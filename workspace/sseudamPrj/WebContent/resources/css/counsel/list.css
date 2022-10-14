@@ -1,0 +1,90 @@
+#counsel-main {
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+}
+
+.counsel-main-wrapper {
+  height: 855px;
+  background-color: pink;
+}
+
+.hidden {
+  display: none;
+}
+
+.border {
+  border: 5px;
+  border: 1px solid var(--border);
+}
+
+.counsel-aside {
+  width: 235px;
+}
+
+.counsel-search input {
+  width: 100%;
+  height: 31px;
+  padding-left: 15px;
+  background-color: var(--search);
+}
+
+.counsel-search input:focus {
+  outline: none;
+}
+
+.counsel-search {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.counsel-search i {
+  color: var(--explain);
+  position: absolute;
+  right: 0px;
+  bottom: 7px;
+}
+
+.counsel-type {
+}
+
+.counsel-type-header {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 0px 8px 15px;
+}
+
+.counsel-type-header img {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+
+.counsel-type-header span {
+  font-weight: 600;
+}
+
+/* .counsel-type-list li img {
+  margin-right: 5px;
+}
+
+.counsel-type-list li {
+  padding: 5px 0px 5px 15px;
+  display: flex;
+  align-items: center;
+} */
+
+.check-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.color-black {
+  color: black;
+}
+
+.color-gray {
+  color: gray;
+}
