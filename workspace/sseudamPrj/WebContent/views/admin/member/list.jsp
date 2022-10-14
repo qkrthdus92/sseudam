@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>쓰담쓰담 | 상담하기</title>
 </head>
 <body>
-	테스트입니다
+	<h1>리스트</h1>
 </body>
 </html>
