@@ -184,24 +184,51 @@ article{
     left: 95px;
     top: 56px;
     filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+    
+    
 }
 .healing-box{
     position: relative;
     width: 257px;
     height: 262.5px;
-    background: #23A68F;
-    box-shadow: inset 0px 1px 30px #50BBA8;
-    border-radius: 10px; 
+    perspective: 1000px;
+
 }
+.healing-box:hover .healing-box-front{ 
+    transform: rotateY(-180deg);
+}
+.healing-box-front{
+    width: 100%;
+    height: 100%;
+    background: #00866e;
+    box-shadow: inset 0px 1px 30px #50BBA8;
+    position: relative;
+    transform-style: preserve-3d;
+    border-radius: 10px; 
+    transform: rotateY(0deg);
+    transition:.5s;
+}
+.healing-img, .healing-title, .healing-content, .healing-box-back {
+    backface-visibility: hidden;
+}
+.healing-box-back{
+    width:100%;
+    height: 100%;
+    border-radius: 10px;
+    position: absolute;
+    background: gray;
+}
+
 .healing-img{
     width: 100%;
     height: 100%;
     position: absolute;
-    opacity: 0.3;
+    opacity: 0.8;
     border-radius: 10px;
     transition:all 0.2s linear;
     margin: auto;
     object-fit: cover;
+    transform: rotateY(180deg);
 }
 .healing-title{
     position: absolute;
@@ -209,14 +236,14 @@ article{
     height: 69px;
     left: 29px;
     top: 40px;
-    
+    transform: rotateY(180deg);
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 28px;
     line-height: 36px;
     text-align: left;
-    
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
     color: #FFFFFF;
 }
 .healing-content{
@@ -225,7 +252,7 @@ article{
     height: 19.98px;
     left: 31px;
     top: 94.91px;
-    
+    transform: rotateY(180deg);
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 600;
@@ -257,7 +284,6 @@ article{
     align-items: flex-start;
     padding: 0px;
     gap: 119px;
-
     
 }
 .slider-review{
@@ -312,6 +338,7 @@ transform: scale(1.1);
     width: 100%;
     height: 275px;
     border-radius: 15px;
+    filter: drop-shadow(5px rgba(0, 0, 0, 0));
 }
 .slider-counseling .slider-box{
     position: relative;
@@ -326,6 +353,9 @@ transform: scale(1.1);
     height: 80%;
     position: relative;
     margin: auto;
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+    
+    
     
 }
 .review-img>img{
@@ -333,6 +363,8 @@ transform: scale(1.1);
     height:100%;
     object-fit: fill;
     border-radius: 10px;
+   
+    
 }
 .review-content{
     display: flex;
@@ -361,6 +393,7 @@ transform: scale(1.1);
     height:100%;
     object-fit: cover;
     border-radius: 100px;
+    border: 1px solid gray;
 }
 .counseling-box-content, .counseling-box-name, .counseling-box-star{
     position: absolute;
