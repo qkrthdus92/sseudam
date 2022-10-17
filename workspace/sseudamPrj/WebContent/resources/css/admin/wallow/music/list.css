@@ -1,0 +1,31 @@
+/* 관리자 - 음악 조회 */
+
+/* 메뉴 글자색 수정*/
+
+.admin-menu-main-content li:nth-child(3) a {
+  color: var(--adminMenuHover);
+  font-size: 17px;
+}
+
+/* 메인 보드 그리드 수정 */
+
+.admin-main-board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr 2fr 1fr 1fr 2fr 2fr 1fr 1fr 1fr;
+  grid-template-rows: 50px 100px 100px 100px 100px 100px;
+}
+
+/* 조회 버튼 수정 */
+
+.main-select-btn select {
+  width: 130px;
+}
+
+.admin-main-board img {
+  width: 80px;
+  height: 80px;
+}
+
+.total-num-info span:last-child::after {
+  content: "개";
+}

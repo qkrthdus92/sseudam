@@ -5,4 +5,8 @@
   --main: #26aa82;
   --star: #fec63d;
   --search: #f9f9f9;
+  --adminMenu: #353535;
+  --adminMenuTitle: #ffffff;
+  --adminMenuDetail: #dedbdb;
+  --adminMenuHover: rgb(48, 232, 149);
 }

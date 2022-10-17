@@ -1,0 +1,26 @@
+/* 관리자 - faq 조회 */
+
+/* 메뉴 글자색 수정*/
+
+.admin-menu-main-notice li:first-child a {
+  color: var(--adminMenuHover);
+  font-size: 17px;
+}
+
+/* 메인 보드 그리드 수정 */
+
+.admin-main-board {
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr 2fr 1fr 2fr 1fr;
+  grid-template-rows: repeat(11, 50px);
+}
+
+/* 조회 버튼 수정 */
+
+.main-select-btn select {
+  width: 130px;
+}
+
+.total-num-info span:last-child::after {
+  content: "개";
+}
