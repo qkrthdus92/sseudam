@@ -72,6 +72,7 @@
     top: 20px;
     left: 50px;
     line-height: 19px;
+    cursor: pointer;
 }
 #dom2{
     box-sizing: border-box;
@@ -93,6 +94,7 @@
     top: 20px;
     left: 35px;
     line-height: 19px;
+    cursor: pointer;
 }
 #dom3{
     box-sizing: border-box;
@@ -111,7 +113,8 @@
     height: 58.63px;
     margin-top: 20px;
     margin-left: 55px;
-    line-height: 19px
+    line-height: 19px;
+    cursor: pointer;
 }
  #editbar{
     width: 1200px;
@@ -195,14 +198,6 @@
     margin-top:35px;
     float: right;
 }
-#star{
-    margin-top: 5px;
-    margin-left: 110px;
-    background-color: #97D299;
-    color:black;
-    border-color: #FFFFFF;
-    border-radius: 10px;
-}
 #bor-top>label{
     margin-left: 10px;
 }
@@ -216,7 +211,7 @@
 	<div id="wrap">
     <div id="main">
         <div id="boardinfo">
-            <div><img id="profile" src="/sseudamPrj/WebContent/resources/img/프로필.png" alt="프로필사진"></div>
+            <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
             <div id="hm1">총 상담내역</div>
             <div id="hm">5건</div>
             <div id="hm1"></div>
@@ -224,13 +219,13 @@
         </div>
     
         <div id="dom">
-            <div id="dominfo">상담예약</div>
+            <div id="dominfo" onclick="location.href='/sseudamPrj/views/mypage/resercheck.jsp';">상담예약</div>
         </div>
         <div id="dom2">
-            <div id="dominfo2">상담완료된예약</div>
+            <div id="dominfo2" onclick="location.href='/sseudamPrj/views/mypage/fin_resercheck.jsp';">상담완료된예약</div>
         </div>
         <div id="dom3">
-            <div id="dominfo3">결제내역</div>
+            <div id="dominfo3" onclick="location.href='/sseudamPrj/views/mypage/reserpay.jsp';">결제내역</div>
         </div>
         <div id="editbar">
             <button id="allselect" ><img id="checkbox" src="/sseudamPrj/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
@@ -238,9 +233,10 @@
         </div>
 
         <div id="pro-box-wrap">
+
             <div id="pro-box-all">
                 <div id="pro-box"> 
-                    <span><img id="profil2" src="/sseudamPrj/WebContent/resources/img/프로필.png" alt=""></span> 
+                    <span><img id="profil2" src="../../resources/img/main/강형욱.jpg" alt=""></span> 
                     <div id="proname">
                         <span>전문가 <br> 심투용</span> 
                     </div>             
@@ -249,7 +245,6 @@
                     <div id="bor-top"><label>에약번호</label></div>
                     <div id="noborder"><label>0113</label></div>
                 </div>
-                <div><button id="star">별점주기</button></div>
             </div>
             <div id="pro-box-all">
                 <div id="pro-box"> 
@@ -262,7 +257,6 @@
                     <div id="bor-top"><label>에약번호</label></div>
                     <div id="noborder"><label>0113</label></div>
                 </div>
-                <div><button id="star">별점주기</button></div>
             </div>
             <div id="pro-box-all">
                 <div id="pro-box"> 
@@ -275,7 +269,6 @@
                     <div id="bor-top"><label>에약번호</label></div>
                     <div id="noborder"><label>0113</label></div>
                 </div>
-                <div><button id="star">별점주기</button></div>
             </div>
             <div id="pro-box-all">
                 <div id="pro-box"> 
@@ -288,7 +281,6 @@
                     <div id="bor-top"><label>에약번호</label></div>
                     <div id="noborder"><label>0113</label></div>
                 </div>
-                <div><button id="star">별점주기</button></div>
             </div>
             <div id="pro-box-all">
                 <div id="pro-box"> 
@@ -301,7 +293,6 @@
                     <div id="bor-top"><label>에약번호</label></div>
                     <div id="noborder"><label>0113</label></div>
                 </div>
-                <div><button id="star">별점주기</button></div>
             </div>
             <div id="pro-box-all">
                 <div id="pro-box"> 
@@ -314,10 +305,7 @@
                     <div id="bor-top"><label>에약번호</label></div>
                     <div id="noborder"><label>0113</label></div>
                 </div>
-                <div><button id="star">별점주기</button></div>
             </div>
-         </div>
-    
     </div>
 </div>
 <%@ include file="/views/common/footer.jsp" %>	

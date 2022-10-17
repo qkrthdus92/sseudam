@@ -72,6 +72,7 @@
     top: 20px;
     left: 50px;
     line-height: 19px;
+    cursor: pointer;
 }
 #dom2{
     box-sizing: border-box;
@@ -93,6 +94,7 @@
     top: 20px;
     left: 35px;
     line-height: 19px;
+    cursor: pointer;
 }
 #dom3{
     box-sizing: border-box;
@@ -111,7 +113,8 @@
     height: 58.63px;
     margin-top: 20px;
     margin-left: 55px;
-    line-height: 19px
+    line-height: 19px;
+    cursor: pointer;
 }
  #editbar{
     width: 1200px;
@@ -201,20 +204,17 @@
     border-radius: 10px;
 }
 #bor-top>label{
-    margin-left: 10px;
+    margin-left: 20px;
 }
 #noborder{
-    margin-left: 10px;
+    margin-left: 20px;
 }
 #datechoice{
-	margin-left: 850px;
-	
+	margin-left: 650px;	
 }
-#serch{
+#allselect{
+    margin-left: 20px;
     margin-top: 20px;
-}
-#date{
-    margin-top: 15px;
 }
 
 </style>
@@ -232,21 +232,23 @@
         </div>
     
         <div id="dom">
-            <div id="dominfo">상담예약</div>
+            <div id="dominfo" onclick="location.href='/sseudamPrj/views/mypage/resercheck.jsp';">상담예약</div>
         </div>
         <div id="dom2">
-            <div id="dominfo2">상담완료된예약</div>
+            <div id="dominfo2" onclick="location.href='/sseudamPrj/views/mypage/fin_resercheck.jsp';">상담완료된예약</div>
         </div>
         <div id="dom3">
-            <div id="dominfo3">결제내역</div>
+            <div id="dominfo3" onclick="location.href='/sseudamPrj/views/mypage/reserpay.jsp';">결제내역</div>
         </div>
         <div id="editbar">
-        	<div id="datechoice">
+            <button id="allselect" ><img id="checkbox" src="/sseudamPrj/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
+            <button id="delete">삭제</button>
+        	<span id="datechoice">
 	            <input id="date" type="date" value="2022-10-12">
 	            <span>~</span>
 	            <input id="date" type="date" value="2022-10-12">
-                <img id="serch" src="../../resources/img/mypage/조회.png" alt="">
-        	</div>
+                <button> 조회</button>
+        	</span>
         </div>
 
         <div id="pro-box-wrap">

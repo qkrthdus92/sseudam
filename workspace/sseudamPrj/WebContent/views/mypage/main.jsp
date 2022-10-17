@@ -101,9 +101,16 @@
         margin-left: 10px;
     }
     #editbnt{
+    	   position: fixed;
+        left: 460px;
+        top: 8px;
+        cursor: pointer;
+    }
+    .editbnt{
         position: fixed;
         left: 460px;
         top: 8px;
+        cursor: pointer;
     }
     #right2{
         width: 530px;
@@ -133,7 +140,88 @@
         margin-top: 20px;
         filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.25)); 
     }
+	#popup {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background: rgba(0, 0, 0, .7);
+	  z-index: 1;
+	  backdrop-filter: blur(4px);
+	  -webkit-backdrop-filter: blur(4px);
+	}
+	
+	#popup.hide {
+	  display: none;
+	}
+	
+	#popup.multiple-filter {
+	  backdrop-filter: blur(4px) grayscale(90%);
+	  -webkit-backdrop-filter: blur(4px) grayscale(90%);
+	}
+	
+	#popup .content {
+	  padding: 20px;
+	  background: #fff;
+	  border-radius: 5px;
+	  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+	  width: 400px;
+	  height: 400px;
+	} 
 
+	.popup-head{
+	width:100%;
+	height:100px; 
+	display:grid;
+	grid-template-rows: 2fr 1fr 1fr;
+	align-items:center;
+	justify-content:center;
+	}
+	.head-title{
+		margin-top: 30px;
+		margin-left: 20px;
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	#popup-logo{
+		width: 100%;
+		height: 50px;
+	}
+
+	.popup-body{              
+	width:100%;
+	height: 220px;
+	background-color:#ffffff; 
+	}
+
+	.popup-foot{                      
+	width:100%;
+	height:50px;
+	}
+	.pop-btn{ 
+	display:inline-flex;           
+	width:50%;                      
+	height:100%;                   
+	justify-content:center;        
+	align-items:center;            
+	float:left;  
+	background-color: #87C57D;                  
+	color:#FFFFFF;                
+	cursor:pointer;     
+	border-style: none;           
+	}
+	#confirm{                
+	border-right:1px solid #FFFFFF;
+	}
+	#popup-text{
+		font-size: 20px;
+		margin-top: 80px;
+	}
 </style>
 </head>
 <body>
@@ -173,23 +261,23 @@
 	        <div id="right1">
 	            <table>
 	                <tr>
-	                    <th id="righttop">&nbsp;&nbsp;&nbsp;&nbsp;내프로필 <button id="editbnt" href="" >수정</button></th>
+	                    <th id="righttop">&nbsp;&nbsp;&nbsp;&nbsp;내프로필 <button class="editbnt" onclick="showPopup(true)" >수정</button></th>
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot"><img  id ="icon" src="/sseudam/resources/전화기.png" alt="전화기">&nbsp;&nbsp;전화번호</th>
+	                    <th id="rightbot"><img  id ="icon" src="../../resources/img/mypage/전화.png" alt="전화기">&nbsp;&nbsp;전화번호</th>
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot"><img  id ="icon" src="/sseudam/resources/닉네임.png" alt="닉네임">&nbsp;&nbsp;닉네임</th>
+	                    <th id="rightbot"><img  id ="icon" src="../../resources/img/mypage/닉네임.png" alt="닉네임">&nbsp;&nbsp;닉네임</th>
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot"><img  id ="icon" src="/sseudam/resources/이메일.png" alt="이메일">&nbsp;&nbsp;이메일</th>
+	                    <th id="rightbot"><img  id ="icon" src="../../resources/img/mypage/메일.png" alt="이메일">&nbsp;&nbsp;이메일</th>
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot1"><img  id ="icon" src="/sseudam/resources/비밀번호.png" alt="비밀번호">&nbsp;&nbsp;비밀번호</th>
+	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/비밀번호.png" alt="비밀번호">&nbsp;&nbsp;비밀번호</th>
 	                    <td></td>
 	                </tr>
 	            </table>
@@ -201,7 +289,8 @@
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot1"><img  id ="icon" src="/sseudam/resources/테스트.png" alt="테스트">&nbsp;&nbsp;나의 점수 <button id="editbnt" href="" >조회</button></th>
+						<!-- 점수확인페이지로이동 -->
+	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/테스트.png" alt="테스트">&nbsp;&nbsp;나의 점수 <button id="editbnt" onclick="location.href='/sseudamPrj/views/mypage/testresultcheck.jsp';">조회</button></th>
 	                    <td></td>
 	                </tr>
 	            </table>
@@ -213,7 +302,7 @@
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot1"><img  id ="icon" src="/sseudam/resources/좋아요.png" alt="좋아요">&nbsp;&nbsp;좋아요 컨텐츠 <button id="editbnt" href="" >조회</button></th>
+	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/좋아요.png" alt="좋아요">&nbsp;&nbsp;좋아요 컨텐츠 <button id="editbnt" onclick="location.href='/sseudamPrj/views/mypage/likecheckyum.jsp';" >조회</button></th>
 	                    <td></td>
 	                </tr>
 	            </table>
@@ -225,11 +314,11 @@
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot"><img  id ="icon" src="/sseudam/resources/글쓰기.png" alt="글쓰기">&nbsp;&nbsp;내가 쓴 게시글<button id="editbnt" href="" >조회</th>
+	                    <th id="rightbot"><img  id ="icon" src="../../resources/img/mypage/글쓰기.png" alt="글쓰기">&nbsp;&nbsp;내가 쓴 게시글조회</th>
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot1"><img  id ="icon" src="/sseudam/resources/댓글.png" alt="댓글">&nbsp;&nbsp;내가 쓴 댓글 <button id="editbnt" href="" >조회</button></th>
+	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/댓글.png" alt="댓글">&nbsp;&nbsp;내가 쓴 댓글 <button id="editbnt" onclick="location.href='/sseudamPrj/views/mypage/boardcheck.jsp';" >조회</button></th>
 	                    <td></td>
 	                </tr>
 	            </table>
@@ -241,19 +330,60 @@
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot"><img  id ="icon" src="/sseudam/resources/상담예약.png" alt="상담예약">&nbsp;&nbsp;상담 예약 내역<button id="editbnt" href="" >조회</th>
+	                    <th id="rightbot"><img  id ="icon" src="../../resources/img/mypage/예약.png" alt="상담예약">&nbsp;&nbsp;상담 예약 내역조회</th>
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot1"><img  id ="icon" src="/sseudam/resources/결제2.png" alt="결제2">&nbsp;&nbsp;결제 내역 <button id="editbnt" href="" >조회</button></th>
+	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/결제.png" alt="결제2">&nbsp;&nbsp;결제 내역 <button id="editbnt" onclick="location.href='/sseudamPrj/views/mypage/resercheck.jsp';" >조회</button></th>
 	                    <td></td>
 	                </tr>
 	            </table>
 	        </div>
 	    </div>
+	    
+		<div id="popup" class="hide">
+		  <div class="content">
+				<div class="popup-head">
+					<div  ><img id="popup-logo" src="../../resources/img/header/logo.png" alt=""></div>
+					<div class="head-title">&nbsp;&nbsp;&nbsp;&nbsp;프로필 수정을 위해 <br> 비밀번호를 입력해주세요.</div>
+				</div>
+				<div class="popup-body">
+					<label id="popup-text"> 비밀번호 :</label>
+					<input id="popup-text" type="password">
+				</div>
+				<div class="popup-foot">
+					<!-- 프로필수정페이지로이동 -->
+					<button class="pop-btn" id="confirm" onclick="location.href='/sseudamPrj/views/mypage/promain.jsp';" >확인</button> 
+					<button class="pop-btn" id="close" onclick="closePopup()" >창 닫기</button>
+				</div>
+		  </div>
+		</div>
+
 	</div>
 	<%@ include file="/views/common/footer.jsp" %>
     
+<script type="text/javascript">
+	function showPopup(multipleFilter) {
+		const popup = document.querySelector('#popup');
+	  
+	  if (multipleFilter) {
+	  	popup.classList.add('multiple-filter');
+	  } else {
+	  	popup.classList.remove('multiple-filter');
+	  }
+	  
+	  popup.classList.remove('hide');
+	}
+	
+	function closePopup() {
+		const popup = document.querySelector('#popup');
+	  popup.classList.add('hide');
+	}
+
+</script>
+
+
+
 
 </body>
 </html>

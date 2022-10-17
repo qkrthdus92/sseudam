@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <% String root = request.getContextPath();%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +17,7 @@
 </head>
 <body>
 	<%@ include file="/views/common/header.jsp" %>
+    <div class=topBtn onclick="window.scrollTo(0,0);">TOP</div>
     <nav>
         <div class="head-slider hs1">
             <div class="head-slider-in">
@@ -62,33 +62,32 @@
         
         
     </nav>
-    <section>
+    <main>
         <article>
             <div class="little-menu">힐링하기</div>
             <div class="healing">
                 <div class="healing-box">
                     <div class="healing-box-front">
-                        <img class="healing-img" src="<%=root%>/resources/img/main/혼밥사진.jpg">
-                        <div class="healing-title">혼자서 냠냠</div>
-                        <div class="healing-content">혼밥 · 혼카페 · 혼술</div>
-                        <div class="healing-box-back"></div>
+                        <img class="healing-img" src="<%=root%>/resources/img/main/혼카페.jpg">
+                        <div class="healing-title">먹으면서 힐링</div>
+                        <div class="healing-content">혼밥 · 카페 · 혼술</div>
+                        <div class="healing-box-back">혼자서 냠냠</div>
                     </div>                                      
-                </div>
-               
+                </div>               
                 <div class="healing-box">
                     <div class="healing-box-front">
                         <img class="healing-img" src="<%=root%>/resources/img/main/산책로.jpg">
-                        <div class="healing-title">밖에서 뚜벅뚜벅</div>
+                        <div class="healing-title">여기저기 힐링</div>
                         <div class="healing-content">문화 · 운동 · 산책</div>
-                        <div class="healing-box-back"></div>
+                        <div class="healing-box-back">밖에서 뚜벅뚜벅</div>
                     </div> 
                 </div>
                 <div class="healing-box">
                     <div class="healing-box-front">
                         <img class="healing-img" src="<%=root%>/resources/img/main/집뒹굴.jpg">
-                        <div class="healing-title">집에서 뒹굴뒹굴</div>
+                        <div class="healing-title">이것저것 힐링</div>
                         <div class="healing-content">음악 · 명상 · 독서 · 영화</div>
-                        <div class="healing-box-back"></div>
+                        <div class="healing-box-back">안에서 뒹굴뒹굴</div>
                     </div> 
                 </div>
                 
@@ -171,6 +170,12 @@
                     <div class="counseling-box-star">평점 : ★★★★★</div>
                 </div>
                 <div class="slider-box">
+                    <div class="counseling-box-img"><img src="<%=root%>/resources/img/main/김민지.jpg"></div>
+                    <div class="counseling-box-content">쿠키 전문 상담가</div>
+                    <div class="counseling-box-name">민지</div>
+                    <div class="counseling-box-star">평점 : ★★★★★</div>
+                </div>
+                <div class="slider-box">
                     <div class="counseling-box-img"><img src="<%=root%>/resources/img/main/임영웅.jpg"></div>
                     <div class="counseling-box-content">부모님 전문 상담가</div>
                     <div class="counseling-box-name">임영웅</div>
@@ -178,16 +183,16 @@
                 </div>
                 <div class="slider-box">
                     <div class="counseling-box-img"><img src="<%=root%>/resources/img/main/장원영.jpg"></div>
-                    <div class="counseling-box-content">숨참고 Love Dive</div>
+                    <div class="counseling-box-content">다이빙 전문 상담가</div>
                     <div class="counseling-box-name">장원영</div>
                     <div class="counseling-box-star">평점 : ★★★★★</div>
                 </div>
                 <div class="slider-box">
                     <div class="counseling-box-img"><img src="<%=root%>/resources/img/main/러버덕.jpg"></div>
-                    <div class="counseling-box-content">잠실 사는 오리</div>
+                    <div class="counseling-box-content">러버덕</div>
                     <div class="counseling-box-name">러버덕</div>
                     <div class="counseling-box-star">평점 : ★★★★★</div>
-                </div>
+                </div>              
                 <div class="slider-box">
                     <div class="counseling-box-img"><img src="<%=root%>/resources/img/main/오박사.png"></div>
                     <div class="counseling-box-content">포켓몬 전문 상담가</div>
@@ -249,7 +254,7 @@
                 
             </div>
         </article>
-    </section>
+    </main>
     <%@ include file="/views/common/footer.jsp" %>
     
     <script>

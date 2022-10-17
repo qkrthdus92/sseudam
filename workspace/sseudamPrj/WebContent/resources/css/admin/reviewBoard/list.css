@@ -1,0 +1,33 @@
+/* 관리자 - 후기게시판 조회 */
+
+/* 메뉴 글자색 수정*/
+
+.admin-menu-main-board li:last-child a {
+  color: var(--adminMenuHover);
+  font-size: 17px;
+}
+
+/* 메인 보드 그리드 수정 */
+
+.admin-main-board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(11, 50px);
+}
+
+/* 조회 버튼 수정 */
+
+.main-select-btn select {
+  width: 130px;
+}
+
+/* 썸네일 크기 */
+
+.admin-main-board img {
+  width: 45px;
+  height: 45px;
+}
+
+.total-num-info span:last-child::after {
+  content: "개";
+}

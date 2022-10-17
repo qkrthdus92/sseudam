@@ -1,19 +1,30 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
 body{
     background-color: #f5f5f5;
     margin: 0px;
     padding: 0px;
 }
-
-/* body */
-nav{
-    display: flex;
+*{
     box-sizing: border-box;
-    position: relative;
-    
-    display: flex;
+}
+.topBtn { 
+    cursor:pointer;
+	position: fixed;
+    right: 1%;
+	bottom: 50px; 
+	display: scroll; 
+	z-index: 9999;
+    font-size: 20px;
+    font-weight: 800;
+    font-family: 'Nanum Gothic', sans-serif;
+    text-shadow:1px 1px 1px rgb(161, 161, 161);
+}
+/* body */
+nav{  
+    position: relative;   
     height: 350px;
 }
 .hs1{
@@ -32,21 +43,17 @@ nav{
     background-color: #CA8A8B;
 }
 .head-slider{       
-    box-sizing: border-box;
+    
     height: 350px;
     
 }
-.head-slider-in{
-    
-    box-sizing: border-box;
+.head-slider-in{ 
     position: relative;
     width: 1200px;
     height: 100%;
     margin: auto;
 }
-/* .head-slider-in>div{
-    border: 1px solid blue;
-} */
+
 .ment1{
     position: absolute;
     width: 370px;
@@ -54,7 +61,7 @@ nav{
     left: 57px;
     top: 61px;
 
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 25px;
@@ -69,7 +76,7 @@ nav{
     left: 57px;
     top: 101px;
 
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 50px;
@@ -90,7 +97,7 @@ nav{
     background: #FFFFFF;
     border-radius: 25px;
 
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 22px;
@@ -112,19 +119,17 @@ nav{
     object-fit: contain;
 }
 
-section{
-    box-sizing: border-box;
+main{
+    
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    /* align-items: flex-end; */
     padding: 0px;
     gap: 15px;
 
     position: relative;
     width: 1200px;
     height: 1545px;
-    /* left: 341px; */
-    /* top: 535px; */
     margin-top: 15px;
     margin-bottom: 15px;
     margin-left: auto;
@@ -132,7 +137,7 @@ section{
 }
 article{
     position: relative;
-    box-sizing: border-box;
+    
     width: 1200px;
     height: 375px;
 
@@ -163,7 +168,7 @@ article{
     left: 0px;
     top: 0px;
 
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 20px;
@@ -200,8 +205,6 @@ article{
 .healing-box-front{
     width: 100%;
     height: 100%;
-    background: #00866e;
-    box-shadow: inset 0px 1px 30px #50BBA8;
     position: relative;
     transform-style: preserve-3d;
     border-radius: 10px; 
@@ -212,11 +215,20 @@ article{
     backface-visibility: hidden;
 }
 .healing-box-back{
+    display: flex;
     width:100%;
     height: 100%;
-    border-radius: 10px;
+    border-radius: 9px;
     position: absolute;
-    background: gray;
+    background-color: #6bcebc;
+    border: 10px solid white;
+    color: white;
+    justify-content : center;
+    align-items : center;
+    font-size: 30px;
+    font-weight: 800;
+    font-family: 'Nanum Gothic', sans-serif;
+    text-shadow:1px 1px 1px rgb(161, 161, 161);
 }
 
 .healing-img{
@@ -229,6 +241,7 @@ article{
     margin: auto;
     object-fit: cover;
     transform: rotateY(180deg);
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
 }
 .healing-title{
     position: absolute;
@@ -237,14 +250,14 @@ article{
     left: 29px;
     top: 40px;
     transform: rotateY(180deg);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 28px;
     line-height: 36px;
     text-align: left;
-    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
-    color: #FFFFFF;
+    text-shadow:2px 2px 2px #000;
+    color: white;
 }
 .healing-content{
     position: absolute;
@@ -253,14 +266,14 @@ article{
     left: 31px;
     top: 94.91px;
     transform: rotateY(180deg);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
     line-height: 22px;
     text-align: left;
-    
-    color: #FFFFFF;
+    text-shadow:2px 2px 2px #000;
+    color: white;
     
 }
 .the-more{
@@ -270,7 +283,7 @@ article{
     left: 1110px;
     top: 20px;
 
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 15px;
@@ -335,11 +348,17 @@ transform: scale(1.1);
     color: gray;
 }
 .slider-review .slider-box{
+    border: transparent;
     width: 100%;
-    height: 275px;
-    border-radius: 15px;
+    height: 277px;
+    border-radius: 15px 15px 0px 0px;
+    border: 1px solid rgba(255, 255, 255, 0);
     filter: drop-shadow(5px rgba(0, 0, 0, 0));
 }
+.slider-review .slider-box:hover{
+    border-bottom: 1px solid #6F6F6F;
+}
+
 .slider-counseling .slider-box{
     position: relative;
     width: 300px;
@@ -372,11 +391,11 @@ transform: scale(1.1);
     justify-content: center;
     align-items: center;
     padding: 17px 33px;
-    font-family: 'Inter', sans-serif;
-
+    font-family: 'Nanum Gothic', sans-serif;
+    color: rgb(80, 80, 80);
 
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 15px;
     line-height: 18px;
     text-align: center;
@@ -397,7 +416,7 @@ transform: scale(1.1);
 }
 .counseling-box-content, .counseling-box-name, .counseling-box-star{
     position: absolute;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
@@ -436,7 +455,7 @@ transform: scale(1.1);
 }
 .slider-box-qoute{
     position: relative;
-    box-sizing: border-box;
+    
     height: 100%
 }
 .slider-box-quote>img{
@@ -455,7 +474,7 @@ transform: scale(1.1);
     left: 0px;
     top: 0px;
     
-    font-family: 'Inter',sans-serif;;
+    font-family: 'Nanum Gothic',sans-serif;;
     font-style: italic;
     font-weight: 600;
     font-size: 30px;
@@ -467,32 +486,3 @@ transform: scale(1.1);
     text-shadow: 0px 4px 4px #000000;
     transform: matrix(0.98, 0, -0.18, 1, 0, 0);
 }
-
-/* footer */
-footer{
-    position: relative;
-    /* width: 1920px; */
-    height: 180px;
-    border: 1px solid #ff0000;
-    border-top: 1px solid #DFDFDF;
-}
-footer>div{
-    box-sizing: border-box;
-    position: relative;
-    width: 1200px;
-    height: 180px;
-    margin: auto;
-    border: 1px solid green;
-}
-
-::-webkit-scrollbar { 
-    width: 10px; /*스크롤바의 너비*/} 
-    
-::-webkit-scrollbar-thumb { 
-background-color: rgb(189, 189, 189); /*스크롤바의 색상*/ 
-border-radius: 10px; /*스크롤바 라운드*/}
-
-::-webkit-scrollbar-track { 
-background-color: rgb(255, 255, 255); /*스크롤바 트랙 색상*/ 
-border-radius: 10px; /*스크롤바 트랙 라운드*/ 
-box-shadow: inset 0px 0px 5px rgba(0,0,0,0.2); /*스크롤바 트랙 안쪽 그림자*/}

@@ -18,6 +18,24 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
     font-style: normal;
   }
 
+  ::-webkit-scrollbar {
+    width: 10px; /*스크롤바의 너비*/
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgb(189, 189, 189); /*스크롤바의 색상*/
+    border-radius: 10px; /*스크롤바 라운드*/
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(110, 110, 110);
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: rgb(255, 255, 255); /*스크롤바 트랙 색상*/
+    border-radius: 10px; /*스크롤바 트랙 라운드*/
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2); /*스크롤바 트랙 안쪽 그림자*/
+  }
+
   /* 공통*/
   html,
   body {
@@ -31,6 +49,7 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
 
   .main-header {
     height: 169px;
+    border-bottom: 1px solid #dfdfdf;
   }
 
   .main-wrapper {
@@ -151,26 +170,63 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
     text-decoration: none;
     color: black;
   }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    width: 100%;
+    display: none;
+    position: absolute;
+    top: 57px;
+    z-index: 1; /*다른 요소들보다 앞에 배치*/
+    font-weight: 400;
+    background-color: #f9f9f9fb;
+    min-width: 200px;
+  }
+
+  .dropdown-content a {
+    display: block;
+    text-decoration: none;
+    color: rgb(37, 37, 37);
+    font-size: 14px;
+    padding: 12px 20px;
+    text-align: center;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ececec;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
 </style>
 
 <header class="main-header">
   <div class="main-header-top">
     <div class="main-wrapper">
-      <span><a href="">회원가입</a></span>
+      <span><a href="<%=root%>/views/common/join.jsp">회원가입</a></span>
       <span><a href="">로그인</a></span>
     </div>
   </div>
   <div class="main-header-title">
     <div class="main-wrapper main-header-title-wrapper">
       <div class="main-header-logo">
-        <a href=""><img src="<%= root %>/resources/img/header/logo.png" alt="" /></a>
+        <a href="<%=root%>/views/main/main.jsp"
+          ><img src="<%= root %>/resources/img/header/logo.png" alt=""
+        /></a>
       </div>
       <div class="main-header-icons">
         <div class="main-header-icon">
           <a href=""><i class="fa-solid fa-heart"></i><span>저장</span></a>
         </div>
         <div class="main-header-icon">
-          <a href=""><i class="fa-regular fa-user"></i><span>마이</span></a>
+          <a href="<%=root%>/views/mypage/main.jsp"
+            ><i class="fa-regular fa-user"></i><span>마이</span></a
+          >
         </div>
       </div>
     </div>
@@ -178,23 +234,36 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
   <div class="main-header-nav">
     <div class="main-wrapper">
       <div>
-        <a href="">스트레스 테스트</a>
+        <a href="<%=root%>/views/stress/stressTest.jsp">스트레스 테스트</a>
         <div class="main-header-nav-color"></div>
       </div>
-      <div>
+      <div class="dropdown">
         <a href="">힐링하기</a>
         <div class="main-header-nav-color"></div>
+        <div class="dropdown-content">
+          <a href="<%=root%>/views/healing/nyam.jsp">혼자서 냠냠</a>
+          <a href="<%=root%>/views/healing/outside.jsp">밖에서 뚜벅뚜벅</a>
+          <a href="<%=root%>/views/healing/inside.jsp">안에서 뒹굴뒹굴</a>
+        </div>
       </div>
       <div>
-        <a href="">상담하기</a>
+        <a href="<%=root%>/views/counsel/list.jsp">상담하기</a>
         <div class="main-header-nav-color"></div>
       </div>
-      <div>
+      <div class="dropdown">
         <a href="">게시판</a>
         <div class="main-header-nav-color"></div>
+        <div class="dropdown-content">
+          <a href="<%=root%>/views/board/freeBoard/freeBoardList.jsp"
+            >자유게시판</a
+          >
+          <a href="<%=root%>/views/board/afterBoard/afterBoardList.jsp"
+            >후기게시판</a
+          >
+        </div>
       </div>
       <div>
-        <a href="">고객센터</a>
+        <a href="<%=root%>/views/mypage/customercenter.jsp">고객센터</a>
         <div class="main-header-nav-color"></div>
       </div>
     </div>

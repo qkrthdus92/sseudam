@@ -1,0 +1,212 @@
+/* common css */
+
+.hidden {
+  display: none !important;
+}
+
+.border {
+  border-radius: 5px;
+  border: 1px solid var(--border);
+}
+
+/* 헤더 nav 컬러 보이게 */
+
+.main-header-nav > .main-wrapper div:nth-child(3) div {
+  display: block;
+}
+
+/* 헤터, 푸터 사이 main */
+
+#counsel-detail-main {
+  background-color: var(--base);
+  display: flex;
+  justify-content: center;
+}
+
+/* 1200 wrapper */
+
+.counsel-detail-main-wrapper {
+  background-color: white;
+  height: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 상단부분(전문가이미지, 전문가설명, 알려드립니다) */
+
+.counsel-detail-top {
+  display: flex;
+  margin-top: 70px;
+}
+
+/* 전문가 이미지 */
+
+.counsel-detail-pro-img {
+  margin-right: 50px;
+}
+
+.counsel-detail-pro-img img {
+  width: 220px;
+  height: 290px;
+  border-radius: 7px;
+}
+
+/* 전문가 설명 */
+
+.counsel-detail-pro-summary {
+  margin-top: 10px;
+  margin-right: 40px;
+}
+
+.counsel-pro-name {
+  font-size: 30px;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+
+.counsel-pro-type {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.counsel-pro-introduce {
+  margin-bottom: 20px;
+  line-height: 20px;
+}
+
+.counsel-pro-review {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.counsel-pro-review div:nth-child(2) {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.counsel-pro-price {
+  display: flex;
+  /* justify-content: flex-end; */
+}
+
+.counsel-pro-price div:first-child {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.counsel-pro-price div:last-child {
+  font-size: 20px;
+  margin-left: 20px;
+  font-weight: 600;
+}
+
+.counsel-pro-price div:last-child::after {
+  content: "원";
+  font-weight: 500;
+}
+
+.fa-star {
+  color: var(--star);
+}
+
+.counsel-detail-appoint-btn {
+  width: 260px;
+  height: 50px;
+  background-color: var(--main);
+  border-radius: 10px;
+  margin-top: 25px;
+}
+
+.counsel-detail-appoint-btn a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* 알려드립니다! */
+
+.counsel-detail-notice {
+  width: 330px;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.755);
+}
+
+.counsel-detail-notice-title {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.counsel-detail-notice-title img {
+  width: 30px;
+  height: 30px;
+}
+
+.counsel-detail-notice-title span {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.counsel-detail-notice li {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.counsel-detail-notice li div {
+  margin-right: 5px;
+}
+
+.counsel-detail-notice li span {
+  line-height: 20px;
+}
+
+/* 중간 회색 선 */
+
+.counsel-detail-border {
+  width: 1100px;
+  height: 1px;
+  background-color: var(--border);
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+/* 하단부분(전문가소개, 자격증, 학력) */
+
+.counsel-detail-introduce {
+  width: 100%;
+  display: flex;
+  padding-left: 70px;
+}
+
+.counsel-detail-introduce-title {
+  font-size: 25px;
+  font-weight: 900;
+  margin-right: 150px;
+}
+
+.counsel-detail-introduce-certificate {
+  margin-right: 250px;
+}
+
+.counsel-detail-introduce-certificate div,
+.counsel-detail-introduce-edu div {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.counsel-detail-introduce-certificate div i,
+.counsel-detail-introduce-edu div i {
+  margin-right: 8px;
+}
+
+.counsel-detail-introduce-certificate li,
+.counsel-detail-introduce-edu li {
+  margin-bottom: 20px;
+}

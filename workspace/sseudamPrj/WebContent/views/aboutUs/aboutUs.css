@@ -1,0 +1,150 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+.bg-img{
+    position: absolute;
+    height: 1200px;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+}
+.bg-img>img{
+    width: 100%;   
+    object-fit: fill;   
+}
+.whole-line{
+    background-color: #F5F5F5;
+    position: relative;
+    height: 2340px;
+    margin: 0 auto;
+}
+main{
+    position: relative;
+    height: 100%;
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+.ment{
+    height: 630px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Nanum Gothic',sans-serif;
+    font-weight: 800;
+    font-size: 55px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+.ment-title{
+    font-weight: 800;
+    font-size: 55px;
+    margin-bottom: 50px;
+}
+.ment-content{
+    font-weight: 400;
+    font-size: 30px;  
+}
+.ment-content p{
+    margin: 5px;
+}
+nav{
+    width: 100%;
+    height: 270px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+}
+nav article{
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+
+    font-family: 'Nanum Gothic';
+    font-weight: 800;
+    font-size: 50px;
+    line-height: 61px;
+
+    text-align: center;
+
+    color: #26AA82;
+
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+section{
+    background-color: white;
+    width: 100%;
+    height: 1440px;
+
+    display: grid;
+    grid-template-rows: repeat(3,1fr);
+    grid-template-columns: repeat(2, 1fr);
+
+}
+.art1, .art5{
+    padding: 60px 0px 60px 60px;
+}
+.art4{
+    padding: 60px 60px 60px 0px;
+}
+section img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+.art2, .art3, .art6{
+    padding-top: 60px;
+    padding-bottom: 60px;
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+}
+.us-title{
+    margin: 0 100px;
+    border-bottom: 1px solid #26AA82;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Nanum Gothic';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+
+    color: #555555;
+}
+.us-content{
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+
+    font-family: 'Nanum Gothic';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
+    text-align: center;
+
+    color: #555555;
+}
+.us-content p{
+    margin: 5px;
+}

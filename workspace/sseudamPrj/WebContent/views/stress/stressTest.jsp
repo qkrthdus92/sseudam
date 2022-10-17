@@ -139,6 +139,7 @@
 </head>
 <body>
 <%@ include file="/views/common/header.jsp" %>
+
 	<div id="wrap">
        <div id="main">
            <div id="title">스트레스 지수 테스트</div>

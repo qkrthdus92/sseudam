@@ -53,8 +53,8 @@
 	
 	<div id="main">
 		<div class="btn">
-			<button type="button" id="btn1" class="button" value="Normal"><img src="../../resources/img/join/join.JPG" style="width : 140px; height : 150px; margin-bottom: 10px;"><br>일반 회원가입</button>
-			<button type="button" id="btn2" class="button" value="Expert"><img src="../../resources/img/join/projoin.JPG" style="width : 185px; height : 145px; margin-bottom: 10px; margin-right: 30px;"><br>전문가 회원가입</button>
+			<button type="button" id="btn1" class="button" value="Normal"><img src="../../resources/img/join/join.png" style="width : 160px; height : 150px;"><br>일반 회원가입</button>
+			<button type="button" id="btn2" class="button" value="Expert"><img src="../../resources/img/join/projoin.png" style="width : 160px; height : 150px;"><br>전문가 회원가입</button>
 		</div>
 	</div>
 	

@@ -1,0 +1,278 @@
+/* 공통 */
+
+.hidden {
+  display: none;
+}
+
+/* main */
+
+.counsel-pay-main {
+  display: flex;
+  justify-content: center;
+  background-color: var(--base);
+}
+
+/* 1200 */
+
+.counsel-pay-main-wrapper {
+  background-color: white;
+  padding: 70px 250px;
+}
+
+/* title */
+
+.counsel-pay-title {
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+/* margin-bottom */
+.counsel-pay-pro-info,
+.counsel-pay-select-date,
+.total-price {
+  margin-bottom: 100px;
+}
+
+/* 전문가 정보 */
+
+.counsel-pay-pro-info {
+  display: flex;
+  margin-left: 10px;
+}
+
+.counsel-pay-pro-info img {
+  width: 127px;
+  height: 173px;
+  border-radius: 10px;
+  margin-right: 50px;
+}
+
+.counsel-pro-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.counsel-pro-type {
+  margin-bottom: 13px;
+  font-size: 14px;
+}
+
+.counsel-pro-introduce {
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 20px;
+}
+
+.counsel-pro-review {
+  display: flex;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.counsel-pro-review div:nth-child(2) {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.counsel-pro-price {
+  display: flex;
+}
+
+.counsel-pro-price div:first-child {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.counsel-pro-price div:last-child {
+  font-size: 20px;
+  margin-left: 20px;
+  font-weight: 600;
+}
+
+.counsel-pro-price div:last-child::after,
+.total-price div:last-child::after {
+  content: "원";
+  font-weight: 500;
+}
+
+.fa-star {
+  color: var(--star);
+}
+
+/* 날짜 선택 */
+
+.counsel-pay-select-date {
+  display: flex;
+  font-size: 18px;
+}
+
+.counsel-pay-select-date div {
+  margin-right: 20px;
+  margin-left: 10px;
+  font-weight: 600;
+}
+
+.counsel-pay-select-date select:nth-child(2) {
+  margin-right: 20px;
+}
+
+.counsel-pay-select-date select {
+  width: 70px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* 결제수단 선택 */
+
+.counsel-pay-select-payment {
+  display: flex;
+}
+
+.counsel-pay-select-payment select:first-child {
+  margin-left: 5px;
+  width: 150px;
+}
+
+.counsel-pay-select-payment select:last-child {
+  margin-left: 5px;
+  width: 115px;
+}
+
+.counsel-pay-select-payment select {
+  border: none;
+  outline: none;
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.counsel-pay-select-payment input {
+  width: 300px;
+  height: 35px;
+  border: 1px solid var(--border);
+  outline: none;
+  border-radius: 25px;
+  padding: 0px 20px;
+}
+
+/* 카드결제 */
+
+.counsel-pay-card,
+.counsel-pay-phone {
+  margin-top: 20px;
+  margin-bottom: 70px;
+}
+
+.counsel-pay-card div,
+.counsel-pay-phone div {
+  margin-left: 10px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.counsel-pay-card input {
+  margin-left: 20px;
+}
+
+.counsel-pay-card div:nth-child(1) input,
+.counsel-pay-phone div:nth-child(1) input {
+  width: 230px;
+  height: 28px;
+  outline: none;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 0px 10px;
+}
+
+.counsel-pay-card div:nth-child(2) input,
+.counsel-pay-phone div:nth-child(2) input:first-child {
+  width: 100px;
+  height: 28px;
+  outline: none;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 0px 12px;
+}
+
+.counsel-pay-card div:nth-child(3) input {
+  width: 50px;
+  height: 28px;
+  outline: none;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 0px 12px;
+}
+
+.counsel-pay-card div span {
+  font-size: 14px;
+  margin-left: 17px;
+  color: rgba(231, 103, 29, 0.86);
+}
+
+.counsel-pay-phone div span {
+  font-size: 14px;
+  margin-left: 10px;
+  color: rgba(231, 103, 29, 0.86);
+}
+
+/* 휴대폰 결제 */
+
+.counsel-pay-phone div input {
+  margin-left: 10px;
+}
+
+.counsel-pay-phone div:nth-child(2) input:first-child {
+  margin-left: 25px;
+}
+
+.counsel-pay-phone div:nth-child(2) input[type="button"] {
+  outline: none;
+  border: 1px solid var(--main);
+  background-color: var(--search);
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  color: var(--main);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* 총 결제금액 */
+
+.total-price {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 100px;
+}
+
+/* 동의문구 */
+
+.counsel-pay-agree {
+  font-size: 15px;
+  color: var(--explain);
+  margin-top: 100px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 결제하기 버튼 */
+
+.counsel-pay-btn {
+  width: 700px;
+  height: 57px;
+  background-color: var(--main);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
