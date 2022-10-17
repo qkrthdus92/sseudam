@@ -59,7 +59,7 @@
         width: 177px;
         height: 59.04px;
         margin-top: 30px;
-        background: rgba(217, 217, 217, 0.5);
+        background: #FFFFFF;
         border-width: 1px 1px 0px 1px;
         border-style: solid;
         border-color: rgba(0, 0, 0, 0.6);
@@ -72,6 +72,29 @@
         top: 20px;
         left: 30px;
         line-height: 19px;
+        cursor: pointer;
+    }
+    #dom2{
+        box-sizing: border-box;
+        position: absolute;
+        width: 177px;
+        height: 59.04px;
+        margin-top: 30px;
+        margin-left : 177px;
+        border-width: 1px 1px 0px 1px;
+        border-style: solid;
+        background: rgba(217, 217, 217, 0.5);
+        border-color: rgba(0, 0, 0, 0.6);
+        border-radius: 30px 30px 0px 0px;
+    }
+    #dominfo2{     
+        position: absolute;
+        width: 177.44px;
+        height: 58.63px;
+        top: 20px;
+        left: 35px;
+        line-height: 19px;
+        cursor: pointer;
     }
     #editbar{
         width: 1200px;
@@ -121,7 +144,7 @@
 		<div id="wrap">
 		<div id="main">
 		    <div id="boardinfo">
-		       <div><img id="profile" src="/sseudamPrj/WebContent/resources/img/프로필.png" alt="프로필사진"></div>
+		       <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
 		       <div id="hm1">총 게시글</div>
 		       <div id="hm">19개</div>
 		       <div id="hm1">총 댓글</div>
@@ -129,8 +152,11 @@
 		    </div>
 		
 		    <div id="dom">
-		        <div id="dominfo">내가 쓴 댓글</div>
+		        <div id="dominfo" onclick="location.href='/sseudamPrj/views/mypage/boardcheck.jsp';">내가 쓴 게시글</div>
 		    </div>
+            <div id="dom2">
+                <div id="dominfo2" onclick="location.href='/sseudamPrj/views/mypage/commentcheck.jsp';">내가 쓴 댓글</div>
+            </div>
 		    <div id="editbar">
 		        <button id="allselect" ><img id="checkbox" src="/sseudamPrj/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
 		        <button id="delete">삭제</button>

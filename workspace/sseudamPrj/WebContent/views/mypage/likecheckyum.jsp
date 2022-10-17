@@ -59,7 +59,7 @@
     width: 177px;
     height: 59.04px;
     position: absolute;
-    margin-top: 80px;
+    margin-top: 30px;
     background: rgba(217, 217, 217, 0.5);
     border-width: 1px 1px 0px 1px;
     border-style: solid;
@@ -73,13 +73,14 @@
     top: 20px;
     left: 50px;
     line-height: 19px;
+    cursor: pointer;
 }
 #dom2{
     box-sizing: border-box;
     position: absolute;
     width: 177px;
     height: 59.04px;
-    margin-top: 80px;
+    margin-top: 30px;
     margin-left : 177px;
     border-width: 1px 1px 0px 1px;
     border-style: solid;
@@ -94,12 +95,13 @@
     top: 20px;
     left: 35px;
     line-height: 19px;
+    cursor: pointer;
 }
 #dom3{
     box-sizing: border-box;
     width: 177px;
     height: 59.04px;
-    margin-top: 80px;
+    margin-top: 30px;
     margin-left: 354px;
     background: #FFFFFF;
     border-width: 1px 1px 0px 1px;
@@ -112,7 +114,8 @@
     height: 58.63px;
     margin-top: 20px;
     margin-left: 35px;
-    line-height: 19px
+    line-height: 19px;
+    cursor: pointer;
 }
  #editbar{
     width: 1200px;
@@ -161,7 +164,7 @@
 	<div id="wrap">
 	<div id="main">
 	    <div id="boardinfo">
-	       <div><img id="profile" src="/sseudamPrj/WebContent/resources/img/프로필.png" alt="프로필사진"></div>
+	       <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
 	       <div id="hm1">나의 좋아요</div>
 	       <div id="hm">19개</div>
 	       <div id="hm1"></div>
@@ -169,13 +172,13 @@
 	    </div>
 	    
 	    <div id="dom">
-	        <div id="dominfo">혼자서냠냠</div>
+	        <div id="dominfo" onclick="location.href='/sseudamPrj/views/mypage/likecheckyum.jsp';">혼자서냠냠</div>
 	    </div>
 	    <div id="dom2">
-	        <div id="dominfo2">안에서뒹굴뒹굴</div>
+	        <div id="dominfo2" onclick="location.href='/sseudamPrj/views/mypage/likecheckhome.jsp';">안에서뒹굴뒹굴</div>
 	    </div>
 	    <div id="dom3">
-	        <div id="dominfo3">밖에서뚜벅뚜벅</div>
+	        <div id="dominfo3" onclick="location.href='/sseudamPrj/views/mypage/likecheckout.jsp';">밖에서뚜벅뚜벅</div>
 	    </div>
 	    <div id="editbar">
 	        <button id="allselect" ><img id="checkbox" src="/sseudamPrj/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
