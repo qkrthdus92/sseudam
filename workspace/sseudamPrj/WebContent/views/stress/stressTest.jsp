@@ -21,6 +21,7 @@
             
         }
         #main{
+        border-top: 1px solid #dfdfdf;
         width: 1200px;
 		height: 3400px;
 		display: grid;
@@ -158,11 +159,11 @@
            </div>
            <div></div>
            <div>
-               <fieldset>
+               <fieldset aria-required="true">
                    <legend>1. 당신이 통제할 수 없는 일 때문에 화가 난 경험이 많은편입니까?</legend>
                    <label for="test1-y"><input type="radio" class="radio-y" name="test1" id="test1-y" value=2>네</label>
-                   <label for="test1-o"><input type="radio" class="radio-o" name="test1" id="test1-o" value=1>보통</label>
-                   <label for="test1-n"><input type="radio" class="radio-n" name="test1" id="test1-n" value=0>아니요</label>
+                   <label for="test1-o"><input type="radio" class="radio-o" name="test1" id="test1-o" value=1  >보통</label>
+                   <label for="test1-n"><input type="radio" class="radio-n" name="test1" id="test1-n" value=0  >아니요</label>
                </fieldset>
            </div>
            <div>
@@ -262,7 +263,7 @@
                </fieldset>
            </div>
            <div>
-               <form action="" method="post">
+               <form action="<%=root%>/views/stress/stressResult.jsp" method="post">
                    <input type="submit" value="결과보기" id="btn">
                </form>
            </div>
