@@ -170,6 +170,12 @@
                     <div class="counseling-box-star">평점 : ★★★★★</div>
                 </div>
                 <div class="slider-box">
+                    <div class="counseling-box-img"><img src="<%=root%>/resources/img/main/김민지.jpg"></div>
+                    <div class="counseling-box-content">쿠키 전문 상담가</div>
+                    <div class="counseling-box-name">민지</div>
+                    <div class="counseling-box-star">평점 : ★★★★★</div>
+                </div>
+                <div class="slider-box">
                     <div class="counseling-box-img"><img src="<%=root%>/resources/img/main/임영웅.jpg"></div>
                     <div class="counseling-box-content">부모님 전문 상담가</div>
                     <div class="counseling-box-name">임영웅</div>
@@ -186,13 +192,7 @@
                     <div class="counseling-box-content">러버덕</div>
                     <div class="counseling-box-name">러버덕</div>
                     <div class="counseling-box-star">평점 : ★★★★★</div>
-                </div>
-                <div class="slider-box">
-                    <div class="counseling-box-img"><img src="<%=root%>/resources/img/main/김민지.jpg"></div>
-                    <div class="counseling-box-content">쿠키 전문 상담가</div>
-                    <div class="counseling-box-name">김민지</div>
-                    <div class="counseling-box-star">평점 : ★★★★★</div>
-                </div>
+                </div>              
                 <div class="slider-box">
                     <div class="counseling-box-img"><img src="<%=root%>/resources/img/main/오박사.png"></div>
                     <div class="counseling-box-content">포켓몬 전문 상담가</div>

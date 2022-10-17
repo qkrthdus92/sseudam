@@ -12,7 +12,7 @@
 <body>
 	<%@ include file="/views/common/header.jsp" %>
 	<div class=topBtn onclick="window.scrollTo(0,0);">TOP</div>
-	<nav class="nav-inside">
+	<nav class="inside-color">
         <div class="head-in">
 			<div class="ment1">밖은 좀 시끄러우니까</div>
 			<div class="ment2">안에서 뒹굴뒹굴</div>
@@ -25,7 +25,7 @@
 			<div>냠냠 ></div>
 		</section>
 		<section class="order-by">
-			<div>좋아요순</div>
+			<div>저장순</div>
 			<div>최근등록순</div>
 			<div>기본정렬</div>
 		</section>
@@ -37,7 +37,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플1.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 노래</div>					
 					</a>	
 				</div>			
 			</article>
@@ -48,7 +48,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플2.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 노래</div>					
 					</a>	
 				</div>			
 			</article>
@@ -59,7 +59,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플3.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 노래</div>					
 					</a>	
 				</div>			
 			</article>
@@ -70,7 +70,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플4.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 노래</div>					
 					</a>	
 				</div>			
 			</article>
@@ -81,7 +81,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플5.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 노래</div>					
 					</a>	
 				</div>			
 			</article>
@@ -92,7 +92,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플6.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 노래</div>					
 					</a>	
 				</div>			
 			</article>
@@ -103,7 +103,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플7.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 노래</div>					
 					</a>	
 				</div>			
 			</article>
@@ -114,7 +114,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플8.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 노래</div>					
 					</a>	
 				</div>			
 			</article>
@@ -125,7 +125,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플9.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 노래</div>					
 					</a>	
 				</div>			
 			</article>
@@ -148,7 +148,7 @@
 			<div class="popup_head">
 				<a class="pop-close" href="javascript:closePop()" alt="">x</a>
 			</div>
-			<div class="popup_body">				
+			<div class="popup_body inside-color">				
 				<div class="popup_pic"><img src="<%=root%>/resources/img/main/샘플2.jpg"></div>
 				<div class="popup_name">어떤 산책로</div>
 				
@@ -167,9 +167,9 @@
 					<img class="imti" src="<%=root%>/resources/img/header/Favorite_duotone.png" alt="">저장하기
 				</div>							
 			</div>
-			<div class="diagonal-1-1"></div>
+			<div class="diagonal-1-1 inside-border-color"></div>
 			<div class="diagonal-1-2"></div>
-			<div class="diagonal-2-1"></div>
+			<div class="diagonal-2-1 inside-border-color"></div>
 			<div class="diagonal-2-2"></div>
 			
 		</div>

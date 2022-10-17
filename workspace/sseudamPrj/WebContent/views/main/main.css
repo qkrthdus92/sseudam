@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
 body{
     background-color: #f5f5f5;
     margin: 0px;
@@ -18,7 +19,7 @@ body{
 	z-index: 9999;
     font-size: 20px;
     font-weight: 800;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     text-shadow:1px 1px 1px rgb(161, 161, 161);
 }
 /* body */
@@ -60,7 +61,7 @@ nav{
     left: 57px;
     top: 61px;
 
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 25px;
@@ -75,7 +76,7 @@ nav{
     left: 57px;
     top: 101px;
 
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 50px;
@@ -96,7 +97,7 @@ nav{
     background: #FFFFFF;
     border-radius: 25px;
 
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 22px;
@@ -167,7 +168,7 @@ article{
     left: 0px;
     top: 0px;
 
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 20px;
@@ -226,7 +227,7 @@ article{
     align-items : center;
     font-size: 30px;
     font-weight: 800;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     text-shadow:1px 1px 1px rgb(161, 161, 161);
 }
 
@@ -249,7 +250,7 @@ article{
     left: 29px;
     top: 40px;
     transform: rotateY(180deg);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 28px;
@@ -265,7 +266,7 @@ article{
     left: 31px;
     top: 94.91px;
     transform: rotateY(180deg);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
@@ -282,7 +283,7 @@ article{
     left: 1110px;
     top: 20px;
 
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 15px;
@@ -351,11 +352,11 @@ transform: scale(1.1);
     width: 100%;
     height: 277px;
     border-radius: 15px 15px 0px 0px;
-    border: 2px solid rgba(255, 255, 255, 0);
+    border: 1px solid rgba(255, 255, 255, 0);
     filter: drop-shadow(5px rgba(0, 0, 0, 0));
 }
 .slider-review .slider-box:hover{
-    border-bottom: 2px solid #6F6F6F;
+    border-bottom: 1px solid #6F6F6F;
 }
 
 .slider-counseling .slider-box{
@@ -390,10 +391,11 @@ transform: scale(1.1);
     justify-content: center;
     align-items: center;
     padding: 17px 33px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
+    color: rgb(80, 80, 80);
 
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 15px;
     line-height: 18px;
     text-align: center;
@@ -414,7 +416,7 @@ transform: scale(1.1);
 }
 .counseling-box-content, .counseling-box-name, .counseling-box-star{
     position: absolute;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
@@ -472,7 +474,7 @@ transform: scale(1.1);
     left: 0px;
     top: 0px;
     
-    font-family: 'Inter',sans-serif;;
+    font-family: 'Nanum Gothic',sans-serif;;
     font-style: italic;
     font-weight: 600;
     font-size: 30px;
@@ -484,32 +486,3 @@ transform: scale(1.1);
     text-shadow: 0px 4px 4px #000000;
     transform: matrix(0.98, 0, -0.18, 1, 0, 0);
 }
-
-/* footer */
-footer{
-    position: relative;
-    /* width: 1920px; */
-    height: 180px;
-    border: 1px solid #ff0000;
-    border-top: 1px solid #DFDFDF;
-}
-footer>div{
-    
-    position: relative;
-    width: 1200px;
-    height: 180px;
-    margin: auto;
-    border: 1px solid green;
-}
-
-::-webkit-scrollbar { 
-    width: 10px; /*스크롤바의 너비*/} 
-    
-::-webkit-scrollbar-thumb { 
-background-color: rgb(189, 189, 189); /*스크롤바의 색상*/ 
-border-radius: 10px; /*스크롤바 라운드*/}
-
-::-webkit-scrollbar-track { 
-background-color: rgb(255, 255, 255); /*스크롤바 트랙 색상*/ 
-border-radius: 10px; /*스크롤바 트랙 라운드*/ 
-box-shadow: inset 0px 0px 5px rgba(0,0,0,0.2); /*스크롤바 트랙 안쪽 그림자*/}

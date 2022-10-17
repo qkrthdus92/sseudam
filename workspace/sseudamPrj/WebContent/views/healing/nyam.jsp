@@ -12,11 +12,11 @@
 <body>
 	<%@ include file="/views/common/header.jsp" %>
 	<div class=topBtn onclick="window.scrollTo(0,0);">TOP</div>
-	<nav class="nav-nyam">
+	<nav class="nyam-color">
         <div class="head-in">
 			<div class="ment1">식사는 잡쉈어?</div>
 			<div class="ment2">혼자서 냠냠</div>
-			<div class="head-slider-img"><img src="<%=root%>/resources/img/healing/맛집힐링.png"></div>
+			<div class="head-slider-img"><img src="<%=root%>/resources/img/healing/냠냠.png"></div>
         </div>
 	</nav>
 	<main>
@@ -37,7 +37,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플1.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 카페</div>					
 					</a>	
 				</div>			
 			</article>
@@ -48,7 +48,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플2.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 카페</div>					
 					</a>	
 				</div>			
 			</article>
@@ -59,7 +59,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플3.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 카페</div>					
 					</a>	
 				</div>			
 			</article>
@@ -70,7 +70,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플4.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 카페</div>					
 					</a>	
 				</div>			
 			</article>
@@ -81,7 +81,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플5.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 카페</div>					
 					</a>	
 				</div>			
 			</article>
@@ -92,7 +92,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플6.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 카페</div>					
 					</a>	
 				</div>			
 			</article>
@@ -103,7 +103,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플7.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 카페</div>					
 					</a>	
 				</div>			
 			</article>
@@ -114,7 +114,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플8.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 카페</div>					
 					</a>	
 				</div>			
 			</article>
@@ -125,7 +125,7 @@
 				<div class="healing-pic-outline">
 					<a class="pop-open" href="javascript:openPop()" alt="">
 						<img class="healing-pic" src="<%=root%>/resources/img/main/샘플9.jpg">
-						<div class="healing-name">어느카페</div>					
+						<div class="healing-name">어떤 카페</div>					
 					</a>	
 				</div>			
 			</article>
@@ -148,7 +148,7 @@
 			<div class="popup_head">
 				<a class="pop-close" href="javascript:closePop()" alt="">x</a>
 			</div>
-			<div class="popup_body">				
+			<div class="popup_body nyam-color">				
 				<div class="popup_pic"><img src="<%=root%>/resources/img/main/샘플2.jpg"></div>
 				<div class="popup_name">어느 카페</div>				
 			</div>
@@ -166,9 +166,9 @@
 					<img class="imti" src="<%=root%>/resources/img/healing/하트.png" alt="">저장하기
 				</div>							
 			</div>
-			<div class="diagonal-1-1"></div>
+			<div class="diagonal-1-1 nyam-border-color"></div>
 			<div class="diagonal-1-2"></div>
-			<div class="diagonal-2-1"></div>
+			<div class="diagonal-2-1 nyam-border-color"></div>
 			<div class="diagonal-2-2"></div>
 			
 		</div>
