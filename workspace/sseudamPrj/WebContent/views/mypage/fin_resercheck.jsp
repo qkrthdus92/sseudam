@@ -83,7 +83,7 @@
     margin-left : 177px;
     border-width: 1px 1px 0px 1px;
     border-style: solid;
-    background: #FFFFFF;
+    background: rgba(217, 217, 217, 0.5);
     border-color: rgba(0, 0, 0, 0.6);
     border-radius: 30px 30px 0px 0px;
 }
@@ -102,7 +102,7 @@
     height: 59.04px;
     margin-top: 30px;
     margin-left: 354px;
-    background: rgba(217, 217, 217, 0.5);
+    background: #FFFFFF;
     border-width: 1px 1px 0px 1px;
     border-style: solid;
     border-color: rgba(0, 0, 0, 0.6);
@@ -124,6 +124,10 @@
 #checkbox{
     width: 18px;
     height: 16px;
+}
+#allselect{
+    margin-left: 20px;
+    margin-top: 20px;
 }
 #edittop{
     width: 1200px;
@@ -183,40 +187,134 @@
     margin-top: 5px;
 }
 #profil2{
-    margin-top: 5px;
-    width: 40px;
-    height: 40px;
+    margin-top: 15;
+    width: 70px;
+    height: 70px;
     border-radius: 100px;
     margin-left: 15px;
 }
 #proname{
+    margin-right: 35px;
+    margin-top:35px;
     float: right;
-    margin-right: 50px;
-    margin-top: 8px;
-    font-size: 14px;
 }
-#star{
+#review_bnt{
     margin-top: 5px;
     margin-left: 110px;
     background-color: #97D299;
     color:black;
     border-color: #FFFFFF;
     border-radius: 10px;
+    cursor: pointer;
 }
 #bor-top>label{
-    margin-left: 20px;
+    margin-left: 10px;
 }
 #noborder{
-    margin-left: 20px;
+    margin-left: 10px;
 }
-#datechoice{
-	margin-left: 650px;	
-}
-#allselect{
-    margin-left: 20px;
-    margin-top: 20px;
-}
+	#popup {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  background: rgba(0, 0, 0, .7);
+	  z-index: 1;
+	  backdrop-filter: blur(4px);
+	  -webkit-backdrop-filter: blur(4px);
+	}
+	
+	#popup.hide {
+	  display: none;
+	}
+	
+	#popup.multiple-filter {
+	  backdrop-filter: blur(4px) grayscale(90%);
+	  -webkit-backdrop-filter: blur(4px) grayscale(90%);
+	}
+	
+	#popup .content {
+	  padding: 20px;
+	  background: #fff;
+	  border-radius: 5px;
+	  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+	  width: 400px;
+	  height: 400px;
+	} 
 
+	.popup-head{
+	width:100%;
+	height:100px; 
+	display:grid;
+	grid-template-rows: 2fr 1fr 1fr;
+	align-items:center;
+	justify-content:center;
+	}
+	.head-title{
+		margin-top: 30px;
+		margin-left: 20px;
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	#popup-logo{
+		width: 100%;
+		height: 50px;
+	}
+
+	.popup-body{              
+	width:100%;
+	height: 220px;
+	background-color:#ffffff; 
+	}
+
+	.popup-foot{                      
+	width:100%;
+	height:50px;
+	}
+	.pop-btn{ 
+	display:inline-flex;           
+	width:50%;                      
+	height:100%;                   
+	justify-content:center;        
+	align-items:center;            
+	float:left;  
+	background-color: #87C57D;                  
+	color:#FFFFFF;                
+	cursor:pointer;     
+	border-style: none;           
+	}
+	#confirm{                
+	border-right:1px solid #FFFFFF;
+	}
+	 .star {
+    position: relative;
+    font-size: 2rem;
+    color: #ddd;
+    }
+  
+   .star input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    }
+  
+  .star span {
+    width: 0;
+    position: absolute; 
+    left: 0;
+    color: red;
+    overflow: hidden;
+    pointer-events: none;
+    }
+    
 </style>
 </head>
 <body>
@@ -225,10 +323,10 @@
     <div id="main">
         <div id="boardinfo">
             <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
-            <div id="hm1">총 결제내역</div>
+            <div id="hm1">총 상담내역</div>
             <div id="hm">5건</div>
             <div id="hm1"></div>
-            <div idg="hm"></div>
+            <div id="hm"></div>
         </div>
     
         <div id="dom">
@@ -243,97 +341,71 @@
         <div id="editbar">
             <button id="allselect" ><img id="checkbox" src="/sseudamPrj/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
             <button id="delete">삭제</button>
-        	<span id="datechoice">
-	            <input id="date" type="date" value="2022-10-12">
-	            <span>~</span>
-	            <input id="date" type="date" value="2022-10-12">
-                <button> 조회</button>
-        	</span>
         </div>
 
         <div id="pro-box-wrap">
+            <div id="pro-box-all">
                 <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
+                    <span><img id="profil2" src="/sseudamPrj/WebContent/resources/img/프로필.png" alt=""></span> 
                     <div id="proname">
-                        <span>예약일시<br> 22.10.13</span> 
+                        <span>전문가 <br> 심투용</span> 
                     </div>             
-                    <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                    <div id="bor-top"><label>결제일시</label></div>
+                    <div id="bor-top"><label>에약일시</label></div>
                     <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>결제수단</label></div>
-                    <div id="noborder"><label>**카드</label></div>
+                    <div id="bor-top"><label>에약번호</label></div>
+                    <div id="noborder"><label>0113</label></div>
                 </div>
+                <div><button id="review_bnt" onclick="showPopup(true)">별점주기</button></div>
+            </div>
                 
-                 <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>예약일시<br> 22.10.13</span> 
-                    </div>             
-                    <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                    <div id="bor-top"><label>결제일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>결제수단</label></div>
-                    <div id="noborder"><label>**카드</label></div>
-                </div>
-                
-                <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>예약일시<br> 22.10.13</span> 
-                    </div>             
-                    <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                    <div id="bor-top"><label>결제일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>결제수단</label></div>
-                    <div id="noborder"><label>**카드</label></div>
-                </div>
-                
-                <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>예약일시<br> 22.10.13</span> 
-                    </div>             
-                    <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                    <div id="bor-top"><label>결제일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>결제수단</label></div>
-                    <div id="noborder"><label>**카드</label></div>
-                </div>
-
-                 <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>예약일시<br> 22.10.13</span> 
-                    </div>             
-                    <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                    <div id="bor-top"><label>결제일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>결제수단</label></div>
-                    <div id="noborder"><label>**카드</label></div>
-                </div>
-
-                <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>예약일시<br> 22.10.13</span> 
-                    </div>             
-                    <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                    <div id="bor-top"><label>결제일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>결제수단</label></div>
-                    <div id="noborder"><label>**카드</label></div>
-                </div>
-                
-         </div>
-    
     </div>
+    		<div id="popup" class="hide">
+		  <div class="content">
+				<div class="popup-head">
+					<div  ><img id="popup-logo" src="../../resources/img/header/logo.png" alt=""></div>
+					<div class="head-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예약번호0113의 <br> &nbsp;&nbsp;&nbsp;&nbsp;상담은 어떠셨나요?</div>
+				</div>
+				<div class="popup-body">
+					<span class="star">
+						 ★★★★★
+						<span>★★★★★</span>
+						<input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+					</span>
+				</div>
+				<div class="popup-foot">
+					<!-- 별점주는 컨트롤러로 이동 -->
+					<button class="pop-btn" id="confirm" onclick="location.href='';" >확인</button> 
+					<button class="pop-btn" id="close" onclick="closePopup()" >창 닫기</button>
+				</div>
+		  </div>
+		</div>
+    
 </div>
 <%@ include file="/views/common/footer.jsp" %>	
+
+<script type="text/javascript">
+	function showPopup(multipleFilter) {
+		const popup = document.querySelector('#popup');
+	  
+	  if (multipleFilter) {
+	  	popup.classList.add('multiple-filter');
+	  } else {
+	  	popup.classList.remove('multiple-filter');
+	  }
+	  
+	  popup.classList.remove('hide');
+	}
+	
+	function closePopup() {
+		const popup = document.querySelector('#popup');
+	  popup.classList.add('hide');
+	}
+</script>
+<script type="text/javascript">
+	const drawStar = (target) => {
+    document.querySelector(`.star span`).style.width = `${target.value * 10}%`;
+  	}
+</script>
+
 </body>
 </html>

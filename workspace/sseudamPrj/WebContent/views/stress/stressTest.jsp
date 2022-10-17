@@ -138,7 +138,6 @@
 </head>
 <body>
 <%@ include file="/views/common/header.jsp" %>
-<% String root = request.getContextPath();%>
 
 	<div id="wrap">
        <div id="main">

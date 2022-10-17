@@ -61,7 +61,6 @@
 </head>
 <body>
 <%@ include file="/views/common/header.jsp" %>
-<% String root = request.getContextPath();%>
 	<div id="wrap">
        <div id="main">
            <div id="title">테스트 결과<br>Nick님의 스트레스 지수는 __점 입니다.</div>

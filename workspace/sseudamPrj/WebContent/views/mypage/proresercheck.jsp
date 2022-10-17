@@ -59,11 +59,12 @@
     height: 59.04px;
     position: absolute;
     margin-top: 30px;
-    background: #FFFFFF;
+    background:  rgba(217, 217, 217, 0.5);
     border-width: 1px 1px 0px 1px;
     border-style: solid;
     border-color: rgba(0, 0, 0, 0.6);
     border-radius: 30px 30px 0px 0px;
+    cursor: pointer;
 }
 #dominfo{     
     position: absolute;
@@ -72,7 +73,6 @@
     top: 20px;
     left: 50px;
     line-height: 19px;
-    cursor: pointer;
 }
 #dom2{
     box-sizing: border-box;
@@ -86,15 +86,15 @@
     background: #FFFFFF;
     border-color: rgba(0, 0, 0, 0.6);
     border-radius: 30px 30px 0px 0px;
+    cursor: pointer;
 }
 #dominfo2{     
     position: absolute;
     width: 177.44px;
     height: 58.63px;
     top: 20px;
-    left: 35px;
+    left: 55px;
     line-height: 19px;
-    cursor: pointer;
 }
 #dom3{
     box-sizing: border-box;
@@ -102,20 +102,8 @@
     height: 59.04px;
     margin-top: 30px;
     margin-left: 354px;
-    background: rgba(217, 217, 217, 0.5);
-    border-width: 1px 1px 0px 1px;
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0.6);
-    border-radius: 30px 30px 0px 0px;
 }
-#dominfo3{ 
-    width: 177.44px;
-    height: 58.63px;
-    margin-top: 20px;
-    margin-left: 55px;
-    line-height: 19px;
-    cursor: pointer;
-}
+
  #editbar{
     width: 1200px;
     height: 63px;
@@ -147,6 +135,12 @@
     border-bottom: 1px solid grey;
     font-size: 20px;
 }
+
+#allselect{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
 #cb1{
     width: 20px;
 	height: 20px;
@@ -192,7 +186,7 @@
 #proname{
     float: right;
     margin-right: 50px;
-    margin-top: 8px;
+    margin-top: 20px;
     font-size: 14px;
 }
 #star{
@@ -210,12 +204,11 @@
     margin-left: 20px;
 }
 #datechoice{
-	margin-left: 650px;	
+	margin-left: 650px;
 }
-#allselect{
-    margin-left: 20px;
-    margin-top: 20px;
-}
+
+
+
 
 </style>
 </head>
@@ -232,13 +225,13 @@
         </div>
     
         <div id="dom">
-            <div id="dominfo" onclick="location.href='/sseudamPrj/views/mypage/resercheck.jsp';">상담예약</div>
+            <div id="dominfo" onclick="location.href='/sseudamPrj/views/mypage/proresercheck.jsp';">상담예약</div>
         </div>
         <div id="dom2">
-            <div id="dominfo2" onclick="location.href='/sseudamPrj/views/mypage/fin_resercheck.jsp';">상담완료된예약</div>
+            <div id="dominfo2" onclick="location.href='/sseudamPrj/views/mypage/promoneycheck.jsp';">수익조회</div>
         </div>
         <div id="dom3">
-            <div id="dominfo3" onclick="location.href='/sseudamPrj/views/mypage/reserpay.jsp';">결제내역</div>
+            <div id="dominfo3"></div>
         </div>
         <div id="editbar">
             <button id="allselect" ><img id="checkbox" src="/sseudamPrj/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
@@ -246,7 +239,7 @@
         	<span id="datechoice">
 	            <input id="date" type="date" value="2022-10-12">
 	            <span>~</span>
-	            <input id="date" type="date" value="2022-10-12">
+	            <input id="" type="date" value="2022-10-12">
                 <button> 조회</button>
         	</span>
         </div>
@@ -255,81 +248,74 @@
                 <div id="pro-box"> 
                     <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
                     <div id="proname">
-                        <span>예약일시<br> 22.10.13</span> 
+                        <span>아이디</span> 
                     </div>             
-                    <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
+                    <div id="bor-top"><label>전화번호</label></div>
+                    <div id="noborder"><label>010.1234.5678</label></div>
                     <div id="bor-top"><label>결제일시</label></div>
                     <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>결제수단</label></div>
-                    <div id="noborder"><label>**카드</label></div>
-                </div>
-                
-                 <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>예약일시<br> 22.10.13</span> 
-                    </div>             
                     <div id="bor-top"><label>예약번호</label></div>
                     <div id="noborder"><label>0113</label></div>
-                    <div id="bor-top"><label>결제일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>결제수단</label></div>
-                    <div id="noborder"><label>**카드</label></div>
-                </div>
-                
-                <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>예약일시<br> 22.10.13</span> 
-                    </div>             
-                    <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                    <div id="bor-top"><label>결제일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>결제수단</label></div>
-                    <div id="noborder"><label>**카드</label></div>
-                </div>
-                
-                <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>예약일시<br> 22.10.13</span> 
-                    </div>             
-                    <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                    <div id="bor-top"><label>결제일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>결제수단</label></div>
-                    <div id="noborder"><label>**카드</label></div>
-                </div>
-
-                 <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>예약일시<br> 22.10.13</span> 
-                    </div>             
-                    <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                    <div id="bor-top"><label>결제일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>결제수단</label></div>
-                    <div id="noborder"><label>**카드</label></div>
                 </div>
 
                 <div id="pro-box"> 
                     <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
                     <div id="proname">
-                        <span>예약일시<br> 22.10.13</span> 
+                        <span>아이디</span> 
                     </div>             
-                    <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
+                    <div id="bor-top"><label>전화번호</label></div>
+                    <div id="noborder"><label>010.1234.5678</label></div>
                     <div id="bor-top"><label>결제일시</label></div>
                     <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>결제수단</label></div>
-                    <div id="noborder"><label>**카드</label></div>
+                    <div id="bor-top"><label>예약번호</label></div>
+                    <div id="noborder"><label>0113</label></div>
                 </div>
-                
+
+
+                <div id="pro-box"> 
+                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
+                    <div id="proname">
+                        <span>아이디</span> 
+                    </div>             
+                    <div id="bor-top"><label>전화번호</label></div>
+                    <div id="noborder"><label>010.1234.5678</label></div>
+                    <div id="bor-top"><label>결제일시</label></div>
+                    <div id="noborder"><label>22/10/04/13:30</label></div>
+                    <div id="bor-top"><label>예약번호</label></div>
+                    <div id="noborder"><label>0113</label></div>
+                </div>
+
+                <div id="pro-box"> 
+                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
+                    <div id="proname">
+                        <span>아이디</span> 
+                    </div>             
+                    <div id="bor-top"><label>전화번호</label></div>
+                    <div id="noborder"><label>010.1234.5678</label></div>
+                    <div id="bor-top"><label>결제일시</label></div>
+                    <div id="noborder"><label>22/10/04/13:30</label></div>
+                    <div id="bor-top"><label>예약번호</label></div>
+                    <div id="noborder"><label>0113</label></div>
+                </div>
+
+                <div id="pro-box"> 
+                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
+                    <div id="proname">
+                        <span>아이디</span> 
+                    </div>             
+                    <div id="bor-top"><label>전화번호</label></div>
+                    <div id="noborder"><label>010.1234.5678</label></div>
+                    <div id="bor-top"><label>결제일시</label></div>
+                    <div id="noborder"><label>22/10/04/13:30</label></div>
+                    <div id="bor-top"><label>예약번호</label></div>
+                    <div id="noborder"><label>0113</label></div>
+                </div>
+
+
+ 
+
+         
+                                 
          </div>
     
     </div>
