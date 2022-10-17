@@ -1,0 +1,22 @@
+/* 관리자 - 관리자 조회 */
+
+/* 메뉴 글자색 수정*/
+
+.admin-menu-main-user li:nth-child(3) a {
+  color: var(--adminMenuHover);
+  font-size: 17px;
+}
+
+/* 메인 보드 그리드 수정 */
+
+.admin-main-board {
+  display: grid;
+  grid-template-columns: 1fr 10fr 1fr;
+  grid-template-rows: repeat(11, 50px);
+}
+
+/* 조회 버튼 수정 */
+
+.main-select-btn select {
+  width: 130px;
+}
