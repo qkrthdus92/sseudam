@@ -284,7 +284,7 @@
               </div>
               <div class="popup-foot">
                   <!-- 프로필수정페이지로이동 -->
-                  <button class="pop-btn" id="confirm" onclick="location.href='/sseudamPrj/views/mypage/promain.jsp';" >확인</button> 
+                  <button class="pop-btn" id="confirm" onclick="location.href='/sseudamPrj/views/mypage/proeditmypage.jsp';" >확인</button> 
                   <button class="pop-btn" id="close" onclick="closePopup()" >창 닫기</button>
               </div>
         </div>

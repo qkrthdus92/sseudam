@@ -79,6 +79,12 @@
         margin-top: 20px;
         border-bottom: 1px solid lightgray;
     }
+    #csqna3{
+        font-size: 16px;
+        margin-top: 30px;
+        border-bottom: 1px solid lightgray;
+    }
+    
     #csmainbot{
         height: 80px;
         display: grid;
@@ -124,25 +130,25 @@
             <div id="csqnabody">
                 <div id="csqnacontent">
                     <div id="csqna1">Q.</div>
-                    <div id="csqna2">좋아요 확인은 어디서 하죠?</div>
+                    <div id="csqna3">좋아요 확인은 어디서 하죠?</div>
                     <div  id="csqna1">A.</div>
                     <div  id="csqna2">로그인 후 마이페이지 > 좋아요 확인에서 하실 수 있습니다.</div>
                 </div>
                 <div id="csqnacontent">
                     <div id="csqna1">Q.</div>
-                    <div id="csqna2">상담 금액 책정 기준이 뭔가요?</div>
+                    <div id="csqna3">상담 금액 책정 기준이 뭔가요?</div>
                     <div  id="csqna1">A.</div>
                     <div  id="csqna2">전문 상담가의 자격증 갯수에 따라 책정됩니다.</div>
                 </div>
                 <div id="csqnacontent">
                     <div id="csqna1">Q.</div>
-                    <div id="csqna2">개인정보 수정은 어디서 어떻게 해야하나요?</div>
+                    <div id="csqna3">개인정보 수정은 어디서 어떻게 해야하나요?</div>
                     <div  id="csqna1">A.</div>
                     <div  id="csqna2">로그인 후 마이페이지 > 내프로필 수정해서 할 수 있습니다.</div>
                 </div>
                 <div id="csqnacontent">
                     <div id="csqna1">Q.</div>
-                    <div id="csqna2">컨텐츠의 선정기준은 뭔가요?</div>
+                    <div id="csqna3">컨텐츠의 선정기준은 뭔가요?</div>
                     <div  id="csqna1">A.</div>
                     <div  id="csqna2">다수의 데이터를 바탕으로 선정되며 광고는 포함되지 않습니다.</div>
                 </div>

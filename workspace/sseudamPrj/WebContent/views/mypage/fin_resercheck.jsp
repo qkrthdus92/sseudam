@@ -291,30 +291,34 @@
 	#confirm{                
 	border-right:1px solid #FFFFFF;
 	}
-	 .star {
-    position: relative;
-    font-size: 2rem;
-    color: #ddd;
-    }
-  
-   .star input {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    opacity: 0;
-    cursor: pointer;
-    }
-  
-  .star span {
-    width: 0;
-    position: absolute; 
-    left: 0;
-    color: red;
-    overflow: hidden;
-    pointer-events: none;
-    }
-    
+	#myform input[type=radio]{
+	    display: none; /* 라디오박스 감춤 */
+	}
+	#myform label{
+	    font-size: 2.5em; /* 이모지 크기 */
+	    color: transparent; /* 기존 이모지 컬러 제거 */
+	    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+	}
+    #myform label:hover{
+    text-shadow: 0 0 0 #87C57D; /* 마우스 호버 */
+	}
+	#myform label:hover ~ label{
+	    text-shadow: 0 0 0 #87C57D; /* 마우스 호버 뒤에오는 이모지들 */
+	}
+	#myform fieldset{
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+    direction: rtl; /* 이모지 순서 반전 */
+    border: 0; /* 필드셋 테두리 제거 */
+	}
+	#myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 #87C57D; /* 마우스 클릭 체크 */
+	}
+	#viewstar{
+	width: 100%;
+	padding-top: 60px;
+	padding-left: 20px;
+	}
+	
 </style>
 </head>
 <body>
@@ -366,11 +370,17 @@
 					<div class="head-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예약번호0113의 <br> &nbsp;&nbsp;&nbsp;&nbsp;상담은 어떠셨나요?</div>
 				</div>
 				<div class="popup-body">
-					<span class="star">
-						 ★★★★★
-						<span>★★★★★</span>
-						<input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
-					</span>
+					<div id="viewstar">
+						<form name="myform" id="myform" method="post" action="./save">
+						    <fieldset>
+						        <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+						        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+						        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+						        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+						        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+						    </fieldset>
+						</form>
+					</div>
 				</div>
 				<div class="popup-foot">
 					<!-- 별점주는 컨트롤러로 이동 -->
@@ -401,6 +411,7 @@
 	  popup.classList.add('hide');
 	}
 </script>
+
 <script type="text/javascript">
 	const drawStar = (target) => {
     document.querySelector(`.star span`).style.width = `${target.value * 10}%`;
