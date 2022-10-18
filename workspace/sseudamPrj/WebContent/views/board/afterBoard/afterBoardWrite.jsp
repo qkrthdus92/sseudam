@@ -17,7 +17,7 @@
     }
     #wrap > *{
         width: 100vw;
-        height: 1200px;
+        height: 1500px;
         box-sizing: border-box;
         background-color: #FFFFFF;
         
@@ -29,7 +29,7 @@
     #main{
         border-top: 1px solid #dfdfdf;
         width: 1200px;
-        height: 850px;
+        height: 1150px;
         margin: auto;
     }
     #title{
@@ -47,7 +47,7 @@
         height: 85%;
         background-color: #F5F5F5;
         display: grid;
-        grid-template-rows: 1fr 3fr 1fr;
+        grid-template-rows: 1fr 3fr 1fr 2fr 0.7fr;
         margin: 0 auto;
         align-content: center;
         padding: 20px;
@@ -56,6 +56,38 @@
         font-size: 1.1rem;
         margin: auto;
     }
+    #file-upload > div{
+        display: flex;
+        margin-left: 60px;
+    }
+    #upload{
+        font-size: 1.1rem;
+        margin-top: 10px;
+        margin-left: 45px;
+    }
+    #upload-btn{
+        margin-left: 30px;
+        width: 85px;
+        height: 35px;
+        background-color: #dfdfdf;
+        border: 0px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+    }
+    .upload-list{
+        margin:auto;
+        grid-template-rows: repeat(5, 1fr);
+        width: 90%;
+        height: 100%;
+    }
+    .upload-list > div{
+        border: 0.5px solid #ffffff;
+        height: 20%;
+        background-color: #dfdfdf;
+
+    }
+
+
+
     #btn{
         margin: auto;
     }
@@ -84,14 +116,32 @@
             <%@ include file="/views/common/header.jsp" %>
         </div>
         <div id="main">
-            <div id="title">자유게시판</div>
+            <div id="title">후기게시판</div>
             <div id="write-box">
                 <div id="write-title">제목<br><input type="text" size="130" style="height:25px" placeholder="제목을 입력하세요."></div>
                 <div id="write-content">내용<br><textarea name="content" cols="132%" rows="30" style="resize:none;" placeholder="내용을 입력하세요."></textarea></div>
+                
+                
+                <div id="file-upload">
+                    <div id="upload">이미지 첨부</div>
+                    <div>
+                        <div><textarea name="content" cols="115%"  style="resize:none;" placeholder="첨부파일을 선택하세요. (이미지파일 최대 5장)"></textarea></div>
+                        <div><button id="upload-btn">파일선택</button></div>
+                    </div>
+                </div>
+                
+                <div class="upload-list">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                
                 <div id="btn">
                     <input type="submit" value="등록" id="ok-btn">
                     &nbsp;&nbsp;
-                    <button id="no-btn" onclick="location.href='<%=root%>/views/board/freeBoard/freeBoardList.jsp'">취소</button></div>
+                    <button id="no-btn" onclick="location.href='<%=root%>/views/board/afterBoard/afterBoardList.jsp'">취소</button></div>
             </div>
         </div>
         <div id="footer">

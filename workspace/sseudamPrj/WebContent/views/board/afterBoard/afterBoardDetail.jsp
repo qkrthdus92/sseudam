@@ -76,8 +76,10 @@
         padding: 20px;
         width: 1160px;
         height: 650px;
-        white-space: pre-wrap;
         border-bottom: 1px solid #747474;
+    }
+    .board-content > div{
+        margin-left: 20px;
     }
     #cmt-cnt{
         margin-top: 30px;
@@ -146,10 +148,10 @@
             <%@ include file="/views/common/header.jsp" %>
         </div>
         <div id="main">
-            <div id="title">자유게시판</div>
+            <div id="title">후기게시판</div>
             <div id="board-title">
                 <div>no.60</div>
-                <div>자유게시판 글 상세조회 테스트</div>
+                <div>후기게시판 글 상세조회 테스트</div>
                 <div>user01</div>
                 <div>2022-10-16</div>
                 <div id="hit">
@@ -164,7 +166,13 @@
                 <div>&nbsp;|&nbsp;</div>
                 <div><a href="">삭제하기</a></div>
             </div>
-            <div id="board-content">내용부분</div>
+            <div class="board-content">
+                <div>
+                    <img src="<%=root%>/resources/img/main/러버덕.jpg">
+                    러버덕러버덕러버덕러버덕러버덕러버덕러버덕러버덕러버덕러버덕러버덕러버덕러버덕러버덕러버덕러버덕러버덕러버덕러버덕
+
+                </div>
+            </div>
             <div id="cmt-cnt">
                 <img src="<%=root%>/resources/img2/Chat.svg">
                 <div>댓글 x개</div>
@@ -224,7 +232,7 @@
                     </div>
                 </div>
             </div>
-            <div id="list-btn-div"><button id="list-btn" onclick="location.href='<%=root%>/views/board/freeBoard/freeBoardList.jsp'">목록</button></div>
+            <div id="list-btn-div"><button id="list-btn" onclick="location.href='<%=root%>/views/board/afterBoard/afterBoardList.jsp'">목록</button></div>
         </div>
         <div id="footer">
             <%@ include file="/views/common/footer.jsp" %>
