@@ -84,7 +84,14 @@
     #search{
         grid-column: span 5;
         margin: auto;
-        text-align: center;
+        display: flex;
+    }
+    #search > div{
+        margin: 3px;
+        vertical-align: middle;
+    }
+    #search-icon{
+        padding-top: 3px;
     }
     #footer{
         width: 100vw;
@@ -170,12 +177,15 @@
 
             <div id="page">< 1 2 3 4 5 6 7 8 9 10 ></div>
             <div id="search">
-                <select name="board-search" form="">
-                    <option value="title">제목</option>
-                    <option value="content">내용</option>
-                    <option value="writer">작성자</option>
-                </select>
-                <input type="text">
+                <div>
+                    <select name="board-search" form="">
+                        <option value="title">제목</option>
+                        <option value="content">내용</option>
+                        <option value="writer">작성자</option>
+                    </select>
+                </div>
+                <div><input type="text"></div>
+                <div id="search-icon"><img src="<%=root%>/resources/img2/Vector.svg"></div>
             </div>
         </div>
         <div id="footer">

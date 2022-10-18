@@ -74,7 +74,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-     
         }
         #suggest{
             width: 20%;
@@ -89,9 +88,6 @@
             height: 85%;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
-        }
-        #suggest > *{
-            
         }
         #btn{
             margin: 10px;
@@ -117,7 +113,6 @@
 </head>
 <body>
 <%@ include file="/views/common/header.jsp" %>
-
 	<div id="wrap">
        <div id="main">
            <div id="title">테스트 결과<br>Nick님의 스트레스 지수는 __점 입니다.</div>
@@ -126,7 +121,7 @@
                    <legend>스트레스 지수에 따른 등급은 아래와 같이 평가됩니다.</legend>
                    <div class="grade">
                         <div>
-                            <img src="<%=root%>/resources/icon/Happy.svg">
+                            <img src="<%=root%>/resources/img2/Happy.svg">
                             &nbsp;&nbsp;&nbsp;0~6점 : 낮음
                             <br>
                             &nbsp;&nbsp;&nbsp;스트레스 없는 행복한 삶을 살고계시는군요. 축하합니다!
@@ -134,7 +129,7 @@
                     </div>
                     <div class="grade">
                        <div>
-                            <img src="<%=root%>/resources/icon/Lol.svg">
+                            <img src="<%=root%>/resources/img2/Lol.svg">
                             &nbsp;&nbsp;&nbsp;7 ~16점 : 보통
                             <br>
                             &nbsp;&nbsp;&nbsp;일상생활에서 겪는 보통수준의 스트레스입니다.
@@ -142,7 +137,7 @@
                     </div>
                     <div class="grade">
                         <div>
-                            <img src="<%=root%>/resources/icon/Sad.svg">
+                            <img src="<%=root%>/resources/img2/Sad.svg">
                             &nbsp;&nbsp;&nbsp;17~26점 : 높음
                             <br>
                             &nbsp;&nbsp;&nbsp;심각한 스트레스를 받고 있습니다.
@@ -156,12 +151,12 @@
            </div>
             <div id="title"><br>Nick님에게 추천하는 힐링컨텐츠</div>
             <div id="content">
-                <div id="btn"><img src="<%=root%>/resources/icon/left_btn.svg"></div>
+                <div id="btn"><img src="<%=root%>/resources/img2/left_btn.svg"></div>
                 <div id="suggest"><img src="<%=root%>/resources/img/main/러버덕.jpg">추천컨텐츠</div>
                 <div id="suggest"><img src="<%=root%>/resources/img/main/러버덕.jpg">추천컨텐츠</div>
                 <div id="suggest"><img src="<%=root%>/resources/img/main/러버덕.jpg">추천컨텐츠</div>
                 <div id="suggest"><img src="<%=root%>/resources/img/main/러버덕.jpg">추천컨텐츠</div>
-                <div id="btn"><img src="<%=root%>/resources/icon/right_btn.svg"></div>
+                <div id="btn"><img src="<%=root%>/resources/img2/right_btn.svg"></div>
             </div>
            
         <div><br><input type="submit" value="테스트 다시하기" id="retry">
