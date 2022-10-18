@@ -12,3 +12,25 @@
   grid-template-columns: 0.7fr 0.7fr 0.5fr 1fr 1fr 2fr 2fr 4fr 1fr 1fr 0.7fr 0.7fr;
   grid-template-rows: repeat(11, 60px);
 }
+
+/* 전문가 수정페이지 */
+
+.admin-pro-certificate {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.admin-pro-certificate div {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-pro-certificate div:nth-child(-n + 3) {
+  background-color: var(--adminMenu);
+  color: white;
+}

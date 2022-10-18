@@ -32,7 +32,13 @@ pageEncoding="UTF-8"%>
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
 
-          <div class="add-btn"><input type="button" value="게시글 작성" /></div>
+          <div class="add-btn">
+            <input
+              type="button"
+              value="게시글 작성"
+              onclick="location.href='<%=root%>/views/admin/freeBoard/add.jsp'"
+            />
+          </div>
         </div>
         <div class="admin-main-wrapper">
           <div class="admin-main-board-top">
@@ -59,7 +65,11 @@ pageEncoding="UTF-8"%>
 
             <%for(int i=1; i<=10; i++) {%>
             <div>1</div>
-            <div><a href="">여행가고싶다~</a></div>
+            <div>
+              <a href="<%=root%>/views/admin/freeBoard/detail.jsp"
+                >여행가고싶다~</a
+              >
+            </div>
             <div>한혜원</div>
             <div>2022-10-16 23:36:30</div>
             <div>100</div>
