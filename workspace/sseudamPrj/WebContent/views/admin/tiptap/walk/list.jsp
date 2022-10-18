@@ -42,7 +42,13 @@ pageEncoding="UTF-8"%>
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
 
-          <div class="add-btn"><input type="button" value="산책 추가" /></div>
+          <div class="add-btn">
+            <input
+              type="button"
+              value="산책 추가"
+              onclick="location.href='<%=root%>/views/admin/tiptap/walk/add.jsp'"
+            />
+          </div>
         </div>
         <div class="admin-main-wrapper">
           <div class="admin-main-board-top">
@@ -89,7 +95,9 @@ pageEncoding="UTF-8"%>
             <div>게시완료</div>
             <div>100</div>
             <div>
-              <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+              <a href="<%=root%>/views/admin/tiptap/walk/edit.jsp"
+                ><i class="fa-solid fa-pen-to-square"></i
+              ></a>
             </div>
 
             <%}%>

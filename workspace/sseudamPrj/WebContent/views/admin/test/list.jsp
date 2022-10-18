@@ -32,7 +32,13 @@ pageEncoding="UTF-8"%>
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
 
-          <div class="add-btn"><input type="button" value="질문 작성" /></div>
+          <div class="add-btn">
+            <input
+              type="button"
+              value="질문 작성"
+              onclick="location.href='<%=root%>/views/admin/test/add.jsp'"
+            />
+          </div>
         </div>
         <div class="admin-main-wrapper">
           <div class="admin-main-board-top">
@@ -61,7 +67,9 @@ pageEncoding="UTF-8"%>
               >
             </div>
             <div>
-              <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+              <a href="<%=root%>/views/admin/test/edit.jsp"
+                ><i class="fa-solid fa-pen-to-square"></i
+              ></a>
             </div>
             <div>
               <a href=""><i class="fa-regular fa-trash-can"></i></a>

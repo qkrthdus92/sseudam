@@ -32,7 +32,13 @@ pageEncoding="UTF-8"%>
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
 
-          <div class="add-btn"><input type="button" value="게시글 작성" /></div>
+          <div class="add-btn">
+            <input
+              type="button"
+              value="게시글 작성"
+              onclick="location.href='<%=root%>/views/admin/faq/add.jsp'"
+            />
+          </div>
         </div>
         <div class="admin-main-wrapper">
           <div class="admin-main-board-top">
@@ -59,7 +65,7 @@ pageEncoding="UTF-8"%>
             <%for(int i=1; i<=10; i++) {%>
             <div>1</div>
             <div>
-              <a href=""
+              <a href="<%=root%>/views/admin/faq/detail.jsp"
                 >제가 누른 좋아요를 보고싶어요. 어디서 확인할 수 있나요?</a
               >
             </div>

@@ -35,7 +35,13 @@ pageEncoding="UTF-8"%>
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
 
-          <div class="add-btn"><input type="button" value="전문가 추가" /></div>
+          <div class="add-btn">
+            <input
+              type="button"
+              value="전문가 추가"
+              onclick="location.href='<%=root%>/views/admin/pro/add.jsp'"
+            />
+          </div>
         </div>
         <div class="admin-main-wrapper">
           <div class="admin-main-board-top">
@@ -76,10 +82,14 @@ pageEncoding="UTF-8"%>
             <div>50000</div>
             <div>승인완료</div>
             <div>
-              <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+              <a href="<%=root%>/views/admin/pro/counsel.jsp"
+                ><i class="fa-solid fa-magnifying-glass"></i
+              ></a>
             </div>
             <div>
-              <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+              <a href="<%=root%>/views/admin/pro/edit.jsp"
+                ><i class="fa-solid fa-pen-to-square"></i
+              ></a>
             </div>
             <%}%>
           </div>

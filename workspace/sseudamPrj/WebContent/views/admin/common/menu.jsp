@@ -109,7 +109,7 @@
     margin-right: 10px;
   }
 
-  .admin-menu-logout span {
+  .admin-menu-logout a {
     color: white;
   }
 
@@ -184,7 +184,7 @@
     </div>
   </main>
   <div class="admin-menu-logout">
-    <i class="fa-solid fa-right-from-bracket"></i><span>로그아웃</span>
+    <i class="fa-solid fa-right-from-bracket"></i><a href="">로그아웃</a>
   </div>
 </aside>
 <script
