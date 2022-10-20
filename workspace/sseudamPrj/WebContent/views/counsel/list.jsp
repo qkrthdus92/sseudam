@@ -1,20 +1,24 @@
+<%@page import="com.kh.sseudam.counsel.pro.vo.ProVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<% String root1 = request.getContextPath();%>
+<% List<ProVo> proList = (List<ProVo>)request.getAttribute("proList"); %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <title>Insert title here</title>
-    <link rel="stylesheet" href="/sseudamPrj/resources/css/common/reset.css" />
+    <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"
-      href="/sseudamPrj/resources/css/counsel/list.css?ver=3"
+      href="<%=root1%>/resources/css/counsel/list.css?ver=3"
     />
     <link
       rel="stylesheet"
-      href="/sseudamPrj/resources/css/common/variables.css"
+      href="<%=root1%>/resources/css/common/variables.css"
     />
-    <script src="/sseudamPrj/resources/js/counsel/list.js"></script>
+    <script src="<%=root1%>/resources/js/counsel/list.js"></script>
   </head>
   <body>
     <%@ include file="/views/common/header.jsp" %>
@@ -33,7 +37,7 @@ pageEncoding="UTF-8"%>
             <div class="counsel-type border">
               <div class="counsel-type-header">
                 <img
-                  src="../../resources/img/counsel/Folder_search_duotone_line.png"
+                  src="<%= root %>/resources/img/counsel/Folder_search_duotone_line.png"
                   alt=""
                 />
 
@@ -113,7 +117,7 @@ pageEncoding="UTF-8"%>
 
             <div class="counsel-type counsel-type2 border">
               <div class="counsel-type-header">
-                <img src="../../resources/img/counsel/Filter.png" alt="" />
+                <img src="<%=root %>/resources/img/counsel/Filter.png" alt="" />
 
                 <span>상세 조건</span>
               </div>
@@ -231,186 +235,40 @@ pageEncoding="UTF-8"%>
             <li><a href="">낮은가격순</a></li>
           </ul>
           <div class="counsel-pro-list">
-            <div class="counsel-pro-detail">
-              <div>
-                <a href="<%=root%>/views/counsel/detail.jsp"
-                  ><img
-                    src="../../resources/img/counsel/Rectangle 4019.png"
-                    alt=""
-                /></a>
-              </div>
-              <div>
-                <div class="counsel-pro-name">
-                  <a href="<%=root%>/views/counsel/detail.jsp">주연희</a>
-                </div>
-                <div class="counsel-pro-type">청소년 상담</div>
-                <div class="counsel-pro-introduce">
-                  <a href="<%=root%>/views/counsel/detail.jsp"
-                    >마음의 평안과 진정한 나를 찾아 떠나는 여행으로
-                    초대합니다.</a
-                  >
-                </div>
-                <div class="counsel-pro-review">
-                  <i class="fa-solid fa-star"></i>
-                  <div>4.9</div>
-                  <div>(86)</div>
-                </div>
-                <div class="counsel-pro-price">
-                  <div>1회상담</div>
-                  <div>50,000</div>
-                </div>
-              </div>
-            </div>
-            <div class="counsel-pro-detail">
-              <div>
-                <a href="<%=root%>/views/counsel/detail.jsp"
-                  ><img
-                    src="../../resources/img/counsel/Rectangle 4019.png"
-                    alt=""
-                /></a>
-              </div>
-              <div>
-                <div class="counsel-pro-name">
-                  <a href="<%=root%>/views/counsel/detail.jsp">주연희</a>
-                </div>
-                <div class="counsel-pro-type">청소년 상담</div>
-                <div class="counsel-pro-introduce">
-                  <a href="<%=root%>/views/counsel/detail.jsp"
-                    >마음의 평안과 진정한 나를 찾아 떠나는 여행으로
-                    초대합니다.</a
-                  >
-                </div>
-                <div class="counsel-pro-review">
-                  <i class="fa-solid fa-star"></i>
-                  <div>4.9</div>
-                  <div>(86)</div>
-                </div>
-                <div class="counsel-pro-price">
-                  <div>1회상담</div>
-                  <div>50,000</div>
-                </div>
-              </div>
-            </div>
-            <div class="counsel-pro-detail">
-              <div>
-                <a href="<%=root%>/views/counsel/detail.jsp"
-                  ><img
-                    src="../../resources/img/counsel/Rectangle 4019.png"
-                    alt=""
-                /></a>
-              </div>
-              <div>
-                <div class="counsel-pro-name">
-                  <a href="<%=root%>/views/counsel/detail.jsp">주연희</a>
-                </div>
-                <div class="counsel-pro-type">청소년 상담</div>
-                <div class="counsel-pro-introduce">
-                  <a href="<%=root%>/views/counsel/detail.jsp"
-                    >마음의 평안과 진정한 나를 찾아 떠나는 여행으로
-                    초대합니다.</a
-                  >
-                </div>
-                <div class="counsel-pro-review">
-                  <i class="fa-solid fa-star"></i>
-                  <div>4.9</div>
-                  <div>(86)</div>
-                </div>
-                <div class="counsel-pro-price">
-                  <div>1회상담</div>
-                  <div>50,000</div>
-                </div>
-              </div>
-            </div>
-            <div class="counsel-pro-detail">
-              <div>
-                <a href="<%=root%>/views/counsel/detail.jsp"
-                  ><img
-                    src="../../resources/img/counsel/Rectangle 4019.png"
-                    alt=""
-                /></a>
-              </div>
-              <div>
-                <div class="counsel-pro-name">
-                  <a href="<%=root%>/views/counsel/detail.jsp">주연희</a>
-                </div>
-                <div class="counsel-pro-type">청소년 상담</div>
-                <div class="counsel-pro-introduce">
-                  <a href="<%=root%>/views/counsel/detail.jsp"
-                    >마음의 평안과 진정한 나를 찾아 떠나는 여행으로
-                    초대합니다.</a
-                  >
-                </div>
-                <div class="counsel-pro-review">
-                  <i class="fa-solid fa-star"></i>
-                  <div>4.9</div>
-                  <div>(86)</div>
-                </div>
-                <div class="counsel-pro-price">
-                  <div>1회상담</div>
-                  <div>50,000</div>
-                </div>
-              </div>
-            </div>
-            <div class="counsel-pro-detail">
-              <div>
-                <a href="<%=root%>/views/counsel/detail.jsp"
-                  ><img
-                    src="../../resources/img/counsel/Rectangle 4019.png"
-                    alt=""
-                /></a>
-              </div>
-              <div>
-                <div class="counsel-pro-name">
-                  <a href="<%=root%>/views/counsel/detail.jsp">주연희</a>
-                </div>
-                <div class="counsel-pro-type">청소년 상담</div>
-                <div class="counsel-pro-introduce">
-                  <a href="<%=root%>/views/counsel/detail.jsp"
-                    >마음의 평안과 진정한 나를 찾아 떠나는 여행으로
-                    초대합니다.</a
-                  >
-                </div>
-                <div class="counsel-pro-review">
-                  <i class="fa-solid fa-star"></i>
-                  <div>4.9</div>
-                  <div>(86)</div>
-                </div>
-                <div class="counsel-pro-price">
-                  <div>1회상담</div>
-                  <div>50,000</div>
-                </div>
-              </div>
-            </div>
-            <div class="counsel-pro-detail">
-              <div>
-                <a href="<%=root%>/views/counsel/detail.jsp"
-                  ><img
-                    src="../../resources/img/counsel/Rectangle 4019.png"
-                    alt=""
-                /></a>
-              </div>
-              <div>
-                <div class="counsel-pro-name">
-                  <a href="<%=root%>/views/counsel/detail.jsp">주연희</a>
-                </div>
-                <div class="counsel-pro-type">청소년 상담</div>
-                <div class="counsel-pro-introduce">
-                  <a href="<%=root%>/views/counsel/detail.jsp"
-                    >마음의 평안과 진정한 나를 찾아 떠나는 여행으로
-                    초대합니다.</a
-                  >
-                </div>
-                <div class="counsel-pro-review">
-                  <i class="fa-solid fa-star"></i>
-                  <div>4.9</div>
-                  <div>(86)</div>
-                </div>
-                <div class="counsel-pro-price">
-                  <div>1회상담</div>
-                  <div>50,000</div>
-                </div>
-              </div>
-            </div>
+          
+          	<%for(int i=0; i<proList.size(); i++) {%>
+	            <div class="counsel-pro-detail">
+	              <div>
+	                <a href="<%=root%>/views/counsel/detail.jsp"
+	                  ><img
+	                    src="<%=root %>/resources/img/counsel/<%= proList.get(i).getImg() %>"
+	                    alt=""
+	                /></a>
+	              </div>
+	              <div>
+	                <div class="counsel-pro-name">
+	                  <a href="<%=root%>/views/counsel/detail.jsp"><%= proList.get(i).getName() %></a>
+	                </div>
+	                <div class="counsel-pro-type"><%=proList.get(i).getCounselType() %></div>
+	                <div class="counsel-pro-introduce">
+	                  <a href="<%=root%>/views/counsel/detail.jsp"
+	                    ><%= proList.get(i).getIntroduce() %></a
+	                  >
+	                </div>
+	                <div class="counsel-pro-review">
+	                  <i class="fa-solid fa-star"></i>
+	                  <div><%= proList.get(i).getAvgStar() %></div>
+	                  <div>(<%= proList.get(i).getCounselCnt() %>)</div>
+	                </div>
+	                <div class="counsel-pro-price">
+	                  <div>1회상담</div>
+	                  <div><%= proList.get(i).getPrice() %></div>
+	                </div>
+	              </div>
+	            </div>
+            <%} %>
+            
+
           </div>
           <div class="counsel-pro-list-page">1 2 3</div>
         </section>
