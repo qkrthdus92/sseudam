@@ -203,13 +203,114 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
   .dropdown:hover .dropdown-content {
     display: block;
   }
+
+  #popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .7);
+  z-index: 1;
+}
+
+.popup-btn{
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+}
+
+/* 로그인 팝업 */
+
+#popup.hide {
+  display: none;
+}
+
+#popup.has-filter {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+#popup .login-popup {
+  width: 477px;
+  height: 634px;
+  display: grid;
+  grid-template-rows: 42px 470px 122px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
+}
+
+#popup .login-popup-header{
+  border-radius: 10px 10px 0px 0px;
+  background-color: rgba(217, 217, 217, 1);
+}
+
+#popup .login-popup-btn{
+  width: 30px;
+  height: 30px;
+  margin-top: 5px;
+  margin-left: 92%;
+}
+
+.login-header{
+  font-size: 25px;
+  font-weight: bold;
+  margin-left: 25px;
+  margin-top: 40px;
+}
+
+.login-input{
+  margin-left: 20%;
+  margin-top: 13%;
+  font-size: 18px;
+}
+
+.login-pwd{
+  margin-top: 20px;
+}
+
+.login-btn{
+  width: 199px;
+  height: 42px;
+  font-size: 18px;
+  margin-left: 28%;
+  margin-top: 30px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: rgba(163, 215, 165, 1);
+}
+
+input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
+
+.login-popup-button{
+  width: 320px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-left: 15%;
+}
+
+.join-btn,
+.id-find-btn,
+.pwd-find-btn{
+  border: none;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+
 </style>
 
 <header class="main-header">
   <div class="main-header-top">
     <div class="main-wrapper">
       <span><a href="<%=root%>/views/common/join.jsp">회원가입</a></span>
-      <span><a href="">로그인</a></span>
+      <span><button class="popup-btn" onclick="loginPopup(true)">로그인</button></span>
     </div>
   </div>
   <div class="main-header-title">
@@ -268,8 +369,61 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
       </div>
     </div>
   </div>
+
+  <!-- 로그인 팝업 -->
+  <div id="popup" class="hide">
+    <div class="login-popup">
+      <div class="login-popup-header">
+        <img src="../../resources/img/join/close.png" class="login-popup-btn" onclick="closePopup()">
+      </div>
+      <div class="login-popup-middle">
+          <div class="login-header">쓰담쓰담 로그인</div>
+          <div class="login-input">
+            <div class="login-in" >아이디</div>
+            <div>
+            	<input type="text" name="memberId" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black;">
+            </div>
+            <div class="login-pwd">비밀번호</div>
+            <div>
+                <input type="password" name="memberPwd" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black;">
+            </div>
+          </div>
+            <div>
+              <br><input type="submit" value="로그인" class="login-btn">
+            </div>
+      </div>
+      
+      <div class="login-popup-button">
+        <div><button class="join-btn" onclick="location.href='<%=root%>/views/common/join.jsp'">회원가입</button></div>
+        <div><button class="id-find-btn" onclick="">아이디 찾기</button></div>
+        <div><button class="pwd-find-btn" onclick="">비밀번호 찾기</button></div>
+      </div>
+      
+    </div>
+  </div>
+
 </header>
+
 <script
   src="https://kit.fontawesome.com/939838bb27.js"
   crossorigin="anonymous"
 ></script>
+
+<script>
+    // 로그인 팝업
+    function loginPopup(hasFilter) {
+    const popup = document.querySelector('#popup');
+    
+    if (hasFilter) {
+      popup.classList.add();
+    } 
+    
+    popup.classList.remove('hide');
+  }
+
+  function closePopup() {
+    const popup = document.querySelector('#popup');
+    popup.classList.add('hide');
+  }
+
+</script>

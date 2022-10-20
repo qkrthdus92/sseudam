@@ -66,7 +66,6 @@
         width: 350px;
     }
 
-
     .attached-file-btn{
         color: rgba(253, 121, 0, 1);
         border: 1px solid rgba(253, 121, 0, 1);
@@ -77,10 +76,28 @@
         height: 25px;
     }
 
-    .join-sequence > img{
+    /* .join-sequence > img{
         width: 50px;
         height: 15px;
         margin-right: 40px;
+    } */
+
+    .license{
+        display: flex;
+        border: 1px solid black;
+        width: 350px;
+        height: 220px;
+        border-radius: 5px;
+        flex-direction: column;
+        margin-top: 20px;
+        font-size: 12px;
+    }
+
+    .license-header{
+        border-radius: 5px 5px 0px 0px;
+        border-bottom: 1px solid black;
+        background-color: rgba(217, 217, 217, 1);
+        grid-column: 1 / -1;
     }
 
     .next-page{
@@ -109,13 +126,13 @@
                 <img src="../../resources/img/join/가입_완료.png">
             </div>
 
-            <div class="join-sequence">
+            <!-- <div class="join-sequence">
                 <img src="../../resources/img/join/now.png">
                 <img src="../../resources/img/join/next.png">
                 <img src="../../resources/img/join/next.png">
                 <img src="../../resources/img/join/next.png">
                 <img src="../../resources/img/join/next.png">
-            </div>
+            </div> -->
 
             <div class="join-1nd">
                 <div>자격증 이름</div>
@@ -125,9 +142,18 @@
                 <div>자격증 번호</div>
                 <div><input type="number" name="memberPwd1"></div>
             </div>
-            <div class="join-2nd2">
-                <div>증빙서류</div>
-                <div><input type="button" class="attached-file-btn" value="첨부파일" onclick="location.href=''"></div>
+            <div class="join-3nd">
+                <div>
+                    증빙서류
+                    <input type="button" class="attached-file-btn" value="첨부파일" onclick="location.href=''">
+                </div>
+                <div>
+                    <div><input type="number" name="attached-file-name"></div>
+                </div>
+            </div>
+            <div class="license">
+                <div class="license-header">&nbsp;자격증 목록</div>
+                <div class="license-list"></div>
             </div>
             
             <div class="next">
