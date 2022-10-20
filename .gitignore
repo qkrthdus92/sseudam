@@ -1,6 +1,7 @@
 workspace/Servers/
 workspace/sseudamPrj/.settings/
 workspace/.metadata/
+SQL/
 
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse,java,windows,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,java,windows,macos
