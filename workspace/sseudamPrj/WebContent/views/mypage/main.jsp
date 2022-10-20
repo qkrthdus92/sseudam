@@ -290,7 +290,7 @@
 	                </tr>
 	                <tr>
 						<!-- 점수확인페이지로이동 -->
-	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/테스트.png" alt="테스트">&nbsp;&nbsp;나의 점수 <button id="editbnt" onclick="location.href='/sseudamPrj/views/mypage/testresultcheck.jsp';">조회</button></th>
+	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/테스트.png" alt="테스트">&nbsp;&nbsp;나의 점수 <button id="editbnt" onclick="location.href='/sseudam/views/mypage/testresultcheck.jsp';">조회</button></th>
 	                    <td></td>
 	                </tr>
 	            </table>
@@ -302,7 +302,7 @@
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/좋아요.png" alt="좋아요">&nbsp;&nbsp;좋아요 컨텐츠 <button id="editbnt" onclick="location.href='/sseudamPrj/views/mypage/likecheckyum.jsp';" >조회</button></th>
+	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/좋아요.png" alt="좋아요">&nbsp;&nbsp;좋아요 컨텐츠 <button id="editbnt" onclick="location.href='/sseudam/views/mypage/likecheckyum.jsp';" >조회</button></th>
 	                    <td></td>
 	                </tr>
 	            </table>
@@ -318,7 +318,7 @@
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/댓글.png" alt="댓글">&nbsp;&nbsp;내가 쓴 댓글 <button id="editbnt" onclick="location.href='/sseudamPrj/views/mypage/boardcheck.jsp';" >조회</button></th>
+	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/댓글.png" alt="댓글">&nbsp;&nbsp;내가 쓴 댓글 <button id="editbnt" onclick="location.href='/sseudam/views/mypage/boardcheck.jsp';" >조회</button></th>
 	                    <td></td>
 	                </tr>
 	            </table>
@@ -334,7 +334,7 @@
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/결제.png" alt="결제2">&nbsp;&nbsp;결제 내역 <button id="editbnt" onclick="location.href='/sseudamPrj/views/mypage/resercheck.jsp';" >조회</button></th>
+	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/결제.png" alt="결제2">&nbsp;&nbsp;결제 내역 <button id="editbnt" onclick="location.href='/sseudam/views/mypage/resercheck.jsp';" >조회</button></th>
 	                    <td></td>
 	                </tr>
 	            </table>
@@ -353,7 +353,7 @@
 				</div>
 				<div class="popup-foot">
 					<!-- 프로필수정페이지로이동 -->
-					<button class="pop-btn" id="confirm" onclick="location.href='/sseudamPrj/views/mypage/editmypage.jsp';" >확인</button> 
+					<button class="pop-btn" id="confirm" onclick="location.href='/sseudam/views/mypage/editmypage.jsp';" >확인</button> 
 					<button class="pop-btn" id="close" onclick="closePopup()" >창 닫기</button>
 				</div>
 		  </div>

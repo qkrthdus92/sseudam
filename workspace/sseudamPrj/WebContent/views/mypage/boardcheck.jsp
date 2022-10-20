@@ -149,7 +149,7 @@
 		        <div id="dominfo">내가 쓴 게시글</div>
 		    </div>
             <div id="dom2">
-                <div id="dominfo2" onclick="location.href='/sseudamPrj/views/mypage/commentcheck.jsp';">내가 쓴 댓글</div>
+                <div id="dominfo2" onclick="location.href='/sseudam/views/mypage/commentcheck.jsp';">내가 쓴 댓글</div>
             </div>
 		    <div id="editbar">
 		        <input type="checkbox" name="chk" id="chkAll"><label for="chkAll" >전체선택</label></input>

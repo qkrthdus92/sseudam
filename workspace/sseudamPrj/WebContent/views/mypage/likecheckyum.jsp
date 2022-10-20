@@ -172,16 +172,16 @@
 	    </div>
 	    
 	    <div id="dom">
-	        <div id="dominfo" onclick="location.href='/sseudamPrj/views/mypage/likecheckyum.jsp';">혼자서냠냠</div>
+	        <div id="dominfo" onclick="location.href='/sseudam/views/mypage/likecheckyum.jsp';">혼자서냠냠</div>
 	    </div>
 	    <div id="dom2">
-	        <div id="dominfo2" onclick="location.href='/sseudamPrj/views/mypage/likecheckhome.jsp';">안에서뒹굴뒹굴</div>
+	        <div id="dominfo2" onclick="location.href='/sseudam/views/mypage/likecheckhome.jsp';">안에서뒹굴뒹굴</div>
 	    </div>
 	    <div id="dom3">
-	        <div id="dominfo3" onclick="location.href='/sseudamPrj/views/mypage/likecheckout.jsp';">밖에서뚜벅뚜벅</div>
+	        <div id="dominfo3" onclick="location.href='/sseudam/views/mypage/likecheckout.jsp';">밖에서뚜벅뚜벅</div>
 	    </div>
 	    <div id="editbar">
-	        <button id="allselect" ><img id="checkbox" src="/sseudamPrj/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
+	        <button id="allselect" ><img id="checkbox" src="/sseudam/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
 	        <button id="delete">삭제</button>
 	    </div>
 	    <div id="edittop">

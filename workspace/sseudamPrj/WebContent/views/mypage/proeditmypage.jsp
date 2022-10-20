@@ -110,55 +110,56 @@
 	<div class="main">
         <h1 align="center">정보수정</h1>
 
-
-        <div class="join-area">
-
-            <div>비밀번호</div>
-            <div>
-                <input type="password" name="memberPwd1" placeholder="6~14자 이내로 영문, 숫자, 특수문자를 조합하여 작성">
-            </div>
-
-            <div>닉네임</div>
-            <div>
-                <input type="text" name="Name" placeholder="6~14자 이내로 작성(특수문자 불가능)">
-            </div>
-
-            <div>연락처</div>
-            <div>
-                <input type="tel" name="phone" placeholder="예) 01012345678">
-            </div>
-
-            <div>이메일</div>
-            <div>
-                <input type="email" name="email">
-            </div>
-            
-            <div>소개글</div>
-            <div>
-                <input type="text" name="introduce">
-            </div>
-            
-            <div>계좌번호</div>
-            <div>
-                <select>
-                   <option value="신한">신한</option>
-                   <option value="국민">국민</option>
-                   <option value="우리">우리</option>
-                   <option value="기업">기업</option>
-                   <option value="농협">농협</option>
-                   <option value="카카오뱅크">카카오뱅크</option>
-                   <option value="SC제일">SC제일</option>
-                   <option value="케이뱅크">케이뱅크</option>
-                 </select>
-                <input id="account" type="text" name="account">
-            </div>
-
-
-            <div>
-                <br><input type="submit" value="수정하기" class="btn">
-            </div>
-
-        </div>
+		<form action="/sseudam/mypage/promypage" method="post" onsubmit="return check();">
+	        <div class="join-area">
+	
+	            <div>비밀번호</div>
+	            <div>
+	                <input type="password" name="memberPwd1" placeholder="6~14자 이내로 영문, 숫자, 특수문자를 조합하여 작성">
+	            </div>
+	
+	            <div>닉네임</div>
+	            <div>
+	                <input type="text" name="Name" placeholder="6~14자 이내로 작성(특수문자 불가능)">
+	            </div>
+	
+	            <div>연락처</div>
+	            <div>
+	                <input type="tel" name="phone" placeholder="예) 01012345678">
+	            </div>
+	
+	            <div>이메일</div>
+	            <div>
+	                <input type="email" name="email">
+	            </div>
+	            
+	            <div>소개글</div>
+	            <div>
+	                <input type="text" name="introduce">
+	            </div>
+	            
+	            <div>계좌번호</div>
+	            <div>
+	                <select>
+	                   <option name="account" value="신한">신한</option>
+	                   <option name="account" value="국민">국민</option>
+	                   <option name="account" value="우리">우리</option>
+	                   <option name="account" value="기업">기업</option>
+	                   <option name="account" value="농협">농협</option>
+	                   <option name="account" value="카카오뱅크">카카오뱅크</option>
+	                   <option name="account" value="SC제일">SC제일</option>
+	                   <option name="account" value="케이뱅크">케이뱅크</option>
+	                 </select>
+	                <input id="account" type="text" name="accountnum">
+	            </div>
+	
+	
+	            <div>
+	                <br><input type="submit" value="수정하기" class="btn">
+	            </div>
+	
+	        </div>
+        </form>
             
     </div>
 

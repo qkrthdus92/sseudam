@@ -334,23 +334,23 @@
         </div>
     
         <div id="dom">
-            <div id="dominfo" onclick="location.href='/sseudamPrj/views/mypage/resercheck.jsp';">상담예약</div>
+            <div id="dominfo" onclick="location.href='/sseudam/views/mypage/resercheck.jsp';">상담예약</div>
         </div>
         <div id="dom2">
-            <div id="dominfo2" onclick="location.href='/sseudamPrj/views/mypage/fin_resercheck.jsp';">상담완료된예약</div>
+            <div id="dominfo2" onclick="location.href='/sseudam/views/mypage/fin_resercheck.jsp';">상담완료된예약</div>
         </div>
         <div id="dom3">
-            <div id="dominfo3" onclick="location.href='/sseudamPrj/views/mypage/reserpay.jsp';">결제내역</div>
+            <div id="dominfo3" onclick="location.href='/sseudam/views/mypage/reserpay.jsp';">결제내역</div>
         </div>
         <div id="editbar">
-            <button id="allselect" ><img id="checkbox" src="/sseudamPrj/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
+            <button id="allselect" ><img id="checkbox" src="/sseudam/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
             <button id="delete">삭제</button>
         </div>
 
         <div id="pro-box-wrap">
             <div id="pro-box-all">
                 <div id="pro-box"> 
-                    <span><img id="profil2" src="/sseudamPrj/WebContent/resources/img/프로필.png" alt=""></span> 
+                    <span><img id="profil2" src="/sseudam/WebContent/resources/img/프로필.png" alt=""></span> 
                     <div id="proname">
                         <span>전문가 <br> 심투용</span> 
                     </div>             

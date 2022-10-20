@@ -225,16 +225,16 @@
         </div>
     
         <div id="dom">
-            <div id="dominfo" onclick="location.href='/sseudamPrj/views/mypage/proresercheck.jsp';">상담예약</div>
+            <div id="dominfo" onclick="location.href='/sseudam/views/mypage/proresercheck.jsp';">상담예약</div>
         </div>
         <div id="dom2">
-            <div id="dominfo2" onclick="location.href='/sseudamPrj/views/mypage/promoneycheck.jsp';">수익조회</div>
+            <div id="dominfo2" onclick="location.href='/sseudam/views/mypage/promoneycheck.jsp';">수익조회</div>
         </div>
         <div id="dom3">
             <div id="dominfo3"></div>
         </div>
         <div id="editbar">
-            <button id="allselect" ><img id="checkbox" src="/sseudamPrj/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
+            <button id="allselect" ><img id="checkbox" src="/sseudam/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
             <button id="delete">삭제</button>
         	<span id="datechoice">
 	            <input id="date" type="date" value="2022-10-12">

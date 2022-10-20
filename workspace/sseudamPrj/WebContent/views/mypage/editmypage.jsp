@@ -106,35 +106,36 @@
 	<div class="main">
         <h1 align="center">정보수정</h1>
 
-        <div class="join-area">
-
-            <div>비밀번호</div>
-            <div>
-                <input type="password" name="memberPwd1" placeholder="6~14자 이내로 영문, 숫자, 특수문자를 조합하여 작성">
-            </div>
-
-
-            <div>닉네임</div>
-            <div>
-                <input type="text" name="Name" placeholder="6~14자 이내로 작성(특수문자 불가능)">
-            </div>
-
-            <div>연락처</div>
-            <div>
-                <input type="tel" name="phone" placeholder="예) 01012345678">
-            </div>
-
-            <div>이메일</div>
-            <div>
-                <input type="email" name="email">
-            </div>
-
-            <div>
-                <br><input type="submit" value="수정하기" class="btn">
-            </div>
-
-        </div>
-            
+		<form action="/sseudam/mypage/mypage" method="post" onsubmit="return check();">
+	        <div class="join-area">
+	
+	            <div>비밀번호</div>
+	            <div>
+	                <input type="password" name="memberPwd1" placeholder="6~14자 이내로 영문, 숫자, 특수문자를 조합하여 작성">
+	            </div>
+	
+	
+	            <div>닉네임</div>
+	            <div>
+	                <input type="text" name="Name" placeholder="6~14자 이내로 작성(특수문자 불가능)">
+	            </div>
+	
+	            <div>연락처</div>
+	            <div>
+	                <input type="tel" name="phone" placeholder="예) 01012345678">
+	            </div>
+	
+	            <div>이메일</div>
+	            <div>
+	                <input type="email" name="email">
+	            </div>
+	
+	            <div>
+	                <br><input type="submit" value="수정하기" class="btn">
+	            </div>
+	            
+	        </div>
+         </form>
     </div>
 
     <%@ include file="/views/common/footer.jsp" %>
