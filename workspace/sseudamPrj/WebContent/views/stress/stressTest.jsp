@@ -143,15 +143,15 @@
            <div id="title">스트레스 지수 테스트</div>
            <div id="info">
                <div id="info1">
-                   <img src="<%=root%>/resources/img2/clock-regular.svg">
+                   <img src="<%=root%>/resources/img/stress/clock-regular.svg">
                    총 검사 시간은 3분 내외입니다.
                </div>
                <div id="info2">
-                   <img src="<%=root%>/resources/img2/xmark-solid.svg">
+                   <img src="<%=root%>/resources/img/stress//xmark-solid.svg">
                    가능하면 답변 시<br>'보통'을 선택하지 마십시오.
                </div>
                <div id="info3">
-                   <img src="<%=root%>/resources/img2/list-ol-solid.svg">
+                   <img src="<%=root%>/resources/img/stress//list-ol-solid.svg">
                    네 : 2점<br>보통 : 1점<br>아니요 : 0점
                </div>
            </div>
@@ -261,7 +261,7 @@
                </fieldset>
            </div>
            <div>
-               <form action="<%=root%>/views/stress/stressResult.jsp" method="post">
+               <form action="/sseudam/views/stress/stressResult.jsp" method="post">
                    <input type="submit" value="결과보기" id="btn" onclick="">
                </form>
            </div>
@@ -359,7 +359,8 @@ function check(){
     var myScore = sum1+sum2+sum3+sum4+sum5+sum6+sum7+sum8+sum9+sum10+sum11+sum12+sum13;
 
     console.log(myScore);
-
+	
+    
 
 
 
