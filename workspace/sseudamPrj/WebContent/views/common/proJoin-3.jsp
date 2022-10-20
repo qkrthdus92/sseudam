@@ -67,10 +67,64 @@
         border-radius: 15px;
         margin: auto;
         display: grid;
-        grid-template-rows: 1fr 5fr 6fr;;
-        /* grid-template-columns: 1fr 2fr 2fr; */
+        grid-template-rows: 1fr 4fr 7fr;;
+        grid-template-columns: 2.5fr 7.5fr;
+    }
+    
+    #profile-header{
+        border-bottom: 1px solid black;
+        border-radius: 15px 15px 0px 0px;
+        background-color: rgba(217, 217, 217, 1);
+        grid-column: 1 / -1;
+    }
 
+    #profile-middle-left{
+        border-bottom: 1px solid black;
+        border-right: 1px solid black;
+    }
 
+    #profile-middle-left{
+        text-align: center;
+        padding: 45% 0;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    #profile-middle-right{
+        border-bottom: 1px solid black;
+        display: flex;
+    }
+
+    #profile{
+        width: 100px;
+        height: 100px;
+        border-radius: 70%;
+        margin-left: 20px;
+        margin-top: 12px;
+    }
+
+    input[type="button"]{
+        border: none;
+        background-color: white;
+        margin-top: 70%;
+        margin-left: 10px;
+    }
+    
+    #profile-button-left{
+        border-right: 1px solid black;
+        text-align: center;
+        padding: 65% 0;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    #profile-button-right-province{
+        margin-left: 5px;
+    }
+
+    #profile-button-right-province > label{
+        font-size: 13px;
+        margin-left: 10px;
     }
     
     img{
@@ -90,6 +144,18 @@
         background-color: rgba(163, 215, 165, 1);
         font-size: 18px;
         margin-top: 10px;
+    }
+
+    #introduce{
+        margin-top: 10px;
+        margin-left: 5px;
+    }
+
+    #introduce-text{
+        width: 300px;
+        height: 100px;
+        margin-left: 20px;
+        margin-top: 5px;
     }
 
 </style>
@@ -119,9 +185,37 @@
             </div>
     
             <div class="profile">
-                <div></div>
-                <div></div>
-                <div></div>
+                <div id="profile-header"></div>
+                <div id="profile-middle-left">프로필 사진</div>
+                <div id="profile-middle-right">
+                        <div>
+                            <img src="../../resources/img/join/프로필.png" id="profile">
+                        </div>
+                        <div id="profile-img-btn">
+                            <input type="button" id="profile-img" value="사진 선택" onclick="location.href=''">
+                            <input type="button" id="profile-img-delet" value="삭제" onclick="location.href=''">
+                        </div>
+                </div>
+                <div id="profile-button-left">소개</div>
+                <div id="profile-button-right">
+                    <div id="profile-button-right-province"><br>상담 분야<br>
+                        <label>청소년
+                            <input type="checkbox" name="province" value="youth">
+                        </label>
+                        <label>가족심리
+                            <input type="checkbox" name="province" value="family ">
+                        </label>
+                        <label>우울증
+                            <input type="checkbox" name="province" value="depression">
+                        </label>
+                        <label>취업/진로
+                            <input type="checkbox" name="province" value="course">
+                        </label>
+                    </div>
+                    <div id="introduce">소개글
+                        <br><input type="text" id="introduce-text">
+                    </div>
+                </div>
             </div>
 
             <div>
@@ -130,8 +224,7 @@
 
         </div>
 
-        
-    </nav>>
+    </nav>
 
     <%@ include file="/views/common/footer.jsp" %>
 

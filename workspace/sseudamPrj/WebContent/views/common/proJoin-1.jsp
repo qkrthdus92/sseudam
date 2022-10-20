@@ -124,18 +124,20 @@
                     <input type="button" class="overlap-check-btn" value="중복확인" onclick="location.href=''">
                 </div>
             </div>
-            <div calss="join-2nd">
-                <div>비밀번호</div>
-                <div><input type="password" name="memberPwd1" placeholder="6~14자 이내로 영문, 숫자, 특수문자를 조합하여 작성"></div>
-            </div>
-            <div class="join-2nd2">
-                <div>비밀번호 확인</div>
-                <div><input type="password" name="memberPwd2"></div>
-            </div>
-            <div class="join-3nd">
-                <div>이름</div>
-                <div><input type="text" name="Name"></div>
-            </div>
+
+                <div calss="join-2nd">
+                    <div>비밀번호</div>
+                    <div><input type="password" name="memberPwd1" placeholder="6~14자 이내로 영문, 숫자, 특수문자를 조합하여 작성"></div>
+                </div>
+                <div class="join-2nd2">
+                    <div>비밀번호 확인</div>
+                    <div><input type="password" name="memberPwd2"></div>
+                </div>
+                <div class="join-3nd">
+                    <div>이름</div>
+                    <div><input type="text" name="Name"></div>
+                </div>
+
     
             <div class="gende-box-top">성별</div>
             <div class="join-4nd">
@@ -183,7 +185,7 @@
         </div>
         
 
-    </nav>>
+    </nav>
 
     <%@ include file="/views/common/footer.jsp" %>
 
