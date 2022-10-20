@@ -364,8 +364,8 @@
                     <div id="popup_text2">입니다.</div>
 				</div>
 				<div class="popup-foot">
-					<button class="pop-btn" id="confirm" onclick="location.href='/sseudamPrj/views/mypage/main.jsp';" >확인</button> 
-					<button class="pop-btn" id="close"onclick="location.href='/sseudamPrj/views/mypage/main.jsp';" >창 닫기</button>
+					<button class="pop-btn" id="confirm" onclick="location.href='/sseudam/views/mypage/main.jsp';" >확인</button> 
+					<button class="pop-btn" id="close"onclick="location.href='/sseudam/views/mypage/main.jsp';" >창 닫기</button>
 				</div>
 		  </div>
 		</div>

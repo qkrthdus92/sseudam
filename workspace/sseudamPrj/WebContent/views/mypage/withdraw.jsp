@@ -291,7 +291,7 @@
             <div id="dominfo3"></div>
         </div>
         <div id="editbar">
-            <button id="allselect" ><img id="checkbox" src="/sseudamPrj/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
+            <button id="allselect" ><img id="checkbox" src="/sseudam/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
             <button id="delete">삭제</button>
         	<span id="datechoice">
 	            <input id="date" type="date" value="2022-10-12">
@@ -365,8 +365,8 @@
               </div>
               <div class="popup-foot">
                   <!-- 출금완료페이지로 이동 -->
-                  <button class="pop-btn" id="confirm" onclick="location.href='/sseudamPrj/views/mypage/promoneycheck.jsp';" >확인</button> 
-                  <button class="pop-btn" id="close" onclick="location.href='/sseudamPrj/views/mypage/promoneycheck.jsp';" >창 닫기</button>
+                  <button class="pop-btn" id="confirm" onclick="location.href='/sseudam/views/mypage/promoneycheck.jsp';" >확인</button> 
+                  <button class="pop-btn" id="close" onclick="location.href='/sseudam/views/mypage/promoneycheck.jsp';" >창 닫기</button>
               </div>
         </div>
     </div>
