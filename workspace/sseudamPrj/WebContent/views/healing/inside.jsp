@@ -154,16 +154,16 @@
 				
 			</div>
 			<div class="popup_detail">
-				<div class="popup_addr">
-					<img class="imti" src="<%=root%>/resources/img/healing/주소.png">서울시 구석구석 어딘가 350
+				<div>
+					<img class="imti" src="<%=root%>/resources/img/healing/사람.png">이하이
 				</div>
-				<div class="popup_phone">
-					<img class="imti" src="<%=root%>/resources/img/healing/전화.png">010-1212-1212
+				<div>
+					<img class="imti" src="<%=root%>/resources/img/healing/책.png">한숨
 				</div>
-				<div class="popup_link">
+				<div>
 					<img class="imti" src="<%=root%>/resources/img/healing/돋보기.png">더 알아보기
 				</div>
-				<div class="heart">
+				<div>
 					<img class="imti" src="<%=root%>/resources/img/header/Favorite_duotone.png" alt="">저장하기
 				</div>							
 			</div>

@@ -157,6 +157,9 @@
 				<div class="popup_addr">
 					<img class="imti" src="<%=root%>/resources/img/healing/주소.png">서울시 구석구석 어딘가 350
 				</div>
+				<div class="popup_date">
+					<img class="imti" src="<%=root%>/resources/img/healing/날짜.png">22.09.05 ~ 22.11.04
+				</div>
 				<div class="popup_phone">
 					<img class="imti" src="<%=root%>/resources/img/healing/전화.png">010-1212-1212
 				</div>
