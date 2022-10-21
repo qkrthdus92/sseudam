@@ -135,7 +135,7 @@
     input:focus {outline: none;}
 
 
-    input[type="submit"]{
+    .join-btn > .btn{
         width: 167px;
         height: 42px;
         border: none;
@@ -144,6 +144,7 @@
         background-color: rgba(163, 215, 165, 1);
         font-size: 18px;
         margin-top: 10px;
+        cursor: pointer;
     }
 
     #introduce{
@@ -218,8 +219,8 @@
                 </div>
             </div>
 
-            <div>
-                <br><input type="submit" value="작성 완료" class="btn">
+            <div class="join-btn">
+                <br><input type="button" value="작성 완료" onclick="location.href='<%=root%>/views/common/proJoin-4.jsp'" class="btn">
             </div>
 
         </div>

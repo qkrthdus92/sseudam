@@ -40,6 +40,7 @@
 		height: 230px;
 		border-radius: 15px;
 		box-shadow: 0 5px 3px rgb(199, 198, 198);
+		cursor: pointer;
 	}
 
 	.btn{
