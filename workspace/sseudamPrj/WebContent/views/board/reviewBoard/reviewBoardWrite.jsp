@@ -141,7 +141,7 @@
                 <div id="btn">
                     <input type="submit" value="등록" id="ok-btn">
                     &nbsp;&nbsp;
-                    <button id="no-btn" onclick="location.href='<%=root%>/views/board/afterBoard/afterBoardList.jsp'">취소</button></div>
+                    <button id="no-btn" onclick="location.href='<%=root%>/views/board/reviewBoard/reviewBoardList.jsp'">취소</button></div>
             </div>
         </div>
         <div id="footer">
