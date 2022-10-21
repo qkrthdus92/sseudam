@@ -4,7 +4,7 @@
   background-color: var(--base);
   display: flex;
   justify-content: center;
-  height: 900px;
+  /* height: 900px; */
 }
 
 /* 1200흰색배경 */
@@ -36,6 +36,9 @@
   width: 235px;
   margin-left: 50px;
   margin-top: 50px;
+  /* position: sticky;
+  top: 50px; */
+  padding-bottom: 50px;
 }
 
 .counsel-search input {
@@ -60,6 +63,7 @@
   position: absolute;
   right: 10px;
   bottom: 10px;
+  cursor: pointer;
 }
 
 .counsel-type {
@@ -205,13 +209,15 @@ input[type="radio"] {
   margin-top: 60px;
   margin-left: 15px;
   grid-template-columns: 390px 390px;
-  grid-template-rows: 154px 154px 154px;
+  /* grid-template-rows: 154px 154px 154px; */
   column-gap: 40px;
   row-gap: 70px;
+  margin-bottom: 100px;
 }
 
 .counsel-pro-detail {
   display: flex;
+  height: 154px;
 }
 
 .counsel-pro-detail img {

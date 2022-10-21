@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%-- <% String root = request.getContextPath();%> --%>
+pageEncoding="UTF-8"%> <% String root2 = request.getContextPath();%> 
+
 <style>
   /* 공통*/
   html,
@@ -138,13 +139,13 @@ pageEncoding="UTF-8"%> <%-- <% String root = request.getContextPath();%> --%>
       <div>(주)쓰담쓰담</div>
       <div class="main-footer-sns">
         <a href=""
-          ><img src="/sseudamPrj/resources/img/header/Facebook.png" alt=""
+          ><img src="<%=root2 %>/resources/img/header/Facebook.png" alt=""
         /></a>
         <a href=""
-          ><img src="/sseudamPrj/resources/img/header/Instagram.png" alt=""
+          ><img src="<%=root2 %>/resources/img/header/Instagram.png" alt=""
         /></a>
         <a href=""
-          ><img src="/sseudamPrj/resources/img/header/Twitter.png" alt=""
+          ><img src="<%=root2 %>/resources/img/header/Twitter.png" alt=""
         /></a>
       </div>
     </div>
