@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.sseudam.common.JDBCTemplate;
@@ -40,7 +41,7 @@ public class HealingDao {
         
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        List<HealingVo> list = null;
+        List<HealingVo> list = new ArrayList<HealingVo>();
         
         try {
             pstmt = conn.prepareStatement(sql);
@@ -49,8 +50,8 @@ public class HealingDao {
             while(rs.next()) {
                 String no = rs.getString("NO");
                 String title = rs.getString("TITLE");
-                String artist = rs.getString("ARTIST");
-                String genre = rs.getString("GENRE");
+                String info1 = rs.getString("ARTIST");
+                String info2 = rs.getString("GENRE");
                 String stress = rs.getString("STRESS");
                 String link = rs.getString("LINK");
                 String imgPath = rs.getString("IMG_PATH");
@@ -60,12 +61,13 @@ public class HealingDao {
 
                 HealingVo vo = new HealingVo();
                 vo.setNo(no);
+                vo.setType("음악");
                 vo.setTitle(title);
-                vo.setArtist(artist);
-                vo.setGenre(genre);
+                vo.setInfo1(info1);
+                vo.setInfo2(info2);
                 vo.setStress(stress);
                 vo.setLink(link);
-                vo.setImgPath(imgPath);
+                vo.setImgPath("music/"+imgPath);
                 vo.setWriteDate(writeDate);
                 vo.setModifyDate(modifyDate);
                 vo.setLiked(liked);
@@ -111,7 +113,7 @@ public class HealingDao {
         
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        List<HealingVo> list = null;
+        List<HealingVo> list = new ArrayList<HealingVo>();
         
         try {
             pstmt = conn.prepareStatement(sql);
@@ -120,7 +122,7 @@ public class HealingDao {
             while(rs.next()) {
                 String no = rs.getString("NO");
                 String title = rs.getString("TITLE");
-                String actor = rs.getString("ACTOR");
+                String info1 = rs.getString("ACTOR");
                 String stress = rs.getString("STRESS");
                 String link = rs.getString("LINK");
                 String imgPath = rs.getString("IMG_PATH");
@@ -130,11 +132,13 @@ public class HealingDao {
 
                 HealingVo vo = new HealingVo();
                 vo.setNo(no);
+                vo.setType("영화");
                 vo.setTitle(title);
-                vo.setActor(actor);
+                vo.setInfo1(info1);
+                vo.setInfo2("-");
                 vo.setStress(stress);
                 vo.setLink(link);
-                vo.setImgPath(imgPath);
+                vo.setImgPath("movie/"+imgPath);
                 vo.setWriteDate(writeDate);
                 vo.setModifyDate(modifyDate);
                 vo.setLiked(liked);
@@ -179,7 +183,7 @@ public class HealingDao {
         
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        List<HealingVo> list = null;
+        List<HealingVo> list = new ArrayList<HealingVo>();
         
         try {
             pstmt = conn.prepareStatement(sql);
@@ -197,10 +201,13 @@ public class HealingDao {
 
                 HealingVo vo = new HealingVo();
                 vo.setNo(no);
-                vo.setTitle(title);
+                vo.setType("명상");
+                vo.setTitle("명상");
+                vo.setInfo1("-");
+                vo.setInfo2(title);
                 vo.setStress(stress);
                 vo.setLink(link);
-                vo.setImgPath(imgPath);
+                vo.setImgPath("therapy/"+imgPath);
                 vo.setWriteDate(writeDate);
                 vo.setModifyDate(modifyDate);
                 vo.setLiked(liked);
@@ -248,7 +255,7 @@ public class HealingDao {
         
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        List<HealingVo> list = null;
+        List<HealingVo> list = new ArrayList<HealingVo>();
         
         try {
             pstmt = conn.prepareStatement(sql);
@@ -257,8 +264,8 @@ public class HealingDao {
             while(rs.next()) {
                 String no = rs.getString("NO");
                 String title = rs.getString("TITLE");
-                String writer = rs.getString("WRITER");
-                String publisher = rs.getString("PUBLISHER");
+                String info1 = rs.getString("WRITER");
+                String info2 = rs.getString("PUBLISHER");
                 String stress = rs.getString("STRESS");
                 String link = rs.getString("LINK");
                 String imgPath = rs.getString("IMG_PATH");
@@ -268,12 +275,13 @@ public class HealingDao {
 
                 HealingVo vo = new HealingVo();
                 vo.setNo(no);
+                vo.setType("책");
                 vo.setTitle(title);
-                vo.setWriter(writer);
-                vo.setPublisher(publisher);
+                vo.setInfo1(info1);
+                vo.setInfo2(info2);
                 vo.setStress(stress);
                 vo.setLink(link);
-                vo.setImgPath(imgPath);
+                vo.setImgPath("book/"+imgPath);
                 vo.setWriteDate(writeDate);
                 vo.setModifyDate(modifyDate);
                 vo.setLiked(liked);

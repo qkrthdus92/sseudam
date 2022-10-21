@@ -2,7 +2,6 @@ package com.kh.sseudam.healing.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.kh.sseudam.common.JDBCTemplate;
@@ -29,8 +28,7 @@ public class HealingService {
         list.addAll(therapyList);
         list.addAll(bookList);
         
-        Collections.shuffle(list);
-        
+        System.out.println(therapyList);
         return list;
         
     }

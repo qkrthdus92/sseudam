@@ -7,7 +7,9 @@
 <title>냠냠</title>
 
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet" href="healing.css?after" type="text/css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/healing/healing.css"
+	type="text/css">
 </head>
 <body>
 	<%@ include file="/views/common/header.jsp" %>
