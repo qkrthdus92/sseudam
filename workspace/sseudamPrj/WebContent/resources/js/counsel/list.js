@@ -1,19 +1,33 @@
-// window.onload = function () {
-//   const counselTypeCheckbox = document.querySelectorAll(
-//     ".counsel-type-checkbox"
-//   );
-//   const checkIconBlack = document.querySelectorAll(".check-icon-black");
-//   const checkIconWhite = document.querySelectorAll(".check-icon-white");
+window.onload = function () {
+  console.log("되나??");
+  const searchProNameBtn = document.querySelector("#form-search-pro-name i");
+  const form = document.querySelector("#form-search-pro-name");
+  searchProNameBtn.addEventListener("click", checkFormSearchProName);
+  form.addEventListener("submit", checkFormSearchProName2);
 
-//   counselTypeCheckbox.addEventListener("click", function () {
-//     if (counselTypeCheckbox.checked == true) {
-//       console.log("체크됨");
-//       checkIconWhite.classList.toggle("hidden");
-//       checkIconBlack.classList.toggle("hidden");
-//     } else {
-//       console.log("체크안됨");
-//       checkIconWhite.classList.toggle("hidden");
-//       checkIconBlack.classList.toggle("hidden");
-//     }
-//   });
-// };
+  function checkFormSearchProName() {
+    const input = document.querySelector(".counsel-search input[type=text]");
+    const input2 = input.value.replace(/\s/g, "");
+    console.log("인풋2는 " + input2 + "입니다");
+    if (input2 == "") {
+      alert("전문가 이름을 입력해주세요");
+      return false;
+    }
+
+    console.log(input.value);
+    form.submit();
+  }
+
+  function checkFormSearchProName2(e) {
+    const input = document.querySelector(".counsel-search input[type=text]");
+    const input2 = input.value.replace(/\s/g, "");
+    console.log("인풋2는 " + input2 + "입니다");
+    if (input2 == "") {
+      alert("전문가 이름을 입력해주세요");
+      e.preventDefault();
+    }
+
+    console.log(input.value);
+    form.submit();
+  }
+};

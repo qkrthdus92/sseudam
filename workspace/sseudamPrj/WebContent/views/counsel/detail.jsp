@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="/sseudamPrj/resources/css/common/reset.css" />
     <link
       rel="stylesheet"
-      href="/sseudamPrj/resources/css/counsel/detail.css?ver=1"
+      href="/sseudamPrj/resources/css/counsel/detail.css?ver=2"
     />
     <link
       rel="stylesheet"
