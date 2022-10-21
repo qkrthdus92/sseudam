@@ -1,5 +1,11 @@
+<%@page import="temp.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+	String alertMsg = (String)session.getAttribute("alertMsg");
+	session.removeAttribute("alertMsg");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -120,7 +126,7 @@
 
 	<div id="wrap">
        <div id="main">
-           <div id="title">테스트 결과<br>Nick님의 스트레스 지수는 __점 입니다.</div>
+           <div id="title">테스트 결과<br>Nick님의 스트레스 지수는 <%=loginMember.getTestScore()%>점 입니다.</div>
            <div>
                <fieldset>
                    <legend>스트레스 지수에 따른 등급은 아래와 같이 평가됩니다.</legend>

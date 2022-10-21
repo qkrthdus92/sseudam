@@ -261,7 +261,7 @@
                </fieldset>
            </div>
            <div>
-               <form action="/sseudam/views/stress/stressResult.jsp" method="post">
+               <form action="/sseudam/stress/stressResult" method="post">
                    <input type="submit" value="결과보기" id="btn" onclick="">
                </form>
            </div>

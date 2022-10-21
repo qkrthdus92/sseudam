@@ -135,45 +135,45 @@
         </div>
         <div id="main">
             <div id="title">후기게시판</div>
-            <div id="write"><button onclick="location.href='<%=root%>/views/board/afterBoard/afterBoardWrite.jsp'">글쓰기</button></div>
+            <div id="write"><button onclick="location.href='<%=root%>/views/board/reviewBoard/reviewBoardWrite.jsp'">글쓰기</button></div>
             <div class="board-list">
                 <div class="board-photo">
-                    <a href="<%=root%>/views/board/afterBoard/afterBoardDetail.jsp">
+                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
                         <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
                     </a>
                     <div class="list-info">no | user08 | 2022-10-17 |
                         <div class="view">
-                            <img src="<%=root%>/resources/img2/View.svg">
+                            <img src="<%=root%>/resources/img/board/View.svg">
                         </div>150
                     </div>
                 </div>
                 <div class="board-photo">
-                    <a href="<%=root%>/views/board/afterBoard/afterBoardDetail.jsp">
+                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
                         <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
                     </a>
                     <div class="list-info">no | user08 | 2022-10-17 |
                         <div class="view">
-                            <img src="<%=root%>/resources/img2/View.svg">
+                            <img src="<%=root%>/resources/img/board/View.svg">
                         </div>150
                     </div>
                 </div>
                 <div class="board-photo">
-                    <a href="<%=root%>/views/board/afterBoard/afterBoardDetail.jsp">
+                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
                         <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
                     </a>
                     <div class="list-info">no | user08 | 2022-10-17 |
                         <div class="view">
-                            <img src="<%=root%>/resources/img2/View.svg">
+                            <img src="<%=root%>/resources/img/board/View.svg">
                         </div>150
                     </div>
                 </div>
                 <div class="board-photo">
-                    <a href="<%=root%>/views/board/afterBoard/afterBoardDetail.jsp">
+                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
                         <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
                     </a>
                     <div class="list-info">no | user08 | 2022-10-17 |
                         <div class="view">
-                            <img src="<%=root%>/resources/img2/View.svg">
+                            <img src="<%=root%>/resources/img/board/View.svg">
                         </div>150
                     </div>
                 </div>
@@ -183,42 +183,42 @@
 
             <div class="board-list">
                 <div class="board-photo">
-                    <a href="<%=root%>/views/board/afterBoard/afterBoardDetail.jsp">
+                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
                         <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
                     </a>
                     <div class="list-info">no | user08 | 2022-10-17 |
                         <div class="view">
-                            <img src="<%=root%>/resources/img2/View.svg">
+                            <img src="<%=root%>/resources/img/board/View.svg">
                         </div>150
                     </div>
                 </div>
                 <div class="board-photo">
-                    <a href="<%=root%>/views/board/afterBoard/afterBoardDetail.jsp">
+                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
                         <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
                     </a>
                     <div class="list-info">no | user08 | 2022-10-17 |
                         <div class="view">
-                            <img src="<%=root%>/resources/img2/View.svg">
+                            <img src="<%=root%>/resources/img/board/View.svg">
                         </div>150
                     </div>
                 </div>
                 <div class="board-photo">
-                    <a href="<%=root%>/views/board/afterBoard/afterBoardDetail.jsp">
+                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
                         <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
                     </a>
                     <div class="list-info">no | user08 | 2022-10-17 |
                         <div class="view">
-                            <img src="<%=root%>/resources/img2/View.svg">
+                            <img src="<%=root%>/resources/img/board/View.svg">
                         </div>150
                     </div>
                 </div>
                 <div class="board-photo">
-                    <a href="<%=root%>/views/board/afterBoard/afterBoardDetail.jsp">
+                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
                         <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
                     </a>
                     <div class="list-info">no | user08 | 2022-10-17 |
                         <div class="view">
-                            <img src="<%=root%>/resources/img2/View.svg">
+                            <img src="<%=root%>/resources/img/board/View.svg">
                         </div>150
                     </div>
                 </div>
@@ -233,7 +233,7 @@
                     </select>
                 </div>
                 <div><input type="text"></div>
-                <div id="search-icon"><img src="<%=root%>/resources/img2/Vector.svg"></div>
+                <div id="search-icon"><img src="<%=root%>/resources/img/board/Vector.svg"></div>
             </div>
         </div>
         <div id="footer">

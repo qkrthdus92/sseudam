@@ -43,7 +43,6 @@ public class StressTestController extends HttpServlet{
 		int testScore = score1 + score2 + score3 + score4 + score5 + score6 + score7
 				+ score8 + score9 + score10 + score11 + score12 + score13;
 		
-		System.out.println(testScore);
 		
 		MemberVo vo = new MemberVo();
 		vo.setTestScore(testScore);
@@ -52,7 +51,6 @@ public class StressTestController extends HttpServlet{
 		
 		if(result == 1) {
 			resp.sendRedirect("/views/stress/stressResult.jsp");
-			System.out.println(testScore);
 		} else {
 			System.out.println("테스트실패");
 		}

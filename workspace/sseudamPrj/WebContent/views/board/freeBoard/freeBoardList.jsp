@@ -185,7 +185,7 @@
                     </select>
                 </div>
                 <div><input type="text"></div>
-                <div id="search-icon"><img src="<%=root%>/resources/img2/Vector.svg"></div>
+                <div id="search-icon"><img src="<%=root%>/resources/img/board/Vector.svg"></div>
             </div>
         </div>
         <div id="footer">

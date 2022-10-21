@@ -232,7 +232,7 @@
                     </div>
                 </div>
             </div>
-            <div id="list-btn-div"><button id="list-btn" onclick="location.href='<%=root%>/views/board/afterBoard/afterBoardList.jsp'">목록</button></div>
+            <div id="list-btn-div"><button id="list-btn" onclick="location.href='<%=root%>/views/board/reviewBoard/reviewBoardList.jsp'">목록</button></div>
         </div>
         <div id="footer">
             <%@ include file="/views/common/footer.jsp" %>
