@@ -204,7 +204,7 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
     display: block;
   }
 
-  #popup {
+  #login-popup {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -221,20 +221,21 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
   font-weight: bold;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 /* 로그인 팝업 */
 
-#popup.hide {
+#login-popup.hide {
   display: none;
 }
 
-#popup.has-filter {
+#login-popup.has-filter {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
 
-#popup .login-popup {
+#login-popup .login-popup {
   width: 477px;
   height: 634px;
   display: grid;
@@ -244,12 +245,12 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
   box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
 }
 
-#popup .login-popup-header{
+#login-popup .login-popup-header{
   border-radius: 10px 10px 0px 0px;
   background-color: rgba(217, 217, 217, 1);
 }
 
-#popup .login-popup-btn{
+#login-popup .login-popup-btn{
   width: 30px;
   height: 30px;
   margin-top: 5px;
@@ -283,6 +284,7 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
   border-radius: 5px;
   color: white;
   background-color: rgba(163, 215, 165, 1);
+  cursor: pointer;
 }
 
 input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
@@ -293,6 +295,11 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   flex-direction: row;
   justify-content: space-around;
   margin-left: 15%;
+}
+
+.login-popup-button a{
+  text-decoration: none;
+  color: black;
 }
 
 .join-btn,
@@ -348,7 +355,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
         </div>
       </div>
       <div>
-        <a href="<%=root%>/views/counsel/list.jsp">상담하기</a>
+        <a href="<%=root%>/counsel/list">상담하기</a>
         <div class="main-header-nav-color"></div>
       </div>
       <div class="dropdown">
@@ -358,7 +365,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
           <a href="<%=root%>/views/board/freeBoard/freeBoardList.jsp"
             >자유게시판</a
           >
-          <a href="<%=root%>/views/board/afterBoard/afterBoardList.jsp"
+          <a href="<%=root%>/views/board/reviewBoard/reviewBoardList.jsp"
             >후기게시판</a
           >
         </div>
@@ -371,10 +378,10 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   </div>
 
   <!-- 로그인 팝업 -->
-  <div id="popup" class="hide">
+  <div id="login-popup" class="hide">
     <div class="login-popup">
       <div class="login-popup-header">
-        <img src="../../resources/img/join/close.png" class="login-popup-btn" onclick="closePopup()">
+        <img src="../../resources/img/join/close.png" class="login-popup-btn" onclick="closeLoginPopup()">
       </div>
       <div class="login-popup-middle">
           <div class="login-header">쓰담쓰담 로그인</div>
@@ -389,14 +396,14 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
             </div>
           </div>
             <div>
-              <br><input type="submit" value="로그인" class="login-btn">
+              <br><a href=''><input type="submit" value="로그인" class="login-btn" ></a>
             </div>
       </div>
       
       <div class="login-popup-button">
-        <div><button class="join-btn" onclick="location.href='<%=root%>/views/common/join.jsp'">회원가입</button></div>
-        <div><button class="id-find-btn" onclick="">아이디 찾기</button></div>
-        <div><button class="pwd-find-btn" onclick="">비밀번호 찾기</button></div>
+        <div><a href='<%=root%>/views/common/join.jsp'>회원가입</a></div>
+        <div><a href=''>아이디 찾기</a></div>
+        <div><a href=''>비밀번호 찾기</a></div>
       </div>
       
     </div>
@@ -412,18 +419,17 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 <script>
     // 로그인 팝업
     function loginPopup(hasFilter) {
-    const popup = document.querySelector('#popup');
+    const popup = document.querySelector('#login-popup');
     
     if (hasFilter) {
       popup.classList.add();
-    } 
-    
+    }
     popup.classList.remove('hide');
   }
 
-  function closePopup() {
-    const popup = document.querySelector('#popup');
+  function closeLoginPopup() {
+    const popup = document.querySelector('#login-popup');
     popup.classList.add('hide');
   }
-
 </script>
+

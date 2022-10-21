@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>(일반) 회원가입</title>
 <style>
 
     body{
@@ -37,6 +37,7 @@
 
     label{
         font-size: 13px;
+        cursor: pointer;
     }
 
     h1{
@@ -50,7 +51,6 @@
         color: gray;
         font-weight: normal;
         margin-top: 0;
-        margin-left: 8%;
         font-size: 17px;
     }
 
@@ -66,7 +66,7 @@
         font-size: 18px;
     }
 
-    input[type="submit"]{
+    .join-btn > .btn{
         width: 167px;
         height: 42px;
         border: none;
@@ -75,16 +75,12 @@
         background-color: rgba(163, 215, 165, 1);
         margin-left: 23%;
         font-size: 18px;
+        cursor: pointer;
     }
 
     input::placeholder{
         font-size: 15px;
         color:rgba(204, 204, 204, 1);
-    }
-    
-    #gender-box>label{
-        font-size: 18px;
-        margin-left: 15%;
     }
     
     .overlap-check-btn{
@@ -95,6 +91,7 @@
         background-color: white;
         width: 75px;
         height: 25px;
+        cursor: pointer;
     }
     
 </style>
@@ -104,10 +101,11 @@
     <%@ include file="/views/common/header.jsp" %>
 
 	<div class="main">
-        <h1 align="center">회원가입</h1>
-        <h4 align="center">이곳은 쓰담쓰담에 함께 하실 분들을 위한 회원가입 페이지 입니다.</h4>
+        <h1 align="center" class="join">회원가입</h1>
+        <h4 align="center" class="join-guide">이곳은 쓰담쓰담에 함께 하실 분들을 위한 회원가입 페이지 입니다.</h4>
 
-
+		<form action="/sseudam/member/join" method="post">
+		</form>
         <div class="join-area">
             <div>아이디</div>
             <div>
@@ -127,12 +125,12 @@
 
             <div>이름</div>
             <div>
-                <input type="text" name="Name">
+                <input type="text" name="memberName">
             </div>
 
             <div>닉네임</div>
             <div>
-                <input type="text" name="Name" placeholder="6~14자 이내로 작성(특수문자 불가능)">
+                <input type="text" name="memberNick" placeholder="6~14자 이내로 작성(특수문자 불가능)">
             </div>
 
             <div>연락처</div>
@@ -144,7 +142,8 @@
             <div>
                 <input type="email" name="email">
             </div>
-
+			
+			<!-- 이 부분 테이블에 추가 해야 할 듯...? -->
             <div class="join-TOS">
                 <label>
                     <input type="checkbox">
@@ -157,8 +156,8 @@
                 </label>
             </div>
 
-            <div>
-                <br><input type="submit" value="가입하기" class="btn">
+            <div class="join-btn">
+                <br><input type="button" value="가입하기" class="btn">
             </div>
 
         </div>

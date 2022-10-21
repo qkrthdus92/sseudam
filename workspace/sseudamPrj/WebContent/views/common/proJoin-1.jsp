@@ -179,7 +179,7 @@
                 </div>
             </div>
             <div class="next">
-                <div><br><a href="" class="next-page">다음페이지 작성</a></div>
+                <div><br><a href="<%=root%>/views/common/proJoin-2.jsp" class="next-page">다음페이지 작성</a></div>
             </div>
             
         </div>
