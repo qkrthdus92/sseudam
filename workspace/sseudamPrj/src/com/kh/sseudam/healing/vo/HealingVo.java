@@ -4,16 +4,11 @@ public class HealingVo {
     
     private String no;
     private String cNum;
-    private String name;
-    private String date;
+    private String type;
     private String title;
-    private String writer;
-    private String publisher;
-    private String actor;
-    private String artist;
-    private String genre;
-    private String address;
-    private String phone;
+    private String info1;
+    private String info2;
+    private String info3;
     private String stress;
     private String link;
     private String imgPath;
@@ -22,13 +17,6 @@ public class HealingVo {
     private String deleteYn;
     private String liked;
     
-    
-    public String getLiked() {
-        return liked;
-    }
-    public void setLiked(String liked) {
-        this.liked = liked;
-    }
     public String getNo() {
         return no;
     }
@@ -41,53 +29,35 @@ public class HealingVo {
     public void setcNum(String cNum) {
         this.cNum = cNum;
     }
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getDate() {
-        return date;
-    }
-    public void setDate(String date) {
-        this.date = date;
-    }
+    public void setType(String type) {
+        this.type = type;
+    }  
     public String getTitle() {
         return title;
     }
     public void setTitle(String title) {
         this.title = title;
     }
-    public String getActor() {
-        return actor;
+    public String getInfo1() {
+        return info1;
     }
-    public void setActor(String actor) {
-        this.actor = actor;
+    public void setInfo1(String info1) {
+        this.info1 = info1;
     }
-    public String getArtist() {
-        return artist;
+    public String getInfo2() {
+        return info2;
     }
-    public void setArtist(String artist) {
-        this.artist = artist;
+    public void setInfo2(String info2) {
+        this.info2 = info2;
     }
-    public String getGenre() {
-        return genre;
+    public String getInfo3() {
+        return info3;
     }
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-    public String getAddress() {
-        return address;
-    }
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    public String getPhone() {
-        return phone;
-    }
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setInfo3(String info3) {
+        this.info3 = info3;
     }
     public String getStress() {
         return stress;
@@ -125,41 +95,31 @@ public class HealingVo {
     public void setDeleteYn(String deleteYn) {
         this.deleteYn = deleteYn;
     }
-    public String getWriter() {
-        return writer;
+    public String getLiked() {
+        return liked;
     }
-    public void setWriter(String writer) {
-        this.writer = writer;
+    public void setLiked(String liked) {
+        this.liked = liked;
     }
-    public String getPublisher() {
-        return publisher;
-    }
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
+ 
     @Override
     public String toString() {
-        return "HealingVo [no=" + no + ", cNum=" + cNum + ", name=" + name + ", date=" + date + ", title=" + title
-                + ", writer=" + writer + ", publisher=" + publisher + ", actor=" + actor + ", artist=" + artist
-                + ", genre=" + genre + ", address=" + address + ", phone=" + phone + ", stress=" + stress + ", link="
-                + link + ", imgPath=" + imgPath + ", writeDate=" + writeDate + ", modifyDate=" + modifyDate
-                + ", deleteYn=" + deleteYn + ", liked=" + liked + "]";
+        return "HealingVo [no=" + no + ", cNum=" + cNum + ", type=" + type + ", title=" + title + ", info1=" + info1
+                + ", info2=" + info2 + ", info3=" + info3 + ", stress=" + stress + ", link=" + link + ", imgPath="
+                + imgPath + ", writeDate=" + writeDate + ", modifyDate=" + modifyDate + ", deleteYn=" + deleteYn
+                + ", liked=" + liked + "]";
     }
-    public HealingVo(String no, String cNum, String name, String date, String title, String writer, String publisher,
-            String actor, String artist, String genre, String address, String phone, String stress, String link,
-            String imgPath, String writeDate, String modifyDate, String deleteYn, String liked) {
+    
+    public HealingVo(String no, String cNum, String type, String title, String info1, String info2, String info3,
+            String stress, String link, String imgPath, String writeDate, String modifyDate, String deleteYn,
+            String liked) {
         this.no = no;
         this.cNum = cNum;
-        this.name = name;
-        this.date = date;
+        this.type = type;
         this.title = title;
-        this.writer = writer;
-        this.publisher = publisher;
-        this.actor = actor;
-        this.artist = artist;
-        this.genre = genre;
-        this.address = address;
-        this.phone = phone;
+        this.info1 = info1;
+        this.info2 = info2;
+        this.info3 = info3;
         this.stress = stress;
         this.link = link;
         this.imgPath = imgPath;
@@ -170,6 +130,7 @@ public class HealingVo {
     }
     public HealingVo() {
     }
-
+  
+    
 
 }

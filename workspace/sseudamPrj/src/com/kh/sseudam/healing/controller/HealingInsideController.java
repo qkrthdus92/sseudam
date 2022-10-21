@@ -12,19 +12,35 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.sseudam.healing.service.HealingService;
 import com.kh.sseudam.healing.vo.HealingVo;
 
-@WebServlet(urlPatterns = "/healing/outside")
+@WebServlet(urlPatterns = "/healing/inside")
 public class HealingInsideController extends HttpServlet{
-
-    private final HealingService hs = new HealingService();
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        
         //디비 다녀오기
-        List<HealingVo> listVo = hs.InsidePage();
+        List<HealingVo> insideList = new HealingService().InsidePage();
+        
+        //페이징 처리
+        int listCount;
+        int currentPage;
+        int pageLimit;
+        int boardLimit;
+
+        int maxPage;
+        int startPage;
+        int endPage;
+
+        listCount = insideList.size();
+        currentPage = Integer.parseInt(req.getParameter("pno"));
+        pageLimit = 5;
+        boardLimit = 10;
+
+        maxPage = (int) Math.ceil((double) listCount / boardLimit);
         //화면 보여주기
-        req.setAttribute("listVo", listVo);
-        req.getRequestDispatcher("/").forward(req, resp);
+        req.setAttribute("insideList", insideList);
+        req.getRequestDispatcher("/views/healing/inside.jsp").forward(req, resp);
         
     }
 }
