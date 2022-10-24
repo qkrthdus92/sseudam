@@ -5,6 +5,15 @@
 pageEncoding="UTF-8"%>
 <% String root1 = request.getContextPath();%>
 <% List<ProVo> proList = (List<ProVo>)request.getAttribute("proList"); %>
+<%	PageVo pv = (PageVo)request.getAttribute("pv"); %>
+<% String order = (String)request.getAttribute("order"); %>
+<% String proName = (String)request.getAttribute("proName"); %>
+<% String counselType = (String)request.getAttribute("counselType"); %>
+<% String proLevel = (String)request.getAttribute("proLevel"); %>
+<% String gender = (String)request.getAttribute("gender"); %>
+<% String certificate = (String)request.getAttribute("certificate"); %>
+
+<% String choose = (String)request.getAttribute("choose"); %>
 
 <!DOCTYPE html>
 <html>
@@ -14,23 +23,24 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/counsel/list.css?ver=6"
+      href="<%=root1%>/resources/css/counsel/list.css?ver=8"
     />
     <link
       rel="stylesheet"
       href="<%=root1%>/resources/css/common/variables.css"
     />
-    <script src="<%=root1%>/resources/js/counsel/list.js?ver=2"></script>
+    <script src="<%=root1%>/resources/js/counsel/list.js?ver=4"></script>
   </head>
   <body>
     <%@ include file="/views/common/header.jsp" %>
     <main id="counsel-main">
       <div class="main-wrapper counsel-main-wrapper">
-        <form id="form-search-pro-name" action="<%=root %>/counsel/list" method="get" onsubmit="return false">
+        <form id="form-search-pro-name" action="<%=root %>/counsel/list?pno=1" method="get" onsubmit="return false">
         <aside class="counsel-aside">
               <div class="counsel-search">
+                <input type="text" name="pno" value="1" class="hidden">
               <input
-                class="border"
+                class="border search-name-input"
                 type="text"
                 placeholder="전문가 이름을 검색하세요"
                 name="proName"
@@ -41,7 +51,8 @@ pageEncoding="UTF-8"%>
               </div>
             </form>
             
-            <form action="<%=root%>/counsel/list" method="post">
+            <form action="<%=root%>/counsel/list?pno=1" method="get">
+            <input type="text" name="pno" value="1" class="hidden">
               <div class="counsel-type border">
                 <div class="counsel-type-header">
                   <img
@@ -243,7 +254,8 @@ pageEncoding="UTF-8"%>
 
         <section class="counsel-section">
           <ul class="counsel-filter">
-            <li><a href="<%=root%>/counsel/list?order=normal&pno=1">기본정렬</a></li>
+            <!-- <li><a href="<%=root%>/counsel/list?order=normal&pno=1">기본정렬</a></li> -->
+
             <li><a href="<%=root%>/counsel/list?order=latest&pno=1">최근등록순</a></li>
             <li><a href="<%=root%>/counsel/list?order=star&pno=1">평점순</a></li>
             <li><a href="<%=root%>/counsel/list?order=review&pno=1">후기많은순</a></li>
@@ -255,7 +267,7 @@ pageEncoding="UTF-8"%>
           	<%for(int i=0; i<proList.size(); i++) {%>
 	            <div class="counsel-pro-detail">
 	              <div>
-	                <a href="<%=root%>/views/counsel/detail.jsp"
+	                <a href="<%=root%>/counsel/detail?bno=<%=proList.get(i).getNo() %>"
 	                  ><img
 	                    src="<%=root %>/resources/upload/pro/<%= proList.get(i).getImg() %>"
 	                    alt=""
@@ -263,11 +275,11 @@ pageEncoding="UTF-8"%>
 	              </div>
 	              <div>
 	                <div class="counsel-pro-name">
-	                  <a href="<%=root%>/views/counsel/detail.jsp"><%= proList.get(i).getName() %></a>
+	                  <a href="<%=root%>/counsel/detail?bno=<%=proList.get(i).getNo() %>"><%= proList.get(i).getName() %></a>
 	                </div>
 	                <div class="counsel-pro-type"><%=proList.get(i).getCounselType() %></div>
 	                <div class="counsel-pro-introduce">
-	                  <a href="<%=root%>/views/counsel/detail.jsp"
+	                  <a href="<%=root%>/counsel/detail?bno=<%=proList.get(i).getNo() %>"
 	                    ><%= proList.get(i).getIntroduce() %></a
 	                  >
 	                </div>
@@ -286,17 +298,47 @@ pageEncoding="UTF-8"%>
             
 
           </div>
-         <%--  <div class="counsel-pro-list-page">
-          <%if(pv.getStartPage()!=1) {%>
-      		<a href="<%= root %>/counsel/list?pno=<%=pv.getStartPage()-1 %>" class="btn btn-primary btn-sm">이전</a>
-      	  <%}%>
-	      <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
-	      	<a href="<%= root %>/counsel/list?pno=<%=i %>" class="btn btn-primary btn-sm"><%=i %></a>
-	      <%}%>
-	      <%if(pv.getEndPage() != pv.getMaxPage()) { %>
-	       <a href="<%= root %>/counsel/list?pno=<%=pv.getEndPage()+1 %>" class="btn btn-primary btn-sm">다음</a>
-	      <%}%>
-          </div> --%>
+          <%if(proName != null ) {%>
+        	  <div class="counsel-pro-list-page">
+	          <%if(pv.getStartPage()!=1) {%>
+	      		<a href="<%= root %>/counsel/list?proName=<%=proName %>&pno=<%=pv.getStartPage()-1 %>" >이전</a>
+	      	  <%}%>
+		      <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
+		      	<a href="<%= root %>/counsel/list?proName=<%=proName %>&pno=<%=i %>" ><%=i %></a>
+		      <%}%>
+		      <%if(pv.getEndPage() != pv.getMaxPage()) { %>
+		       <a href="<%= root %>/counsel/list?proName=<%=proName %>&pno=<%=pv.getEndPage()+1 %>" >다음</a>
+		      <%}%>
+	          </div> 
+          <%} %>
+          
+          <%if(order != null) {%>
+	         <div class="counsel-pro-list-page">
+	          <%if(pv.getStartPage()!=1) {%>
+	      		<a href="<%= root %>/counsel/list?order=<%=order %>&pno=<%=pv.getStartPage()-1 %>" >이전</a>
+	      	  <%}%>
+		      <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
+		      	<a href="<%= root %>/counsel/list?order=<%=order %>&pno=<%=i %>" ><%=i %></a>
+		      <%}%>
+		      <%if(pv.getEndPage() != pv.getMaxPage()) { %>
+		       <a href="<%= root %>/counsel/list?order=<%=order %>&pno=<%=pv.getEndPage()+1 %>" >다음</a>
+		      <%}%>
+	          </div> 
+          
+          <%} %>
+           <%if(choose != null) {%>
+        	  <div class="counsel-pro-list-page">
+	          <%if(pv.getStartPage()!=1) {%>
+	      		<a href="<%= root %>/counsel/list?<%=counselType %>&<%=proLevel %>&gender=<%= gender %>&certificate=<%= certificate %>&pno=<%=pv.getStartPage()-1 %>" >이전</a>
+	      	  <%}%>
+		      <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
+		      	<a href="<%= root %>/counsel/list?<%=counselType %>&<%=proLevel %>&gender=<%= gender %>&certificate=<%= certificate %>&pno=<%=i %>" ><%=i %></a>
+		      <%}%>
+		      <%if(pv.getEndPage() != pv.getMaxPage()) { %>
+		       <a href="<%= root %>/counsel/list?<%=counselType %>&<%=proLevel %>&gender=<%= gender %>&certificate=<%= certificate %>&pno=<%=pv.getEndPage()+1 %>" >다음</a>
+		      <%}%>
+	          </div> 
+          <%} %> 
         </section>
       </div>
     </main>
