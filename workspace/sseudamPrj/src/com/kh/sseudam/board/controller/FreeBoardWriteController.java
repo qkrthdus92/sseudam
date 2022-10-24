@@ -11,9 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.sseudam.board.service.FreeBoardService;
 import com.kh.sseudam.board.vo.FreeBoardVo;
+import com.kh.sseudam.member.vo.MemberVo;
 
-import temp.MemberService;
-import temp.MemberVo;
 @WebServlet(urlPatterns = "/board/freeBoardWrite")
 public class FreeBoardWriteController extends HttpServlet{
 	
@@ -22,11 +21,11 @@ public class FreeBoardWriteController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		//로그인여부 확인
-//		if(req.getSession().getAttribute("loginMember") == null){
-//			req.setAttribute("msg", "로그인 후 이용해주세요.");
-//			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
-//			return;
-//		}		
+		if(req.getSession().getAttribute("loginMember") == null){
+			req.setAttribute("msg", "로그인 후 이용해주세요.");
+			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
+			return;
+		}		
 	
 		//화면선택
 		req.getRequestDispatcher("/views/board/freeBoard/freeBoardWrite.jsp").forward(req, resp);
@@ -35,23 +34,21 @@ public class FreeBoardWriteController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		//인코딩
+		req.setCharacterEncoding("UTF-8");
 
 		//로그인멤버 가져오기
 		HttpSession s = req.getSession();
 		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
 		System.out.println(loginMember);
-		
-		
-		//인코딩
-		req.setCharacterEncoding("UTF-8");
-		
+				
 		//데이터 꺼내기
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 
 		//데이터 뭉치기
 		FreeBoardVo vo = new FreeBoardVo();
-		//vo.setWriterNo(loginMember.getNo());
+		vo.setWriterNo(loginMember.getNo());
 		vo.setTitle(title);
 		vo.setContent(content);
 		
@@ -64,7 +61,6 @@ public class FreeBoardWriteController extends HttpServlet{
 			s.setAttribute("alertMsg", "게시글 등록이 완료되었습니다.");
 			resp.sendRedirect("/sseudam/board/freeBoardList?pno=1");
 		}else {
-			req.setAttribute("msg", "게시글 작성 실패");
 			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
 		}
 		

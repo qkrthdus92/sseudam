@@ -1,12 +1,6 @@
-<%@page import="temp.MemberVo"%>
 <%@page import="com.kh.sseudam.board.vo.FreeBoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-	String alertMsg = (String)session.getAttribute("alertMsg");
-	session.removeAttribute("alertMsg");	
-%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,11 +89,6 @@ body {
 </style>
 </head>
 <body>
-<script>
-<%if(alertMsg != null){%>
-	alert('<%= alertMsg %>'); 
-<%}%>
-</script>
 	<div id="wrap">
 
 		<div id="header">
@@ -138,5 +127,7 @@ body {
 	<div id="footer">
 		<%@ include file="/views/common/footer.jsp"%>
 	</div>
+	<script>
+</script>
 </body>
 </html>

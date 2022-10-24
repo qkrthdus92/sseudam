@@ -157,7 +157,7 @@ public class FreeBoardDao {
 
 	// 자유게시판 게시글 작성
 	public static int write(Connection conn, FreeBoardVo vo) {
-		String sql = "INSERT INTO FREE_BOARD(NO, WRITER_NO, TITLE, CONTENT) VALUES(SEQ_FREE_BOARD_NO.NEXTVAL, 1, ?, ?)";
+		String sql = "INSERT INTO FREE_BOARD(NO, WRITER_NO, TITLE, CONTENT) VALUES(SEQ_FREE_BOARD_NO.NEXTVAL, ?, ?, ?)";
 
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -165,9 +165,9 @@ public class FreeBoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 
-			//pstmt.setString(1, vo.getWriterNo());
-			pstmt.setString(1, vo.getTitle());
-			pstmt.setString(2, vo.getContent());
+			pstmt.setString(1, vo.getWriterNo());
+			pstmt.setString(2, vo.getTitle());
+			pstmt.setString(3, vo.getContent());
 
 			result = pstmt.executeUpdate();
 

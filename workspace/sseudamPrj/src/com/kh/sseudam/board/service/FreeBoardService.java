@@ -45,18 +45,6 @@ public class FreeBoardService {
 		JDBCTemplate.close(conn);
 		
 		return vo;
-		
-		
-		
-		
-		/*
-		 * Connection conn = JDBCTemplate.getConnection();
-		 * 
-		 * FreeBoardVo vo = FreeBoardDao.detail(conn, bno);
-		 * 
-		 * JDBCTemplate.close(conn); System.out.println("디테일서비스" + vo); //null 나옴..
-		 * return vo;
-		 */
 	}
 
 	// 자유게시판 게시글 작성
@@ -91,7 +79,6 @@ public class FreeBoardService {
 		JDBCTemplate.close(conn);
 
 		return result;
-
 	}
 
 	//자유게시판 게시글 수정
@@ -106,9 +93,7 @@ public class FreeBoardService {
 		}else {
 			JDBCTemplate.rollback(conn);
 		}
-		
-		return result;
-		
+		return result;	
 	}
 
 	//자유게시판 제목으로 검색

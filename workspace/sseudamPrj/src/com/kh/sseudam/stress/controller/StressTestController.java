@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import com.kh.sseudam.stress.service.StressService;
 
 import oracle.jdbc.driver.HAManager;
-import temp.MemberVo;
 
 @WebServlet(urlPatterns = "/stress/stressTest")
 public class StressTestController extends HttpServlet{
