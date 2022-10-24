@@ -8,10 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.sseudam.common.PageVo;
 import com.kh.sseudam.healing.service.HealingService;
 import com.kh.sseudam.healing.vo.HealingVo;
+
+import temp.MemberVo;
 
 @WebServlet(urlPatterns = "/healing/outside")
 public class HealingOutsideController extends HttpServlet{
@@ -65,7 +68,14 @@ public class HealingOutsideController extends HttpServlet{
         
         
         //회원 넘버 가져오기
-        int mNo = 7;
+        HttpSession s = req.getSession();
+        MemberVo loginMember = (MemberVo) s.getAttribute("loginMember");
+        int mNo;
+        if(loginMember != null) {
+            mNo = loginMember.getNo();
+        }else {
+            mNo = 0;
+        }
         
         //디비 다녀오기
         List<HealingVo> outsideList = new HealingService().OutsidePage(pv, sort, mNo);                    

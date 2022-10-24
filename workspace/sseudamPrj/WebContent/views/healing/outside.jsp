@@ -8,7 +8,6 @@
 List<HealingVo> list = (List<HealingVo>) request.getAttribute("outsideList");
 PageVo pv = (PageVo) request.getAttribute("pv");
 String sort = (String) request.getAttribute("sort");
-MemberVo mv = (MemberVo) request.getAttribute("loginMember");
 %>
 <!DOCTYPE html>
 <html>
@@ -60,8 +59,10 @@ MemberVo mv = (MemberVo) request.getAttribute("loginMember");
 				String memberLike = list.get(i).getMemberLike();
 			%>
 			<article>
-				<%if (mv == null) {%>
-					<a class="like-btn" href="javascript:likeBtn(<%=no%>,<%=i%>)"> 
+				<% if(loginMember != null){
+				String mNo = loginMember.getNo();
+				%>
+				<a class="like-btn" href="javascript:likeBtn(<%=no%>,<%=i%>,<%=mNo%>)">
 				<%} else { %> 
 					<a class="popup-btn" onclick="loginPopup(true)"> 
 				<% }%> 
@@ -181,16 +182,17 @@ MemberVo mv = (MemberVo) request.getAttribute("loginMember");
 	</script>
 
 	<script type="text/javascript">
-		function likeBtn(no, i) {
+		function likeBtn(no, i,mNo) {
 
 			const root = "${pageContext.request.contextPath}";
+			const mNo = 
 
 			$.ajax({
 				url : root + "/healing/outsideLike",
 				type : "post",
 				data : {
 					"no" : no,
-					"mNo" : "7"
+					"mNo" : mNo
 				},
 				dataType : "json",
 				success : function(x) {
