@@ -1,18 +1,24 @@
+<%@page import="com.kh.sseudam.counsel.pro.vo.CertificateVo"%>
+<%@page import="java.util.List"%>
+<%@page import="com.kh.sseudam.counsel.pro.vo.ProVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<% String root5 = request.getContextPath();%>
+<%ProVo vo = (ProVo)request.getAttribute("vo"); %>
+<%List<CertificateVo> cerList = (List<CertificateVo>)request.getAttribute("cerList"); %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <title>Insert title here</title>
-    <link rel="stylesheet" href="/sseudamPrj/resources/css/common/reset.css" />
+    <link rel="stylesheet" href="<%= root5 %>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"
-      href="/sseudamPrj/resources/css/counsel/detail.css?ver=2"
+      href="<%= root5 %>/resources/css/counsel/detail.css?ver=2"
     />
     <link
       rel="stylesheet"
-      href="/sseudamPrj/resources/css/common/variables.css"
+      href="<%= root5 %>/resources/css/common/variables.css"
     />
   </head>
   <body>
@@ -21,31 +27,31 @@ pageEncoding="UTF-8"%>
       <div class="main-wrapper counsel-detail-main-wrapper">
         <div class="counsel-detail-top">
           <div class="counsel-detail-pro-img">
-            <img src="../../resources/img/counsel/Rectangle 4019.png" alt="" />
+            <img src="<%= root5 %>/resources/upload/pro/<%= vo.getImg() %>" alt="" />
           </div>
           <div class="counsel-detail-pro-summary">
-            <div class="counsel-pro-name">주연희</div>
-            <div class="counsel-pro-type">청소년 상담</div>
+            <div class="counsel-pro-name"><%= vo.getName() %></div>
+            <div class="counsel-pro-type"><%= vo.getCounselType() %></div>
             <div class="counsel-pro-introduce">
-              마음의 평안과 진정한 나를 찾아 떠나는 여행으로 초대합니다.
+              <%= vo.getIntroduce() %>
             </div>
             <div class="counsel-pro-review">
               <i class="fa-solid fa-star"></i>
-              <div>4.9</div>
-              <div>(86)</div>
+              <div><%= vo.getAvgStar() %></div>
+              <div>(<%= vo.getCounselCnt() %>)</div>
             </div>
             <div class="counsel-pro-price">
               <div>1회상담</div>
-              <div>50,000</div>
+              <div><%= vo.getPrice() %></div>
             </div>
             <div class="counsel-detail-appoint-btn">
-              <a href="<%=root%>/views/counsel/pay.jsp">상담받기</a>
+              <a href="<%=root%>/counsel/pay?bno=<%=vo.getNo()%>">상담받기</a>
             </div>
           </div>
           <div class="counsel-detail-notice">
             <div class="counsel-detail-notice-title">
               <img
-                src="../../resources/img/counsel/Chat_alt_3_light.png"
+                src="<%=root %>/resources/img/counsel/Chat_alt_3_light.png"
                 alt=""
               /><span>알려드립니다!</span>
             </div>
@@ -80,9 +86,9 @@ pageEncoding="UTF-8"%>
           <div class="counsel-detail-introduce-certificate">
             <div><i class="fa-solid fa-award"></i><span>자격증</span></div>
             <ul>
-              <li>상담심리사 2급</li>
-              <li>상담심리사 2급</li>
-              <li>상담심리사 2급</li>
+            <% for(int i=0; i<cerList.size(); i++) { %>
+            	<li><%= cerList.get(i).getName() %></li>
+            <%} %>
             </ul>
           </div>
           <div class="counsel-detail-introduce-edu">
@@ -90,7 +96,7 @@ pageEncoding="UTF-8"%>
               <i class="fa-solid fa-graduation-cap"></i><span>학력</span>
             </div>
             <ul>
-              <li>가톨릭대학교 상담심리대학원 상담학 전공 석사 졸업</li>
+              <li><%=vo.getEducation() %></li>
             </ul>
           </div>
         </div>

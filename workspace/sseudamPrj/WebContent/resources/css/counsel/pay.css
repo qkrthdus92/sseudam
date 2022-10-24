@@ -113,13 +113,24 @@
   margin-left: 10px;
   font-weight: 600;
 }
-
+.counsel-pay-select-date select:nth-child(1) {
+  margin-right: 20px;
+}
 .counsel-pay-select-date select:nth-child(2) {
   margin-right: 20px;
 }
 
 .counsel-pay-select-date select {
   width: 70px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.counsel-pay-select-date select:first-child {
+  width: 88px;
   border: none;
   outline: none;
   font-size: 18px;
@@ -275,4 +286,69 @@
   font-weight: 600;
   margin-bottom: 50px;
   cursor: pointer;
+}
+
+/* DatePicker CSS */
+
+.ui-widget-header {
+  border: none !important;
+  /* background-color: transparent !important; */
+  background-color: white !important;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default,
+.ui-button,
+html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active {
+  border: 1px solid #fff !important;
+  background: #fff !important;
+  font-weight: normal !important;
+  color: #454545 !important;
+  text-align: center !important;
+  font-size: 14px;
+}
+
+.ui-widget.ui-widget-content {
+  width: 250px;
+}
+
+.ui-datepicker .ui-datepicker-title {
+  font-size: 14px;
+}
+
+.ui-datepicker .ui-datepicker-header {
+  width: 100%;
+}
+
+.ui-datepicker th {
+  font-size: 14px;
+  padding: 0.7em !important;
+}
+
+.ui-datepicker-calendar th:first-child {
+  color: #ff0000 !important;
+}
+
+.ui-datepicker-calendar th:nth-last-child(1) {
+  color: #0d47a1 !important;
+}
+
+.ui-datepicker-calendar tr td:first-child a {
+  color: #ff0000 !important;
+}
+
+.ui-datepicker-calendar tr td:nth-last-child(1) a {
+  color: #0d47a1 !important;
+}
+
+.chooseDate {
+  width: 200px;
+  height: 28px;
+  outline: none;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 0px 12px;
+  margin-right: 10px;
 }
