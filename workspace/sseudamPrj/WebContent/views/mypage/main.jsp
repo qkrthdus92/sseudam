@@ -1,9 +1,6 @@
 <%@page import="com.kh.sseudam.member.vo.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-%>
 <!DOCTYPE html>
 <html>
 <head>

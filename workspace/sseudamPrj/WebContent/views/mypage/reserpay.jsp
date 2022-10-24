@@ -166,7 +166,7 @@
 }
 #pro-box-wrap{
     display: grid;
-    grid-template-columns: 300px 300px 300px 300px;
+    grid-template-columns: 240px 240px 240px 240px 240px;
     grid-template-rows: 245px 245px;
     justify-content: center;
     margin-top:15px; 
@@ -181,7 +181,7 @@
     border: 1px solid rgba(0, 0, 0, 0.5);
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
-    margin-left: 50px;
+    margin-left: 20px;
 }
 #bor-top{
     border-top: 1px solid lightgray ;
