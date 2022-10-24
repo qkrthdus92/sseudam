@@ -5,8 +5,7 @@ import java.sql.Connection;
 import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.stress.dao.StressDao;
 
-import temp.MemberDao;
-import temp.MemberVo;
+import com.kh.sseudam.member.vo.MemberVo;
 
 public class StressService {
 

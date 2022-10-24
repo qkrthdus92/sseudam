@@ -4,8 +4,6 @@
     pageEncoding="UTF-8"%>
 <%
  	FreeBoardVo vo = (FreeBoardVo)request.getAttribute("vo");
-	String s = (String)session.getAttribute("alertMsg");
-	session.removeAttribute("alertMsg");
 	PageVo pv = (PageVo)request.getAttribute("pv");
 %> 
 <!DOCTYPE html>

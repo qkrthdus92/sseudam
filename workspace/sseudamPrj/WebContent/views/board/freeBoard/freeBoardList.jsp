@@ -6,8 +6,6 @@
 <%
 	List<FreeBoardVo> voList = (List<FreeBoardVo>)request.getAttribute("voList");
 	PageVo pv = (PageVo)request.getAttribute("pv");
-	String alertMsg = (String)session.getAttribute("alertMsg");
-	session.removeAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -115,11 +113,7 @@
 </style>
 </head>
 <body>
-<script>
-<%if(alertMsg != null){%>
-	alert('<%= alertMsg %>'); 
-<%}%>
-</script>
+
     <div id="wrap">
         <div id="header">
             <%@ include file="/views/common/header.jsp" %>
@@ -179,5 +173,10 @@
             <%@ include file="/views/common/footer.jsp" %>
         </div>
     </div>
+    <script>
+<%if(alertMsg != null){%>
+	alert('<%= alertMsg %>'); 
+<%}%>
+</script>
 </body>
 </html>
