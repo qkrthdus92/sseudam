@@ -32,11 +32,13 @@ public class MemberLoginController extends HttpServlet{
 		
 		//화면선택
 		if(loginMember != null) {
-			req.getSession().setAttribute("alertMsg", "로그인 성공");
-			resp.sendRedirect("/sseudam/views/common/login.jsp");	//테스트경로 사용 중 끝나면 /main 연결
+			HttpSession s = req.getSession();
+			s.setAttribute("alertMsg", "로그인 성공");
+			s.setAttribute("loginMember", loginMember);
+			resp.sendRedirect("/sseudam/main");
 		}else {
 			req.getSession().setAttribute("alertMsg", "로그인 실패");
-			req.getRequestDispatcher("/sseudam").forward(req, resp);
+			req.getRequestDispatcher("/error").forward(req, resp);	//에러페이지 없지만,, 임의로 넣음
 		}
 		
 	}

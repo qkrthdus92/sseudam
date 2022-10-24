@@ -113,7 +113,7 @@ public class ProMemberJoinPageController extends HttpServlet{
 			}
 			
 			if(result2 == 1) {
-				resp.sendRedirect("/sseudam");
+				resp.sendRedirect("/sseudam/main");
 			}else{
 				System.out.println("실패");
 			}
