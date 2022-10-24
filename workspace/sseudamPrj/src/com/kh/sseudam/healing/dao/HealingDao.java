@@ -1054,7 +1054,7 @@ public class HealingDao {
                 
                 if(cNum.equals("8")) { vo.setcNum("문화");}
                 else if(cNum.equals("9")) { vo.setcNum("산책");}
-                else{ vo.setcNum("등산");}               
+                else{ vo.setcNum("운동");}               
                             
                 
                 vo.setTitle(title);
@@ -1172,7 +1172,7 @@ public class HealingDao {
                 
                 if(cNum.equals("8")) { vo.setcNum("문화");}
                 else if(cNum.equals("9")) { vo.setcNum("산책");}
-                else{ vo.setcNum("등산");}               
+                else{ vo.setcNum("운동");}               
                             
                 
                 vo.setTitle(title);
@@ -1290,7 +1290,7 @@ public class HealingDao {
                 
                 if(cNum.equals("8")) { vo.setcNum("문화");}
                 else if(cNum.equals("9")) { vo.setcNum("산책");}
-                else{ vo.setcNum("등산");}               
+                else{ vo.setcNum("운동");}               
                             
                 
                 vo.setTitle(title);
@@ -1409,7 +1409,7 @@ public class HealingDao {
                 
                 if(cNum.equals("8")) { vo.setcNum("문화");}
                 else if(cNum.equals("9")) { vo.setcNum("산책");}
-                else{ vo.setcNum("등산");}               
+                else{ vo.setcNum("운동");}               
                             
                 
                 vo.setTitle(title);

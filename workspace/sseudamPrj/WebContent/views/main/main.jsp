@@ -33,7 +33,7 @@
             <div class="head-slider-in">
                 <div class="ment1">지금 당장 힐링이 필요해</div>
                 <div class="ment2">힐링하러 가기</div>
-                <div class="justGo">바로가기 ></div>
+                <div class="justGo" OnClick="location.href ='<%=root%>/healing/nyam'" style="cursor:pointer;">바로가기 ></div>
                 <div class="head-slider-img"><img src="<%=root%>/resources/img/main/자연.png"></div>
             </div>
         </div>
@@ -68,7 +68,7 @@
         <article>
             <div class="little-menu">힐링하기</div>
             <div class="healing">
-                <div class="healing-box">
+                <div class="healing-box" OnClick="location.href ='<%=root%>/healing/nyam'" style="cursor:pointer;">
                     <div class="healing-box-front">
                         <img class="healing-img" src="<%=root%>/resources/img/main/혼카페.jpg">
                         <div class="healing-title">먹으면서 힐링</div>
@@ -76,7 +76,7 @@
                         <div class="healing-box-back">혼자서 냠냠</div>
                     </div>                                      
                 </div>               
-                <div class="healing-box">
+                <div class="healing-box" OnClick="location.href ='<%=root%>/healing/outside'" style="cursor:pointer;">
                     <div class="healing-box-front">
                         <img class="healing-img" src="<%=root%>/resources/img/main/산책로.jpg">
                         <div class="healing-title">여기저기 힐링</div>
@@ -84,7 +84,7 @@
                         <div class="healing-box-back">밖에서 뚜벅뚜벅</div>
                     </div> 
                 </div>
-                <div class="healing-box">
+                <div class="healing-box" OnClick="location.href ='<%=root%>/healing/inside'" style="cursor:pointer;">
                     <div class="healing-box-front">
                         <img class="healing-img" src="<%=root%>/resources/img/main/집뒹굴.jpg">
                         <div class="healing-title">이것저것 힐링</div>

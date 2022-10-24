@@ -8,7 +8,6 @@
 	List<HealingVo> list = (List<HealingVo>) request.getAttribute("insideList");
 	PageVo pv = (PageVo)request.getAttribute("pv");
 	String sort = (String)request.getAttribute("sort");
-	MemberVo mv = (MemberVo)request.getAttribute("loginMember");
 %>
 <!DOCTYPE html>
 <html>
@@ -65,11 +64,14 @@
 			for (int i = 0; i < list.size(); i++) {
 				String no = list.get(i).getNo();
 				String cnt = list.get(i).getLiked();
-				String memberLike = list.get(i).getMemberLike();
+				String memberLike = list.get(i).getMemberLike();				
 			%>
 			<article>
-			<%if(mv == null){%>
-				<a class="like-btn" href="javascript:likeBtn(<%=no%>,<%=i%>)">
+			<%
+			if(loginMember != null){
+				String mNo = loginMember.getNo();
+			%>
+				<a class="like-btn" href="javascript:likeBtn(<%=no%>,<%=i%>,<%=mNo%>)">
 			<%}else{ %>
 				<a class="popup-btn" onclick="loginPopup(true)">
 			<%} %>
@@ -170,9 +172,10 @@
 	
 	<script type="text/javascript">
 		
-		function likeBtn(no,i){
+		function likeBtn(no,i,mNo){
 
 			const root = "${pageContext.request.contextPath}";
+			const mNo = "";
 			
 			$.ajax({
 				url: root+"/healing/insideLike",
@@ -180,7 +183,7 @@
                 data: 
                 {
                     "no": no,
-                    "mNo" : "7"
+                    "mNo" : mNo
                 },
                 dataType : "json",
                 success : function(x){                	
