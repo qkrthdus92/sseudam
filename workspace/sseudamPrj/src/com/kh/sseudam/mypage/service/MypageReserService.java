@@ -4,35 +4,32 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.kh.sseudam.common.JDBCTemplate;
+import com.kh.sseudam.common.PageVo;
 import com.kh.sseudam.mypage.board.vo.MypageLikeVo;
-import com.kh.sseudam.mypage.board.vo.MypageReserDetailVo;
 import com.kh.sseudam.mypage.board.vo.MypageReserVo;
 import com.kh.sseudam.mypage.dao.MypageLikeDao;
 import com.kh.sseudam.mypage.dao.MypageReserDao;
 
 public class MypageReserService {
 
-	public List<MypageReserVo> selectList(String num) {
+	public List<MypageReserVo> selectList(PageVo pv,String num) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		List<MypageReserVo> selectList = MypageReserDao.selectList(num,conn);
+		List<MypageReserVo> selectList = MypageReserDao.selectList(num,conn,pv);
 		
 		JDBCTemplate.close(conn);
 		
 		return selectList;
 	}
 
-	//상세조회
-	public MypageReserVo selectReserOne(String num, String no) {
-		
+	public int selectCount() {
 		Connection conn = JDBCTemplate.getConnection();
-		MypageReserVo vo = null;
 		
-		vo = MypageReserDao.selectReserOne(conn , no,num);
+		int result = MypageReserDao.selectCount(conn);
 		
 		JDBCTemplate.close(conn);
 		
-		return vo;
+		return result;
 	}
 
 }

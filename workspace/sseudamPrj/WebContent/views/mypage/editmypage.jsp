@@ -106,28 +106,28 @@
 	<div class="main">
         <h1 align="center">정보수정</h1>
 
-		<form action="/sseudam/mypage/mypage" method="post" onsubmit="return check();">
+		<form action="/sseudam/mypage/edit" method="post" onsubmit="return check();">
 	        <div class="join-area">
 	
 	            <div>비밀번호</div>
 	            <div>
-	                <input type="password" name="memberPwd1" placeholder="6~14자 이내로 영문, 숫자, 특수문자를 조합하여 작성">
+	                <input type="password" name="memberPwd1" value="<%=loginMember.getPwd() %>" placeholder="6~14자 이내로 영문, 숫자, 특수문자를 조합하여 작성">
 	            </div>
 	
 	
 	            <div>닉네임</div>
 	            <div>
-	                <input type="text" name="memberNick" placeholder="6~14자 이내로 작성(특수문자 불가능)">
+	                <input type="text" name="memberNick" value="<%=loginMember.getNick() %>" placeholder="6~14자 이내로 작성(특수문자 불가능)">
 	            </div>
 	
 	            <div>연락처</div>
 	            <div>
-	                <input type="tel" name="memberPhone" placeholder="예) 01012345678">
+	                <input type="tel" name="memberPhone" value="<%=loginMember.getPhone() %>" placeholder="예) 01012345678">
 	            </div>
 	
 	            <div>이메일</div>
 	            <div>
-	                <input type="email" name="memberEmail">
+	                <input type="email" name="memberEmail" value="<%=loginMember.getEmail()%>" >
 	            </div>
 	
 	            <div>

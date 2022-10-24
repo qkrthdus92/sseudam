@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.sseudam.common.JDBCTemplate;
+import com.kh.sseudam.common.PageVo;
 import com.kh.sseudam.mypage.board.vo.MypageReserVo;
 
 public class MypageReserDao {
 
-	public static List<MypageReserVo> selectList(String num, Connection conn) {
+	public static List<MypageReserVo> selectList(PageVo pv,String num, Connection conn) {
 		
 		String sql="SELECT * FROM PRO_APPOINT A LEFT JOIN PRO_MEMBER M  ON A.PRO_NO = M.NO WHERE MEMBER_NO=? AND ADVICE_DATE >= SYSDATE";
 		
@@ -22,6 +23,12 @@ public class MypageReserDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int start = (pv.getCurrentPage() - 1) * pv.getBoardLimit() + 1 ;
+			int end = start + pv.getBoardLimit() - 1;
+			
+			pstmt.setInt(1,start);
+			pstmt.setInt(2, end);
 			
 			pstmt.setString(1, num);
 			
@@ -94,49 +101,10 @@ public class MypageReserDao {
 		
 	}
 
-	//상세조회
-	public static MypageReserVo selectReserOne(Connection conn, String no, String num) {
-		
-		String sql="SELECT A.NO AS \"예약번호\" ,A.MEMBER_NO ,A.PRO_NO ,A.ADVICE_DATE ,A.PAY_METHOD ,A.PAY ,A.PAY_DATE ,A.STAR ,M.NAME ,M.PHONE ,M.EMAIL ,M.INTRODUCE ,M.COUNSEL_TYPE_NO FROM PRO_APPOINT A FULL OUTER JOIN PRO_MEMBER M  ON A.PRO_NO = M.NO WHERE A.MEMBER_NO=? AND A.NO=? AND ADVICE_DATE >= SYSDATE";
-
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		MypageReserVo vo = null;
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, num);
-			pstmt.setString(2, no);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				String a_no = rs.getString("예약번호"); 
-				String member_no = rs.getString("MEMBER_NO"); 
-				String pro_no = rs.getString("PRO_NO"); 
-				String advice_date = rs.getString("ADVICE_DATE");
-				String pay_method = rs.getString("PAY_METHOD");
-				String pay = rs.getString("PAY");
-				String pay_date = rs.getString("PAY_DATE");
-				String star = rs.getString("STAR");
-				String name = rs.getString("NAME"); 
-				String phone = rs.getString("PHONE"); 
-				String email = rs.getString("EMAIL"); 
-				String introduce = rs.getString("INTRODUCE"); 
-				String counsel_type_no = rs.getString("COUNSEL_TYPE_NO"); 
-				
-				vo = new MypageReserVo();
-				
-				
-				
-			}
-			
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
+	public static int selectCount(Connection conn) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
+
 
 }

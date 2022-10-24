@@ -64,7 +64,7 @@ public class MypageEditDao {
 				String nick = rs.getString("NICK");
 				String phone = rs.getString("PHONE");
 				String email = rs.getString("EMAIL");
-				String testscore = rs.getString("TEST_SCORE");
+				int testscore = rs.getInt("TEST_SCORE");
 				String joindate = rs.getString("JOIN_DATE");
 				String modifyDate = rs.getString("MODIFY_DATE");
 				String quityn = rs.getString("QUIT_YN");
@@ -76,10 +76,10 @@ public class MypageEditDao {
 				loginMember.setNick(nick);
 				loginMember.setPhone(phone);
 				loginMember.setEmail(email);
-				loginMember.setTest_score(testscore);
-				loginMember.setJoin_date(joindate);
-				loginMember.setModify_date(modifyDate);
-				loginMember.setQuit_yn(quityn);
+				loginMember.setTestScore(testscore);
+				loginMember.setJoinDate(joindate);
+				loginMember.setModifyDate(modifyDate);
+				loginMember.setQuitYn(quityn);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

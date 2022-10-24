@@ -55,7 +55,7 @@ public class MypageEditController extends HttpServlet {
 		if(updatedMember != null) {
 			 req.getSession().setAttribute("alerMsg", "회원정보 수정 성공!");
 			 req.getSession().setAttribute("loginMember", updatedMember);
-			 resp.sendRedirect("/sseudam");
+			 resp.sendRedirect("/sseudam/views/mypage/main.jsp");
 		 }else {
 //			 req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
 		 }

@@ -2,9 +2,9 @@ package com.kh.sseudam.mypage.board.vo;
 
 public class MypageTestscoreVo {
 
-	private String test_score;
+	private int test_score;
 
-	public MypageTestscoreVo(String test_score) {
+	public MypageTestscoreVo(int test_score) {
 		super();
 		this.test_score = test_score;
 	}
@@ -13,11 +13,11 @@ public class MypageTestscoreVo {
 		super();
 	}
 
-	public String getTest_score() {
+	public int getTest_score() {
 		return test_score;
 	}
 
-	public void setTest_score(String test_score) {
+	public void setTest_score(int test_score) {
 		this.test_score = test_score;
 	}
 
@@ -25,6 +25,8 @@ public class MypageTestscoreVo {
 	public String toString() {
 		return "MypageTestscoreVo [test_score=" + test_score + "]";
 	}
+
+
 	
 	
 }

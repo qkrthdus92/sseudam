@@ -28,7 +28,7 @@ public class MypageTestscoreDao {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				String test_score = rs.getString("TEST_SCORE");
+				int test_score = rs.getInt("TEST_SCORE");
 				
 				MypageTestscoreVo vo= new MypageTestscoreVo();
 				vo.setTest_score(test_score);
