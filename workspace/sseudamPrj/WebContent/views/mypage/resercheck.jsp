@@ -1,5 +1,10 @@
+<%@page import="com.kh.sseudam.mypage.board.vo.MypageReserVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	List<MypageReserVo> MypageReserList = (List<MypageReserVo>)request.getAttribute("MypageReserList");	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -181,6 +186,7 @@
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
     margin-left: 50px;
+    cursor: pointer;
 }
 #bor-top{
     border-top: 1px solid lightgray ;
@@ -212,20 +218,20 @@
     <div id="main">
         <div id="boardinfo">
             <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
-            <div id="hm1">총 상담내역</div>
-            <div id="hm">5건</div>
+            <div id="hm1">상담 예정내역</div>
+            <div id="hm"><%=MypageReserList.size() %>건</div>
             <div id="hm1"></div>
             <div id="hm"></div>
         </div>
     
         <div id="dom">
-            <div id="dominfo" onclick="location.href='/sseudam/views/mypage/resercheck.jsp';">상담예약</div>
+            <div id="dominfo" onclick="location.href='/sseudam/mypage/resercheck'">상담예약</div>
         </div>
         <div id="dom2">
-            <div id="dominfo2" onclick="location.href='/sseudam/views/mypage/fin_resercheck.jsp';">상담완료된예약</div>
+            <div id="dominfo2" onclick="location.href='/sseudam/mypage/fin_resercheck'">상담완료된예약</div>
         </div>
         <div id="dom3">
-            <div id="dominfo3" onclick="location.href='/sseudam/views/mypage/reserpay.jsp';">결제내역</div>
+            <div id="dominfo3" onclick="location.href='/sseudam/mypage/reserpay'">결제내역</div>
         </div>
         <div id="editbar">
             <button id="allselect" ><img id="checkbox" src="/sseudam/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
@@ -233,79 +239,22 @@
         </div>
 
         <div id="pro-box-wrap">
-
+		<%for(int i = 0 ; i < MypageReserList.size(); ++i){%>
             <div id="pro-box-all">
-                <div id="pro-box"> 
+                <div id="pro-box" onclick="location.href='/sseudam/mypage/reserdetail?no=<%=MypageReserList.get(i).getNo()%>"> 
                     <span><img id="profil2" src="../../resources/img/main/강형욱.jpg" alt=""></span> 
                     <div id="proname">
-                        <span>전문가 <br> 심투용</span> 
+                        <span>전문가 <br> <%= MypageReserList.get(i).getName()%></span> 
                     </div>             
                     <div id="bor-top"><label>에약일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
+                    <div id="noborder"><label><%= MypageReserList.get(i).getAdvice_date()%></label></div>
                     <div id="bor-top"><label>에약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
+                    <div id="noborder"><label><%= MypageReserList.get(i).getNo()%></label></div>
                 </div>
             </div>
-            <div id="pro-box-all">
-                <div id="pro-box"> 
-                    <span><img id="profil2" src="/sseudam/WebContent/resources/img/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>전문가 <br> 심투용</span> 
-                    </div>             
-                    <div id="bor-top"><label>에약일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>에약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                </div>
-            </div>
-            <div id="pro-box-all">
-                <div id="pro-box"> 
-                    <span><img id="profil2" src="/sseudam/WebContent/resources/img/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>전문가 <br> 심투용</span> 
-                    </div>             
-                    <div id="bor-top"><label>에약일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>에약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                </div>
-            </div>
-            <div id="pro-box-all">
-                <div id="pro-box"> 
-                    <span><img id="profil2" src="/sseudam/WebContent/resources/img/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>전문가 <br> 심투용</span> 
-                    </div>             
-                    <div id="bor-top"><label>에약일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>에약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                </div>
-            </div>
-            <div id="pro-box-all">
-                <div id="pro-box"> 
-                    <span><img id="profil2" src="/sseudam/WebContent/resources/img/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>전문가 <br> 심투용</span> 
-                    </div>             
-                    <div id="bor-top"><label>에약일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>에약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                </div>
-            </div>
-            <div id="pro-box-all">
-                <div id="pro-box"> 
-                    <span><img id="profil2" src="/sseudam/WebContent/resources/img/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>전문가 <br> 심투용</span> 
-                    </div>             
-                    <div id="bor-top"><label>에약일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>에약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                </div>
-            </div>
+         <%}%> 
+         </div>
+           
     </div>
 </div>
 <%@ include file="/views/common/footer.jsp" %>	

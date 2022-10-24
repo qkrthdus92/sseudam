@@ -1,5 +1,12 @@
+<%@page import="com.kh.sseudam.mypage.board.vo.MypageTestscoreVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	List<MypageTestscoreVo> MypageTestscoreList = (List<MypageTestscoreVo>)request.getAttribute("MypageTestscoreList");	
+%>
+    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -359,7 +366,7 @@
 				<div class="popup-body">
                     <div id="popup_test_score">
                         <div><img id="popup_test_logo" src="../../resources/img/mypage/테스트.png" alt=""></div>
-                        <div id="popup-text"> 89점 </div>
+                        <div id="popup-text"> <%=MypageTestscoreList.get(0).getTest_score() %>점 </div>
                     </div>
                     <div id="popup_text2">입니다.</div>
 				</div>

@@ -96,9 +96,7 @@
         width: 75px;
         height: 25px;
     }
-    #account{
-    width: 250px;
-    }
+
     
     
 </style>
@@ -137,22 +135,6 @@
 	            <div>
 	                <input type="text" name="introduce">
 	            </div>
-	            
-	            <div>계좌번호</div>
-	            <div>
-	                <select>
-	                   <option name="account" value="신한">신한</option>
-	                   <option name="account" value="국민">국민</option>
-	                   <option name="account" value="우리">우리</option>
-	                   <option name="account" value="기업">기업</option>
-	                   <option name="account" value="농협">농협</option>
-	                   <option name="account" value="카카오뱅크">카카오뱅크</option>
-	                   <option name="account" value="SC제일">SC제일</option>
-	                   <option name="account" value="케이뱅크">케이뱅크</option>
-	                 </select>
-	                <input id="account" type="text" name="accountnum">
-	            </div>
-	
 	
 	            <div>
 	                <br><input type="submit" value="수정하기" class="btn">

@@ -1,5 +1,14 @@
+<%@page import="com.kh.sseudam.mypage.board.vo.MypageCommentVo2"%>
+<%@page import="com.kh.sseudam.mypage.board.vo.MypageBoardVo"%>
+<%@page import="com.kh.sseudam.mypage.board.vo.MypageCommentVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        
+<%
+	List<MypageCommentVo> MypageCommentList = (List<MypageCommentVo>)request.getAttribute("MypageCommentList");	
+	List<MypageCommentVo2> MypageCommentList2 = (List<MypageCommentVo2>)request.getAttribute("MypageCommentList2");	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,18 +153,16 @@
 		<div id="wrap">
 		<div id="main">
 		    <div id="boardinfo">
-		       <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
-		       <div id="hm1">총 게시글</div>
-		       <div id="hm">19개</div>
+		       <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
 		       <div id="hm1">총 댓글</div>
-		       <div id="hm">19개</div>
+		       <div id="hm"><%= MypageCommentList.size() + MypageCommentList2.size()%>개</div>
 		    </div>
 		
 		    <div id="dom">
-		        <div id="dominfo" onclick="location.href='/sseudam/views/mypage/boardcheck.jsp';">내가 쓴 게시글</div>
+		        <div id="dominfo" onclick="location.href='/sseudam/mypage/boardcheck'';">내가 쓴 게시글</div>
 		    </div>
             <div id="dom2">
-                <div id="dominfo2" onclick="location.href='/sseudam/views/mypage/commentcheck.jsp';">내가 쓴 댓글</div>
+                <div id="dominfo2"">내가 쓴 댓글</div>
             </div>
 		    <div id="editbar">
 		        <button id="allselect" ><img id="checkbox" src="/sseudam/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
@@ -168,29 +175,24 @@
 		        <div>게시판</div>
 		        <div>작성일</div>
 		    </div>
-		    <div id="editlist">
-		        <div><input type="checkbox" id="cb1"></div>
-		        <div>1</div>
-		        <div>안녕하세요</div>
-		        <div>자유게시판</div>
-		        <div>2022.10.12</div>
-		
-		    </div>
-		    <div id="editlist">
-		        <div><input type="checkbox" id="cb1"></div>
-		        <div>1</div>
-		        <div>안녕하세요</div>
-		        <div>자유게시판</div>
-		        <div>2022.10.12</div>
-		
-		    </div>
-		    <div id="editlist">
-		        <div><input type="checkbox" id="cb1"></div>
-		        <div>1</div>
-		        <div>안녕하세요</div>
-		        <div>자유게시판</div>
-		        <div>2022.10.12</div>
-		    </div>
+		    <%for(int i = 0 ; i < MypageCommentList.size(); ++i){%>
+			    <div id="editlist">
+			        <div><input type="checkbox" id="cb1"></div>
+			        <div><%= MypageCommentList.get(i).getNo()%></div>
+			        <div><%= MypageCommentList.get(i).getCmt()%></div>
+			        <div><%= MypageCommentList.get(i).getType()%></div>
+			        <div><%= MypageCommentList.get(i).getWriter_no()%></div>
+			    </div>
+		    <%}%>
+		   		    <%for(int i = 0 ; i < MypageCommentList2.size(); ++i){%>
+			    <div id="editlist">
+			        <div><input type="checkbox" id="cb1"></div>
+			        <div><%= MypageCommentList2.get(i).getNo()%></div>
+			        <div><%= MypageCommentList2.get(i).getCmt()%></div>
+			        <div><%= MypageCommentList2.get(i).getType()%></div>
+			        <div><%= MypageCommentList2.get(i).getWriter_no()%></div>
+			    </div>
+		    <%}%>
 		</div>
 	</div>
 <%@ include file="/views/common/footer.jsp" %>	

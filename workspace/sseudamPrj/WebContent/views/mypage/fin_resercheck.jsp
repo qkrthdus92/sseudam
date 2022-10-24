@@ -1,5 +1,11 @@
+<%@page import="com.kh.sseudam.mypage.board.vo.MypageFinreserVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	List<MypageFinreserVo> MypageFinreserList = (List<MypageFinreserVo>)request.getAttribute("MypageFinreserList");	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -327,20 +333,20 @@
     <div id="main">
         <div id="boardinfo">
             <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
-            <div id="hm1">총 상담내역</div>
-            <div id="hm">5건</div>
+            <div id="hm1">상담완료</div>
+            <div id="hm"><%=MypageFinreserList.size() %>건</div>
             <div id="hm1"></div>
             <div id="hm"></div>
         </div>
     
         <div id="dom">
-            <div id="dominfo" onclick="location.href='/sseudam/views/mypage/resercheck.jsp';">상담예약</div>
+            <div id="dominfo" onclick="location.href='/sseudam/mypage/resercheck'">상담예약</div>
         </div>
         <div id="dom2">
-            <div id="dominfo2" onclick="location.href='/sseudam/views/mypage/fin_resercheck.jsp';">상담완료된예약</div>
+            <div id="dominfo2" onclick="location.href='/sseudam/mypage/fin_resercheck'">상담완료된예약</div>
         </div>
         <div id="dom3">
-            <div id="dominfo3" onclick="location.href='/sseudam/views/mypage/reserpay.jsp';">결제내역</div>
+            <div id="dominfo3" onclick="location.href='/sseudam/mypage/reserpay'">결제내역</div>
         </div>
         <div id="editbar">
             <button id="allselect" ><img id="checkbox" src="/sseudam/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
@@ -348,47 +354,49 @@
         </div>
 
         <div id="pro-box-wrap">
+        <%for(int i = 0 ; i < MypageFinreserList.size(); ++i){%>
             <div id="pro-box-all">
                 <div id="pro-box"> 
                     <span><img id="profil2" src="/sseudam/WebContent/resources/img/프로필.png" alt=""></span> 
                     <div id="proname">
-                        <span>전문가 <br> 심투용</span> 
+                        <span>전문가 <br> <%= MypageFinreserList.get(i).getName()%></span> 
                     </div>             
                     <div id="bor-top"><label>에약일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
+                    <div id="noborder"><label> <%= MypageFinreserList.get(i).getAdvice_date()%></label></div>
                     <div id="bor-top"><label>에약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
+                    <div id="noborder"><label> <%= MypageFinreserList.get(i).getA_no()%></label></div>
                 </div>
                 <div><button id="review_bnt" onclick="showPopup(true)">별점주기</button></div>
             </div>
-                
-    </div>
     		<div id="popup" class="hide">
 		  <div class="content">
 				<div class="popup-head">
 					<div  ><img id="popup-logo" src="../../resources/img/header/logo.png" alt=""></div>
-					<div class="head-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예약번호0113의 <br> &nbsp;&nbsp;&nbsp;&nbsp;상담은 어떠셨나요?</div>
+					<div class="head-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예약번호<%= MypageFinreserList.get(i).getA_no()%>의 <br> &nbsp;&nbsp;&nbsp;&nbsp;상담은 어떠셨나요?</div>
 				</div>
 				<div class="popup-body">
 					<div id="viewstar">
 						<form name="myform" id="myform" method="post" action="./save">
 						    <fieldset>
-						        <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
-						        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+						        <input type="radio" name="rating" value="1" id="rate1"><label for="rate1">⭐</label>
+						        <input type="radio" name="rating" value="2" id="rate2"><label for="rate2">⭐</label>
 						        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
-						        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
-						        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+						        <input type="radio" name="rating" value="4" id="rate4"><label for="rate4">⭐</label>
+						        <input type="radio" name="rating" value="5" id="rate5"><label for="rate5">⭐</label>
 						    </fieldset>
 						</form>
 					</div>
 				</div>
 				<div class="popup-foot">
 					<!-- 별점주는 컨트롤러로 이동 -->
-					<button class="pop-btn" id="confirm" onclick="location.href='';" >확인</button> 
+					<button class="pop-btn" id="confirm" onclick="location.href=''" >확인</button> 
 					<button class="pop-btn" id="close" onclick="closePopup()" >창 닫기</button>
 				</div>
 		  </div>
 		</div>
+         <%}%>       
+  		</div>
+  		
     
 </div>
 <%@ include file="/views/common/footer.jsp" %>	
@@ -417,6 +425,17 @@
     document.querySelector(`.star span`).style.width = `${target.value * 10}%`;
   	}
 </script>
+
+<!-- <script type="text/javascript">
+
+	document.getElementById('confirm').onclick = function() {
+	    var radios = document.getElementsByName("rating");
+	    var selected = Array.from(radios).find(radio => radio.checked);
+	    alert(selected.value);
+	}
+	console.log(selected);
+
+</script> -->
 
 </body>
 </html>
