@@ -1,4 +1,4 @@
-package com.kh.sseudam.pro.join.vo;
+package com.kh.sseudam.pro.vo;
 
 public class ProJoinPage1Vo {
 

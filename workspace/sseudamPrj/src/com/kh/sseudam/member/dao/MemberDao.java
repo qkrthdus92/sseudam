@@ -63,10 +63,10 @@ public class MemberDao {
 				String nick = rs.getString("NICK");
 				String phone = rs.getString("PHONE");
 				String email = rs.getString("EMAIL");
-				String testscore = rs.getString("TEST_SCORE");
-				String joindate = rs.getString("JOIN_DATE");
-				String quityn = rs.getString("QUIT_YN");
-				String modifydate = rs.getString("MODIFY_DATE");
+				int testScore = rs.getInt("TEST_SCORE");
+				String joinDate = rs.getString("JOIN_DATE");
+				String quiYyn = rs.getString("QUIT_YN");
+				String modifyDate = rs.getString("MODIFY_DATE");
 				
 				loginMember = new MemberVo();
 				loginMember.setNo(no);
@@ -76,10 +76,10 @@ public class MemberDao {
 				loginMember.setNick(nick);
 				loginMember.setPhone(phone);
 				loginMember.setEmail(email);
-				loginMember.setTestScore(testscore);
-				loginMember.setJoinDate(joindate);
-				loginMember.setQuitYn(quityn);
-				loginMember.setModifyDate(modifydate);
+				loginMember.setTestScore(testScore);
+				loginMember.setJoinDate(joinDate);
+				loginMember.setQuitYn(quiYyn);
+				loginMember.setModifyDate(modifyDate);
 			}
 
 			

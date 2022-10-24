@@ -176,11 +176,11 @@
         <div class="join-area">
 
             <div class="join-step">
-                <img src="../../resources/img/join/횐가입.png">
-                <img src="../../resources/img/join/자격_정보_작성.png">
-                <img src="../../resources/img/join/프로필_작성.png">
-                <img src="../../resources/img/join/심사_승인.png">
-                <img src="../../resources/img/join/가입_완료.png">
+                <img src="<%=root%>/resources/img/join/횐가입.png">
+                <img src="<%=root%>/resources/img/join/자격_정보_작성.png">
+                <img src="<%=root%>/resources/img/join/프로필_작성.png">
+                <img src="<%=root%>/resources/img/join/심사_승인.png">
+                <img src="<%=root%>/resources/img/join/가입_완료.png">
             </div>
 
             <div class="join-guide">
@@ -193,7 +193,7 @@
                 <div id="profile-middle-left">프로필 사진</div>
                 <div id="profile-middle-right">
                         <div>
-                            <img src="../../resources/img/join/프로필.png" id="profile">
+                            <img src="<%=root%>/resources/img/join/프로필.png" id="profile">
                         </div>
                         <div id="profile-img-btn">
                             <input type="button" id="profile-img" value="사진 선택" name="img" onclick="location.href=''">

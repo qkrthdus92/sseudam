@@ -333,7 +333,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 <header class="main-header">
   <div class="main-header-top">
     <div class="main-wrapper">
-      <span><a href="<%=root%>/views/common/join.jsp">회원가입</a></span>
+      <span><a href="<%=root%>/sseudam/join">회원가입</a></span>
       <span><button class="popup-btn" onclick="loginPopup(true)">로그인</button></span>
     </div>
   </div>
@@ -366,9 +366,9 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
         <a href="">힐링하기</a>
         <div class="main-header-nav-color"></div>
         <div class="dropdown-content">
-          <a href="<%=root%>/views/healing/nyam.jsp">혼자서 냠냠</a>
-          <a href="<%=root%>/views/healing/outside.jsp">밖에서 뚜벅뚜벅</a>
-          <a href="<%=root%>/views/healing/inside.jsp">안에서 뒹굴뒹굴</a>
+          <a href="<%=root%>/healing/nyam">혼자서 냠냠</a>
+          <a href="<%=root%>/healing/outside">밖에서 뚜벅뚜벅</a>
+          <a href="<%=root%>/healing/inside">안에서 뒹굴뒹굴</a>
         </div>
       </div>
       <div>
@@ -397,7 +397,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	    <div id="login-popup" class="hide">
 	    <div class="login-popup">
 	      <div class="login-popup-header">
-	        <img src="../../resources/img/join/close.png" class="login-popup-btn" onclick="closeLoginPopup()">
+	        <img src="<%=root%>/resources/img/join/close.png" class="login-popup-btn" onclick="closeLoginPopup()">
 	      </div>
 	      <div class="login-popup-middle">
 	          <div class="login-header">쓰담쓰담 로그인</div>

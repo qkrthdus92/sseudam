@@ -1,7 +1,9 @@
-package com.kh.sseudam.pro.join.vo;
+package com.kh.sseudam.pro.vo;
 
 public class ProJoinPage2Vo {
 
+	
+	private String proMemberNo;
 	private String education;
 	private String certificateName;
 	private String certificateNum;
@@ -11,12 +13,22 @@ public class ProJoinPage2Vo {
 		super();
 	}
 
-	public ProJoinPage2Vo(String education, String certificateName, String certificateNum, String imgPath) {
+	public ProJoinPage2Vo(String proMemberNo, String education, String certificateName, String certificateNum,
+			String imgPath) {
 		super();
+		this.proMemberNo = proMemberNo;
 		this.education = education;
 		this.certificateName = certificateName;
 		this.certificateNum = certificateNum;
 		this.imgPath = imgPath;
+	}
+
+	public String getProMemberNo() {
+		return proMemberNo;
+	}
+
+	public void setProMemberNo(String proMemberNo) {
+		this.proMemberNo = proMemberNo;
 	}
 
 	public String getEducation() {
@@ -53,10 +65,9 @@ public class ProJoinPage2Vo {
 
 	@Override
 	public String toString() {
-		return "ProJoinPage2Vo [education=" + education + ", certificateName=" + certificateName + ", certificateNum="
-				+ certificateNum + ", imgPath=" + imgPath + "]";
+		return "ProJoinPage2Vo [proMemberNo=" + proMemberNo + ", education=" + education + ", certificateName="
+				+ certificateName + ", certificateNum=" + certificateNum + ", imgPath=" + imgPath + "]";
 	}
 
-	
 	
 }
