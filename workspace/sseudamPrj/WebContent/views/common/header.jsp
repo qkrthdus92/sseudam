@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
 	session.removeAttribute("alertMsg");
 	
 	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-	
+
 %>
 
 <script>

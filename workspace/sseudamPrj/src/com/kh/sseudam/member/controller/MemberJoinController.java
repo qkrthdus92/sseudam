@@ -47,7 +47,7 @@ public class MemberJoinController extends HttpServlet{
 		//화면 선택
 		if(result == 1) {
 			req.getSession().setAttribute("alertMsg", "회원가입 완료");
-			resp.sendRedirect("/sseudam");	//테스트 끝난 후 경로 변경: /main
+			resp.sendRedirect("/sseudam/main");
 		}else {
 			
 		}
