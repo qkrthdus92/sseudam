@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.sseudam.member.service.MemberService;
 import com.kh.sseudam.member.vo.MemberVo;
 
-@WebServlet(urlPatterns = "/views/common/join.jsp")
+@WebServlet(urlPatterns = "/join/memberJoin")
 public class MemberJoinController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/vi").forward(req, resp);
+		req.getRequestDispatcher("/views/common/memberJoin.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -46,8 +46,8 @@ public class MemberJoinController extends HttpServlet{
 
 		//화면 선택
 		if(result == 1) {
-			System.out.println("회원가입 성공!");
-			resp.sendRedirect("");
+			req.getSession().setAttribute("alertMsg", "회원가입 완료");
+			resp.sendRedirect("/sseudam");	//테스트 끝난 후 경로 변경: /main
 		}else {
 			
 		}

@@ -106,7 +106,7 @@
         <h1 align="center">회원가입</h1>
         <h4 align="center">이곳은 쓰담쓰담에서 상담사로 활동하실 분들을 위한 회원가입 페이지 입니다.</h4>
 
-        
+	<form action="/sseudam/join/proJoinPage=1" method="post">      
         <div class="join-area">
             
             <div class="join-step">
@@ -117,6 +117,8 @@
                 <img src="../../resources/img/join/가입_완료.png">
             </div>
 
+
+
             <div class="join-1nd">
                 <div>아이디</div>
                 <div>
@@ -125,7 +127,7 @@
                 </div>
             </div>
 
-                <div calss="join-2nd">
+                <div class="join-2nd">
                     <div>비밀번호</div>
                     <div><input type="password" name="memberPwd1" placeholder="6~14자 이내로 영문, 숫자, 특수문자를 조합하여 작성"></div>
                 </div>
@@ -135,7 +137,7 @@
                 </div>
                 <div class="join-3nd">
                     <div>이름</div>
-                    <div><input type="text" name="Name"></div>
+                    <div><input type="text" name="memberName"></div>
                 </div>
 
     
@@ -144,10 +146,10 @@
                 <div class="gender">
                     <div class="gender-box">
                             <label>여자
-                                <input type="checkbox" name="gender" value="female">
+                                <input type="checkbox" name="gender" value="F">
                             </label>
                             <label>남자
-                                <input type="checkbox" name="gender" value="male">
+                                <input type="checkbox" name="gender" value="M">
                             </label>
                     </div>
                 </div>
@@ -157,7 +159,7 @@
                 <div>연락처</div>
                 <div><input type="tel" name="phone" placeholder="예) 01012345678"></div>
             </div>
-            <div calss="join-6nd">
+            <div class="join-6nd">
                 <div>이메일</div>
                 <div><input type="email" name="email"></div>
             </div>
@@ -170,7 +172,7 @@
                             (필수) 서비스 이용약관 및 개인정보 처리방침에 동의합니다.
                         </label>
                     </div>
-                    <div calss="TOS-2nd">
+                    <div class="TOS-2nd">
                         <label>
                             <input type="checkbox">
                             (선택) 이벤트 진행 등의 마케팅 정보를 수신합니다.
@@ -179,11 +181,13 @@
                 </div>
             </div>
             <div class="next">
+            	<input type="submit" >
                 <div><br><a href="<%=root%>/views/common/proJoin-2.jsp" class="next-page">다음페이지 작성</a></div>
             </div>
             
         </div>
         
+	</form>
 
     </nav>
 

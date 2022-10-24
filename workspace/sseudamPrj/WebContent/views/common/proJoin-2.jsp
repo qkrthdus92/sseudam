@@ -1,5 +1,7 @@
+<%@page import="com.kh.sseudam.counsel.pro.vo.ProVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,7 +117,7 @@
         <h1 align="center">회원가입</h1>
         <h4 align="center">이곳은 쓰담쓰담에서 상담사로 활동하실 분들을 위한 회원가입 페이지 입니다.</h4>
 
-        
+	<form action="/sseudam/join/proJoinPage=1" method="post"> 
         <div class="join-area">
             
             <div class="join-step">
@@ -134,21 +136,26 @@
                 <img src="../../resources/img/join/next.png">
             </div> -->
 
+            <div class="join-0nd">
+                <div>최종학력</div>
+                <div><input type="text" name="education"></div>
+            </div>
+
             <div class="join-1nd">
                 <div>자격증 이름</div>
-                <div><input type="text" name="licenseName"></div>
+                <div><input type="text" name="certificateName"></div>
             </div>
             <div calss="join-2nd">
                 <div>자격증 번호</div>
-                <div><input type="number" name="memberPwd1"></div>
+                <div><input type="text" name="certificateNum" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></div>
             </div>
             <div class="join-3nd">
                 <div>
                     증빙서류
-                    <input type="button" class="attached-file-btn" value="첨부파일" onclick="location.href=''">
+                    <input type="button" class="attached-file-btn" name="imgPath" value="첨부파일" onclick="location.href=''">
                 </div>
                 <div>
-                    <div><input type="number" name="attached-file-name"></div>
+                    <div><input type="text" name="attached-file-name"></div>
                 </div>
             </div>
             <div class="license">
@@ -157,11 +164,12 @@
             </div>
             
             <div class="next">
+            	<input type="submit">
                 <div><br><a href="<%=root%>/views/common/proJoin-3.jsp" class="next-page">다음페이지 작성</a></div>
             </div>
             
         </div>
-        
+	</form>
 
     </nav>>
 

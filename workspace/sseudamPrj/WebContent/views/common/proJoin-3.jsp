@@ -1,5 +1,7 @@
+<%@page import="com.kh.sseudam.counsel.pro.vo.ProVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -170,6 +172,7 @@
         <h1 align="center">회원가입</h1>
         <h4 align="center">이곳은 쓰담쓰담에서 상담사로 활동하실 분들을 위한 회원가입 페이지 입니다.</h4>
 
+	<form action="/sseudam/join/proJoinPage=1" method="post"> 
         <div class="join-area">
 
             <div class="join-step">
@@ -193,7 +196,7 @@
                             <img src="../../resources/img/join/프로필.png" id="profile">
                         </div>
                         <div id="profile-img-btn">
-                            <input type="button" id="profile-img" value="사진 선택" onclick="location.href=''">
+                            <input type="button" id="profile-img" value="사진 선택" name="img" onclick="location.href=''">
                             <input type="button" id="profile-img-delet" value="삭제" onclick="location.href=''">
                         </div>
                 </div>
@@ -201,30 +204,31 @@
                 <div id="profile-button-right">
                     <div id="profile-button-right-province"><br>상담 분야<br>
                         <label>청소년
-                            <input type="checkbox" name="province" value="youth">
+                            <input type="checkbox" name="counselType" value="1">
                         </label>
                         <label>가족심리
-                            <input type="checkbox" name="province" value="family ">
+                            <input type="checkbox" name="counselType" value="2 ">
                         </label>
                         <label>우울증
-                            <input type="checkbox" name="province" value="depression">
+                            <input type="checkbox" name="counselType" value="3">
                         </label>
                         <label>취업/진로
-                            <input type="checkbox" name="province" value="course">
+                            <input type="checkbox" name="counselType" value="4">
                         </label>
                     </div>
                     <div id="introduce">소개글
-                        <br><input type="text" id="introduce-text">
+                        <br><input type="text" id="introduce-text" name="introduce">
                     </div>
                 </div>
             </div>
 
             <div class="join-btn">
-                <br><input type="button" value="작성 완료" onclick="location.href='<%=root%>/views/common/proJoin-4.jsp'" class="btn">
+                <br><input type="submit" value="작성 완료" class="btn">
             </div>
 
         </div>
-
+	</form>
+		
     </nav>
 
     <%@ include file="/views/common/footer.jsp" %>

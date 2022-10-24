@@ -9,16 +9,16 @@ public class MemberVo {
 	private String nick;
 	private String phone;
 	private String email;
-	private String test_score;
-	private String join_date;
-	private String quit_yn;
-	private String modify_date;
+	private String testScore;
+	private String joinDate;
+	private String quitYn;
+	private String modifyDate;
 	
 	public MemberVo() {
 	}
 
 	public MemberVo(String no, String id, String pwd, String name, String nick, String phone, String email,
-			String test_score, String join_date, String quit_yn, String modify_date) {
+			String testScore, String joinDate, String quitYn, String modifyDate) {
 		super();
 		this.no = no;
 		this.id = id;
@@ -27,10 +27,10 @@ public class MemberVo {
 		this.nick = nick;
 		this.phone = phone;
 		this.email = email;
-		this.test_score = test_score;
-		this.join_date = join_date;
-		this.quit_yn = quit_yn;
-		this.modify_date = modify_date;
+		this.testScore = testScore;
+		this.joinDate = joinDate;
+		this.quitYn = quitYn;
+		this.modifyDate = modifyDate;
 	}
 
 	public String getNo() {
@@ -89,45 +89,45 @@ public class MemberVo {
 		this.email = email;
 	}
 
-	public String getTest_score() {
-		return test_score;
+	public String getTestScore() {
+		return testScore;
 	}
 
-	public void setTest_score(String test_score) {
-		this.test_score = test_score;
+	public void setTestScore(String testScore) {
+		this.testScore = testScore;
 	}
 
-	public String getJoin_date() {
-		return join_date;
+	public String getJoinDate() {
+		return joinDate;
 	}
 
-	public void setJoin_date(String join_date) {
-		this.join_date = join_date;
+	public void setJoinDate(String joinDate) {
+		this.joinDate = joinDate;
 	}
 
-	public String getQuit_yn() {
-		return quit_yn;
+	public String getQuitYn() {
+		return quitYn;
 	}
 
-	public void setQuit_yn(String quit_yn) {
-		this.quit_yn = quit_yn;
+	public void setQuitYn(String quitYn) {
+		this.quitYn = quitYn;
 	}
 
-	public String getModify_date() {
-		return modify_date;
+	public String getModifyDate() {
+		return modifyDate;
 	}
 
-	public void setModify_date(String modify_date) {
-		this.modify_date = modify_date;
+	public void setModifyDate(String modifyDate) {
+		this.modifyDate = modifyDate;
 	}
 
 	@Override
 	public String toString() {
 		return "MemberVo [no=" + no + ", id=" + id + ", pwd=" + pwd + ", name=" + name + ", nick=" + nick + ", phone="
-				+ phone + ", email=" + email + ", test_score=" + test_score + ", join_date=" + join_date + ", quit_yn="
-				+ quit_yn + ", modify_date=" + modify_date + "]";
+				+ phone + ", email=" + email + ", testScore=" + testScore + ", joinDate=" + joinDate + ", quitYn="
+				+ quitYn + ", modifyDate=" + modifyDate + "]";
 	}
-	
+
 	
 	
 }
