@@ -1,9 +1,14 @@
+<%@page import="com.kh.sseudam.member.vo.MemberVo"%>
+<%@page import="com.kh.sseudam.common.PageVo"%>
 <%@page import="com.kh.sseudam.healing.vo.HealingVo"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-List<HealingVo> insideList = (List<HealingVo>) request.getAttribute("insideList");
+	List<HealingVo> list = (List<HealingVo>) request.getAttribute("insideList");
+	PageVo pv = (PageVo)request.getAttribute("pv");
+	String sort = (String)request.getAttribute("sort");
+	MemberVo mv = (MemberVo)request.getAttribute("loginMember");
 %>
 <!DOCTYPE html>
 <html>
@@ -12,21 +17,23 @@ List<HealingVo> insideList = (List<HealingVo>) request.getAttribute("insideList"
 <title>뒹굴뒹굴</title>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/healing/healing.css"
 	type="text/css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 </head>
+
 <body>
 	<%@ include file="/views/common/header.jsp"%>
 	<div class=topBtn onclick="window.scrollTo(0,0);">TOP</div>
 	<nav class="inside-color">
 		<div class="head-in">
 			<div class="ment1">밖은 좀 시끄러우니까</div>
-			<div class="ment2">안에서 뒹굴뒹굴</div>
+			<div class="ment2">안에서 뒹굴뒹굴</a></div>
 			<div class="head-slider-img">
 				<img src="<%=root%>/resources/img/healing/침대.png">
 			</div>
@@ -34,29 +41,55 @@ List<HealingVo> insideList = (List<HealingVo>) request.getAttribute("insideList"
 	</nav>
 	<main>
 		<section class="other-healing">
-			<div>< 뚜벅뚜벅</div>
-			<div>냠냠 ></div>
+			<a href="<%=root%>/healing/outside"><div>< 뚜벅뚜벅</div></a>
+			<a href="<%=root%>/healing/nyam"><div>냠냠 ></div></a>
 		</section>
 		<section class="order-by">
+		
+			<a href="<%=root%>/healing/inside?pno=1&sort=random">
+			<div>무작위정렬</div>
+			</a>
+			<a href="<%=root%>/healing/inside?pno=1&sort=like"> 
 			<div>저장순</div>
+			</a>
+			<a href="<%=root%>/healing/inside?pno=1&sort=title">
+			<div>이름순</div>
+			</a>
+			<a href="<%=root%>/healing/inside?pno=1">
 			<div>최근등록순</div>
-			<div>기본정렬</div>
+			</a>			
+			
 		</section>
 		<section class="contents">
 			<%
-			int i = 0;
-			for (i = 0; i < insideList.size(); i++) {
+			for (int i = 0; i < list.size(); i++) {
+				String no = list.get(i).getNo();
+				String cnt = list.get(i).getLiked();
+				String memberLike = list.get(i).getMemberLike();
 			%>
 			<article>
-				<div class="healing-heart">
-					<img src="<%=root%>/resources/img/healing/하트.png"><%=insideList.get(i).getLiked()%>
-				</div>
+			<%if(mv == null){%>
+				<a class="like-btn" href="javascript:likeBtn(<%=no%>,<%=i%>)">
+			<%}else{ %>
+				<a class="popup-btn" onclick="loginPopup(true)">
+			<%} %>
+					<%if(memberLike.equals("0")){%>
+						<div class="healing-heart inside-heart<%=i%>">
+							<img src="<%=root%>/resources/img/healing/하트.png">
+							<div class="like-count<%=i%> like-cnt"><%=cnt%></div>
+						</div>
+					<%}else{ %>
+						<div class="healing-heart inside-heart  inside-heart<%=i%>">
+							<img src="<%=root%>/resources/img/healing/하트.png">
+							<div class="like-count<%=i%> like-cnt"><%=cnt%></div>						
+						</div>
+					<%} %>
+				</a>
 				<div class="healing-pic-outline">
 					<script></script>
-					<a class="pop-open" href="javascript:openPop(<%=i%>)"> <img
-						class="healing-pic"
-						src="<%=root%>/resources/upload/<%=insideList.get(i).getImgPath()%>">
-						<div class="healing-name"><%=insideList.get(i).getType()%></div>
+					<a class="pop-open" href="javascript:openPop(<%=i%>)"> 
+						<img class="healing-pic" src="<%=root%>/resources/upload/inside/<%=list.get(i).getImgPath()%>">
+						<div class="healing-name"><%=list.get(i).getcNum()%></div>
 					</a>
 				</div>
 			</article>
@@ -64,32 +97,30 @@ List<HealingVo> insideList = (List<HealingVo>) request.getAttribute("insideList"
 			<div class="popup_layer" id="pop<%=i%>">
 				<div class="popup_box h1">
 					<div class="popup_head">
-						<a class="pop-close" href="javascript:closePop(<%=i%>)" alt="">x</a>
+						<a class="pop-close" href="javascript:closePop(<%=i%>)">x</a>
 					</div>
 					<div class="popup_body inside-color">
 						<div class="popup_pic">
-							<img
-								src="<%=root%>/resources/upload/<%=insideList.get(i).getImgPath()%>">
+							<img src="<%=root%>/resources/upload/inside/<%=list.get(i).getImgPath()%>">
 						</div>
-						<div class="popup_name"><%=insideList.get(i).getTitle()%></div>
+						<div class="popup_name"><%=list.get(i).getcNum()%></div>
 
 					</div>
 					<div class="popup_detail">
 						<div>
-							<img class="imti" src="<%=root%>/resources/img/healing/사람.png"><%=insideList.get(i).getInfo1()%>
+							<img class="imti" src="<%=root%>/resources/img/healing/책.png"><%=list.get(i).getTitle()%>
 						</div>
 						<div>
-							<img class="imti" src="<%=root%>/resources/img/healing/책.png"><%=insideList.get(i).getInfo2()%>
+							<img class="imti" src="<%=root%>/resources/img/healing/사람.png"><%=list.get(i).getInfoA()%>
+						</div>
+						<div>
+							<img class="imti" src="<%=root%>/resources/img/healing/내용.png"><%=list.get(i).getInfoB()%>
 						</div>
 						<div>
 							<img class="imti" src="<%=root%>/resources/img/healing/돋보기.png">
-							<a class="detail-link" href="<%=insideList.get(i).getLink()%>">더
-								알아보기</a>
+							<a class="detail-link" href="<%=list.get(i).getLink()%>">더 알아보기</a>
 						</div>
-						<div>
-							<img class="imti"
-								src="<%=root%>/resources/img/header/Favorite_duotone.png" alt="">저장하기
-						</div>
+
 					</div>
 					<div class="diagonal-1-1 inside-border-color"></div>
 					<div class="diagonal-1-2"></div>
@@ -98,42 +129,81 @@ List<HealingVo> insideList = (List<HealingVo>) request.getAttribute("insideList"
 
 				</div>
 			</div>
-
+			
 			<%
 			}
 			%>
-
-
-
 		</section>
+
+		
 		<section class="page">
-			<div><</div>
-			<div>1</div>
-			<div>2</div>
-			<div>3</div>
-			<div>4</div>
-			<div>5</div>
-			<div>></div>
+			<%if(pv.getStartPage() != 1){ %>	        
+				<div>
+			        	<a href="<%=root%>/healing/inside?pno=<%=pv.getStartPage() - 1 %><%=sort%>"><</a>        
+				</div>
+        	<%} %>  
+			<% for(int j = pv.getStartPage(); j<=pv.getEndPage() ;j++){%>
+				<div class="current-page">
+			            <a href="<%=root%>/healing/inside?pno=<%=j %><%=sort%>"><%=j %></a> 
+				</div>			
+	        <%} %>
+			<%if(pv.getEndPage() != pv.getMaxPage()){ %>	        
+				<div>
+		        	<a href="<%=root%>/healing/inside?pno=<%=pv.getEndPage() + 1 %><%=sort%>">></a>        
+	        	</div>
+        	<%} %>
 		</section>
 	</main>
 	<%@ include file="/views/common/footer.jsp"%>
 
 
-	<script>
+	<script type="text/javascript">
 		// 팝업
-
-			function openPop(i) {
-				document.getElementById("pop"+i).style.display = "block";
-			}
-			function closePop(i) {
-				document.getElementById("pop"+i).style.display = "none";
-			}
+		function openPop(i) {
+			document.getElementById("pop"+i).style.display = "block";
+		}
+		function closePop(i) {
+			document.getElementById("pop"+i).style.display = "none";
+		}
 
 	</script>
+	
+	<script type="text/javascript">
+		
+		function likeBtn(no,i){
 
+			const root = "${pageContext.request.contextPath}";
+			
+			$.ajax({
+				url: root+"/healing/insideLike",
+                type: "post",
+                data: 
+                {
+                    "no": no,
+                    "mNo" : "7"
+                },
+                dataType : "json",
+                success : function(x){                	
+                	
+                	const check = x.likeCheck;
+                	const count = x.likeCount;
+         	
+                	if(check == 0){               		
+                		$('.like-count'+i).text(count);
+                		$('.inside-heart'+i).css("border-color","#b1d39b");
+                	}else{
+                		$('.like-count'+i).text(count);
+                		$('.inside-heart'+i).css("border-color","rgb(221, 221, 221)");
+                	}
+                	
+				},
+				error : function(){
+					alert("에러발생");
+				}
+            });
+		}
 
-
-
-
+	</script>
+	
 </body>
 </html>

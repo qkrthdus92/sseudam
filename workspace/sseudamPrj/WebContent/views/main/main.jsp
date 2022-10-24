@@ -12,7 +12,9 @@
     <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-    <link rel="stylesheet" href="main.css?after" type="text/css">
+	<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/main/main.css"
+	type="text/css">
 
 </head>
 <body>

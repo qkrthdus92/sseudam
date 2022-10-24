@@ -13,13 +13,12 @@ import com.kh.sseudam.common.PageVo;
 import com.kh.sseudam.healing.service.HealingService;
 import com.kh.sseudam.healing.vo.HealingVo;
 
-@WebServlet(urlPatterns = "/healing/inside")
-public class HealingInsideController extends HttpServlet{
+@WebServlet(urlPatterns = "/healing/outside")
+public class HealingOutsideController extends HttpServlet{
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        
         
         //페이징 처리
         int listCount;
@@ -31,7 +30,7 @@ public class HealingInsideController extends HttpServlet{
         int startPage;
         int endPage;
 
-        listCount = new HealingService().selectInsideCount();
+        listCount = new HealingService().selectOutsideCount();
         
         String pno = req.getParameter("pno");
         if(pno == null) {
@@ -69,7 +68,7 @@ public class HealingInsideController extends HttpServlet{
         int mNo = 7;
         
         //디비 다녀오기
-        List<HealingVo> insideList = new HealingService().InsidePage(pv, sort, mNo);                    
+        List<HealingVo> outsideList = new HealingService().OutsidePage(pv, sort, mNo);                    
  
         //sort null처리
         if(sort == null){
@@ -81,8 +80,9 @@ public class HealingInsideController extends HttpServlet{
 
         req.setAttribute("sort", sort);
         req.setAttribute("pv", pv);
-        req.setAttribute("insideList", insideList);
-        req.getRequestDispatcher("/views/healing/inside.jsp").forward(req, resp);
+        req.setAttribute("outsideList", outsideList);
+        req.getRequestDispatcher("/views/healing/outside.jsp").forward(req, resp);
         
     }
+
 }

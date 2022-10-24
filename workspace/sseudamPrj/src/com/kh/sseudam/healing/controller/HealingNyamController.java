@@ -13,13 +13,12 @@ import com.kh.sseudam.common.PageVo;
 import com.kh.sseudam.healing.service.HealingService;
 import com.kh.sseudam.healing.vo.HealingVo;
 
-@WebServlet(urlPatterns = "/healing/inside")
-public class HealingInsideController extends HttpServlet{
-    
+@WebServlet(urlPatterns = "/healing/nyam")
+public class HealingNyamController extends HttpServlet{
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        
+      
         
         //페이징 처리
         int listCount;
@@ -31,7 +30,7 @@ public class HealingInsideController extends HttpServlet{
         int startPage;
         int endPage;
 
-        listCount = new HealingService().selectInsideCount();
+        listCount = new HealingService().selectNyamCount();
         
         String pno = req.getParameter("pno");
         if(pno == null) {
@@ -66,10 +65,10 @@ public class HealingInsideController extends HttpServlet{
         
         
         //회원 넘버 가져오기
-        int mNo = 7;
+        int mNo = 1;
         
         //디비 다녀오기
-        List<HealingVo> insideList = new HealingService().InsidePage(pv, sort, mNo);                    
+        List<HealingVo> nyamList = new HealingService().NyamPage(pv, sort, mNo);                    
  
         //sort null처리
         if(sort == null){
@@ -81,8 +80,7 @@ public class HealingInsideController extends HttpServlet{
 
         req.setAttribute("sort", sort);
         req.setAttribute("pv", pv);
-        req.setAttribute("insideList", insideList);
-        req.getRequestDispatcher("/views/healing/inside.jsp").forward(req, resp);
-        
+        req.setAttribute("nyamList", nyamList);
+        req.getRequestDispatcher("/views/healing/nyam.jsp").forward(req, resp);
     }
 }
