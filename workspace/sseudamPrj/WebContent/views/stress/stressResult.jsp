@@ -1,11 +1,13 @@
 <%@page import="temp.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
+<%-- 
+	로그인멤버 불러오기
+	<%
 	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	session.removeAttribute("alertMsg");
-%>
+%> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -126,7 +128,8 @@
 
 	<div id="wrap">
        <div id="main">
-           <div id="title">테스트 결과<br>Nick님의 스트레스 지수는 <%=loginMember.getTestScore()%>점 입니다.</div>
+           <div id="title">테스트 결과<br>Nick님의 스트레스 지수는 점입니다.</div>
+           <%--점수 불러오기 :  <%=loginMember.getTestScore() %> --%>   
            <div>
                <fieldset>
                    <legend>스트레스 지수에 따른 등급은 아래와 같이 평가됩니다.</legend>
@@ -170,14 +173,13 @@
                 <div id="btn"><img src="<%=root%>/resources/img/stress//right_btn.svg"></div>
             </div>
            
-        <div><br><input type="submit" value="테스트 다시하기" id="retry">
+        	<div><br><button id="retry">테스트 다시하기</button></div>
             
         </div>
        </div>
        <div id="footer">
            <%@ include file="/views/common/footer.jsp" %>
        </div>
-   </div>
 </body>
 </body>
 </html>

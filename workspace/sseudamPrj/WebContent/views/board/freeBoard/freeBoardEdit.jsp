@@ -3,10 +3,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+	/* MemberVo loginMember = (MemberVo)session.getAttribute("loginMember"); */
+	FreeBoardVo vo = (FreeBoardVo) request.getAttribute("vo");
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	session.removeAttribute("alertMsg");	
-%> 
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,40 +103,42 @@ body {
 <%}%>
 </script>
 	<div id="wrap">
-
+	
 		<div id="header">
 			<%@ include file="/views/common/header.jsp"%>
 		</div>
-
+		
 		<div id="main">
-
+		
 			<div id="title">자유게시판</div>
-
+			
 			<form action="" method="post">
 				<div id="write-box">
-
+				
 					<div id="write-title">
 						제목<br> <input type="text" size="130" style="height: 25px"
-							placeholder="제목을 입력하세요." name="title" required>
+							placeholder="제목을 입력하세요." name="title" required value="<%=vo.getTitle()%>">
 					</div>
-
+					
 					<div id="write-content">
 						내용<br>
 						<textarea name="content" cols="132%" rows="30"
 							style="resize: none;" placeholder="내용을 입력하세요." name="content"
-							required></textarea>
+							required><%=vo.getContent()%></textarea>
 					</div>
-
+					
 					<div id="btn">
-						<input type="submit" value="등록" id="ok-btn">
-						<button type="button"id="no-btn"onclick = "history.back()">취소</button>
+						<input type="submit" value="수정" id="ok-btn">
+						<button type="button" id="no-btn" onclick="history.back()">취소</button>
 					</div>
 				</div>
+					
 			</form>
 			&nbsp;&nbsp;
+			
 		</div>
-	</div>
 
+	</div>
 	<div id="footer">
 		<%@ include file="/views/common/footer.jsp"%>
 	</div>
