@@ -3,6 +3,7 @@ package com.kh.sseudam.stress.service;
 import java.sql.Connection;
 
 import com.kh.sseudam.common.JDBCTemplate;
+import com.kh.sseudam.stress.dao.StressDao;
 
 import temp.MemberDao;
 import temp.MemberVo;
@@ -14,8 +15,7 @@ public class StressService {
 
 		Connection conn = JDBCTemplate.getConnection();
 
-		// new MemberDao().insertOne(conn.vo);
-		MemberDao dao = new MemberDao();
+		StressDao dao = new StressDao();
 		int result = dao.myScore(conn, vo);
 
 		if (result == 1) {

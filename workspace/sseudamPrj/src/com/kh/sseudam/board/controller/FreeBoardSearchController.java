@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.sseudam.board.service.FreeBoardService;
 import com.kh.sseudam.board.vo.FreeBoardVo;
 import com.kh.sseudam.common.PageVo;
+@WebServlet(urlPatterns = "/board/freeBoardSearch")
+public class FreeBoardSearchController extends HttpServlet{
 
-@WebServlet(urlPatterns = "/board/freeBoardList")
-public class FreeBoardListController extends HttpServlet {
-
-	// 자유게시판 리스트
+	//자유게시판 검색
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		// 인코딩
@@ -34,7 +34,8 @@ public class FreeBoardListController extends HttpServlet {
 
 		// 게시글 갯수 조회
 		listCount = new FreeBoardService().selectcount();
-		currentPage = Integer.parseInt(req.getParameter("pno"));
+		currentPage =Integer.parseInt(req.getParameter("pno"));
+		//currentPage = Integer.parseInt(req.getParameter("pno"));
 		pageLimit = 10; // 5페이지씩 볼수있게 설정하는곳
 		boardLimit = 10; // 한페이지당 10개씩 볼수 있게 설정하는곳
 
@@ -55,14 +56,20 @@ public class FreeBoardListController extends HttpServlet {
 		pv.setStartPage(startPage);
 		pv.setEndPage(endPage);
 		
-		// 디비 다녀오기
-		List<FreeBoardVo> x = new FreeBoardService().selectList(pv);
+		List<FreeBoardVo> x = null;
+		if("title".equals(req.getParameter("search"))) {
+			x = new FreeBoardService().searchTitle(pv);	
+		}else if("content".equals(req.getParameter("search"))) {
+			x = new FreeBoardService().searchContent(pv);
+		}else if("writer".equals(req.getParameter("search"))) {
+			x = new FreeBoardService().searchWriter(pv);
+		}
 		
+		// 디비 다녀오기
 		req.setAttribute("voList", x);
 		req.setAttribute("pv", pv);
 
 		// 화면선택
 		req.getRequestDispatcher("/views/board/freeBoard/freeBoardList.jsp").forward(req, resp);
-
 	}
 }

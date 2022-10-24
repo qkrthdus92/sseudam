@@ -3,18 +3,18 @@ package com.kh.sseudam.board.vo;
 public class FreeBoardVo {
 
 	private String no;
-	private String writeNo;
+	private String writerNo;
 	private String title;
 	private String content;
 	private String writeDate;
 	private String deleteYn;
 	private String modifyDate;
 	private String views;
-	public FreeBoardVo(String no, String writeNo, String title, String content, String writeDate, String deleteYn,
+	public FreeBoardVo(String no, String writerNo, String title, String content, String writeDate, String deleteYn,
 			String modifyDate, String views) {
 		super();
 		this.no = no;
-		this.writeNo = writeNo;
+		this.writerNo = writerNo;
 		this.title = title;
 		this.content = content;
 		this.writeDate = writeDate;
@@ -32,11 +32,11 @@ public class FreeBoardVo {
 	public void setNo(String no) {
 		this.no = no;
 	}
-	public String getWriteNo() {
-		return writeNo;
+	public String getWriterNo() {
+		return writerNo;
 	}
-	public void setWriteNo(String writeNo) {
-		this.writeNo = writeNo;
+	public void setWriterNo(String writerNo) {
+		this.writerNo = writerNo;
 	}
 	public String getTitle() {
 		return title;
@@ -76,7 +76,7 @@ public class FreeBoardVo {
 	}
 	@Override
 	public String toString() {
-		return "FreeBoardVo [no=" + no + ", writeNo=" + writeNo + ", title=" + title + ", content=" + content
+		return "FreeBoardVo [no=" + no + ", writerNo=" + writerNo + ", title=" + title + ", content=" + content
 				+ ", writeDate=" + writeDate + ", deleteYn=" + deleteYn + ", modifyDate=" + modifyDate + ", views="
 				+ views + "]";
 	}

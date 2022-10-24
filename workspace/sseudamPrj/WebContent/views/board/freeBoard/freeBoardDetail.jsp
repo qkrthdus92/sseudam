@@ -1,5 +1,13 @@
+<%@page import="com.kh.sseudam.common.PageVo"%>
+<%@page import="com.kh.sseudam.board.vo.FreeBoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+ 	FreeBoardVo vo = (FreeBoardVo)request.getAttribute("vo");
+	String s = (String)session.getAttribute("alertMsg");
+	session.removeAttribute("alertMsg");
+	PageVo pv = (PageVo)request.getAttribute("pv");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -148,25 +156,25 @@
         <div id="main">
             <div id="title">자유게시판</div>
             <div id="board-title">
-                <div>no.60</div>
-                <div>자유게시판 글 상세조회 테스트</div>
-                <div>user01</div>
-                <div>2022-10-16</div>
+                <div><%= vo.getNo() %></div>
+                <div><%= vo.getTitle() %></div>
+                <div><%= vo.getWriterNo() %></div>
+                <div><%= vo.getWriteDate() %></div>
                 <div id="hit">
-                    <img src="<%=root%>/resources/img2/View.svg">
-                    <div>59</div>
+                    <img src="<%=root%>/resources/img/board/View.svg">
+                    <div><%= vo.getViews() %></div>
                 </div>
             </div>
             <div id="board-edit">
-                <div>최종수정일자 : 2022-10-16</div>
+                <div>최종수정일자 : <%= vo.getModifyDate() %></div>
                 <div>&nbsp;|&nbsp;</div>
-                <div><a href="">수정하기</a></div>
+                <div><a href="/sseudam/board/freeBoardEdit?no=<%= vo.getNo() %>">수정하기</a></div>
                 <div>&nbsp;|&nbsp;</div>
-                <div><a href="">삭제하기</a></div>
+                <div><a href="/sseudam/board/freeBoardDelete?no=<%= vo.getNo() %>">삭제하기</a></div>
             </div>
-            <div id="board-content">내용부분</div>
+            <div id="board-content"><%= vo.getContent() %></div>
             <div id="cmt-cnt">
-                <img src="<%=root%>/resources/img2/Chat.svg">
+                <img src="<%=root%>/resources/img/board/Chat.svg">
                 <div>댓글 x개</div>
             </div>
             <div id="cmt-box">
@@ -224,7 +232,7 @@
                     </div>
                 </div>
             </div>
-            <div id="list-btn-div"><button id="list-btn" onclick="location.href='<%=root%>/views/board/freeBoard/freeBoardList.jsp'">목록</button></div>
+            <div id="list-btn-div"><button type="button" id="list-btn" onclick = "history.back()">목록</button></div>
         </div>
         <div id="footer">
             <%@ include file="/views/common/footer.jsp" %>

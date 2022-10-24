@@ -6,8 +6,6 @@
 <%
 	List<FreeBoardVo> voList = (List<FreeBoardVo>)request.getAttribute("voList");
 	PageVo pv = (PageVo)request.getAttribute("pv");
-	String alertMsg = (String)session.getAttribute("alertMsg");
-	session.removeAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -85,11 +83,6 @@
         text-decoration: none;
         color: black;
     }
-    #views{
-    	--font-size: 230%;
-        font-weight: 800;
-        color: #26AA82;
-    }
     #page{
         grid-column: span 5;
         margin: auto;
@@ -115,11 +108,6 @@
 </style>
 </head>
 <body>
-<script>
-<%if(alertMsg != null){%>
-	alert('<%= alertMsg %>'); 
-<%}%>
-</script>
     <div id="wrap">
         <div id="header">
             <%@ include file="/views/common/header.jsp" %>
@@ -138,8 +126,7 @@
         <%
 	    	for(int i = 0; i < voList.size(); ++i){%>
 	        <div class="board-list"><%=voList.get(i).getNo() %></div>
-	        <div class="board-list"><a href="<%=root%>/board/freeBoardDetail?bno=<%=voList.get(i).getNo() %>"><%=voList.get(i).getTitle() %>
-	        						&nbsp;<span id="views">[<%=voList.get(i).getViews() %>]</span></a></div>
+	        <div class="board-list"><a href="<%=root%>/board/freeBoardDetail?bno=<%=voList.get(i).getNo() %>"><%=voList.get(i).getTitle() %></a></div>
 	        <div class="board-list"><%=voList.get(i).getWriterNo() %></div>
 	        <div class="board-list"><%=voList.get(i).getWriteDate() %></div>
 	        <div class="board-list"><%=voList.get(i).getViews() %></div>
@@ -174,7 +161,6 @@
   
                 </form>
             </div>
-        </div>
         <div id="footer">
             <%@ include file="/views/common/footer.jsp" %>
         </div>
