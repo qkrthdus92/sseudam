@@ -1,5 +1,10 @@
+<%@page import="com.kh.sseudam.mypage.board.vo.MypageLikeoutVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	List<MypageLikeoutVo> MypageLikeoutList = (List<MypageLikeoutVo>)request.getAttribute("MypageLikeoutList");	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -166,19 +171,19 @@
 	    <div id="boardinfo">
 	       <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
 	       <div id="hm1">나의 좋아요</div>
-	       <div id="hm">19개</div>
+	       <div id="hm"><%=MypageLikeoutList.size() %>개</div>
 	       <div id="hm1"></div>
 	       <div id="hm"></div>
 	    </div>
 	    
         <div id="dom">
-	        <div id="dominfo" onclick="location.href='/sseudam/views/mypage/likecheckyum.jsp';">혼자서냠냠</div>
+	        <div id="dominfo" onclick="location.href='/sseudam/mypage/likecheckyum">혼자서냠냠</div>
 	    </div>
 	    <div id="dom2">
-	        <div id="dominfo2" onclick="location.href='/sseudam/views/mypage/likecheckhome.jsp';">안에서뒹굴뒹굴</div>
+	        <div id="dominfo2" onclick="location.href='/sseudam/mypage/likecheckhome">안에서뒹굴뒹굴</div>
 	    </div>
 	    <div id="dom3">
-	        <div id="dominfo3" onclick="location.href='/sseudam/views/mypage/likecheckout.jsp';">밖에서뚜벅뚜벅</div>
+	        <div id="dominfo3" onclick="">밖에서뚜벅뚜벅</div>
 	    </div>
 	    <div id="editbar">
 	        <button id="allselect" ><img id="checkbox" src="/sseudam/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
@@ -191,27 +196,16 @@
 	        <div>게시판</div>
 	        <div>작성일</div>
 	    </div>
-	    <div id="editlist">
-	        <div><input type="checkbox" id="cb1"></div>
-	        <div>1</div>
-	        <div>밖에서뚜벅뚜벅</div>
-	        <div>밖에서뚜벅뚜벅</div>
-	        <div>22.10.12</div>
-	    </div>
-	    <div id="editlist">
-	        <div><input type="checkbox" id="cb1"></div>
-	        <div>1</div>
-	        <div>밖에서뚜벅뚜벅</div>
-	        <div>밖에서뚜벅뚜벅</div>
-	        <div>22.10.12</div>
-	    </div>
-	    <div id="editlist">
-	        <div><input type="checkbox" id="cb1"></div>
-	        <div>1</div>
-	        <div>밖에서뚜벅뚜벅</div>
-	        <div>밖에서뚜벅뚜벅</div>
-	        <div>22.10.12</div>
-	    </div>
+	    <%for(int i = 0 ; i < MypageLikeoutList.size(); ++i){%>
+		    <div id="editlist">
+		        <div><input type="checkbox" id="cb1"></div>
+		        <div><%= MypageLikeoutList.get(i).getNo()%></div>
+		        <div><%= MypageLikeoutList.get(i).getTitle()%></div>
+		        <div>밖에서뚜벅뚜벅</div>
+		        <div><%= MypageLikeoutList.get(i).getWrite_date()%></div>
+		    </div>
+	   	<%}%>
+	    
 	    </div>
 	</div>
 <%@ include file="/views/common/footer.jsp" %>

@@ -1,5 +1,10 @@
+<%@page import="com.kh.sseudam.mypage.board.vo.MypageProreserVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%
+	List<MypageProreserVo> MypageProreserList = (List<MypageProreserVo>)request.getAttribute("MypageProreserList");	
+%>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -219,16 +224,16 @@
         <div id="boardinfo">
             <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
             <div id="hm1">총 결제내역</div>
-            <div id="hm">5건</div>
+            <div id="hm"><%=MypageProreserList.size() %>건</div>
             <div id="hm1"></div>
             <div idg="hm"></div>
         </div>
     
         <div id="dom">
-            <div id="dominfo" onclick="location.href='/sseudam/views/mypage/proresercheck.jsp';">상담예약</div>
+            <div id="dominfo" onclick="location.href='/sseudam/mypage/proresercheck'">상담예약</div>
         </div>
         <div id="dom2">
-            <div id="dominfo2" onclick="location.href='/sseudam/views/mypage/promoneycheck.jsp';">수익조회</div>
+            <div id="dominfo2" onclick="location.href='/sseudam/mypage/promoneycheck'">수익조회</div>
         </div>
         <div id="dom3">
             <div id="dominfo3"></div>
@@ -245,76 +250,22 @@
         </div>
 
         <div id="pro-box-wrap">
+        
+        	<%for(int i = 0 ; i < MypageProreserList.size(); ++i){%>
                 <div id="pro-box"> 
                     <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
                     <div id="proname">
-                        <span>아이디</span> 
+                        <span><%= MypageProreserList.get(i).getName()%></span> 
                     </div>             
                     <div id="bor-top"><label>전화번호</label></div>
-                    <div id="noborder"><label>010.1234.5678</label></div>
+                    <div id="noborder"><label><%= MypageProreserList.get(i).getPhone()%></label></div>
                     <div id="bor-top"><label>결제일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
+                    <div id="noborder"><label><%= MypageProreserList.get(i).getPay_date()%></label></div>
                     <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
+                    <div id="noborder"><label><%= MypageProreserList.get(i).getNo()%></label></div>
                 </div>
-
-                <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>아이디</span> 
-                    </div>             
-                    <div id="bor-top"><label>전화번호</label></div>
-                    <div id="noborder"><label>010.1234.5678</label></div>
-                    <div id="bor-top"><label>결제일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                </div>
-
-
-                <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>아이디</span> 
-                    </div>             
-                    <div id="bor-top"><label>전화번호</label></div>
-                    <div id="noborder"><label>010.1234.5678</label></div>
-                    <div id="bor-top"><label>결제일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                </div>
-
-                <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>아이디</span> 
-                    </div>             
-                    <div id="bor-top"><label>전화번호</label></div>
-                    <div id="noborder"><label>010.1234.5678</label></div>
-                    <div id="bor-top"><label>결제일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                </div>
-
-                <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
-                    <div id="proname">
-                        <span>아이디</span> 
-                    </div>             
-                    <div id="bor-top"><label>전화번호</label></div>
-                    <div id="noborder"><label>010.1234.5678</label></div>
-                    <div id="bor-top"><label>결제일시</label></div>
-                    <div id="noborder"><label>22/10/04/13:30</label></div>
-                    <div id="bor-top"><label>예약번호</label></div>
-                    <div id="noborder"><label>0113</label></div>
-                </div>
-
-
- 
-
-         
+			 <%}%> 
+                
                                  
          </div>
     

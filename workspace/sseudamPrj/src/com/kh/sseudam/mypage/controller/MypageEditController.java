@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.sseudam.member.vo.MemberVo;
 import com.kh.sseudam.mypage.service.MypageEditService;
 
-@WebServlet(urlPatterns = "/mypage/mypage")
+@WebServlet(urlPatterns = "/mypage/edit")
 public class MypageEditController extends HttpServlet {
 	
 	@Override
@@ -33,32 +34,30 @@ public class MypageEditController extends HttpServlet {
 		HttpSession session= req.getSession();
 		
 		//데이터꺼내기
-		String memberId = req.getParameter("memberId");
 		String memberPwd1 = req.getParameter("memberPwd1");
 		String memberNick = req.getParameter("memberNick");
-		String addr = req.getParameter("addr");
-		String[] hobby = req.getParameterValues("hobby");
+		String memberPhone = req.getParameter("memberPhone");
+		String memberEmail = req.getParameter("memberEmail");
+		
 		
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 		String no = loginMember.getNo();
 		
 		//데뭉
 		MemberVo vo = new MemberVo();
-		vo.setId(memberId);
 		vo.setPwd(memberPwd1);
 		vo.setNick(memberNick);
-		vo.setAddr(addr);
-		vo.setHobby(String.join(",", hobby));
-		vo.setNo(no);
-		
+		vo.setPhone(memberPhone);
+		vo.setEmail(memberEmail);
+
 		MemberVo updatedMember = new MypageEditService().edit(vo);
 		
 		if(updatedMember != null) {
 			 req.getSession().setAttribute("alerMsg", "회원정보 수정 성공!");
 			 req.getSession().setAttribute("loginMember", updatedMember);
-			 resp.sendRedirect("/semi");
+			 resp.sendRedirect("/sseudam");
 		 }else {
-			 req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
+//			 req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
 		 }
 	}
 	

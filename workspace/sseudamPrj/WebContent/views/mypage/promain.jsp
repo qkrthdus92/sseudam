@@ -265,7 +265,7 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/수익.png" alt="결제2">&nbsp;&nbsp;수익조회 <button id="editbnt" onclick="location.href='/sseudam/views/mypage/proresercheck.jsp';">조회</button></th>
+                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/수익.png" alt="결제2">&nbsp;&nbsp;수익조회 <button id="editbnt" onclick="location.href='/sseudam/mypage/proresercheck'">조회</button></th>
                     <td></td>
                 </tr>
             </table>
@@ -284,7 +284,7 @@
               </div>
               <div class="popup-foot">
                   <!-- 프로필수정페이지로이동 -->
-                  <button class="pop-btn" id="confirm" onclick="location.href='/sseudam/views/mypage/proeditmypage.jsp';" >확인</button> 
+                  <button class="pop-btn" id="confirm" onclick="location.href='/sseudam/mypage/proeditmypage'" >확인</button> 
                   <button class="pop-btn" id="close" onclick="closePopup()" >창 닫기</button>
               </div>
         </div>

@@ -117,17 +117,17 @@
 	
 	            <div>닉네임</div>
 	            <div>
-	                <input type="text" name="Name" placeholder="6~14자 이내로 작성(특수문자 불가능)">
+	                <input type="text" name="memberNick" placeholder="6~14자 이내로 작성(특수문자 불가능)">
 	            </div>
 	
 	            <div>연락처</div>
 	            <div>
-	                <input type="tel" name="phone" placeholder="예) 01012345678">
+	                <input type="tel" name="memberPhone" placeholder="예) 01012345678">
 	            </div>
 	
 	            <div>이메일</div>
 	            <div>
-	                <input type="email" name="email">
+	                <input type="email" name="memberEmail">
 	            </div>
 	
 	            <div>

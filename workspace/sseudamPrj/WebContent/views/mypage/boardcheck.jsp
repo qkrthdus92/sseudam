@@ -1,5 +1,12 @@
+<%@page import="com.kh.sseudam.mypage.board.vo.MypageCommentVo"%>
+<%@page import="com.kh.sseudam.mypage.board.vo.MypageBoardVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	List<MypageBoardVo> MypageBoardList = (List<MypageBoardVo>)request.getAttribute("MypageBoardList");	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -138,18 +145,18 @@
 		<div id="wrap">
 		<div id="main">
 		    <div id="boardinfo">
-		       <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
+		       <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
 		       <div id="hm1">총 게시글</div>
-		       <div id="hm">19개</div>
-		       <div id="hm1">총 댓글</div>
-		       <div id="hm">19개</div>
+		       
+		       <div id="hm"><%= MypageBoardList.size() %>개</div>
+		      
 		    </div>
 		
 		    <div id="dom">
 		        <div id="dominfo">내가 쓴 게시글</div>
 		    </div>
             <div id="dom2">
-                <div id="dominfo2" onclick="location.href='/sseudam/views/mypage/commentcheck.jsp';">내가 쓴 댓글</div>
+                <div id="dominfo2" onclick="location.href='/sseudam/mypage/commentcheck';">내가 쓴 댓글</div>
             </div>
 		    <div id="editbar">
 		        <input type="checkbox" name="chk" id="chkAll"><label for="chkAll" >전체선택</label></input>
@@ -162,29 +169,17 @@
 		        <div>게시판</div>
 		        <div>작성일</div>
 		    </div>
-		    <div id="editlist">
-		        <div><input type="checkbox" id="chk1" name="chk"></div>
-		        <div>1</div>
-		        <div>안녕하세요</div>
-		        <div>자유게시판</div>
-		        <div>2022.10.12</div>
-		    </div>
-		    <div id="editlist">
-		        <div><input type="checkbox" id="chk2" name="chk"></div>
-		        <div>1</div>
-		        <div>안녕하세요</div>
-		        <div>자유게시판</div>
-		        <div>2022.10.12</div>
-		
-		    </div>
-		     <div id="editlist">
-		        <div><input type="checkbox" id="chk3" name="chk"></div>
-		        <div>1</div>
-		        <div>안녕하세요</div>
-		        <div>자유게시판</div>
-		        <div>2022.10.12</div>
-		
-		    </div>
+		    
+	     	<%for(int i = 0 ; i < MypageBoardList.size(); ++i){%>
+			    <div id="editlist">
+			        <div><input type="checkbox" id="chk1" name="chk"></div>
+			        <div><%= MypageBoardList.get(i).getNo()%></div>
+			        <div><%= MypageBoardList.get(i).getTitle() %></div>
+			        <div><%= MypageBoardList.get(i).getType()%></div>
+			        <div><%= MypageBoardList.get(i).getWriteDate() %></div>
+			    </div>
+		     <%}%>
+		   
 		</div>
 	</div>
 <%@ include file="/views/common/footer.jsp" %>	
