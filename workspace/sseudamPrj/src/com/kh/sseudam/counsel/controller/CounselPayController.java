@@ -51,10 +51,11 @@ public class CounselPayController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-//		HttpSession s = req.getSession();
-//		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
-//		String memberNo = loginMember.getNo();
-		String memberNo = "1";
+		
+		HttpSession s = req.getSession();
+		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
+		String memberNo = loginMember.getNo();
+	
 		String proNo = req.getParameter("bno");
 		System.out.println("전문가번호 : " + proNo);
 		ProVo proVo = new CounselService().selectListByNo(proNo);
@@ -73,8 +74,11 @@ public class CounselPayController extends HttpServlet{
 		int result = new CounselService().insertReserve(vo);
 		
 		if(result == 1) {
-			resp.sendRedirect("sseudam/mypage/resercheck");
+			resp.sendRedirect("/sseudam/mypage/resercheck");
 		}else {
+			
+			req.setAttribute("msg", "상담결제실패");
+			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
 			
 		}
 	}

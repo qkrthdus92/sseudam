@@ -1,22 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <title>Insert title here</title>
-    <link rel="stylesheet" href="/sseudamPrj/resources/css/common/reset.css" />
+    <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"
-      href="/sseudamPrj/resources/css/common/variables.css?ver=3"
+      href="<%=root1%>/resources/css/common/variables.css?ver=3"
     />
     <link
       rel="stylesheet"
-      href="/sseudamPrj/resources/css/admin/common/component.css"
+      href="<%=root1%>/resources/css/admin/common/component.css"
     />
     <link
       rel="stylesheet"
-      href="/sseudamPrj/resources/css/admin/freeBoard/list.css?ver=2"
+      href="<%=root1%>/resources/css/admin/freeBoard/list.css?ver=2"
     />
   </head>
   <body>

@@ -1,22 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <title>Insert title here</title>
-    <link rel="stylesheet" href="/sseudamPrj/resources/css/common/reset.css" />
+    <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"
-      href="/sseudamPrj/resources/css/common/variables.css?ver=2"
+      href="<%=root1%>/resources/css/common/variables.css?ver=2"
     />
     <link
       rel="stylesheet"
-      href="/sseudamPrj/resources/css/admin/wallow/music/list.css?ver=2"
+      href="<%=root1%>/resources/css/admin/wallow/music/list.css?ver=2"
     />
     <link
       rel="stylesheet"
-      href="/sseudamPrj/resources/css/admin/common/component.css?ver=2"
+      href="<%=root1%>/resources/css/admin/common/component.css?ver=2"
     />
     <style>
       .grid-col3 {
