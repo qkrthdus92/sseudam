@@ -1,5 +1,21 @@
+<%@page import="com.kh.sseudam.member.vo.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
+
+<!-- 회원가입 성공 알림 -->
+<%	
+	String alertMsg = (String)session.getAttribute("alertMsg");
+	session.removeAttribute("alertMsg");
+	
+	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+	
+%>
+
+<script>
+		<%if(alertMsg != null){%>
+						alert('<%= alertMsg %>');
+		<%}%>
+</script>
 
 <style>
   @font-face {
@@ -227,7 +243,7 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
 /* 로그인 팝업 */
 
 #login-popup.hide {
-  display: none;
+  display: none;	/* 아예 코드도 사라짐 */
 }
 
 #login-popup.has-filter {
@@ -255,6 +271,7 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
   height: 30px;
   margin-top: 5px;
   margin-left: 92%;
+  cursor: pointer;
 }
 
 .login-header{
@@ -342,7 +359,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   <div class="main-header-nav">
     <div class="main-wrapper">
       <div>
-        <a href="<%=root%>/views/stress/stressTest.jsp">스트레스 테스트</a>
+        <a href="<%=root%>/stress/stressTest">스트레스 테스트</a>
         <div class="main-header-nav-color"></div>
       </div>
       <div class="dropdown">
@@ -355,19 +372,17 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
         </div>
       </div>
       <div>
-        <a href="<%=root%>/counsel/list">상담하기</a>
+        <a href="<%=root%>/counsel/list?pno=1">상담하기</a>
         <div class="main-header-nav-color"></div>
       </div>
       <div class="dropdown">
         <a href="">게시판</a>
         <div class="main-header-nav-color"></div>
         <div class="dropdown-content">
-          <a href="<%=root%>/views/board/freeBoard/freeBoardList.jsp"
-            >자유게시판</a
-          >
-          <a href="<%=root%>/views/board/reviewBoard/reviewBoardList.jsp"
-            >후기게시판</a
-          >
+			<a href="<%=root%>/board/freeBoardList?pno=1"
+            >자유게시판</a>
+          	<a href="<%=root%>/views/board/reviewBoard/reviewBoardList.jsp"
+            >후기게시판</a>
         </div>
       </div>
       <div>
@@ -378,36 +393,38 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   </div>
 
   <!-- 로그인 팝업 -->
-  <div id="login-popup" class="hide">
-    <div class="login-popup">
-      <div class="login-popup-header">
-        <img src="../../resources/img/join/close.png" class="login-popup-btn" onclick="closeLoginPopup()">
-      </div>
-      <div class="login-popup-middle">
-          <div class="login-header">쓰담쓰담 로그인</div>
-          <div class="login-input">
-            <div class="login-in" >아이디</div>
-            <div>
-            	<input type="text" name="memberId" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black;">
-            </div>
-            <div class="login-pwd">비밀번호</div>
-            <div>
-                <input type="password" name="memberPwd" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black;">
-            </div>
-          </div>
-            <div>
-              <br><a href=''><input type="submit" value="로그인" class="login-btn" ></a>
-            </div>
-      </div>
-      
-      <div class="login-popup-button">
-        <div><a href='<%=root%>/views/common/join.jsp'>회원가입</a></div>
-        <div><a href=''>아이디 찾기</a></div>
-        <div><a href=''>비밀번호 찾기</a></div>
-      </div>
-      
-    </div>
-  </div>
+  <form action="/sseudam/login" method="post">
+	    <div id="login-popup" class="hide">
+	    <div class="login-popup">
+	      <div class="login-popup-header">
+	        <img src="../../resources/img/join/close.png" class="login-popup-btn" onclick="closeLoginPopup()">
+	      </div>
+	      <div class="login-popup-middle">
+	          <div class="login-header">쓰담쓰담 로그인</div>
+	          <div class="login-input">
+	            <div class="login-in" >아이디</div>
+	            <div>
+	            	<input type="text" name="memberId" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black;">
+	            </div>
+	            <div class="login-pwd">비밀번호</div>
+	            <div>
+	                <input type="password" name="memberPwd" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black;">
+	            </div>
+	          </div>
+	            <div>
+	              <br><a href=''><input type="submit" value="로그인" class="login-btn" ></a>
+	            </div>
+	      </div>
+	      
+	      <div class="login-popup-button">
+	        <div><a href='<%=root%>/views/common/join.jsp'>회원가입</a></div>
+	        <div><a href=''>아이디 찾기</a></div>
+	        <div><a href=''>비밀번호 찾기</a></div>
+	      </div>
+	      
+	    </div>
+	  </div>
+  </form>
 
 </header>
 

@@ -23,6 +23,16 @@ public class MemberService {
 		}
 		JDBCTemplate.close(conn);
 		return result;
+	}
+	
+	//로그인
+	public MemberVo login(MemberVo vo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		MemberVo loginMember = new MemberDao().selectOne(conn, vo);
+		JDBCTemplate.close(conn);
+		
+		return loginMember;
 		
 	}
 	

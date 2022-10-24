@@ -66,7 +66,7 @@
         font-size: 18px;
     }
 
-    .join-btn > .btn{
+    .join-submit > .submit{
         width: 167px;
         height: 42px;
         border: none;
@@ -104,67 +104,70 @@
         <h1 align="center" class="join">회원가입</h1>
         <h4 align="center" class="join-guide">이곳은 쓰담쓰담에 함께 하실 분들을 위한 회원가입 페이지 입니다.</h4>
 
-		<form action="/sseudam/member/join" method="post">
+		<form action="/sseudam/join/memberJoin" method="post">
+			<div class="join-area">
+	            <div>아이디</div>
+	            <div>
+	            	<input type="text" class="memberId-input" name="memberId" placeholder="6~14자 이내로 영문, 숫자를 조합하여 작성" required>
+	            	<input type="submit" class="overlap-check-btn" value="중복확인">
+	            </div>
+	
+	            <div>비밀번호</div>
+	            <div>
+	                <input type="password" name="memberPwd1" placeholder="6~14자 이내로 영문, 숫자, 특수문자를 조합하여 작성" required>
+	            </div>
+	
+	            <div>비밀번호 확인</div>
+	            <div>
+	                <input type="password" name="memberPwd2">
+	            </div>
+	
+	            <div>이름</div>
+	            <div>
+	                <input type="text" name="memberName" required>
+	            </div>
+	
+	            <div>닉네임</div>
+	            <div>
+	                <input type="text" name="memberNick" placeholder="6~14자 이내로 작성(특수문자 불가능)" required>
+	            </div>
+	
+	            <div>연락처</div>
+	            <div>
+	                <input type="tel" name="phone" placeholder="예) 01012345678" required>
+	            </div>
+	
+	            <div>이메일(선택)</div>
+	            <div>
+	                <input type="email" name="email">
+	            </div>
+				
+				<!-- 이 부분 테이블에 추가 해야 할 듯...? -->
+				<!-- ㄴㄴ y 안 하면 안 넘어가게 하는 코드 있음 -->
+	            <div class="join-TOS">
+	                <label>
+	                    <input type="checkbox" id="agree">
+	                    (필수) 서비스 이용약관 및 개인정보 처리방침에 동의합니다.
+	                </label>
+	                <br>
+	                <label>
+	                    <input type="checkbox">
+	                    (선택) 이벤트 진행 등의 마케팅 정보를 수신합니다.
+	                </label>
+	            </div>
+	
+	            <div class="join-submit">
+	                <br><input type="submit" value="가입하기" class="submit">
+	            </div>
+	
+	        </div>
 		</form>
-        <div class="join-area">
-            <div>아이디</div>
-            <div>
-            	<input type="text" class="memberId-input" name="memberId" placeholder="6~14자 이내로 영문, 숫자를 조합하여 작성">
-            	<input type="button" class="overlap-check-btn" value="중복확인" onclick="location.href=''">
-            </div>
-
-            <div>비밀번호</div>
-            <div>
-                <input type="password" name="memberPwd1" placeholder="6~14자 이내로 영문, 숫자, 특수문자를 조합하여 작성">
-            </div>
-
-            <div>비밀번호 확인</div>
-            <div>
-                <input type="password" name="memberPwd2">
-            </div>
-
-            <div>이름</div>
-            <div>
-                <input type="text" name="memberName">
-            </div>
-
-            <div>닉네임</div>
-            <div>
-                <input type="text" name="memberNick" placeholder="6~14자 이내로 작성(특수문자 불가능)">
-            </div>
-
-            <div>연락처</div>
-            <div>
-                <input type="tel" name="phone" placeholder="예) 01012345678">
-            </div>
-
-            <div>이메일(선택)</div>
-            <div>
-                <input type="email" name="email">
-            </div>
-			
-			<!-- 이 부분 테이블에 추가 해야 할 듯...? -->
-            <div class="join-TOS">
-                <label>
-                    <input type="checkbox">
-                    (필수) 서비스 이용약관 및 개인정보 처리방침에 동의합니다.
-                </label>
-                <br>
-                <label>
-                    <input type="checkbox">
-                    (선택) 이벤트 진행 등의 마케팅 정보를 수신합니다.
-                </label>
-            </div>
-
-            <div class="join-btn">
-                <br><input type="button" value="가입하기" class="btn">
-            </div>
-
-        </div>
+		
             
     </div>
 
     <%@ include file="/views/common/footer.jsp" %>
+
 
 </body>
 </html>
