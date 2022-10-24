@@ -92,7 +92,11 @@
     }
 
     .next-page{
-        color: rgba(253, 121, 0, 1)
+        color: rgba(253, 121, 0, 1);
+        background-color: white;
+        border: none;
+		cursor: pointer;
+        font-size: 15px;
     }
 
 </style>
@@ -110,11 +114,11 @@
         <div class="join-area">
             
             <div class="join-step">
-                <img src="../../resources/img/join/횐가입.png">
-                <img src="../../resources/img/join/자격_정보_작성.png">
-                <img src="../../resources/img/join/프로필_작성.png">
-                <img src="../../resources/img/join/심사_승인.png">
-                <img src="../../resources/img/join/가입_완료.png">
+                <img src="<%=root%>/resources/img/join/횐가입.png">
+                <img src="<%=root%>/resources/img/join/자격_정보_작성.png">
+                <img src="<%=root%>/resources/img/join/프로필_작성.png">
+                <img src="<%=root%>/resources/img/join/심사_승인.png">
+                <img src="<%=root%>/resources/img/join/가입_완료.png">
             </div>
 
 
@@ -181,8 +185,8 @@
                 </div>
             </div>
             <div class="next">
-            	<input type="submit" >
-                <div><br><a href="<%=root%>/views/common/proJoin-2.jsp" class="next-page">다음페이지 작성</a></div>
+                <br>
+                <div><input type="submit" class="next-page" value="다음 페이지 작성"></div>
             </div>
             
         </div>

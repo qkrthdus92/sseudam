@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.sseudam.counsel.pro.vo.ProVo;
 import com.kh.sseudam.member.vo.MemberVo;
-import com.kh.sseudam.pro.join.vo.ProJoinPage1Vo;
-import com.kh.sseudam.pro.join.vo.ProJoinPage2Vo;
-import com.kh.sseudam.pro.join.vo.ProJoinPage3Vo;
 import com.kh.sseudam.pro.service.ProMemberService;
+import com.kh.sseudam.pro.vo.ProJoinPage1Vo;
+import com.kh.sseudam.pro.vo.ProJoinPage2Vo;
+import com.kh.sseudam.pro.vo.ProJoinPage3Vo;
 
 @WebServlet(urlPatterns = "/join/proJoinPage=1")
 public class ProMemberJoinPageController extends HttpServlet{
@@ -113,6 +113,7 @@ public class ProMemberJoinPageController extends HttpServlet{
 			}
 			
 			if(result2 == 1) {
+				req.getSession().setAttribute("alertMsg", "회원가입 완료");
 				resp.sendRedirect("/sseudam/main");
 			}else{
 				System.out.println("실패");

@@ -9,16 +9,17 @@ public class MemberVo {
 	private String nick;
 	private String phone;
 	private String email;
-	private String testScore;
+	private int testScore;
 	private String joinDate;
 	private String quitYn;
 	private String modifyDate;
 	
 	public MemberVo() {
+		super();
 	}
 
 	public MemberVo(String no, String id, String pwd, String name, String nick, String phone, String email,
-			String testScore, String joinDate, String quitYn, String modifyDate) {
+			int testScore, String joinDate, String quitYn, String modifyDate) {
 		super();
 		this.no = no;
 		this.id = id;
@@ -89,11 +90,11 @@ public class MemberVo {
 		this.email = email;
 	}
 
-	public String getTestScore() {
+	public int getTestScore() {
 		return testScore;
 	}
 
-	public void setTestScore(String testScore) {
+	public void setTestScore(int testScore) {
 		this.testScore = testScore;
 	}
 
@@ -127,7 +128,5 @@ public class MemberVo {
 				+ phone + ", email=" + email + ", testScore=" + testScore + ", joinDate=" + joinDate + ", quitYn="
 				+ quitYn + ", modifyDate=" + modifyDate + "]";
 	}
-
-	
 	
 }

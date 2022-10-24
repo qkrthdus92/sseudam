@@ -55,8 +55,8 @@
 
 		<div id="main">
 			<div class="btn">
-				<button type="button" id="btn1" class="button" value="Normal" onclick="location.href='<%=root%>/views/common/memberJoin.jsp'"><img src="../../resources/img/join/join.png" style="width : 160px; height : 150px;"><br>일반 회원가입</button>
-				<button type="button" id="btn2" class="button" value="Expert" onclick="location.href='<%=root%>/views/common/proJoin-1.jsp'"><img src="../../resources/img/join/projoin.png" style="width : 160px; height : 150px;"><br>전문가 회원가입</button>
+				<button type="button" id="btn1" class="button" value="Normal" onclick="location.href='<%=root%>/join/memberJoin'"><img src="<%=root%>/resources/img/join/join.png" style="width : 160px; height : 150px;"><br>일반 회원가입</button>
+				<button type="button" id="btn2" class="button" value="Expert" onclick="location.href='<%=root%>/join/proJoinPage=1'"><img src="<%=root%>/resources/img/join/projoin.png" style="width : 160px; height : 150px;"><br>전문가 회원가입</button>
 			</div>
 		</div>
 

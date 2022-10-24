@@ -38,7 +38,7 @@ public class MemberLoginController extends HttpServlet{
 			resp.sendRedirect("/sseudam/main");
 		}else {
 			req.getSession().setAttribute("alertMsg", "로그인 실패");
-			req.getRequestDispatcher("/error").forward(req, resp);	//에러페이지 없지만,, 임의로 넣음
+			req.getRequestDispatcher("/sseudam").forward(req, resp);	//임의로 넣음
 		}
 		
 	}
