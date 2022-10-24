@@ -1,5 +1,7 @@
 /* 공통 */
 
+@charset "utf-8";
+
 .hidden {
   display: none;
 }

@@ -1,5 +1,7 @@
 /* common css */
 
+@charset "utf-8";
+
 .hidden {
   display: none !important;
 }

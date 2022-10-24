@@ -1,4 +1,4 @@
-<%@page import="com.kh.sseudam.counsel.pro.vo.CertificateVo"%>
+﻿<%@page import="com.kh.sseudam.counsel.pro.vo.CertificateVo"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kh.sseudam.counsel.pro.vo.ProVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

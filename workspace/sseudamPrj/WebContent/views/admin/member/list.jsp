@@ -1,22 +1,29 @@
+<%@page import="com.kh.sseudam.common.PageVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
+<% 
+	List memberList = (List)request.getAttribute("memberList"); 
+	PageVo pv = (PageVo)request.getAttribute("pv");
+
+%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <title>쓰담쓰담 | 상담하기</title>
-    <link rel="stylesheet" href="/sseudamPrj/resources/css/common/reset.css" />
+    <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"
-      href="/sseudamPrj/resources/css/common/variables.css?ver=2"
+      href="<%=root1%>/resources/css/common/variables.css?ver=2"
     />
     <link
       rel="stylesheet"
-      href="/sseudamPrj/resources/css/admin/member/list.css?ver=2"
+      href="<%=root1%>/resources/css/admin/member/list.css?ver=3"
     />
     <link
       rel="stylesheet"
-      href="/sseudamPrj/resources/css/admin/common/component.css?ver=1"
+      href="<%=root1%>/resources/css/admin/common/component.css?ver=2"
     />
   </head>
   <body>
@@ -66,8 +73,8 @@ pageEncoding="UTF-8"%>
             <div>테스트점수</div>
             <div>계정상태</div>
             <div>edit</div>
-            <%for(int i=1; i<=10; i++) {%>
-            <div>1</div>
+            <%for(int i=0; i<memberList.size(); i++) {%>
+            <div>1></div>
             <div>한혜원</div>
             <div>user01</div>
             <div>nick01</div>
