@@ -43,6 +43,7 @@ public class MypageEditDao {
 	//일반회원 조회
 	public MemberVo selectOne(Connection conn, MemberVo vo) {
 		
+		System.out.println("dao");
 		String sql = "SELECT NO ,ID ,PWD ,NAME,NICK ,PHONE ,EMAIL ,TEST_SCORE,JOIN_DATE ,QUIT_YN ,MODIFY_DATE FROM MEMBER WHERE ID = ? AND PWD = ? AND QUIT_YN = 'N'";
 		
 		PreparedStatement pstmt = null;
@@ -60,6 +61,7 @@ public class MypageEditDao {
 			if(rs.next()) {
 				String id = rs.getString("ID");
 				String pwd = rs.getString("PWD");
+				String name = rs.getString("NAME");
 				String no = rs.getString("NO");
 				String nick = rs.getString("NICK");
 				String phone = rs.getString("PHONE");
@@ -73,6 +75,7 @@ public class MypageEditDao {
 				loginMember.setNo(no);
 				loginMember.setId(id);
 				loginMember.setPwd(pwd);
+				loginMember.setName(name);
 				loginMember.setNick(nick);
 				loginMember.setPhone(phone);
 				loginMember.setEmail(email);
@@ -80,6 +83,8 @@ public class MypageEditDao {
 				loginMember.setJoinDate(joindate);
 				loginMember.setModifyDate(modifyDate);
 				loginMember.setQuitYn(quityn);
+				
+				System.out.println(loginMember);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

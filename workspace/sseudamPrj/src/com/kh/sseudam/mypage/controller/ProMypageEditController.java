@@ -43,6 +43,8 @@ public class ProMypageEditController extends HttpServlet {
 		
 		ProVo ProloginMember = (ProVo)session.getAttribute("ProloginMember");
 		String no = ProloginMember.getNo();
+		String id = ProloginMember.getId();
+		String pwd = ProloginMember.getPwd();
 		
 		ProVo vo = new ProVo();
 		vo.setPwd(memberPwd1);
@@ -50,9 +52,18 @@ public class ProMypageEditController extends HttpServlet {
 		vo.setPhone(memberPhone);
 		vo.setEmail(memberEmail);
 		vo.setIntroduce(introduce);
+		vo.setId(id);
+		vo.setPwd(pwd);
 
 		
 		ProVo updatedMember = new MypageEditService().proedit(vo);
+		
+		if(updatedMember != null) {
+			 req.getSession().setAttribute("loginMember", updatedMember);
+			 resp.sendRedirect("/sseudam/views/mypage/promain.jsp");
+		}else {
+			
+		}
 		
 		
 	}

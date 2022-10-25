@@ -1,3 +1,4 @@
+<%@page import="com.kh.sseudam.common.PageVo"%>
 <%@page import="com.kh.sseudam.mypage.board.vo.MypageFinreserVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,7 @@
     
 <%
 	List<MypageFinreserVo> MypageFinreserList = (List<MypageFinreserVo>)request.getAttribute("MypageFinreserList");	
+	PageVo pv = (PageVo)request.getAttribute("pv");
 %>
 <!DOCTYPE html>
 <html>
@@ -30,6 +32,13 @@
         /* border */
 
         border: 1px solid #DFDFDF;
+    }
+    
+#main > #page-area{
+        grid-column: span 5;
+        text-align: center;
+        margin-top: 20px;
+        border-bottom: none;
     }
 #boardinfo{
     width: 1100px;
@@ -206,7 +215,7 @@
 }
 #review_bnt{
     margin-top: 5px;
-    margin-left: 110px;
+    margin-left: 85px;
     background-color: #97D299;
     color:black;
     border-color: #FFFFFF;
@@ -340,17 +349,16 @@
         </div>
     
         <div id="dom">
-            <div id="dominfo" onclick="location.href='/sseudam/mypage/resercheck'">상담예약</div>
+            <div id="dominfo" onclick="location.href='/sseudam/mypage/resercheck?pno=1'">상담예약</div>
         </div>
         <div id="dom2">
-            <div id="dominfo2" onclick="location.href='/sseudam/mypage/fin_resercheck'">상담완료된예약</div>
+            <div id="dominfo2" onclick="location.href='/sseudam/mypage/fin_resercheck?pno=1'">상담완료된예약</div>
         </div>
         <div id="dom3">
-            <div id="dominfo3" onclick="location.href='/sseudam/mypage/reserpay'">결제내역</div>
+            <div id="dominfo3" onclick="location.href='/sseudam/mypage/reserpay?pno=1'">결제내역</div>
         </div>
         <div id="editbar">
-            <button id="allselect" ><img id="checkbox" src="/sseudam/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
-            <button id="delete">삭제</button>
+           
         </div>
 
         <div id="pro-box-wrap">
@@ -394,10 +402,26 @@
 				</div>
 		  </div>
 		</div>
-         <%}%>       
-  		</div>
-  		
-    
+		   <%}%>  
+              
+	</div>
+         <div id="page-area">
+        
+        <%if(pv.getStartPage() !=1){%>
+		        <a href="/sseudam/mypage/fin_resercheck?pno=<%=pv.getStartPage()-1%>" class="btn btn-primary btn-sm">PRE</a> 
+        	<%}%>
+        
+        
+        <%for(int i =pv.getStartPage(); i <= pv.getEndPage(); ++i){%>
+       		<a href="/sseudam/mypage/fin_resercheck?pno=<%=i %>" class="btn btn-primary btn-sm"><%=i %></a> 
+       	<%}%>
+       	
+       	<%if(pv.getEndPage() != pv.getMaxPage()){%>
+    		<a href="/sseudam/mypage/fin_resercheck?pno=<%=pv.getEndPage()+1%>" class="btn btn-primary btn-sm">NEXT</a> 
+   		<%}%>
+       	
+       	
+        </div>
 </div>
 <%@ include file="/views/common/footer.jsp" %>	
 

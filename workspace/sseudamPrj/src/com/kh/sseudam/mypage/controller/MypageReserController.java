@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.sseudam.common.PageVo;
-import com.kh.sseudam.mypage.board.vo.MypageLikeoutVo;
 import com.kh.sseudam.mypage.board.vo.MypageReserVo;
-import com.kh.sseudam.mypage.service.MypageLikeoutService;
 import com.kh.sseudam.mypage.service.MypageReserService;
 
 @WebServlet(urlPatterns = "/mypage/resercheck")
@@ -20,6 +18,13 @@ public class MypageReserController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+//		HttpSession s = req.getSession();
+//		
+//		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
+//		
+//		String num = loginMember.getNo();
+		
 		
 		//페이징 처리
 		int listCount; 			//총 ㅐ시글 갯수
@@ -30,7 +35,7 @@ public class MypageReserController extends HttpServlet{
 		int startPage;			//페이징바 시작 페이지
 		int endPage;			//페이징바 종료 페이지
 		
-		listCount = new MypageReserService().selectCount();
+		listCount = new MypageReserService().selectCount("1");//회원번호 임의지정
 		currentPage = Integer.parseInt(req.getParameter("pno")) ;
 		pageLimit = 5;   //임의로 정함
 		boardLimit = 10; //임의로 정함
@@ -39,7 +44,7 @@ public class MypageReserController extends HttpServlet{
 
 		startPage =(currentPage-1) / pageLimit * pageLimit +1;
 
-		 endPage = startPage + pageLimit - 1;
+		endPage = startPage + pageLimit - 1;
 	      
 	      if(endPage > maxPage) {
 	         endPage = maxPage;
@@ -54,14 +59,8 @@ public class MypageReserController extends HttpServlet{
 		pv.setStartPage(startPage);
 		pv.setEndPage(endPage);
 		
-		
-//		HttpSession s = req.getSession();
-//		
-//		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
-//		
-//		String num = loginMember.getNo();
-		
-		List<MypageReserVo> MypageReserList = new MypageReserService().selectList("1",pv);
+		//디비
+		List<MypageReserVo> MypageReserList = new MypageReserService().selectList(pv,"1");
 		
 		req.setAttribute("pv", pv);
 		req.setAttribute("MypageReserList", MypageReserList);

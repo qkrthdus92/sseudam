@@ -22,7 +22,6 @@ public class MypageEditService {
 		if(result == 1) {
 			JDBCTemplate.commit(conn);
 			updatedMember = new MypageEditDao().selectOne(conn, vo);
-			return updatedMember;
 		}else {
 			JDBCTemplate.rollback(conn);
 		}
@@ -43,7 +42,6 @@ public class MypageEditService {
 		if(result == 1) {
 			JDBCTemplate.commit(conn);
 			updatedMember = new MypageEditDao().proSelectOne(conn, vo);
-			return updatedMember;
 		}else {
 			JDBCTemplate.rollback(conn);
 		}

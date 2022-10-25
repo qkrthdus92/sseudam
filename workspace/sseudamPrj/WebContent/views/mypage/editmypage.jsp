@@ -106,7 +106,7 @@
 	<div class="main">
         <h1 align="center">정보수정</h1>
 
-		<form action="/sseudam/mypage/edit" method="post" onsubmit="return check();">
+		<form action="/sseudam/mypage/edit" method="post">
 	        <div class="join-area">
 	
 	            <div>비밀번호</div>

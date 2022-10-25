@@ -1,34 +1,46 @@
+<%@page import="com.kh.sseudam.common.PageVo"%>
 <%@page import="com.kh.sseudam.mypage.board.vo.MypageReserVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	List<MypageReserVo> MypageReserList = (List<MypageReserVo>)request.getAttribute("MypageReserList");	
+	PageVo pv = (PageVo)request.getAttribute("pv");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
+
 <style>
 
 #wrap{
         position: relative;
         background: #F5F5F5;
     }
-    #main{
-        width: 1200px;
-        height: 851px;
-        left: 350px;
-        top: 169px;
-        margin: auto;
+#main{
+      width: 1200px;
+      height: 851px;
+      left: 350px;
+      top: 169px;
+      margin: auto;
 
-        /* white */
+      /* white */
 
-        background: #FFFFFF;
-        /* border */
+      background: #FFFFFF;
+      /* border */
 
-        border: 1px solid #DFDFDF;
+      border: 1px solid #DFDFDF;
+  }
+    
+#main > #page-area{
+        grid-column: span 5;
+        text-align: center;
+        margin-top: 20px;
+        border-bottom: none;
     }
 #boardinfo{
     width: 1100px;
@@ -200,7 +212,7 @@
 }
 #proname{
     margin-right: 35px;
-    margin-top:35px;
+    margin-top:10px;
     float: right;
 }
 #bor-top>label{
@@ -224,17 +236,16 @@
         </div>
     
         <div id="dom">
-            <div id="dominfo" onclick="location.href='/sseudam/mypage/resercheck'">상담예약</div>
+            <div id="dominfo" onclick="location.href='/sseudam/mypage/resercheck?pno=1'">상담예약</div>
         </div>
         <div id="dom2">
-            <div id="dominfo2" onclick="location.href='/sseudam/mypage/fin_resercheck'">상담완료된예약</div>
+            <div id="dominfo2" onclick="location.href='/sseudam/mypage/fin_resercheck?pno=1'">상담완료된예약</div>
         </div>
         <div id="dom3">
-            <div id="dominfo3" onclick="location.href='/sseudam/mypage/reserpay'">결제내역</div>
+            <div id="dominfo3" onclick="location.href='/sseudam/mypage/reserpay?pno=1'">결제내역</div>
         </div>
         <div id="editbar">
-            <button id="allselect" ><img id="checkbox" src="/sseudam/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
-            <button id="delete">삭제</button>
+           
         </div>
 
         <div id="pro-box-wrap">
@@ -253,6 +264,24 @@
             </div>
          <%}%> 
          </div>
+         
+         <div id="page-area">
+        
+        <%if(pv.getStartPage() !=1){%>
+		        <a href="/sseudam/mypage/resercheck?pno=<%=pv.getStartPage()-1%>" class="btn btn-primary btn-sm">PRE</a> 
+        	<%}%>
+        
+        
+        <%for(int i =pv.getStartPage(); i <= pv.getEndPage(); ++i){%>
+       		<a href="/sseudam/mypage/resercheck?pno=<%=i %>" class="btn btn-primary btn-sm"><%=i %></a> 
+       	<%}%>
+       	
+       	<%if(pv.getEndPage() != pv.getMaxPage()){%>
+    		<a href="/sseudam/mypage/resercheck?pno=<%=pv.getEndPage()+1%>" class="btn btn-primary btn-sm">NEXT</a> 
+   		<%}%>
+       	
+       	
+        </div>
            
     </div>
 </div>

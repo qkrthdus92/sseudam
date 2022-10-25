@@ -5,13 +5,12 @@ import java.util.List;
 
 import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.common.PageVo;
-import com.kh.sseudam.mypage.board.vo.MypageLikeVo;
 import com.kh.sseudam.mypage.board.vo.MypageReserVo;
-import com.kh.sseudam.mypage.dao.MypageLikeDao;
 import com.kh.sseudam.mypage.dao.MypageReserDao;
 
 public class MypageReserService {
 
+	//예약 목록 조회
 	public List<MypageReserVo> selectList(PageVo pv,String num) {
 		Connection conn = JDBCTemplate.getConnection();
 		
@@ -22,10 +21,12 @@ public class MypageReserService {
 		return selectList;
 	}
 
-	public int selectCount() {
+	//예약 갯수 조회
+	public int selectCount(String num) {
+		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int result = MypageReserDao.selectCount(conn);
+		int result = MypageReserDao.selectCount(conn,num);
 		
 		JDBCTemplate.close(conn);
 		

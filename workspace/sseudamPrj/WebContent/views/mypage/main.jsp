@@ -233,9 +233,9 @@
 	            <div id="leftftop">
 	                <div><h1 align="center">마이페이지</h1></div>
 	                <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
-	                <div><h2 align="center">이름</h2></div>
-	                <div><h3 align="center">닉네임</h3></div>
-	                <div id="ment">아이디님 좋은 하루되세요.</div>
+	                <div><h2 align="center"><%= loginMember.getName() %> </h2></div>
+	                <div><h3 align="center"><%= loginMember.getNick() %> </h3></div>
+	                <div id="ment"><%= loginMember.getId() %> 님 좋은 하루되세요.</div>
 	            </div>
 	            <div id="leftbot">
 	                <table>
@@ -303,7 +303,7 @@
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/좋아요.png" alt="좋아요">&nbsp;&nbsp;좋아요 컨텐츠 <button id="editbnt" onclick="location.href='/sseudam/mypage/likeyum'" >조회</button></th>
+	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/좋아요.png" alt="좋아요">&nbsp;&nbsp;좋아요 컨텐츠 <button id="editbnt" onclick="location.href='/sseudam/mypage/likeyum?pno=1'" >조회</button></th>
 	                    <td></td>
 	                </tr>
 	            </table>
@@ -319,7 +319,7 @@
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/댓글.png" alt="댓글">&nbsp;&nbsp;내가 쓴 댓글 <button id="editbnt" onclick="location.href='/sseudam/mypage/boardcheck'" >조회</button></th>
+	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/댓글.png" alt="댓글">&nbsp;&nbsp;내가 쓴 댓글 <button id="editbnt" onclick="location.href='/sseudam/mypage/boardcheck?pno=1'" >조회</button></th>
 	                    <td></td>
 	                </tr>
 	            </table>
@@ -335,7 +335,7 @@
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/결제.png" alt="결제2">&nbsp;&nbsp;결제 내역 <button id="editbnt" onclick="location.href='/sseudam/mypage/resercheck'" >조회</button></th>
+	                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/결제.png" alt="결제2">&nbsp;&nbsp;결제 내역 <button id="editbnt" onclick="location.href='/sseudam/mypage/resercheck?pno=1'" >조회</button></th>
 	                    <td></td>
 	                </tr>
 	            </table>
