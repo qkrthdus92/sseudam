@@ -185,7 +185,6 @@ String sort = (String) request.getAttribute("sort");
 		function likeBtn(no, i,mNo) {
 
 			const root = "${pageContext.request.contextPath}";
-			const mNo = 
 
 			$.ajax({
 				url : root + "/healing/outsideLike",
