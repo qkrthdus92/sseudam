@@ -12,3 +12,9 @@
   grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(11, 50px);
 }
+
+/* .admin-main-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(11, 50px);
+} */
