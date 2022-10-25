@@ -95,7 +95,6 @@ public class HealingDao {
                 + "( \r\n"
                 + "    SELECT \r\n"
                 + "        ROWNUM AS RNUM\r\n"
-                + "        ,NVL2(MEMBER_NO, 1, 0) IS_LIKE        \r\n"
                 + "        ,T.* FROM( \r\n"
                 + "            SELECT \r\n"
                 + "                NO\r\n"
@@ -109,6 +108,7 @@ public class HealingDao {
                 + "                ,WRITE_DATE\r\n"
                 + "                ,MODIFY_DATE\r\n"
                 + "                ,NVL(COUNT(MEMBER_NO),0) AS LIKED\r\n"
+                + "                ,SUM(CASE WHEN  MEMBER_NO = ?  THEN 1 ELSE 0 END ) IS_LIKE\r\n"
                 + "            FROM INSIDE\r\n"
                 + "            LEFT OUTER JOIN INSIDE_LIKE ON NO = INSIDE_NO\r\n"
                 + "            WHERE DELETE_YN = 'N'\r\n"
@@ -125,8 +125,6 @@ public class HealingDao {
                 + "                MODIFY_DATE\r\n"
                 + "            ORDER BY WRITE_DATE DESC\r\n"
                 + "            ) T\r\n"
-                + "        LEFT OUTER JOIN INSIDE_LIKE L ON T.NO = L.INSIDE_NO\r\n"
-                + "        WHERE L.MEMBER_NO = ? OR L.MEMBER_NO IS NULL\r\n"
                 + "    )\r\n"
                 + "   \r\n"
                 + "WHERE RNUM BETWEEN ? AND ?";
@@ -206,7 +204,6 @@ public class HealingDao {
                 + "( \r\n"
                 + "    SELECT \r\n"
                 + "        ROWNUM AS RNUM\r\n"
-                + "        ,NVL2(MEMBER_NO, 1, 0) IS_LIKE        \r\n"
                 + "        ,T.* FROM( \r\n"
                 + "            SELECT \r\n"
                 + "                NO\r\n"
@@ -220,6 +217,7 @@ public class HealingDao {
                 + "                ,WRITE_DATE\r\n"
                 + "                ,MODIFY_DATE\r\n"
                 + "                ,NVL(COUNT(MEMBER_NO),0) AS LIKED\r\n"
+                + "                ,SUM(CASE WHEN  MEMBER_NO = ?  THEN 1 ELSE 0 END ) IS_LIKE\r\n"
                 + "            FROM INSIDE\r\n"
                 + "            LEFT OUTER JOIN INSIDE_LIKE ON NO = INSIDE_NO\r\n"
                 + "            WHERE DELETE_YN = 'N'\r\n"
@@ -236,8 +234,6 @@ public class HealingDao {
                 + "                MODIFY_DATE\r\n"
                 + "            ORDER BY LIKED DESC\r\n"
                 + "            ) T\r\n"
-                + "        LEFT OUTER JOIN INSIDE_LIKE L ON T.NO = L.INSIDE_NO\r\n"
-                + "        WHERE L.MEMBER_NO = ? OR L.MEMBER_NO IS NULL\r\n"
                 + "    )\r\n"
                 + "   \r\n"
                 + "WHERE RNUM BETWEEN ? AND ?";
@@ -318,7 +314,6 @@ public class HealingDao {
                 + "( \r\n"
                 + "    SELECT \r\n"
                 + "        ROWNUM AS RNUM\r\n"
-                + "        ,NVL2(MEMBER_NO, 1, 0) IS_LIKE        \r\n"
                 + "        ,T.* FROM( \r\n"
                 + "            SELECT \r\n"
                 + "                NO\r\n"
@@ -332,6 +327,7 @@ public class HealingDao {
                 + "                ,WRITE_DATE\r\n"
                 + "                ,MODIFY_DATE\r\n"
                 + "                ,NVL(COUNT(MEMBER_NO),0) AS LIKED\r\n"
+                + "                ,SUM(CASE WHEN  MEMBER_NO = ?  THEN 1 ELSE 0 END ) IS_LIKE\r\n"
                 + "            FROM INSIDE\r\n"
                 + "            LEFT OUTER JOIN INSIDE_LIKE ON NO = INSIDE_NO\r\n"
                 + "            WHERE DELETE_YN = 'N'\r\n"
@@ -348,8 +344,6 @@ public class HealingDao {
                 + "                MODIFY_DATE\r\n"
                 + "                order by dbms_random.value\r\n"
                 + "            ) T\r\n"
-                + "        LEFT OUTER JOIN INSIDE_LIKE L ON T.NO = L.INSIDE_NO\r\n"
-                + "        WHERE L.MEMBER_NO = ? OR L.MEMBER_NO IS NULL\r\n"
                 + "    )\r\n"
                 + "   \r\n"
                 + "WHERE RNUM BETWEEN ? AND ?";
@@ -431,7 +425,6 @@ public class HealingDao {
                 + "( \r\n"
                 + "    SELECT \r\n"
                 + "        ROWNUM AS RNUM\r\n"
-                + "        ,NVL2(MEMBER_NO, 1, 0) IS_LIKE        \r\n"
                 + "        ,T.* FROM( \r\n"
                 + "            SELECT \r\n"
                 + "                NO\r\n"
@@ -445,6 +438,7 @@ public class HealingDao {
                 + "                ,WRITE_DATE\r\n"
                 + "                ,MODIFY_DATE\r\n"
                 + "                ,NVL(COUNT(MEMBER_NO),0) AS LIKED\r\n"
+                + "                ,SUM(CASE WHEN  MEMBER_NO = ?  THEN 1 ELSE 0 END ) IS_LIKE\r\n"
                 + "            FROM INSIDE\r\n"
                 + "            LEFT OUTER JOIN INSIDE_LIKE ON NO = INSIDE_NO\r\n"
                 + "            WHERE DELETE_YN = 'N'\r\n"
@@ -461,8 +455,6 @@ public class HealingDao {
                 + "                MODIFY_DATE\r\n"
                 + "            ORDER BY TITLE\r\n"
                 + "            ) T\r\n"
-                + "        LEFT OUTER JOIN INSIDE_LIKE L ON T.NO = L.INSIDE_NO\r\n"
-                + "        WHERE L.MEMBER_NO = ? OR L.MEMBER_NO IS NULL\r\n"
                 + "    )\r\n"
                 + "   \r\n"
                 + "WHERE RNUM BETWEEN ? AND ?";
@@ -544,7 +536,6 @@ public class HealingDao {
                 + "( \r\n"
                 + "    SELECT \r\n"
                 + "        ROWNUM AS RNUM\r\n"
-                + "        ,NVL2(MEMBER_NO, 1, 0) IS_LIKE        \r\n"
                 + "        ,T.* FROM( \r\n"
                 + "            SELECT \r\n"
                 + "                NO\r\n"
@@ -557,6 +548,7 @@ public class HealingDao {
                 + "                ,WRITE_DATE\r\n"
                 + "                ,MODIFY_DATE\r\n"
                 + "                ,NVL(COUNT(MEMBER_NO),0) AS LIKED\r\n"
+                + "                ,SUM(CASE WHEN  MEMBER_NO = ?  THEN 1 ELSE 0 END ) IS_LIKE\r\n"
                 + "            FROM EAT_ALONE\r\n"
                 + "            LEFT OUTER JOIN EAT_LIKE ON NO = EAT_ALONE_NO\r\n"
                 + "            WHERE DELETE_YN = 'N'\r\n"
@@ -572,8 +564,6 @@ public class HealingDao {
                 + "                MODIFY_DATE\r\n"
                 + "            ORDER BY WRITE_DATE DESC\r\n"
                 + "            ) T\r\n"
-                + "        LEFT OUTER JOIN EAT_LIKE L ON T.NO = L.EAT_ALONE_NO\r\n"
-                + "        WHERE L.MEMBER_NO = ? OR L.MEMBER_NO IS NULL\r\n"
                 + "    )\r\n"
                 + "   \r\n"
                 + "WHERE RNUM BETWEEN ? AND ?";
@@ -651,7 +641,6 @@ public class HealingDao {
                 + "( \r\n"
                 + "    SELECT \r\n"
                 + "        ROWNUM AS RNUM\r\n"
-                + "        ,NVL2(MEMBER_NO, 1, 0) IS_LIKE        \r\n"
                 + "        ,T.* FROM( \r\n"
                 + "            SELECT \r\n"
                 + "                NO\r\n"
@@ -664,6 +653,7 @@ public class HealingDao {
                 + "                ,WRITE_DATE\r\n"
                 + "                ,MODIFY_DATE\r\n"
                 + "                ,NVL(COUNT(MEMBER_NO),0) AS LIKED\r\n"
+                + "                ,SUM(CASE WHEN  MEMBER_NO = ?  THEN 1 ELSE 0 END ) IS_LIKE\r\n"
                 + "            FROM EAT_ALONE\r\n"
                 + "            LEFT OUTER JOIN EAT_LIKE ON NO = EAT_ALONE_NO\r\n"
                 + "            WHERE DELETE_YN = 'N'\r\n"
@@ -679,8 +669,6 @@ public class HealingDao {
                 + "                MODIFY_DATE\r\n"
                 + "            ORDER BY LIKED DESC\r\n"
                 + "            ) T\r\n"
-                + "        LEFT OUTER JOIN EAT_LIKE L ON T.NO = L.EAT_ALONE_NO\r\n"
-                + "        WHERE L.MEMBER_NO = ? OR L.MEMBER_NO IS NULL\r\n"
                 + "    )\r\n"
                 + "   \r\n"
                 + "WHERE RNUM BETWEEN ? AND ?";
@@ -759,7 +747,6 @@ public class HealingDao {
                 + "( \r\n"
                 + "    SELECT \r\n"
                 + "        ROWNUM AS RNUM\r\n"
-                + "        ,NVL2(MEMBER_NO, 1, 0) IS_LIKE        \r\n"
                 + "        ,T.* FROM( \r\n"
                 + "            SELECT \r\n"
                 + "                NO\r\n"
@@ -772,6 +759,7 @@ public class HealingDao {
                 + "                ,WRITE_DATE\r\n"
                 + "                ,MODIFY_DATE\r\n"
                 + "                ,NVL(COUNT(MEMBER_NO),0) AS LIKED\r\n"
+                + "                ,SUM(CASE WHEN  MEMBER_NO = ?  THEN 1 ELSE 0 END ) IS_LIKE\r\n"
                 + "            FROM EAT_ALONE\r\n"
                 + "            LEFT OUTER JOIN EAT_LIKE ON NO = EAT_ALONE_NO\r\n"
                 + "            WHERE DELETE_YN = 'N'\r\n"
@@ -787,8 +775,6 @@ public class HealingDao {
                 + "                MODIFY_DATE\r\n"
                 + "            order by dbms_random.value\r\n"
                 + "            ) T\r\n"
-                + "        LEFT OUTER JOIN EAT_LIKE L ON T.NO = L.EAT_ALONE_NO\r\n"
-                + "        WHERE L.MEMBER_NO = ? OR L.MEMBER_NO IS NULL\r\n"
                 + "    )\r\n"
                 + "   \r\n"
                 + "WHERE RNUM BETWEEN ? AND ?";
@@ -868,7 +854,6 @@ public class HealingDao {
                 + "( \r\n"
                 + "    SELECT \r\n"
                 + "        ROWNUM AS RNUM\r\n"
-                + "        ,NVL2(MEMBER_NO, 1, 0) IS_LIKE        \r\n"
                 + "        ,T.* FROM( \r\n"
                 + "            SELECT \r\n"
                 + "                NO\r\n"
@@ -881,6 +866,7 @@ public class HealingDao {
                 + "                ,WRITE_DATE\r\n"
                 + "                ,MODIFY_DATE\r\n"
                 + "                ,NVL(COUNT(MEMBER_NO),0) AS LIKED\r\n"
+                + "                ,SUM(CASE WHEN  MEMBER_NO = ?  THEN 1 ELSE 0 END ) IS_LIKE\r\n"
                 + "            FROM EAT_ALONE\r\n"
                 + "            LEFT OUTER JOIN EAT_LIKE ON NO = EAT_ALONE_NO\r\n"
                 + "            WHERE DELETE_YN = 'N'\r\n"
@@ -896,8 +882,6 @@ public class HealingDao {
                 + "                MODIFY_DATE\r\n"
                 + "            ORDER BY NAME\r\n"
                 + "            ) T\r\n"
-                + "        LEFT OUTER JOIN EAT_LIKE L ON T.NO = L.EAT_ALONE_NO\r\n"
-                + "        WHERE L.MEMBER_NO = ? OR L.MEMBER_NO IS NULL\r\n"
                 + "    )\r\n"
                 + "   \r\n"
                 + "WHERE RNUM BETWEEN ? AND ?";
@@ -977,7 +961,6 @@ public class HealingDao {
                 + "( \r\n"
                 + "    SELECT \r\n"
                 + "        ROWNUM AS RNUM\r\n"
-                + "        ,NVL2(MEMBER_NO, 1, 0) IS_LIKE        \r\n"
                 + "        ,T.* FROM( \r\n"
                 + "            SELECT \r\n"
                 + "                NO\r\n"
@@ -992,6 +975,7 @@ public class HealingDao {
                 + "                ,WRITE_DATE\r\n"
                 + "                ,MODIFY_DATE\r\n"
                 + "                ,NVL(COUNT(MEMBER_NO),0) AS LIKED\r\n"
+                + "                ,SUM(CASE WHEN  MEMBER_NO = ?  THEN 1 ELSE 0 END ) IS_LIKE\r\n"
                 + "            FROM OUTSIDE\r\n"
                 + "            LEFT OUTER JOIN OUTSIDE_LIKE ON NO = OUTSIDE_NO\r\n"
                 + "            WHERE DELETE_YN = 'N'\r\n"
@@ -1009,8 +993,6 @@ public class HealingDao {
                 + "                MODIFY_DATE\r\n"
                 + "            ORDER BY WRITE_DATE DESC\r\n"
                 + "            ) T\r\n"
-                + "        LEFT OUTER JOIN OUTSIDE_LIKE L ON T.NO = L.OUTSIDE_NO\r\n"
-                + "        WHERE L.MEMBER_NO = ? OR L.MEMBER_NO IS NULL\r\n"
                 + "    )\r\n"
                 + "   \r\n"
                 + "WHERE RNUM BETWEEN ? AND ?";
@@ -1095,7 +1077,6 @@ public class HealingDao {
                 + "( \r\n"
                 + "    SELECT \r\n"
                 + "        ROWNUM AS RNUM\r\n"
-                + "        ,NVL2(MEMBER_NO, 1, 0) IS_LIKE        \r\n"
                 + "        ,T.* FROM( \r\n"
                 + "            SELECT \r\n"
                 + "                NO\r\n"
@@ -1110,6 +1091,7 @@ public class HealingDao {
                 + "                ,WRITE_DATE\r\n"
                 + "                ,MODIFY_DATE\r\n"
                 + "                ,NVL(COUNT(MEMBER_NO),0) AS LIKED\r\n"
+                + "                ,SUM(CASE WHEN  MEMBER_NO = ?  THEN 1 ELSE 0 END ) IS_LIKE\r\n"
                 + "            FROM OUTSIDE\r\n"
                 + "            LEFT OUTER JOIN OUTSIDE_LIKE ON NO = OUTSIDE_NO\r\n"
                 + "            WHERE DELETE_YN = 'N'\r\n"
@@ -1127,8 +1109,6 @@ public class HealingDao {
                 + "                MODIFY_DATE\r\n"
                 + "            ORDER BY LIKED DESC\r\n"
                 + "            ) T\r\n"
-                + "        LEFT OUTER JOIN OUTSIDE_LIKE L ON T.NO = L.OUTSIDE_NO\r\n"
-                + "        WHERE L.MEMBER_NO = ? OR L.MEMBER_NO IS NULL\r\n"
                 + "    )\r\n"
                 + "   \r\n"
                 + "WHERE RNUM BETWEEN ? AND ?";
@@ -1213,7 +1193,6 @@ public class HealingDao {
                 + "( \r\n"
                 + "    SELECT \r\n"
                 + "        ROWNUM AS RNUM\r\n"
-                + "        ,NVL2(MEMBER_NO, 1, 0) IS_LIKE        \r\n"
                 + "        ,T.* FROM( \r\n"
                 + "            SELECT \r\n"
                 + "                NO\r\n"
@@ -1228,6 +1207,7 @@ public class HealingDao {
                 + "                ,WRITE_DATE\r\n"
                 + "                ,MODIFY_DATE\r\n"
                 + "                ,NVL(COUNT(MEMBER_NO),0) AS LIKED\r\n"
+                + "                ,SUM(CASE WHEN  MEMBER_NO = ?  THEN 1 ELSE 0 END ) IS_LIKE\r\n"
                 + "            FROM OUTSIDE\r\n"
                 + "            LEFT OUTER JOIN OUTSIDE_LIKE ON NO = OUTSIDE_NO\r\n"
                 + "            WHERE DELETE_YN = 'N'\r\n"
@@ -1245,8 +1225,6 @@ public class HealingDao {
                 + "                MODIFY_DATE\r\n"
                 + "            order by dbms_random.value\r\n"
                 + "            ) T\r\n"
-                + "        LEFT OUTER JOIN OUTSIDE_LIKE L ON T.NO = L.OUTSIDE_NO\r\n"
-                + "        WHERE L.MEMBER_NO = ? OR L.MEMBER_NO IS NULL\r\n"
                 + "    )\r\n"
                 + "   \r\n"
                 + "WHERE RNUM BETWEEN ? AND ?";
@@ -1332,7 +1310,6 @@ public class HealingDao {
                 + "( \r\n"
                 + "    SELECT \r\n"
                 + "        ROWNUM AS RNUM\r\n"
-                + "        ,NVL2(MEMBER_NO, 1, 0) IS_LIKE        \r\n"
                 + "        ,T.* FROM( \r\n"
                 + "            SELECT \r\n"
                 + "                NO\r\n"
@@ -1347,6 +1324,7 @@ public class HealingDao {
                 + "                ,WRITE_DATE\r\n"
                 + "                ,MODIFY_DATE\r\n"
                 + "                ,NVL(COUNT(MEMBER_NO),0) AS LIKED\r\n"
+                + "                ,SUM(CASE WHEN  MEMBER_NO = ?  THEN 1 ELSE 0 END ) IS_LIKE\r\n"
                 + "            FROM OUTSIDE\r\n"
                 + "            LEFT OUTER JOIN OUTSIDE_LIKE ON NO = OUTSIDE_NO\r\n"
                 + "            WHERE DELETE_YN = 'N'\r\n"
@@ -1364,8 +1342,6 @@ public class HealingDao {
                 + "                MODIFY_DATE\r\n"
                 + "            ORDER BY TITLE DESC\r\n"
                 + "            ) T\r\n"
-                + "        LEFT OUTER JOIN OUTSIDE_LIKE L ON T.NO = L.OUTSIDE_NO\r\n"
-                + "        WHERE L.MEMBER_NO = ? OR L.MEMBER_NO IS NULL\r\n"
                 + "    )\r\n"
                 + "   \r\n"
                 + "WHERE RNUM BETWEEN ? AND ?";
@@ -1552,6 +1528,7 @@ public class HealingDao {
             e.printStackTrace();
         } finally {            
             JDBCTemplate.close(pstmt);
+            JDBCTemplate.close(rs);
         }
         return liked;
         
@@ -1666,6 +1643,7 @@ public class HealingDao {
             e.printStackTrace();
         } finally {            
             JDBCTemplate.close(pstmt);
+            JDBCTemplate.close(rs);
         }
         return liked;
         
@@ -1778,6 +1756,7 @@ public class HealingDao {
             e.printStackTrace();
         } finally {            
             JDBCTemplate.close(pstmt);
+            JDBCTemplate.close(rs);
         }
         return liked;
         

@@ -175,7 +175,6 @@
 		function likeBtn(no,i,mNo){
 
 			const root = "${pageContext.request.contextPath}";
-			const mNo = "";
 			
 			$.ajax({
 				url: root+"/healing/insideLike",

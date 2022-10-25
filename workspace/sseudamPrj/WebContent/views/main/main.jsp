@@ -1,5 +1,11 @@
+<%@page import="com.kh.sseudam.main.vo.MainVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	List<MainVo> reVo = (List<MainVo>)request.getAttribute("reVo");
+	List<MainVo> proVo = (List<MainVo>)request.getAttribute("proVo");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,8 +103,20 @@
         </article>
         <article>
             <div class="little-menu">후기게시판</div>
-            <div class="the-more">더보기</div>
+            <a href="<%=root%>">
+            	<div class="the-more">더 보기</div>
+            </a>
             <div class="slider-review">
+            
+            
+           		<%-- <%for(int i = 0;i<reVo.size();i++){ %>
+	            	<div class="slider-box"  OnClick="location.href ='<%=root%>/'" style="cursor:pointer;">
+	                    <div class="review-img"><img src="<%=root%>/resources/upload/afterBoard/<%=reVo.get(i).getImgName()%>"></div>
+	                    <div class="review-content"><%=reVo.get(i).getTitle() %></div>
+	                </div>            	
+            	<%} %> --%>
+            	
+            	
                 <div class="slider-box">
                     <div class="review-img"><img src="<%=root%>/resources/img/main/샘플1.jpg"></div>
                     <div class="review-content">너와 함께한 시간</div>
@@ -145,8 +163,25 @@
         </article>
         <article>
             <div class="little-menu">전문가 상담</div>
-            <div class="the-more">더보기</div>
-            <div class="slider-counseling">             
+            <a href="<%=root%>/counsel/list">
+            	<div class="the-more">더 보기</div>
+            </a>
+            <div class="slider-counseling">      
+            	
+            	<%
+            		for(int i = 0;i<proVo.size();i++){ 
+            			int s = Integer.parseInt(proVo.get(i).getStar());
+            	%>
+	           		<div class="slider-box">
+	                    <div class="counseling-box-img"><img src="<%=root%>/resources/upload/pro/<%=proVo.get(i).getImgName()%>"></div>
+	                    <div class="counseling-box-content"><%=proVo.get(i).getType()%> 전문가</div>
+	                    <div class="counseling-box-name"><%=proVo.get(i).getName()%></div>
+	                    <div class="counseling-box-star">
+	                    	평점 : <%for(int j = 0 ;j<s ;j++){%>★<%}%>	                    	
+	                    </div>
+	                </div>
+            	<%} %>
+              
                 <div class="slider-box">
                     <div class="counseling-box-img"><img src="<%=root%>/resources/img/main/심원용.jpg"></div>
                     <div class="counseling-box-content">코딩 전문 상담가</div>
@@ -302,8 +337,8 @@
         $( document ).ready( function(){
             $( '.quote' ).slick({
                 dots:false,
-                autoplay: false,
-                autoplaySpeed: 5000,
+                autoplay: true,
+                autoplaySpeed: 3000,
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 fade : true,

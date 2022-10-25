@@ -13,8 +13,9 @@ import javax.servlet.http.HttpSession;
 import com.kh.sseudam.common.PageVo;
 import com.kh.sseudam.healing.service.HealingService;
 import com.kh.sseudam.healing.vo.HealingVo;
+import com.kh.sseudam.member.vo.MemberVo;
 
-import temp.MemberVo;
+
 
 @WebServlet(urlPatterns = "/healing/outside")
 public class HealingOutsideController extends HttpServlet{
@@ -72,7 +73,7 @@ public class HealingOutsideController extends HttpServlet{
         MemberVo loginMember = (MemberVo) s.getAttribute("loginMember");
         int mNo;
         if(loginMember != null) {
-            mNo = loginMember.getNo();
+            mNo = Integer.parseInt(loginMember.getNo());
         }else {
             mNo = 0;
         }
