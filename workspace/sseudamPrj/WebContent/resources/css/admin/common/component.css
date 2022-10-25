@@ -2,6 +2,10 @@
 
 /* 오른쪽 부분*/
 
+div {
+  box-sizing: border-box;
+}
+
 .admin-main {
   position: absolute;
   left: 280px;
@@ -97,6 +101,7 @@
   /* padding-bottom: 10px; */
   background-color: white;
   border: 1px solid var(--border);
+  margin-bottom: 20px;
 }
 
 /* 전체사용자 ?명 + 조회 버튼 */
@@ -251,4 +256,40 @@
 .reply-header span:nth-child(3)::after {
   content: "개";
   color: black;
+}
+
+/* 페이징바 */
+
+#page-area {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+i.fa-magnifying-glass {
+  cursor: pointer;
+}
+
+.input-edit {
+  border: none;
+  border-bottom: 1px solid var(--border);
+  height: 100%;
+
+  box-sizing: border-box;
+  padding-left: 28px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#printDupId,
+#printDupNick {
+  width: 200px;
+  height: 50px;
+  /* margin-left: 20px; */
+  color: var(--main);
 }

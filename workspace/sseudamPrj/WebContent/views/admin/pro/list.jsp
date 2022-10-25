@@ -23,7 +23,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
     <%@ include file="/views/admin/common/menu.jsp"%>
     <main class="admin-main">
       <header class="admin-main-header">
-        <h1>전문가</h1>
+        <h1><a href="<%=root%>/admin/pro/list?pno=1&status=all">전문가</a></h1>
       </header>
       <section class="admin-main-section">
         <div class="admin-main-section-top">

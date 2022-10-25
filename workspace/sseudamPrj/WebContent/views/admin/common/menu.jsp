@@ -1,4 +1,12 @@
-﻿<% String root = request.getContextPath();%>
+﻿<% String root = request.getContextPath();%> <% String alertMsg =
+(String)session.getAttribute("alertMsg"); session.removeAttribute("alertMsg");
+%>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
 
@@ -124,8 +132,10 @@
     <div class="admin-menu-main-user">
       <h1>회원 관리</h1>
       <ul>
-        <li><a href="<%=root%>/views/admin/member/list.jsp">사용자</a></li>
-        <li><a href="<%=root%>/views/admin/pro/list.jsp">전문가</a></li>
+        <li>
+          <a href="<%=root%>/admin/member/list?pno=1&quitYn=both">사용자</a>
+        </li>
+        <li><a href="<%=root%>/admin/pro/list?pno=1&status=all">전문가</a></li>
         <li><a href="<%=root%>/views/admin/admin/list.jsp">관리자</a></li>
       </ul>
     </div>
@@ -202,4 +212,17 @@
   const menu = document.querySelector(".admin-menu-main");
   menu.style.height = window.innerHeight - 110 + "px";
   console.log(menu.style.height);
+</script>
+<script>
+      <%if(alertMsg != null) {%>
+        Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: '<%= alertMsg%>',
+    showConfirmButton: false,
+    timer: 1500
+  })
+
+
+      <%}%>
 </script>

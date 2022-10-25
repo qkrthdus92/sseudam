@@ -74,7 +74,7 @@ public class CounselPayController extends HttpServlet{
 		int result = new CounselService().insertReserve(vo);
 		
 		if(result == 1) {
-			resp.sendRedirect("/sseudam/mypage/resercheck");
+			resp.sendRedirect("/sseudam/mypage/resercheck?pno=1");
 		}else {
 			
 			req.setAttribute("msg", "상담결제실패");
