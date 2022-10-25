@@ -26,6 +26,7 @@ public class MypageEditController extends HttpServlet {
 		}
 	}
 	
+	//마이페이지(장보수정)
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -42,6 +43,8 @@ public class MypageEditController extends HttpServlet {
 		
 		MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 		String no = loginMember.getNo();
+		String id = loginMember.getId();
+		String pwd = loginMember.getPwd();
 		
 		//데뭉
 		MemberVo vo = new MemberVo();
@@ -49,11 +52,15 @@ public class MypageEditController extends HttpServlet {
 		vo.setNick(memberNick);
 		vo.setPhone(memberPhone);
 		vo.setEmail(memberEmail);
+		vo.setNo(no);
+		vo.setId(id);
+		vo.setPwd(pwd);
 
 		MemberVo updatedMember = new MypageEditService().edit(vo);
 		
+		//수정후 화면선택
 		if(updatedMember != null) {
-			 req.getSession().setAttribute("alerMsg", "회원정보 수정 성공!");
+//			 req.getSession().setAttribute("alerMsg", "회원정보 수정 성공!");
 			 req.getSession().setAttribute("loginMember", updatedMember);
 			 resp.sendRedirect("/sseudam/views/mypage/main.jsp");
 		 }else {

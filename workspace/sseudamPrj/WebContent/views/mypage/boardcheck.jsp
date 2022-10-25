@@ -1,3 +1,4 @@
+<%@page import="com.kh.sseudam.common.PageVo"%>
 <%@page import="com.kh.sseudam.mypage.board.vo.MypageCommentVo"%>
 <%@page import="com.kh.sseudam.mypage.board.vo.MypageBoardVo"%>
 <%@page import="java.util.List"%>
@@ -6,6 +7,7 @@
     
 <%
 	List<MypageBoardVo> MypageBoardList = (List<MypageBoardVo>)request.getAttribute("MypageBoardList");	
+	PageVo pv = (PageVo)request.getAttribute("pv");
 %>
 <!DOCTYPE html>
 <html>
@@ -31,6 +33,12 @@
         /* border */
 
         border: 1px solid #DFDFDF;
+    }
+    #main > #page-area{
+        grid-column: span 5;
+        text-align: center;
+        margin-top: 20px;
+        border-bottom: none;
     }
     #boardinfo{
         width: 1100px;
@@ -156,7 +164,7 @@
 		        <div id="dominfo">내가 쓴 게시글</div>
 		    </div>
             <div id="dom2">
-                <div id="dominfo2" onclick="location.href='/sseudam/mypage/commentcheck';">내가 쓴 댓글</div>
+                <div id="dominfo2" onclick="location.href='/sseudam/mypage/commentcheck?pno=1';">내가 쓴 댓글</div>
             </div>
 		    <div id="editbar">
 		        <input type="checkbox" name="chk" id="chkAll"><label for="chkAll" >전체선택</label></input>
@@ -174,12 +182,28 @@
 			    <div id="editlist">
 			        <div><input type="checkbox" id="chk1" name="chk"></div>
 			        <div><%= MypageBoardList.get(i).getNo()%></div>
-			        <div><%= MypageBoardList.get(i).getTitle() %></div>
+			        <div onclick="location.href='<%=root%>/board/freeBoardDetail?bno=<%=MypageBoardList.get(i).getNo() %>'"><%= MypageBoardList.get(i).getTitle() %></div>
 			        <div><%= MypageBoardList.get(i).getType()%></div>
 			        <div><%= MypageBoardList.get(i).getWriteDate() %></div>
 			    </div>
 		     <%}%>
-		   
+		    <div id="page-area">
+        
+        <%if(pv.getStartPage() !=1){%>
+		        <a href="/sseudam/mypage/boardcheck?pno=<%=pv.getStartPage()-1%>" class="btn btn-primary btn-sm">PRE</a> 
+        	<%}%>
+        
+        
+        <%for(int i =pv.getStartPage(); i <= pv.getEndPage(); ++i){%>
+       		<a href="/sseudam/mypage/boardcheck?pno=<%=i %>" class="btn btn-primary btn-sm"><%=i %></a> 
+       	<%}%>
+       	
+       	<%if(pv.getEndPage() != pv.getMaxPage()){%>
+    		<a href="/sseudam/mypage/boardcheck?pno=<%=pv.getEndPage()+1%>" class="btn btn-primary btn-sm">NEXT</a> 
+   		<%}%>
+       	
+       	
+        </div>
 		</div>
 	</div>
 <%@ include file="/views/common/footer.jsp" %>	

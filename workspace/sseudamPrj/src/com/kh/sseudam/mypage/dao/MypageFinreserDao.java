@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.sseudam.common.JDBCTemplate;
+import com.kh.sseudam.common.PageVo;
 import com.kh.sseudam.mypage.board.vo.MypageFinreserVo;
 
 public class MypageFinreserDao {
 
-	public static List<MypageFinreserVo> selectList(String num, Connection conn) {
+	public static List<MypageFinreserVo> selectList(String num, Connection conn, PageVo pv) {
 		
-		String sql="SELECT A.NO AS \"예약번호\" ,A.MEMBER_NO ,A.PRO_NO ,A.ADVICE_DATE ,A.PAY_METHOD ,A.PAY ,A.PAY_DATE ,A.STAR ,M.NAME FROM PRO_APPOINT A FULL OUTER JOIN PRO_MEMBER M  ON A.PRO_NO = M.NO WHERE MEMBER_NO=? AND ADVICE_DATE < SYSDATE";
+		String sql="SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM(SELECT A.NO AS \"예약번호\" ,A.MEMBER_NO ,A.PRO_NO ,A.ADVICE_DATE ,A.PAY_METHOD ,A.PAY ,A.PAY_DATE ,A.STAR ,M.NAME FROM PRO_APPOINT A FULL OUTER JOIN PRO_MEMBER M  ON A.PRO_NO = M.NO WHERE MEMBER_NO=? AND ADVICE_DATE < SYSDATE)T ) WHERE RNUM BETWEEN ? AND ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -24,7 +25,12 @@ public class MypageFinreserDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			int start = (pv.getCurrentPage() - 1) * pv.getBoardLimit() + 1 ;
+			int end = start + pv.getBoardLimit() - 1;
+			
 			pstmt.setString(1, num);
+			pstmt.setInt(2,start);
+			pstmt.setInt(3, end);
 			
 			rs = pstmt.executeQuery();
 			
@@ -63,6 +69,35 @@ public class MypageFinreserDao {
 		return voList;
 
 		
+	}
+
+	public static int selectCount(Connection conn, String num) {
+		
+		
+		//SQL
+		String sql ="SELECT COUNT(*) AS CNT FROM SELECT A.NO AS \"예약번호\" ,A.MEMBER_NO ,A.PRO_NO ,A.ADVICE_DATE ,A.PAY_METHOD ,A.PAY ,A.PAY_DATE ,A.STAR ,M.NAME FROM PRO_APPOINT A FULL OUTER JOIN PRO_MEMBER M  ON A.PRO_NO = M.NO WHERE MEMBER_NO=? AND ADVICE_DATE < SYSDATE";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("CNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
 }

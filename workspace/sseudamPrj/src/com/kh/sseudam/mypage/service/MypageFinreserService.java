@@ -4,21 +4,35 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.kh.sseudam.common.JDBCTemplate;
+import com.kh.sseudam.common.PageVo;
 import com.kh.sseudam.mypage.board.vo.MypageFinreserVo;
 import com.kh.sseudam.mypage.board.vo.MypageReserVo;
 import com.kh.sseudam.mypage.dao.MypageFinreserDao;
+import com.kh.sseudam.mypage.dao.MypageReserDao;
 
 public class MypageFinreserService {
 
-	public List<MypageFinreserVo> selectList(String num) {
+	public List<MypageFinreserVo> selectList(PageVo pv,String num) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		List<MypageFinreserVo> selectList = MypageFinreserDao.selectList(num,conn);
+		List<MypageFinreserVo> selectList = MypageFinreserDao.selectList(num,conn,pv);
 		
 		JDBCTemplate.close(conn);
 		
 		return selectList;
 	}
+	
+	//예약 갯수 조회
+	public int selectCount(String num) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = MypageFinreserDao.selectCount(conn,num);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}	
 
 }

@@ -13,9 +13,9 @@ import com.kh.sseudam.mypage.board.vo.MypageReserVo;
 
 public class MypageReserDao {
 
-	public static List<MypageReserVo> selectList(PageVo pv,String num, Connection conn) {
+	public static List<MypageReserVo> selectList(String num,Connection conn, PageVo pv) {
 		
-		String sql="SELECT * FROM PRO_APPOINT A LEFT JOIN PRO_MEMBER M  ON A.PRO_NO = M.NO WHERE MEMBER_NO=? AND ADVICE_DATE >= SYSDATE";
+		String sql="SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM(SELECT * FROM PRO_APPOINT A LEFT JOIN PRO_MEMBER M  ON A.PRO_NO = M.NO WHERE MEMBER_NO=? AND ADVICE_DATE >= SYSDATE )T ) WHERE RNUM BETWEEN ? AND ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -27,10 +27,10 @@ public class MypageReserDao {
 			int start = (pv.getCurrentPage() - 1) * pv.getBoardLimit() + 1 ;
 			int end = start + pv.getBoardLimit() - 1;
 			
-			pstmt.setInt(1,start);
-			pstmt.setInt(2, end);
-			
 			pstmt.setString(1, num);
+			pstmt.setInt(2,start);
+			pstmt.setInt(3, end);
+			
 			
 			rs = pstmt.executeQuery();
 			
@@ -101,9 +101,33 @@ public class MypageReserDao {
 		
 	}
 
-	public static int selectCount(Connection conn) {
-		// TODO Auto-generated method stub
-		return 0;
+	//예약 갯수 조회
+	public static int selectCount(Connection conn , String num) {
+		
+		//SQL
+		String sql ="SELECT COUNT(*) AS CNT FROM PRO_APPOINT A LEFT JOIN PRO_MEMBER M  ON A.PRO_NO = M.NO WHERE MEMBER_NO=? AND ADVICE_DATE >= SYSDATE";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("CNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
 
