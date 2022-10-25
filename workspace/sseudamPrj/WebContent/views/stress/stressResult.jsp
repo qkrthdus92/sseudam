@@ -1,5 +1,11 @@
+<%@page import="com.kh.sseudam.stress.vo.StressVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	List<StressVo> suggestList = (List<StressVo>)request.getAttribute("suggestList");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,15 +100,22 @@
 		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
 	}
 	
-	#suggest>img {
+	#suggest> a >img {
 		width: 100%;
 		height: 85%;
 		border-top-left-radius: 10px;
 		border-top-right-radius: 10px;
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
 	}
 	
-	#suggest>* {
-		
+	#suggest>pre {
+		text-align: center;
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: #454545;
+		letter-spacing: -1px;
+		margin: auto;
+		margin-top: 6.5px;
 	}
 	
 	#btn {
@@ -114,7 +127,7 @@
 		align-items: center;
 		justify-content: center;
 		margin: auto;
-		width: 130px;
+		width: 150px;
 		height: 40px;
 		background-color: rgba(151, 210, 153, 0.7);
 		border: 0px;
@@ -133,9 +146,8 @@
 	<div id="wrap">
 		<div id="main">
 			<div id="title">
-				테스트 결과<br>Nick님의 스트레스 지수는 <%=loginMember.getTestScore() %>점입니다.
+				테스트 결과<br><%=loginMember.getNick()%>님의 스트레스 지수는 <%=loginMember.getTestScore()%>점입니다.
 			</div>
-			<%--점수 불러오기 :  <%=loginMember.getTestScore() %> --%>
 			<div>
 				<fieldset>
 					<legend>스트레스 지수에 따른 등급은 아래와 같이 평가됩니다.</legend>
@@ -168,33 +180,39 @@
 					</div>
 				</fieldset>
 			</div>
-			<div id="title">
-				<br>Nick님에게 추천하는 힐링컨텐츠
+		<div id="title">
+				<br><%=loginMember.getNick()%>님에게 추천하는 힐링컨텐츠
 			</div>
 			<div id="content">
 				<div id="btn">
-					<img src="<%=root%>/resources/img/stress//left_btn.svg">
+					<%-- <img src="<%=root%>/resources/img/stress//left_btn.svg"> --%>
 				</div>
-				<div id="suggest">
-					<img src="<%=root%>/resources/img/main/러버덕.jpg">추천컨텐츠
-				</div>
-				<div id="suggest">
-					<img src="<%=root%>/resources/img/main/러버덕.jpg">추천컨텐츠
-				</div>
-				<div id="suggest">
-					<img src="<%=root%>/resources/img/main/러버덕.jpg">추천컨텐츠
-				</div>
-				<div id="suggest">
-					<img src="<%=root%>/resources/img/main/러버덕.jpg">추천컨텐츠
-				</div>
+				
+				<%//4~7 : in //8~10 : out
+					for(int i = 0; i < 4; i++){
+						String x = "";
+						if(Integer.parseInt(suggestList.get(i).getcNum()) >= 4 && Integer.parseInt(suggestList.get(i).getcNum()) <= 7){
+							x = "inside";
+						} 
+						if(Integer.parseInt(suggestList.get(i).getcNum()) >= 8 && Integer.parseInt(suggestList.get(i).getcNum()) <= 10){
+							x = "outside";
+						}
+						System.out.println(suggestList.get(i).getImgPath());
+						%> 
+						<div id="suggest">
+								<a href="<%=suggestList.get(i).getLink()%>"><img src="<%=root%>/resources/upload/<%=x%>/<%=suggestList.get(i).getImgPath()%>"></a>
+								<pre><%=suggestList.get(i).getTitle()%></pre>
+							</div>
+						
+					<%}%>
 				<div id="btn">
-					<img src="<%=root%>/resources/img/stress//right_btn.svg">
+					<%-- <img src="<%=root%>/resources/img/stress/right_btn.svg"> --%>
 				</div>
 			</div>
 
 			<div>
 				<br>
-				<button id="retry">테스트 다시하기</button>
+				<button id="retry" onclick="location.href='<%=root%>/stress/stressTest'"><img src="<%=root%>/resources/img/stress/Refresh.svg">&nbsp;테스트 다시하기</button>
 			</div>
 
 		</div>

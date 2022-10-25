@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.sseudam.board.vo.FreeBoardCmtVo;
 import com.kh.sseudam.board.vo.FreeBoardVo;
 import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.common.PageVo;
@@ -22,6 +23,34 @@ public class FreeBoardDao {
 		int result = 0;
 
 		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				result = rs.getInt("CNT");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+	
+	// 자유게시판 댓글 갯수 조회
+	public static int selectCountCmt(Connection conn) {
+		String sql = "SELECT COUNT(*) AS CNT FROM FREE_BOARD_CMT WHERE FREE_BOARD_NO = ? AND DELETE_YN = 'N'";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+
+		try {
+
+			pstmt.setString(1, );
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
@@ -84,6 +113,52 @@ public class FreeBoardDao {
 		return voList;
 
 	}
+	
+	//자유게시판 댓글조회
+	public static List<FreeBoardCmtVo> selectCmt(Connection conn, PageVo pv, String no) {
+
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM , T.* FROM (SELECT C.NO, C.FREE_BOARD_NO, C.CMT, M.NICK AS WRITER_NO, TO_CHAR(C.MODIFY_DATE, 'yyyy-mm-dd') AS MODIFY_DATE,C.DELETE_YN FROM FREE_BOARD_CMT C JOIN MEMBER M ON C.WRITER_NO = M.NO WHERE DELETE_YN = 'N' AND FREE_BOARD_NO = ? ORDER BY NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<FreeBoardCmtVo> cmtList = new ArrayList<FreeBoardCmtVo>();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			int start = (pv.getCurrentPage() - 1) * pv.getBoardLimit() + 1;
+			int end = start + pv.getBoardLimit() - 1;
+
+			pstmt.setString(1, no);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+//				String no = rs.getString("NO");
+//				String title = rs.getString("TITLE");
+//				String writerNo = rs.getString("WRITER_NO");
+//				String writeDate = rs.getString("WRITE_DATE");
+//				String views = rs.getString("VIEWS");
+
+				FreeBoardCmtVo cmtVo = new FreeBoardCmtVo();
+//				cmtVo.setNo(no);
+//				cmtVo.setTitle(title);
+//				cmtVo.setWriterNo(writerNo);
+//				cmtVo.setViews(views);
+//				cmtVo.setWriteDate(writeDate);
+//				cmtList.add(vo);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+//		return voList;
+	}
 
 	// 자유게시판 상세조회
 	public static FreeBoardVo detail(Connection conn, String bno) {
@@ -109,6 +184,7 @@ public class FreeBoardDao {
 				String modifyDate = rs.getString("MODIFY_DATE");
 				String deleteYn = rs.getString("DELETE_YN");
 				String writerNo = rs.getString("WRITER_NO");
+				
 
 				vo = new FreeBoardVo();
 				vo.setNo(no);
@@ -127,8 +203,6 @@ public class FreeBoardDao {
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(pstmt);
 		}
-
-		System.out.println("vo출력" + vo); //잘나옴
 		return vo;
 	}
 
@@ -368,5 +442,7 @@ public class FreeBoardDao {
 		}
 		return voList;	
 	}
+
+
 
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.kh.sseudam.board.dao.FreeBoardDao;
+import com.kh.sseudam.board.vo.FreeBoardCmtVo;
 import com.kh.sseudam.board.vo.FreeBoardVo;
 import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.common.PageVo;
@@ -11,10 +12,21 @@ import com.kh.sseudam.common.PageVo;
 public class FreeBoardService {
 
 	// 자유게시판 게시글 갯수 조회
-	public int selectcount() {
+	public int selectCount() {
 		Connection conn = JDBCTemplate.getConnection();
 
 		int result = FreeBoardDao.selectCount(conn);
+
+		JDBCTemplate.close(conn);
+
+		return result;
+	}
+	
+	// 자유게시판 댓글 갯수 조회
+	public int selectCountCmt() {
+		Connection conn = JDBCTemplate.getConnection();
+
+		int result = FreeBoardDao.selectCountCmt(conn);
 
 		JDBCTemplate.close(conn);
 
@@ -26,6 +38,17 @@ public class FreeBoardService {
 		Connection conn = JDBCTemplate.getConnection();
 
 		List<FreeBoardVo> x = FreeBoardDao.selectList(conn, pv);
+
+		JDBCTemplate.close(conn);
+
+		return x;
+	}
+	
+	// 자유게시판 댓글 조회
+	public List<FreeBoardCmtVo> selectCmt(PageVo pv, String no) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		List<FreeBoardCmtVo> x = FreeBoardDao.selectCmt(conn, pv, no);
 
 		JDBCTemplate.close(conn);
 
@@ -131,5 +154,6 @@ public class FreeBoardService {
 
 		return x;	
 	}
+
 
 }
