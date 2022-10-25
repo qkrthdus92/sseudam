@@ -1,4 +1,3 @@
-<%@page import="com.kh.sseudam.member.vo.MemberVo"%>
 <%@page import="com.kh.sseudam.board.vo.FreeBoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -138,6 +137,7 @@ body {
 <%if(alertMsg != null){%>
 	alert('<%= alertMsg %>'); 
 <%}%>
+
 </script>
 </body>
 </html>

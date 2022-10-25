@@ -7,9 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.sseudam.board.service.FreeBoardService;
 import com.kh.sseudam.board.vo.FreeBoardVo;
+import com.kh.sseudam.member.vo.MemberVo;
 @WebServlet(urlPatterns = "/board/freeBoardEdit")
 public class FreeBoardEditController extends HttpServlet{
 
@@ -17,17 +19,31 @@ public class FreeBoardEditController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		//데이터 꺼내기
-		String no = req.getParameter("no");
 		
-		//데이터 뭉치기
 		
-		//디비 다녀오기
-		FreeBoardVo vo = new FreeBoardService().detail(no);
+			//데이터 꺼내기
+			String no = req.getParameter("no");
+			
+			//디비 다녀오기
+			FreeBoardVo vo = new FreeBoardService().detail(no);
+			
+			//작성자 여부 확인
+			HttpSession s = req.getSession();
+			MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
+			boolean isWriter = (loginMember != null) && loginMember.getNick().equals(vo.getWriterNo());
+			
+			if(isWriter) {
+			//화면 선택
+			req.setAttribute("vo", vo);
+			req.getRequestDispatcher("/views/board/freeBoard/freeBoardEdit.jsp").forward(req, resp);
+			
+		} else {
+			req.setAttribute("msg", "작성자만 수정이 가능합니다.");
+			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
+			return;
+		}
 		
-		//화면 선택
-		req.setAttribute("vo", vo);
-		req.getRequestDispatcher("/views/board/freeBoard/freeBoardEdit.jsp").forward(req, resp);
+		
 		
 	}
 	
