@@ -11,6 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.sseudam.member.service.MemberService;
 import com.kh.sseudam.member.vo.MemberVo;
+import com.kh.sseudam.pro.service.ProMemberService;
+import com.kh.sseudam.pro.vo.ProJoinPage1Vo;
+import com.kh.sseudam.pro.vo.ProMemberJoinVo;
 
 @WebServlet(urlPatterns = "/login")
 public class MemberLoginController extends HttpServlet{
@@ -29,6 +32,17 @@ public class MemberLoginController extends HttpServlet{
 		
 		//디비
 		MemberVo loginMember = new MemberService().login(vo);
+		ProMemberJoinVo proLoginMember = null;
+		ProMemberJoinVo proVo = new ProMemberJoinVo();
+		
+		if(loginMember == null) {
+			proLoginMember = new ProMemberService().prologin(vo);
+		}
+		
+		if(loginMember == null && proLoginMember == null) {
+			req.getSession().setAttribute("alertMsg", "로그인 실패");
+			req.getRequestDispatcher("/sseudam").forward(req, resp);	//임의로 넣음
+		}
 		
 		//화면선택
 		if(loginMember != null) {
@@ -36,9 +50,13 @@ public class MemberLoginController extends HttpServlet{
 			s.setAttribute("alertMsg", "로그인 성공");
 			s.setAttribute("loginMember", loginMember);
 			resp.sendRedirect("/sseudam/main");
-		}else {
-			req.getSession().setAttribute("alertMsg", "로그인 실패");
-			req.getRequestDispatcher("/sseudam").forward(req, resp);	//임의로 넣음
+		}
+		
+		if(proLoginMember != null) {
+			HttpSession s = req.getSession();
+			s.setAttribute("alertMsg", "로그인 성공");
+			s.setAttribute("proLoginMember", proLoginMember);
+			resp.sendRedirect("/sseudam/main");
 		}
 		
 	}

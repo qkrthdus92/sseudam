@@ -28,8 +28,6 @@ public class ProMemberJoinPageController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-	
-		System.out.println("컨트롤러 들어옴ㅇㅇ?");
 		
 		String memberId = req.getParameter("memberId");
 		String memberPwd = req.getParameter("memberPwd1");
@@ -53,8 +51,6 @@ public class ProMemberJoinPageController extends HttpServlet{
 		boolean isPage2 = education != null && certificateName != null && certificateNum != null;
 		boolean isPage3 = counselType != null && introduce != null;
 		
-		System.out.println("isPage1 :" + isPage1);
-		
 		ProJoinPage1Vo page1vo = null;
 		ProJoinPage2Vo page2vo = null;
 		ProJoinPage3Vo page3vo = null;
@@ -72,8 +68,6 @@ public class ProMemberJoinPageController extends HttpServlet{
 			req.getRequestDispatcher("/views/common/proJoin-2.jsp").forward(req, resp);
 		}
 		
-		
-		System.out.println("isPage2 :" + isPage2);
 		
 		if(isPage2 && !isPage1 && !isPage3){
 			page2vo = new ProJoinPage2Vo();

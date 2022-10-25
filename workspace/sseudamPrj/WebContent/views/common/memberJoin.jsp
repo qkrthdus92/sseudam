@@ -93,7 +93,6 @@
         height: 25px;
         cursor: pointer;
     }
-    
 </style>
 </head>
 <body>
@@ -104,37 +103,38 @@
         <h1 align="center" class="join">회원가입</h1>
         <h4 align="center" class="join-guide">이곳은 쓰담쓰담에 함께 하실 분들을 위한 회원가입 페이지 입니다.</h4>
 
-		<form action="/sseudam/join/memberJoin" method="post">
+		<form action="/sseudam/join/memberJoin" method="post" name="join">
 			<div class="join-area">
 	            <div>아이디</div>
 	            <div>
-	            	<input type="text" class="memberId-input" name="memberId" placeholder="6~14자 이내로 영문, 숫자를 조합하여 작성" required>
-	            	<input type="submit" class="overlap-check-btn" value="중복확인">
+	            	<input type="text" class="memberId-input" id="id" name="memberId" check_result="fail" placeholder="6~14자 이내 영문, 숫자를 포함하여 작성" required>
+	            	<button type="button" onclick="openCheckId()" class="overlap-check-btn" >중복확인</button>
+	            	<input type="hidden" name="idCheck" value="idUncheck">
 	            </div>
 	
 	            <div>비밀번호</div>
 	            <div>
-	                <input type="password" name="memberPwd1" placeholder="6~14자 이내로 영문, 숫자, 특수문자를 조합하여 작성" required>
+	                <input type="password" id="pwd1" name="memberPwd1" placeholder="6~14자 이내 영문, 숫자, 특수문자를 포함하여 작성" required>
 	            </div>
 	
 	            <div>비밀번호 확인</div>
 	            <div>
-	                <input type="password" name="memberPwd2">
+	                <input type="password" id="pwd2" name="memberPwd2">
 	            </div>
 	
 	            <div>이름</div>
 	            <div>
-	                <input type="text" name="memberName" required>
+	                <input type="text" id="name" name="memberName" required>
 	            </div>
 	
 	            <div>닉네임</div>
 	            <div>
-	                <input type="text" name="memberNick" placeholder="6~14자 이내로 작성(특수문자 불가능)" required>
+	                <input type="text" id="nick" name="memberNick" placeholder="6~14자 이내로 작성(특수문자 불가능)" required>
 	            </div>
 	
 	            <div>연락처</div>
 	            <div>
-	                <input type="tel" name="phone" placeholder="예) 01012345678" required>
+	                <input type="tel" id="phone" name="phone" placeholder="예) 01012345678" required>
 	            </div>
 	
 	            <div>이메일(선택)</div>
@@ -142,31 +142,106 @@
 	                <input type="email" name="email">
 	            </div>
 				
-				<!-- 이 부분 테이블에 추가 해야 할 듯...? -->
-				<!-- ㄴㄴ y 안 하면 안 넘어가게 하는 코드 있음 -->
 	            <div class="join-TOS">
-	                <label>
-	                    <input type="checkbox" id="agree">
-	                    (필수) 서비스 이용약관 및 개인정보 처리방침에 동의합니다.
-	                </label>
-	                <br>
-	                <label>
-	                    <input type="checkbox">
-	                    (선택) 이벤트 진행 등의 마케팅 정보를 수신합니다.
-	                </label>
+	            	<form name="checkBox">
+		                <label>
+		                    <input type="checkbox" id="agreeCheck" name="agreeCheck">
+		                    <a style="color: red;">(필수)</a> 서비스 이용약관 및 개인정보 처리방침에 동의합니다.
+		                </label>
+		                <br>
+		                <label>
+		                    <input type="checkbox">
+		                    (선택) 이벤트 진행 등의 마케팅 정보를 수신합니다.
+		                </label>
+	            	</form>
 	            </div>
 	
 	            <div class="join-submit">
-	                <br><input type="submit" value="가입하기" class="submit">
+	                <br><input type="submit" onclick="return joincheck();" value="가입하기" class="submit">
 	            </div>
 	
 	        </div>
 		</form>
-		
-            
+
     </div>
+    <script>
+	    
+    	function joincheck(){
+    		var getId = document.getElementById("id");
+    		var getPwd1 = document.getElementById("pwd1");
+    		var getPwd2 = document.getElementById("pwd2");
+    		var getName = document.getElementById("name");
+    		var getNick = document.getElementById("nick");
+    		 		
+    		var id = getId.value;
+    		var pwd1 = getPwd1.value;
+    		var pwd2 = getPwd2.value;
+    		var name = getName.value;
+    		var nick = getNick.value;
+    		
+    		var checkId = /^[a-zA-Z0-9]{6,14}$/;	//영문+숫자
+    		var checkPwd = /^(?=.*[a-zA-Z])(?=.*[#?!@$%^&*-])(?=.*[0-9]).{6,14}$/; //문자 + 특수문자
+			var checkName = /^[가-힣a-zA-Z]+$/;	//한글+영문
+    		
+			var cb = document.checkBox;
+    		
+    		if(!checkId.test(id)){
+    			alert("아이디는 6~14자 이내로 영문, 숫자를 포함하여 작성해 주세요.")
+    			return false;
+    		}
+    		
+    		if(!checkPwd.test(pwd1)){
+    			alert("비밀번호는 6~14자 이내로 영문, 숫자, 특수문자를 포함하여 작성해 주세요.")
+    			return false;
+    		}
+    		
+    		if(pwd1 != pwd2){
+    			alert("비밀번호가 일치하지 않습니다.")
+    			return false;
+    		}
+    		
+    		if(!checkName.test(name)){
+    			alert("이름은 한글과 영문으로 입력해 주세요.")
+    			return false;
+    		}
+    		
+    		if(!checkName.test(nick)){
+    			alert("닉네임은 한글과 영문으로 입력해 주세요.")
+    			return false;
+    		}
+		
+    		<!-- 체크여부 확인이 안 됨 -->
+    		if(!cb.agreeCheck.checked){
+    			alert("약관에 동의해 주세요.")
+    			cb.agreeCheck.focus();
+    			return false;
+    		}
+    		
+    		
+    	}
+    	
+    	//아이디 중복 확인
+    	function openCheckId(){
+    		
+    		var getId = document.getElementById("id");
+    		
+    		var id = getId.value;
+    		
+    		window.name = "parentForm";
+    		window.open("common/idCheck.jsp",
+    				"checkForm", "width=500, height=300, resizable = no, scrollbars = no");
+    	}
+    	
+    	function inputIdChk(){
+    		document.id = "idUncheck"
+    	}
+		 
+    	
+    </script>
 
     <%@ include file="/views/common/footer.jsp" %>
+    
+
 
 
 </body>

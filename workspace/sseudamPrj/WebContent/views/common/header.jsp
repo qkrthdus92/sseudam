@@ -1,3 +1,4 @@
+<%@page import="com.kh.sseudam.pro.vo.ProMemberJoinVo"%>
 <%@page import="com.kh.sseudam.member.vo.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
@@ -8,7 +9,7 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
 	session.removeAttribute("alertMsg");
 	
 	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-
+	ProMemberJoinVo proLoginMember = (ProMemberJoinVo)session.getAttribute("proLoginMember");
 %>
 
 <script>
@@ -90,6 +91,7 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
 
   .main-header-title {
     height: 83px;
+    
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #dfdfdf;
@@ -327,10 +329,21 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   background-color: transparent;
 }
 
+/* 회원가입 성공 */
+.login-success{
+  font-weight: lighter;
+}
+
+.login-success a{
+  font-weight: bold;
+}
 
 </style>
 
 <header class="main-header">
+
+<%if(loginMember == null && proLoginMember == null){%>
+<!-- 로그인 OFF -->
   <div class="main-header-top">
     <div class="main-wrapper">
       <span><a href="<%=root%>/sseudam/join">회원가입</a></span>
@@ -425,6 +438,131 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	    </div>
 	  </div>
   </form>
+  
+  <%}else if(loginMember != null){%>
+    <div class="main-header-top">
+    <div class="main-wrapper">
+      <span><div class="login-success"><a href="<%=root%>/views/mypage/main.jsp"><%= loginMember.getName() %></a> 님, 환영합니다.</div></span>
+      <span><div><a href="<%= root %>/member/logout">로그아웃</a></div></span>
+    </div>
+  </div>
+  <div class="main-header-title">
+    <div class="main-wrapper main-header-title-wrapper">
+      <div class="main-header-logo">
+        <a href="<%=root%>/views/main/main.jsp"
+          ><img src="<%= root %>/resources/img/header/logo.png" alt=""
+        /></a>
+      </div>
+      <div class="main-header-icons">
+        <div class="main-header-icon">
+          <a href=""><i class="fa-solid fa-heart"></i><span>저장</span></a>
+        </div>
+        <div class="main-header-icon">
+          <a href="<%=root%>/views/mypage/main.jsp"
+            ><i class="fa-regular fa-user"></i><span>마이</span></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main-header-nav">
+    <div class="main-wrapper">
+      <div>
+        <a href="<%=root%>/stress/stressTest">스트레스 테스트</a>
+        <div class="main-header-nav-color"></div>
+      </div>
+      <div class="dropdown">
+        <a href="">힐링하기</a>
+        <div class="main-header-nav-color"></div>
+        <div class="dropdown-content">
+          <a href="<%=root%>/healing/nyam">혼자서 냠냠</a>
+          <a href="<%=root%>/healing/outside">밖에서 뚜벅뚜벅</a>
+          <a href="<%=root%>/healing/inside">안에서 뒹굴뒹굴</a>
+        </div>
+      </div>
+      <div>
+        <a href="<%=root%>/counsel/list?pno=1">상담하기</a>
+        <div class="main-header-nav-color"></div>
+      </div>
+      <div class="dropdown">
+        <a href="">게시판</a>
+        <div class="main-header-nav-color"></div>
+        <div class="dropdown-content">
+			<a href="<%=root%>/board/freeBoardList?pno=1"
+            >자유게시판</a>
+          	<a href="<%=root%>/views/board/reviewBoard/reviewBoardList.jsp"
+            >후기게시판</a>
+        </div>
+      </div>
+      <div>
+        <a href="<%=root%>/views/mypage/customercenter.jsp">고객센터</a>
+        <div class="main-header-nav-color"></div>
+      </div>
+    </div>
+  </div>
+  
+  <%}else{%>
+      <div class="main-header-top">
+    <div class="main-wrapper">
+      <span><div class="login-success"><a href="<%=root%>/views/mypage/main.jsp"><%= proLoginMember.getName() %></a> 님, 환영합니다.</div></span>
+      <span><div><a href="<%= root %>/member/logout">로그아웃</a></div></span>
+    </div>
+  </div>
+  <div class="main-header-title">
+    <div class="main-wrapper main-header-title-wrapper">
+      <div class="main-header-logo">
+        <a href="<%=root%>/views/main/main.jsp"
+          ><img src="<%= root %>/resources/img/header/logo.png" alt=""
+        /></a>
+      </div>
+      <div class="main-header-icons">
+        <div class="main-header-icon">
+          <a href=""><i class="fa-solid fa-heart"></i><span>저장</span></a>
+        </div>
+        <div class="main-header-icon">
+          <a href="<%=root%>/views/mypage/main.jsp"
+            ><i class="fa-regular fa-user"></i><span>마이</span></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main-header-nav">
+    <div class="main-wrapper">
+      <div>
+        <a href="<%=root%>/stress/stressTest">스트레스 테스트</a>
+        <div class="main-header-nav-color"></div>
+      </div>
+      <div class="dropdown">
+        <a href="">힐링하기</a>
+        <div class="main-header-nav-color"></div>
+        <div class="dropdown-content">
+          <a href="<%=root%>/healing/nyam">혼자서 냠냠</a>
+          <a href="<%=root%>/healing/outside">밖에서 뚜벅뚜벅</a>
+          <a href="<%=root%>/healing/inside">안에서 뒹굴뒹굴</a>
+        </div>
+      </div>
+      <div>
+        <a href="<%=root%>/counsel/list?pno=1">상담하기</a>
+        <div class="main-header-nav-color"></div>
+      </div>
+      <div class="dropdown">
+        <a href="">게시판</a>
+        <div class="main-header-nav-color"></div>
+        <div class="dropdown-content">
+			<a href="<%=root%>/board/freeBoardList?pno=1"
+            >자유게시판</a>
+          	<a href="<%=root%>/views/board/reviewBoard/reviewBoardList.jsp"
+            >후기게시판</a>
+        </div>
+      </div>
+      <div>
+        <a href="<%=root%>/views/mypage/customercenter.jsp">고객센터</a>
+        <div class="main-header-nav-color"></div>
+      </div>
+    </div>
+  </div>
+  <%}%>  
 
 </header>
 
