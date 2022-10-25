@@ -142,16 +142,16 @@
 
             <div class="join-0nd">
                 <div>최종학력</div>
-                <div><input type="text" name="education"></div>
+                <div><input type="text" name="education" required></div>
             </div>
 
             <div class="join-1nd">
                 <div>자격증 이름</div>
-                <div><input type="text" name="certificateName"></div>
+                <div><input type="text" name="certificateName" required></div>
             </div>
             <div calss="join-2nd">
                 <div>자격증 번호</div>
-                <div><input type="text" name="certificateNum" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></div>
+                <div><input type="text" name="certificateNum" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required></div>
             </div>
             <div class="join-3nd">
                 <div>

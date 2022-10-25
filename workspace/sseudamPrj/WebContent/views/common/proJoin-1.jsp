@@ -126,22 +126,22 @@
             <div class="join-1nd">
                 <div>아이디</div>
                 <div>
-                    <input type="text" name="memberId" style="width: 280px;" placeholder="6~14자 이내로 영문, 숫자를 조합하여 작성">
+                    <input type="text" id="id" name="memberId" style="width: 280px;" placeholder="6~14자 이내 영문, 숫자를 포함하여 작성" required>
                     <input type="button" class="overlap-check-btn" value="중복확인" onclick="location.href=''">
                 </div>
             </div>
 
                 <div class="join-2nd">
                     <div>비밀번호</div>
-                    <div><input type="password" name="memberPwd1" placeholder="6~14자 이내로 영문, 숫자, 특수문자를 조합하여 작성"></div>
+                    <div><input type="password" id="pwd1" name="memberPwd1" placeholder="6~14자 이내 영문, 숫자, 특수문자를 포함하여 작성" required></div>
                 </div>
                 <div class="join-2nd2">
                     <div>비밀번호 확인</div>
-                    <div><input type="password" name="memberPwd2"></div>
+                    <div><input type="password" id="pwd2" name="memberPwd2"></div>
                 </div>
                 <div class="join-3nd">
                     <div>이름</div>
-                    <div><input type="text" name="memberName"></div>
+                    <div><input type="text" id="name" name="memberName" required></div>
                 </div>
 
     
@@ -161,19 +161,19 @@
             
             <div class="join-5nd">
                 <div>연락처</div>
-                <div><input type="tel" name="phone" placeholder="예) 01012345678"></div>
+                <div><input type="tel" id="phone" name="phone" placeholder="예) 01012345678" required></div>
             </div>
             <div class="join-6nd">
                 <div>이메일</div>
-                <div><input type="email" name="email"></div>
+                <div><input type="email" id="eamil" name="email" required></div>
             </div>
             <div class="join-under">
                 <div class="TOS">
                     <div class="TOS-1nd">
                         <br>
                         <label>
-                            <input type="checkbox">
-                            (필수) 서비스 이용약관 및 개인정보 처리방침에 동의합니다.
+                            <input type="checkbox" required>
+	                    	<a style="color: red;">(필수)</a> 서비스 이용약관 및 개인정보 처리방침에 동의합니다.
                         </label>
                     </div>
                     <div class="TOS-2nd">
@@ -194,6 +194,49 @@
 	</form>
 
     </nav>
+    
+	<script>
+	<!-- 회원가입 유효성 검사 -->
+		function joincheck(){
+			var getId = document.getElementById("id");
+			var getPwd1 = document.getElementById("pwd1");
+			var getPwd2 = document.getElementById("pwd2");
+			var getName = document.getElementById("name");
+			 		
+			var id = getId.value;
+			var pwd1 = getPwd1.value;
+			var pwd2 = getPwd2.value;
+			var name = getName.value;
+			
+			var checkId = /^[a-zA-Z0-9]{6,14}$/;	//영문+숫자
+			var checkPwd = /^(?=.*[a-zA-Z])(?=.*[#?!@$%^&*-])(?=.*[0-9]).{6,14}$/; //문자 + 특수문자
+			var checkName = /^[가-힣a-zA-Z]+$/;	//한글+영문
+			
+			
+			if(!checkId.test(id)){
+				alert("아이디는 6~14자 이내로 영문, 숫자를 포함하여 작성해 주세요.")
+				return false;
+			}
+			
+			if(!checkPwd.test(pwd1)){
+				alert("비밀번호는 6~14자 이내로 영문, 숫자, 특수문자를 포함하여 작성해 주세요.")
+				return false;
+			}
+			
+			if(pwd1 != pwd2){
+				alert("비밀번호가 일치하지 않습니다.")
+				return false;
+			}
+			
+			if(!checkName.test(name)){
+				alert("이름은 한글과 영문으로 입력해 주세요.")
+				return false;
+			}
+		
+			
+		}
+	</script>
+
 
     <%@ include file="/views/common/footer.jsp" %>
 
