@@ -203,10 +203,9 @@
             <div id="leftftop">
                 <div><h1 align="center">마이페이지</h1></div>
                 <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
-                <div><h2 align="center">이름</h2></div>
-                <div><h3 align="center">닉네임</h3></div>
+                <div><h2 align="center"><%= proLoginMember.getName() %></h2></div>
                 <div><h3 align="center">나의 별점 ★★★★☆</h3></div>
-                <div id="ment">아이디님 좋은 하루되세요.</div>
+                <div id="ment"><%= proLoginMember.getId() %>님 좋은 하루되세요.</div>
             </div>
             <div id="leftbot">
                 <table>
@@ -265,7 +264,7 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/수익.png" alt="결제2">&nbsp;&nbsp;수익조회 <button id="editbnt" onclick="location.href='/sseudam/mypage/proresercheck'">조회</button></th>
+                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/수익.png" alt="결제2">&nbsp;&nbsp;수익조회 <button id="editbnt" onclick="location.href='/sseudam/mypage/proresercheck?pno=1'">조회</button></th>
                     <td></td>
                 </tr>
             </table>

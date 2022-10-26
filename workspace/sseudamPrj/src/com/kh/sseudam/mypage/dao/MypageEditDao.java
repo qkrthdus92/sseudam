@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.counsel.pro.vo.ProVo;
 import com.kh.sseudam.member.vo.MemberVo;
+import com.kh.sseudam.pro.vo.ProMemberJoinVo;
 
 public class MypageEditDao {
 
@@ -98,7 +99,7 @@ public class MypageEditDao {
 	}
 
 	//프로회원 정보수정
-	public int proUpdateOneByNo(Connection conn, ProVo vo) {
+	public int proUpdateOneByNo(Connection conn, ProMemberJoinVo vo) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -128,13 +129,13 @@ public class MypageEditDao {
 	}
 	
 	//프로회원정보조회
-	public ProVo proSelectOne(Connection conn, ProVo vo) {
+	public ProMemberJoinVo proSelectOne(Connection conn, ProMemberJoinVo vo) {
 		
 		String sql = "SELECT NO ,COUNSEL_TYPE_NO,ID ,PWD ,NAME ,GENDER,PHONE ,EMAIL ,EDUCATION,PRICE,PRO_STATUS,IMG,JOIN_DATE ,INTRODUCE ,MODIFY_DATE FROM PRO_MEMBER WHERE ID = ? AND PWD = ? AND NOT PRO_STATUS = 'Q'";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ProVo loginMember = null;
+		ProMemberJoinVo loginMember = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -162,9 +163,9 @@ public class MypageEditDao {
 				
 				
 				
-				loginMember = new ProVo();
+				loginMember = new ProMemberJoinVo();
 				loginMember.setNo(no);
-				loginMember.setCounselType(counsel_type_no);
+				loginMember.setCounselTypeNo(counsel_type_no);
 				loginMember.setId(id);
 				loginMember.setPwd(pwd);
 				loginMember.setName(name);

@@ -1,3 +1,4 @@
+<%@page import="com.kh.sseudam.common.PageVo"%>
 <%@page import="com.kh.sseudam.mypage.board.vo.MypageCommentVo2"%>
 <%@page import="com.kh.sseudam.mypage.board.vo.MypageBoardVo"%>
 <%@page import="com.kh.sseudam.mypage.board.vo.MypageCommentVo"%>
@@ -8,6 +9,7 @@
 <%
 	List<MypageCommentVo> MypageCommentList = (List<MypageCommentVo>)request.getAttribute("MypageCommentList");	
 	List<MypageCommentVo2> MypageCommentList2 = (List<MypageCommentVo2>)request.getAttribute("MypageCommentList2");	
+	PageVo pv = (PageVo)request.getAttribute("pv");
 %>
 <!DOCTYPE html>
 <html>
@@ -33,6 +35,12 @@
         /* border */
 
         border: 1px solid #DFDFDF;
+    }
+        #main > #page-area{
+        grid-column: span 5;
+        text-align: center;
+        margin-top: 20px;
+        border-bottom: none;
     }
     #boardinfo{
         width: 1100px;
@@ -128,14 +136,14 @@
     }
     #edittop{
         display: grid;
-        grid-template-columns: 1fr 2fr 5fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 5fr 2fr 2fr;
         align-content: center;
         text-align: center;
     }
     #editlist{
-        height: 60px;
+        height: 40px;
         display: grid;
-        grid-template-columns: 1fr 2fr 5fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 5fr 2fr 2fr;
         align-content: center;
         text-align: center;
         border-bottom: 1px solid grey;
@@ -193,6 +201,22 @@
 			        <div><%= MypageCommentList2.get(i).getWriter_no()%></div>
 			    </div>
 		    <%}%>
+		    
+   		    <div id="page-area">
+		        <%if(pv.getStartPage() !=1){%>
+				        <a href="/sseudam/mypage/commentcheck?pno=<%=pv.getStartPage()-1%>" class="btn btn-primary btn-sm">PRE</a> 
+		        	<%}%>
+		        
+		        
+		        <%for(int i =pv.getStartPage(); i <= pv.getEndPage(); ++i){%>
+		       		<a href="/sseudam/mypage/commentcheck?pno=<%=i %>" class="btn btn-primary btn-sm"><%=i %></a> 
+		       	<%}%>
+		       	
+		       	<%if(pv.getEndPage() != pv.getMaxPage()){%>
+		    		<a href="/sseudam/mypage/commentcheck?pno=<%=pv.getEndPage()+1%>" class="btn btn-primary btn-sm">NEXT</a> 
+		   		<%}%>
+        </div>
+		    
 		</div>
 	</div>
 <%@ include file="/views/common/footer.jsp" %>	

@@ -8,6 +8,7 @@
 <%
 	List<MypageBoardVo> MypageBoardList = (List<MypageBoardVo>)request.getAttribute("MypageBoardList");	
 	PageVo pv = (PageVo)request.getAttribute("pv");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -133,19 +134,23 @@
     }
     #edittop{
         display: grid;
-        grid-template-columns: 1fr 2fr 5fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 5fr 2fr 2fr;
         align-content: center;
         text-align: center;
     }
     #editlist{
-        height: 60px;
+        height: 40px;
         display: grid;
-        grid-template-columns: 1fr 2fr 5fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 5fr 2fr 2fr;
         align-content: center;
         text-align: center;
         border-bottom: 1px solid grey;
         font-size: 20px;
     }
+    #detaillocation{
+     cursor: pointer;
+    }
+    
 
 </style>
 <body>
@@ -182,7 +187,13 @@
 			    <div id="editlist">
 			        <div><input type="checkbox" id="chk1" name="chk"></div>
 			        <div><%= MypageBoardList.get(i).getNo()%></div>
-			        <div onclick="location.href='<%=root%>/board/freeBoardDetail?bno=<%=MypageBoardList.get(i).getNo() %>'"><%= MypageBoardList.get(i).getTitle() %></div>
+			        <%String bp = null;
+			        if(MypageBoardList.get(i).getType().equals("자유게시판")){ 
+			        	bp ="/board/freeBoardDetail?bno=";
+			        }else{
+			        	bp ="/board/reviewBoardDetail?bno=";
+			        }%>
+			        <div id ="detaillocation" onclick="location.href='<%=root%><%=bp%><%=MypageBoardList.get(i).getNo() %>'"><%= MypageBoardList.get(i).getTitle() %></div>
 			        <div><%= MypageBoardList.get(i).getType()%></div>
 			        <div><%= MypageBoardList.get(i).getWriteDate() %></div>
 			    </div>

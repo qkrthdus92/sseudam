@@ -1,9 +1,11 @@
+<%@page import="com.kh.sseudam.common.PageVo"%>
 <%@page import="com.kh.sseudam.mypage.board.vo.MypageProreserVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%
 	List<MypageProreserVo> MypageProreserList = (List<MypageProreserVo>)request.getAttribute("MypageProreserList");	
+ 	PageVo pv = (PageVo)request.getAttribute("pv");
 %>   
 <!DOCTYPE html>
 <html>
@@ -29,6 +31,12 @@
         /* border */
 
         border: 1px solid #DFDFDF;
+    }
+    #main > #page-area{
+        grid-column: span 5;
+        text-align: center;
+        margin-top: 20px;
+        border-bottom: none;
     }
 #boardinfo{
     width: 1100px;
@@ -230,10 +238,10 @@
         </div>
     
         <div id="dom">
-            <div id="dominfo" onclick="location.href='/sseudam/mypage/proresercheck'">상담예약</div>
+            <div id="dominfo" onclick="location.href='/sseudam/mypage/proresercheck?pno=1'">상담예약</div>
         </div>
         <div id="dom2">
-            <div id="dominfo2" onclick="location.href='/sseudam/mypage/promoneycheck'">수익조회</div>
+            <div id="dominfo2" onclick="location.href='/sseudam/mypage/promoneycheck?pno=1'">수익조회</div>
         </div>
         <div id="dom3">
             <div id="dominfo3"></div>
@@ -265,10 +273,24 @@
                     <div id="noborder"><label><%= MypageProreserList.get(i).getNo()%></label></div>
                 </div>
 			 <%}%> 
-                
-                                 
          </div>
-    
+    	 <div id="page-area">
+        
+        <%if(pv.getStartPage() !=1){%>
+		        <a href="/sseudam/mypage/resercheck?pno=<%=pv.getStartPage()-1%>" class="btn btn-primary btn-sm">PRE</a> 
+        	<%}%>
+        
+        
+        <%for(int i =pv.getStartPage(); i <= pv.getEndPage(); ++i){%>
+       		<a href="/sseudam/mypage/resercheck?pno=<%=i %>" class="btn btn-primary btn-sm"><%=i %></a> 
+       	<%}%>
+       	
+       	<%if(pv.getEndPage() != pv.getMaxPage()){%>
+    		<a href="/sseudam/mypage/resercheck?pno=<%=pv.getEndPage()+1%>" class="btn btn-primary btn-sm">NEXT</a> 
+   		<%}%>
+       	
+       	
+        </div>
     </div>
 </div>
 <%@ include file="/views/common/footer.jsp" %>	

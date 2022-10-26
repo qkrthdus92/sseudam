@@ -7,6 +7,7 @@ import com.kh.sseudam.counsel.pro.vo.ProVo;
 import com.kh.sseudam.member.dao.MemberDao;
 import com.kh.sseudam.member.vo.MemberVo;
 import com.kh.sseudam.mypage.dao.MypageEditDao;
+import com.kh.sseudam.pro.vo.ProMemberJoinVo;
 
 public class MypageEditService {
 
@@ -31,13 +32,13 @@ public class MypageEditService {
 	}
 	
 	//프로회원정보수정
-	public ProVo proedit(ProVo vo) {
+	public ProMemberJoinVo proedit(ProMemberJoinVo vo) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
 		int result = new MypageEditDao().proUpdateOneByNo(conn, vo);
 		
-		ProVo updatedMember = null;
+		ProMemberJoinVo updatedMember = null;
 		
 		if(result == 1) {
 			JDBCTemplate.commit(conn);

@@ -8,14 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.sseudam.common.JDBCTemplate;
+import com.kh.sseudam.common.PageVo;
 import com.kh.sseudam.mypage.board.vo.MypageCommentVo;
 import com.kh.sseudam.mypage.board.vo.MypageCommentVo2;
 
 public class MypageCommentDao {
 
-	public static List<MypageCommentVo> selectList(String num, Connection conn) {
+	public static List<MypageCommentVo> selectList(String num, Connection conn,PageVo pv) {
 		
-		String sql ="SELECT NO, FREE_BOARD_NO, WRITER_NO, CMT, CMT_DATE, DELETE_YN, MODIFY_DATE , '자유게시판' \"게시판\" FROM FREE_BOARD_CMT WHERE WRITER_NO =? UNION SELECT NO, REVIEW_BOARD_NO, WRITER_NO, CMT, CMT_DATE, DELETE_YN, MODIFY_DATE,'후기게시판' \"게시판\"FROM REVIEW_BOARD_CMT WHERE WRITER_NO =?";
+		String sql ="SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM(SELECT NO, FREE_BOARD_NO, WRITER_NO, CMT, CMT_DATE, DELETE_YN, MODIFY_DATE , '자유게시판' \"게시판\" FROM FREE_BOARD_CMT WHERE WRITER_NO =? UNION SELECT NO, REVIEW_BOARD_NO, WRITER_NO, CMT, CMT_DATE, DELETE_YN, MODIFY_DATE,'후기게시판' \"게시판\"FROM REVIEW_BOARD_CMT WHERE WRITER_NO =?)T ) WHERE RNUM BETWEEN ? AND ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -25,8 +26,13 @@ public class MypageCommentDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			int start = (pv.getCurrentPage() - 1) * pv.getBoardLimit() + 1 ;
+			int end = start + pv.getBoardLimit() - 1;
+			
 			pstmt.setString(1, num);
 			pstmt.setString(2, num);
+			pstmt.setInt(3,start);
+			pstmt.setInt(4, end);
 			
 			rs = pstmt.executeQuery();
 			
@@ -66,9 +72,9 @@ public class MypageCommentDao {
 		return voList;
 	}
 
-	public static List<MypageCommentVo2> selectList2(String num, Connection conn) {
+	public static List<MypageCommentVo2> selectList2(String num, Connection conn,PageVo pv) {
 	
-String sql ="SELECT NO, FREE_BOARD_NO, WRITER_NO, CMT, CMT_DATE, DELETE_YN, MODIFY_DATE , '자유게시판' \"게시판\" FROM FREE_BOARD_CMT WHERE WRITER_NO =? UNION SELECT NO, REVIEW_BOARD_NO, WRITER_NO, CMT, CMT_DATE, DELETE_YN, MODIFY_DATE,'후기게시판' \"게시판\"FROM REVIEW_BOARD_CMT WHERE WRITER_NO =?";
+String sql ="SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM(SELECT NO, FREE_BOARD_NO, WRITER_NO, CMT, CMT_DATE, DELETE_YN, MODIFY_DATE , '자유게시판' \"게시판\" FROM FREE_BOARD_CMT WHERE WRITER_NO =? UNION SELECT NO, REVIEW_BOARD_NO, WRITER_NO, CMT, CMT_DATE, DELETE_YN, MODIFY_DATE,'후기게시판' \"게시판\"FROM REVIEW_BOARD_CMT WHERE WRITER_NO =?)T ) WHERE RNUM BETWEEN ? AND ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -78,8 +84,13 @@ String sql ="SELECT NO, FREE_BOARD_NO, WRITER_NO, CMT, CMT_DATE, DELETE_YN, MODI
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			int start = (pv.getCurrentPage() - 1) * pv.getBoardLimit() + 1 ;
+			int end = start + pv.getBoardLimit() - 1;
+			
 			pstmt.setString(1, num);
 			pstmt.setString(2, num);
+			pstmt.setInt(3,start);
+			pstmt.setInt(4, end);
 			
 			rs = pstmt.executeQuery();
 			
@@ -119,4 +130,31 @@ String sql ="SELECT NO, FREE_BOARD_NO, WRITER_NO, CMT, CMT_DATE, DELETE_YN, MODI
 		return voList;
 	}
 
+	public static int selectCount(Connection conn, String num) {
+		
+		String sql="SELECT COUNT(*) AS CNT FROM (SELECT NO, FREE_BOARD_NO, WRITER_NO, CMT, CMT_DATE, DELETE_YN, MODIFY_DATE , '자유게시판' \"게시판\" FROM FREE_BOARD_CMT WHERE WRITER_NO =? UNION SELECT NO, REVIEW_BOARD_NO, WRITER_NO, CMT, CMT_DATE, DELETE_YN, MODIFY_DATE,'후기게시판' \"게시판\"FROM REVIEW_BOARD_CMT WHERE WRITER_NO =?)";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			pstmt.setString(2, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("CNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 }

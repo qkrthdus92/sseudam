@@ -65,7 +65,6 @@ public class MypageBoardDao {
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(pstmt);
 		}
-		System.out.println(voList);
 		return voList;
 	}
 
