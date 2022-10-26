@@ -6,6 +6,7 @@
 <%
 	List<FreeBoardVo> voList = (List<FreeBoardVo>)request.getAttribute("voList");
 	PageVo pv = (PageVo)request.getAttribute("pv");
+	PageVo cmtPv = (PageVo)request.getAttribute("cmtPv");
 %>
 <!DOCTYPE html>
 <html>
@@ -132,7 +133,7 @@
         <%
 	    	for(int i = 0; i < voList.size(); ++i){%>
 	        <div class="board-list"><%=voList.get(i).getNo() %></div>
-	        <div class="board-list"><a href="<%=root%>/board/freeBoardDetail?bno=<%=voList.get(i).getNo() %>"><%=voList.get(i).getTitle() %>
+	        <div class="board-list"><a href="<%=root%>/board/freeBoardDetail?bno=<%=voList.get(i).getNo() %>&cmtPno=1"><%=voList.get(i).getTitle() %>
 	        						&nbsp;<span id="views">[<%=voList.get(i).getViews() %>]</span></a></div>
 	        <div class="board-list"><%=voList.get(i).getWriterNo() %></div>
 	        <div class="board-list"><%=voList.get(i).getWriteDate() %></div>

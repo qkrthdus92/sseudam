@@ -41,7 +41,7 @@ public class FreeBoardDao {
 	}
 	
 	// 자유게시판 댓글 갯수 조회
-	public static int selectCountCmt(Connection conn) {
+	public static int selectCountCmt(Connection conn, String bno) {
 		String sql = "SELECT COUNT(*) AS CNT FROM FREE_BOARD_CMT WHERE FREE_BOARD_NO = ? AND DELETE_YN = 'N'";
 
 		PreparedStatement pstmt = null;
@@ -50,8 +50,9 @@ public class FreeBoardDao {
 
 		try {
 
-			pstmt.setString(1, );
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bno);
+	
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
@@ -115,7 +116,7 @@ public class FreeBoardDao {
 	}
 	
 	//자유게시판 댓글조회
-	public static List<FreeBoardCmtVo> selectCmt(Connection conn, PageVo pv, String no) {
+	public static List<FreeBoardCmtVo> selectCmt(Connection conn, PageVo pv, String bno) {
 
 		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM , T.* FROM (SELECT C.NO, C.FREE_BOARD_NO, C.CMT, M.NICK AS WRITER_NO, TO_CHAR(C.MODIFY_DATE, 'yyyy-mm-dd') AS MODIFY_DATE,C.DELETE_YN FROM FREE_BOARD_CMT C JOIN MEMBER M ON C.WRITER_NO = M.NO WHERE DELETE_YN = 'N' AND FREE_BOARD_NO = ? ORDER BY NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
 
@@ -129,26 +130,28 @@ public class FreeBoardDao {
 			int start = (pv.getCurrentPage() - 1) * pv.getBoardLimit() + 1;
 			int end = start + pv.getBoardLimit() - 1;
 
-			pstmt.setString(1, no);
+			pstmt.setString(1, bno);
 			pstmt.setInt(2, start);
 			pstmt.setInt(3, end);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-//				String no = rs.getString("NO");
-//				String title = rs.getString("TITLE");
-//				String writerNo = rs.getString("WRITER_NO");
-//				String writeDate = rs.getString("WRITE_DATE");
-//				String views = rs.getString("VIEWS");
+				String no = rs.getString("NO");
+				String freeBoardNo = rs.getString("FREE_BOARD_NO");
+				String cmt = rs.getString("CMT");
+				String writerNo = rs.getString("WRITER_NO");
+				String modifyDate = rs.getString("MODIFY_DATE");
+				String deleteYn = rs.getString("DELETE_YN");
 
 				FreeBoardCmtVo cmtVo = new FreeBoardCmtVo();
-//				cmtVo.setNo(no);
-//				cmtVo.setTitle(title);
-//				cmtVo.setWriterNo(writerNo);
-//				cmtVo.setViews(views);
-//				cmtVo.setWriteDate(writeDate);
-//				cmtList.add(vo);
+				cmtVo.setNo(no);
+				cmtVo.setFreeBoardNo(freeBoardNo);
+				cmtVo.setCmt(cmt);
+				cmtVo.setWriterNo(writerNo);
+				cmtVo.setModifyDate(modifyDate);
+				cmtVo.setDeleteYn(deleteYn);
+				cmtList.add(cmtVo);
 			}
 
 		} catch (SQLException e) {
@@ -157,7 +160,7 @@ public class FreeBoardDao {
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(pstmt);
 		}
-//		return voList;
+		return cmtList;
 	}
 
 	// 자유게시판 상세조회

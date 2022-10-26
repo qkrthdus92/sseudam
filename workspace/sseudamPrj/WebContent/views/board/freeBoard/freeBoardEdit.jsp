@@ -119,13 +119,13 @@ body {
 					</div>
 					
 					<div id="btn">
-						<input type="submit" value="수정" id="ok-btn">
+						<input type="submit" value="수정" id="ok-btn">&nbsp;&nbsp;
 						<button type="button" id="no-btn" onclick="history.back()">취소</button>
 					</div>
 				</div>
 					
 			</form>
-			&nbsp;&nbsp;
+			
 			
 		</div>
 
@@ -133,11 +133,5 @@ body {
 	<div id="footer">
 		<%@ include file="/views/common/footer.jsp"%>
 	</div>
-	<script>
-<%if(alertMsg != null){%>
-	alert('<%= alertMsg %>'); 
-<%}%>
-
-</script>
 </body>
 </html>
