@@ -5,6 +5,30 @@
 <head>
 <meta charset="UTF-8">
 <title>(일반) 회원가입</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	//[중복확인] 버튼 클릭 이벤트
+	$('#idCheckBtn').click(function()){
+	//AJAX 통신 시작
+	$.ajax({
+		type : 'POST',
+		url : '/sseudam/memberJoin',
+		data : {userId : $('#id').val()},
+		async : false,
+		success : function(data){
+		var id = data;
+		id(id.length > 1){
+			$('#result').html("중복");
+		}else{
+			$('#result').html("통과");
+		}
+	}
+		
+	});
+	});
+});
+</script>
 <style>
 
     body{
@@ -94,6 +118,8 @@
         cursor: pointer;
     }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
+</script>
 </head>
 <body>
 
@@ -107,10 +133,10 @@
 			<div class="join-area">
 	            <div>아이디</div>
 	            <div>
-	            	<input type="text" class="memberId-input" id="id" name="memberId" check_result="fail" placeholder="6~14자 이내 영문, 숫자를 포함하여 작성" required>
-	            	<button type="button" onclick="openCheckId()" class="overlap-check-btn" >중복확인</button>
-	            	<input type="hidden" name="idCheck" value="idUncheck">
-	            </div>
+	            	<input type="text" id="id" class="memberId-input" name="memberId" placeholder="6~14자 이내 영문, 숫자를 포함하여 작성" required>
+	            	<button type="button" id="idCheckBtn" class="overlap-check-btn" onclick="idCheck()" >중복확인</button>
+	            	<div id="result"></div>
+	            </div>					
 	
 	            <div>비밀번호</div>
 	            <div>
@@ -219,23 +245,7 @@
     		
     		
     	}
-    	
-    	//아이디 중복 확인
-    	function openCheckId(){
-    		
-    		var getId = document.getElementById("id");
-    		
-    		var id = getId.value;
-    		
-    		window.name = "parentForm";
-    		window.open("common/idCheck.jsp",
-    				"checkForm", "width=500, height=300, resizable = no, scrollbars = no");
-    	}
-    	
-    	function inputIdChk(){
-    		document.id = "idUncheck"
-    	}
-		 
+
     	
     </script>
 
