@@ -1,6 +1,9 @@
-﻿<% String root = request.getContextPath();%> <% String alertMsg =
+﻿<%@page import="com.kh.sseudam.admin.common.AdminVo"%> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core" %> <%@ taglib prefix="fn"
+uri="http://java.sun.com/jsp/jstl/functions" %> <% String root =
+request.getContextPath();%> <% String alertMsg =
 (String)session.getAttribute("alertMsg"); session.removeAttribute("alertMsg");
-%>
+AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin"); %>
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css"
@@ -47,10 +50,15 @@
     border-bottom: 1px solid #808080;
     font-size: 28px;
     font-weight: 600;
-    color: white;
+
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .admin-menu-header a {
+    color: white;
   }
 
   /* 메뉴 부분 */
@@ -124,10 +132,18 @@
   .overflow {
     overflow: auto;
   }
+  .welcome {
+    font-size: 14px;
+    margin-top: 3px;
+    color: #26aa82;
+  }
 </style>
 
 <aside class="admin-menu">
-  <header class="admin-menu-header">쓰담쓰담</header>
+  <header class="admin-menu-header">
+    <a href="<%=root%>/main" target="_blank">쓰담쓰담</a>
+    <div class="welcome"><%=loginAdmin.getId()%>님 환영합니다</div>
+  </header>
   <main class="admin-menu-main overflow">
     <div class="admin-menu-main-user">
       <h1>회원 관리</h1>
@@ -194,7 +210,8 @@
     </div>
   </main>
   <div class="admin-menu-logout">
-    <i class="fa-solid fa-right-from-bracket"></i><a href="">로그아웃</a>
+    <i class="fa-solid fa-right-from-bracket"></i
+    ><a href="<%=root%>/admin/logout">로그아웃</a>
   </div>
 </aside>
 <script

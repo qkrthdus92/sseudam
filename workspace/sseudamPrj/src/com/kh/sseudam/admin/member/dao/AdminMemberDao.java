@@ -249,7 +249,7 @@ public class AdminMemberDao {
 	}
 
 	public int selectCntSearch(Connection conn, String search) {
-		String sql = "SELECT COUNT(*) FROM MEMBER WHERE NAME = ? OR ID = ?";
+		String sql = "SELECT COUNT(*) FROM MEMBER WHERE NAME LIKE ? OR ID LIKE ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -258,8 +258,8 @@ public class AdminMemberDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, search);
-			pstmt.setString(2, search);
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setString(2, "%"+search+"%");
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {

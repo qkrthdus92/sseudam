@@ -19,8 +19,8 @@ public class MemberEditController extends HttpServlet{
 		String mno = req.getParameter("mno");
 		String pno = req.getParameter("pno");
 		String quitYn = req.getParameter("quitYn");
-		System.out.println("겟에딧컨트pno" + pno);
-		System.out.println("겟에딧컨트quitYn" + quitYn);
+		String search = req.getParameter("search");
+
 		
 		//디비 다녀오기
 		MemberVo vo = new AdminMemberService().selectOneByNo(mno);
@@ -29,7 +29,7 @@ public class MemberEditController extends HttpServlet{
 		
 		req.setAttribute("pno", pno);
 		req.setAttribute("quitYn", quitYn);
-		
+		req.setAttribute("search", search);
 		req.getRequestDispatcher("/views/admin/member/edit.jsp").forward(req, resp);
 	}
 	
@@ -47,8 +47,7 @@ public class MemberEditController extends HttpServlet{
 		int test = Integer.parseInt(req.getParameter("test"));
 		String pno = req.getParameter("pno");
 		String quitYn = req.getParameter("quitYn");
-		System.out.println("포에딧컨트pno" + pno);
-		System.out.println("포에딧컨트quitYn" + quitYn);
+		String search = req.getParameter("search");
 		
 		//데이터 뭉치기
 		MemberVo vo = new MemberVo();
@@ -67,7 +66,7 @@ public class MemberEditController extends HttpServlet{
 		if(result == 1) {
 		
 			req.getSession().setAttribute("alertMsg", "회원 수정 완료!");
-			resp.sendRedirect("/sseudam/admin/member/edit?mno="+no+"&pno="+pno+"&quitYn="+quitYn);
+			resp.sendRedirect("/sseudam/admin/member/edit?mno="+no+"&pno="+pno+"&quitYn="+quitYn+"&search="+search);
 			
 		}else {
 			req.setAttribute("msg", "관리자페이지 : 회원정보 수정 실패");

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.sseudam.admin.member.service.AdminMemberService;
+
 import com.kh.sseudam.admin.pro.service.AdminProService;
 import com.kh.sseudam.common.PageVo;
 import com.kh.sseudam.common.Paging;
@@ -22,6 +22,7 @@ public class ProListController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String status = req.getParameter("status");
 		String pno = req.getParameter("pno");
+		String search1 = req.getParameter("search");
 		
 		List<ProVo> proList = null;
 		int currentPage = Integer.parseInt(req.getParameter("pno"));
@@ -32,12 +33,29 @@ public class ProListController extends HttpServlet{
 		//디비다녀오기
 		
 		//이름아이디로 조회
+		if(search1 != null && status == null) {
+			String search = search1.trim();
+			listCount = new AdminProService().selectCntSearch(search);
+			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
+			proList = new AdminProService().selectListSearch(pv, search); 
+			req.setAttribute("pno", pno);
+			req.setAttribute("search", search);
+			req.setAttribute("status", "all");
+			req.setAttribute("proList", proList);
+			req.setAttribute("pv", pv);
+			
+			req.setAttribute("listCount", Integer.toString(listCount));
+			req.getRequestDispatcher("/views/admin/pro/list.jsp").forward(req, resp);
+			
+		}
 		
 		//모든전문가조회
 		if(status != null && status.equals("all")) {
 			listCount = new AdminProService().selectCntAll();
+			System.out.println(listCount);
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
 			proList = new AdminProService().selectListAll(pv);
+			System.out.println(proList);
 			req.setAttribute("pno", pno);
 			req.setAttribute("status", "all");
 			req.setAttribute("proList", proList);
@@ -85,6 +103,6 @@ public class ProListController extends HttpServlet{
 		}
 		
 		
-		req.getRequestDispatcher("/views/admin/pro/list.jsp").forward(req, resp);
+	
 	}
 }

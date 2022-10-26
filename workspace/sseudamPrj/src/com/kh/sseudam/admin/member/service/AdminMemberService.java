@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.kh.sseudam.admin.member.dao.AdminMemberDao;
+import com.kh.sseudam.common.AttachmentVo;
 import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.common.PageVo;
+import com.kh.sseudam.counsel.pro.vo.ProVo;
 import com.kh.sseudam.member.vo.MemberVo;
 
 public class AdminMemberService {
@@ -179,5 +181,7 @@ public class AdminMemberService {
 		}
 		return result;
 	}
+
+
 
 }

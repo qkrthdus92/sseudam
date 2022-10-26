@@ -47,6 +47,7 @@ public class MemberListController extends HttpServlet{
 			
 			req.setAttribute("listCount", Integer.toString(listCount));
 			req.getRequestDispatcher("/views/admin/member/list.jsp").forward(req, resp);
+			return;
 			
 		}
 		//모든회원조회
@@ -60,9 +61,10 @@ public class MemberListController extends HttpServlet{
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
 			req.getRequestDispatcher("/views/admin/member/list.jsp").forward(req, resp);
+			return;
 		}
 		//일반회원조회
-		if(quitYn != null && quitYn.equals("N")) {
+		if( quitYn != null && quitYn.equals("N")) {
 			listCount = new AdminMemberService().selectCntN();
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
 			memberList = new AdminMemberService().selectListN(pv);
@@ -72,9 +74,10 @@ public class MemberListController extends HttpServlet{
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
 			req.getRequestDispatcher("/views/admin/member/list.jsp").forward(req, resp);
+			return;
 		}
 		//탈퇴회원조회
-		if(quitYn != null && quitYn != null && quitYn.equals("Y")) {
+		if( quitYn != null && quitYn.equals("Y")) {
 			listCount = new AdminMemberService().selectCntY();
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
 			memberList = new AdminMemberService().selectListY(pv);
@@ -84,6 +87,7 @@ public class MemberListController extends HttpServlet{
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
 			req.getRequestDispatcher("/views/admin/member/list.jsp").forward(req, resp);
+			return;
 		}
 		
 		

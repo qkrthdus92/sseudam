@@ -44,6 +44,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
           <form action="<%=root1%>/admin/member/list" id="member-search-form">
             <div class="admin-search">
               <input type="text" class="hidden" name="pno" value="1">
+             
               <input
                 type="text"
                 onkeyup="if(window.event.keyCode==13){document.getElementById('member-search-form').submit();}"
@@ -128,7 +129,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
             <div>탈퇴회원</div>
             <%} %>
             <div>
-              <a href="<%=root%>/admin/member/edit?mno=<%=memberList.get(i).getNo() %>&pno=<%=pno %>&quitYn=<%=quitYn %>"
+              <a href="<%=root%>/admin/member/edit?mno=<%=memberList.get(i).getNo() %>&pno=<%=pno %>&quitYn=<%=quitYn %>&search=<%=search%>"
                 ><i class="fa-solid fa-pen-to-square"></i
               ></a>
             </div>

@@ -17,12 +17,25 @@
 
 .admin-pro-certificate {
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.admin-add-certificate {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
 .admin-pro-certificate div {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-add-certificate div {
   height: 50px;
   display: flex;
   justify-content: center;
