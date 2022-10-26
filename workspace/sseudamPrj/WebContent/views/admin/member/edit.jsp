@@ -3,7 +3,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <% String root1 =
 request.getContextPath();%> <% MemberVo vo =
 (MemberVo)request.getAttribute("vo"); %> <% String pno =
 (String)request.getAttribute("pno"); String quitYn =
-(String)request.getAttribute("quitYn"); %>
+(String)request.getAttribute("quitYn"); %> <% String search =
+(String)request.getAttribute("search"); %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -33,7 +34,7 @@ request.getContextPath();%> <% MemberVo vo =
     <%@ include file="/views/admin/common/menu.jsp"%>
     <main class="admin-main">
       <form
-        action="<%=root1 %>/admin/member/edit?mno=<%=vo.getNo() %>&pno=<%=pno %>&quitYn=<%=quitYn %>"
+        action="<%=root1 %>/admin/member/edit?mno=<%=vo.getNo() %>&pno=<%=pno %>&quitYn=<%=quitYn %>&search=<%=search%>"
         method="post"
       >
         <header class="admin-main-header flex-between">
@@ -45,6 +46,7 @@ request.getContextPath();%> <% MemberVo vo =
               value="취소"
               onclick="location.href='<%=root%>/admin/member/list?pno=<%=pno %>&quitYn=<%=quitYn %>'"
             />
+
             <input
               class="save-btn"
               type="submit"

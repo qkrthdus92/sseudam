@@ -118,9 +118,12 @@
   background-color: var(--main);
   border-radius: 10px;
   margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.counsel-detail-appoint-btn a {
+#reserve-counsel-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,6 +132,10 @@
   color: white;
   font-size: 20px;
   font-weight: 600;
+  background-color: var(--main);
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
 }
 
 /* 알려드립니다! */

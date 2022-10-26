@@ -6,6 +6,7 @@ pageEncoding="UTF-8"%>
 <% String root5 = request.getContextPath();%>
 <%ProVo vo = (ProVo)request.getAttribute("vo"); %>
 <%List<CertificateVo> cerList = (List<CertificateVo>)request.getAttribute("cerList"); %>
+  
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,12 +15,15 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="<%= root5 %>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"
-      href="<%= root5 %>/resources/css/counsel/detail.css?ver=2"
+      href="<%= root5 %>/resources/css/counsel/detail.css?ver=3"
     />
     <link
       rel="stylesheet"
       href="<%= root5 %>/resources/css/common/variables.css"
     />
+    <style>
+    
+    </style>
   </head>
   <body>
     <%@ include file="/views/common/header.jsp" %>
@@ -45,8 +49,21 @@ pageEncoding="UTF-8"%>
               <div><%= vo.getPrice() %></div>
             </div>
             <div class="counsel-detail-appoint-btn">
-              <a href="<%=root%>/counsel/pay?bno=<%=vo.getNo()%>">상담받기</a>
+              <!-- <a href="<%=root%>/counsel/pay?bno=<%=vo.getNo()%>">상담받기</a> -->
+              <%if(loginMember==null){ %>
+              <button id="reserve-counsel-btn" class="popup-btn" onclick="loginPopup(true)" >상담받기</button>
+              <%}else{ %>
+              <button id="reserve-counsel-btn" >상담받기</button>
+              <%} %>
             </div>
+            <%if(loginMember!=null){ %>
+            <script>
+              const reserveCounselBtn = document.querySelector('#reserve-counsel-btn');
+              reserveCounselBtn.addEventListener('click',function() {
+                location.href='<%=root%>/counsel/pay?bno=<%=vo.getNo()%>';
+              })
+            </script>
+            <%} %>
           </div>
           <div class="counsel-detail-notice">
             <div class="counsel-detail-notice-title">

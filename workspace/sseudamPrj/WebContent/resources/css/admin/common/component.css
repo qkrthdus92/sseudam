@@ -293,3 +293,8 @@ i.fa-magnifying-glass {
   /* margin-left: 20px; */
   color: var(--main);
 }
+
+.small-img {
+  width: 45px;
+  height: 45px;
+}

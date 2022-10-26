@@ -1,5 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
+<%@page import="com.kh.sseudam.counsel.pro.vo.CertificateVo"%>
+<%@page import="java.util.List"%>
+<%@page import="com.kh.sseudam.counsel.pro.vo.ProVo"%> <%@ page language="java"
+contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <% String root1 =
+request.getContextPath();%> 
+
+<% 
+		ProVo vo = (ProVo)request.getAttribute("proVo");
+		List<CertificateVo> voList = (List<CertificateVo>)request.getAttribute("voList");
+		String pno = (String)request.getAttribute("pno");
+		String status = (String)request.getAttribute("status");
+		String search = (String)request.getAttribute("search");
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,21 +23,25 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/pro/list.css?ver=3"
+      href="<%=root1%>/resources/css/admin/pro/list.css?ver=4"
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/common/component.css?ver=2"
+      href="<%=root1%>/resources/css/admin/common/component.css?ver=3"
     />
     <style>
       .grid-col3 {
-        grid-template-rows: repeat(13, 50px);
+        grid-template-rows: repeat(14, 50px);
       }
     </style>
   </head>
   <body>
     <%@ include file="/views/admin/common/menu.jsp"%>
     <main class="admin-main">
+      <form
+        action="<%=root1 %>/admin/pro/edit?mno=<%=vo.getNo() %>&pno=<%=pno %>&status=<%=status %>&search=<%=search%>"
+        method="post"
+      >
       <header class="admin-main-header flex-between">
         <h1>전문가 정보 수정</h1>
         <div class="btn-set">
@@ -34,69 +49,154 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
             class="cancel-btn"
             type="button"
             value="취소"
-            onclick="history.back()"
+            onclick="location.href='<%=root%>/admin/pro/list?pno=<%=pno %>&status=<%=status %>'"
           />
-          <input class="save-btn" type="submit" value="저장" />
+          <input class="save-btn" type="submit" value="저장" onclick="return checkId();"/>
         </div>
       </header>
       <section class="admin-main-section">
         <div class="admin-main-wrapper">
           <div class="admin-main-board grid-col3">
             <div>번호</div>
-            <div>1</div>
+            <div><%= vo.getNo() %></div>
             <div></div>
             <div>이름</div>
-            <div>한혜원</div>
+            <input
+                type="text"
+                value="<%= vo.getName() %>"
+                class="input-edit"
+                name="name"
+              />
             <div></div>
             <div>아이디</div>
-            <div>user01</div>
+            <input
+                type="text"
+                value="<%= vo.getId() %>"
+                class="input-edit"
+                name="id"
+                id="targetId"
+              />
             <div>
-              <input type="submit" value="중복확인" class="check-btn" />
+              <input type="button" value="중복확인" class="check-btn" onclick="checkDupId();"/>
+              <div id="printDupId"></div>
             </div>
             <div>비밀번호</div>
-            <div>1234</div>
+            <input
+            type="text"
+            value="<%= vo.getPwd() %>"
+            class="input-edit"
+            name="pwd"
+          />
             <div></div>
             <div>상담분야</div>
-            <div>청소년상담</div>
+            <input
+            type="text"
+            value="<%= vo.getCounselType() %>"
+            class="input-edit"
+            name="counselType"
+          />
+            
             <div></div>
             <div>이메일</div>
-            <div>hyewon@naver.com</div>
+            <input
+            type="text"
+            value="<%= vo.getEmail() %>"
+            class="input-edit"
+            name="email"
+          />
             <div></div>
             <div>전화번호</div>
-            <div>010-1234-5678</div>
+            <input
+            type="text"
+            value="<%= vo.getPhone() %>"
+            class="input-edit"
+            name="phone"
+          />
             <div></div>
             <div>최종학력</div>
-            <div>서울대학교 심리학과</div>
+            <input
+            type="text"
+            value="<%= vo.getEducation() %>"
+            class="input-edit"
+            name="education"
+          />
             <div></div>
             <div>상담금액</div>
-            <div>50000</div>
+            <%if(vo.getPrice()!=null){%>
+            <input
+            type="text"
+            value="<%= vo.getPrice() %>"
+            class="input-edit"
+            name="price"
+          />
+          <%}else { %>
+            <input
+            type="text"
+            value="미정"
+            class="input-edit"
+            name="price"
+          />
+            <%}%>
             <div></div>
             <div>프로필사진</div>
-            <div><input type="file" value="업로드" class="upload-btn" /></div>
+            <div>
+              <img
+                src="<%=root%>/resources/upload/pro/<%=vo.getImg()%>"
+                alt=""
+                class="small-img"
+              />
+              <input type="text" disabled value="<%=vo.getImg()%>" class="input-edit">
+            </div>
+            <div><input type="file" name="f" class="upload-btn" /></div>
+            <div>소개글</div>
+            <input
+            type="text"
+            value="<%= vo.getIntroduce() %>"
+            class="input-edit"
+            name="introduce"
+          />
             <div></div>
             <div>계정상태</div>
-            <div>일반회원</div>
+            <%if(vo.getProStatus().equals("J")) {%>
+            <div>승인완료회원</div>
+            <%} %> <%if(vo.getProStatus().equals("W")) {%>
+            <div>승인대기회원</div>
+            <%} %> <%if(vo.getProStatus().equals("Q")) {%>
+            <div>탈퇴회원</div>
+            <%} %>
+            <%if(vo.getProStatus().equals("W")){%>
             <div>
               <input type="submit" value="전문가승인" class="check-btn" />
             </div>
+            <%}else {%>
+              <div></div>
+              <%}%>
             <div>가입일</div>
-            <div>2022-10-10 12:12:12</div>
+            <div><%= vo.getJoinDate() %></div>
             <div></div>
             <div>정보수정일자</div>
-            <div>2022-10-10 12:12:12</div>
+            <div><%= vo.getModifyDate() %></div>
             <div></div>
           </div>
-          <input type="button" value="회원탈퇴" class="delete-btn" />
+          <input type="button" value="회원탈퇴" class="delete-btn" onclick="quit();"/>
         </div>
-        <div class="admin-main-wrapper admin-pro-certificate">
+        <div class="admin-pro-certificate admin-main-wrapper ">
           <div>자격증이름</div>
           <div>자격번호</div>
           <div>자격증첨부파일</div>
-          <%for(int i=1; i<=5; i++) {%>
-          <div>상담심리지도사1급</div>
-          <div>1234-1234</div>
-          <div>certificate.jpg</div>
+          <%for(int i=0; i<voList.size(); i++) {%>
+          <div><%= voList.get(i).getName() %></div>
+          <div><%= voList.get(i).getNum() %></div>
+          <div><%= voList.get(i).getImg() %></div>
           <%}%>
+          
+        </div>
+        <div class="admin-main-wrapper admin-add-certificate">
+          <div>자격증이름</div>
+          <div>자격번호</div>
+          <div>자격증첨부파일</div>
+        </div>
+        <div class="admin-main-wrapper admin-add-certificate">
           <div>
             <input
               type="text"
@@ -115,6 +215,63 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
           <input type="submit" value="추가" class="small-add-btn pro-add-btn" />
         </div>
       </section>
+    </form>
+      
     </main>
+    <script>
+      function checkIdNick() {
+        let checkId = $("#printDupId").text();
+     
+        console.log(checkId);
+    
+        if (
+          (checkId.includes("현재") || checkId.includes("사용가능한")) 
+        ) {
+          return true;
+        } else {
+          Swal.fire("아이디 중복체크해주세요!");
+          return false;
+        }
+      }
+    </script>
+    <script>
+      let id = document.querySelector("#targetId").value;
+      console.log(id);
+      function checkDupId() {
+        console.log('여기여기');
+        $.ajax({
+          url: "<%=root1%>/admin/checkProIdDup",
+          type: "get",
+          data: {
+            id: $('#targetId').val(),
+            mno : <%=vo.getNo()%>
+          },
+          success: function (x) {
+            $("#printDupId").html(x);
+          },
+          error: function () {
+            alert("통신에러발생~");
+          },
+        });
+      }
+    </script>
+     <script>
+      function quit() {
+        Swal.fire({
+          title: <%=vo.getNo()%>+"번 전문가 탈퇴",
+          text: "정말로 탈퇴처리 하시겠습니까?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#26aa82",
+          cancelButtonColor: "#f85a2a",
+          confirmButtonText: "탈퇴",
+          cancelButtonText: "취소"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.href='<%=root%>/admin/pro/quit?mno=<%=vo.getNo()%>&pno=<%=pno %>&status=<%=status %>';
+          }
+        });
+      }
+    </script>
   </body>
 </html>
