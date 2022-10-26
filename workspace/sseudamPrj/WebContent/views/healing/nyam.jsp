@@ -104,7 +104,7 @@
 						<div class="popup_pic">
 							<img src="<%=root%>/resources/upload/nyam/<%=list.get(i).getImgPath()%>">
 						</div>
-						<div class="popup_name">어느 카페</div>				
+						<div class="popup_name"><%=list.get(i).getcNum()%></div>				
 					</div>
 					<div class="popup_detail">
 					
@@ -133,21 +133,40 @@
 			
 		<%}%>
 		</section>
+		
+		<%
+			String nowPage = (String)request.getQueryString();
+			int pi = 0;
+			int pageNum = 1;
+			if(nowPage != null){
+				pi = nowPage.indexOf("pno");
+				pageNum = Integer.parseInt(nowPage.substring(pi+4, pi+5));
+			}		
+		%>
 			
 		<section class="page">
 			<%if(pv.getStartPage() != 1){ %>	        
 				<div>
-			        	<a href="<%=root%>/healing/nyam?pno=<%=pv.getStartPage() - 1 %><%=sort%>"><</a>        
+			        	<a class="other-pages" href="<%=root%>/healing/nyam?pno=<%=pv.getStartPage() - 1 %><%=sort%>"><</a>        
 				</div>
         	<%} %>  
-			<% for(int j = pv.getStartPage(); j<=pv.getEndPage() ;j++){%>
-				<div class="current-page">
-			            <a href="<%=root%>/healing/nyam?pno=<%=j %><%=sort%>"><%=j %></a> 
-				</div>			
+			<% 
+				for(int j = pv.getStartPage(); j<=pv.getEndPage() ;j++){
+					String link = root+"/healing/nyam?pno="+j+sort;
+			%>
+				<div>
+						<%if(pageNum == j){%>	
+			            	<a href="<%=link%>" class="current-page">
+		            	<%}else{ %>
+		            		<a href="<%=link%>" class="other-pages">
+		            	<%} %>
+			            	<%=j %>
+			           		</a> 
+				</div>				
 	        <%} %>
 			<%if(pv.getEndPage() != pv.getMaxPage()){ %>	        
 				<div>
-		        	<a href="<%=root%>/healing/nyam?pno=<%=pv.getEndPage() + 1 %><%=sort%>">></a>        
+		        	<a class="other-pages" href="<%=root%>/healing/nyam?pno=<%=pv.getEndPage() + 1 %><%=sort%>">></a>        
 	        	</div>
         	<%} %>
 		</section>
