@@ -374,7 +374,7 @@
                     <div id="bor-top"><label>에약번호</label></div>
                     <div id="noborder"><label> <%= MypageFinreserList.get(i).getA_no()%></label></div>
                 </div>
-                <div><button id="review_bnt" onclick="showPopup(true)">별점주기</button></div>
+                <div><button id="review_bnt" onclick="showPopup(true,<%=i%>)">별점주기</button></div> <!--i를 어떻게 자바스크립트로 넘길것인지.?-->
             </div>
     		<div id="popup" class="hide">
 		  <div class="content">
@@ -398,11 +398,11 @@
 				<div class="popup-foot">
 					<!-- 별점주는 컨트롤러로 이동 -->
 					<button class="pop-btn" id="confirm" onclick="location.href=''" >확인</button> 
-					<button class="pop-btn" id="close" onclick="closePopup()" >창 닫기</button>
+					<button class="pop-btn" id="close" onclick="closePopup(<%=i %>)" >창 닫기</button>
 				</div>
 		  </div>
 		</div>
-		   <%}%>  
+ 	  <%}%>  
               
 	</div>
          <div id="page-area">
@@ -426,21 +426,22 @@
 <%@ include file="/views/common/footer.jsp" %>	
 
 <script type="text/javascript">
-	function showPopup(multipleFilter) {
-		const popup = document.querySelector('#popup');
+
+	function showPopup(multipleFilter,i) {
+		const popupArr = document.querySelectorAll('#popup');
 	  
 	  if (multipleFilter) {
-	  	popup.classList.add('multiple-filter');
+		  popupArr[i].classList.add('multiple-filter');
 	  } else {
-	  	popup.classList.remove('multiple-filter');
+		  popupArr[i].classList.remove('multiple-filter');
 	  }
 	  
-	  popup.classList.remove('hide');
+	  popupArr[i].classList.remove('hide');
 	}
 	
-	function closePopup() {
-		const popup = document.querySelector('#popup');
-	  popup.classList.add('hide');
+	function closePopup(i) {
+		const popupArr = document.querySelectorAll('#popup');
+		popupArr[i].classList.add('hide');
 	}
 </script>
 

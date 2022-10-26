@@ -1,9 +1,12 @@
+<%@page import="com.kh.sseudam.common.PageVo"%>
 <%@page import="com.kh.sseudam.mypage.board.vo.MypageLikehomeVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	List<MypageLikehomeVo> MypageLikehomeList = (List<MypageLikehomeVo>)request.getAttribute("MypageLikehomeList");	
+	PageVo pv = (PageVo)request.getAttribute("pv");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -30,6 +33,12 @@
         /* border */
 
         border: 1px solid #DFDFDF;
+    }
+    #main > #page-area{
+        grid-column: span 5;
+        text-align: center;
+        margin-top: 20px;
+        border-bottom: none;
     }
 #boardinfo{
     width: 1100px;
@@ -144,24 +153,27 @@
 }
 #edittop{
     display: grid;
-    grid-template-columns: 1fr 2fr 5fr 2fr 1fr;
+    grid-template-columns: 1fr 1fr 5fr 2fr 2fr;
     align-content: center;
     text-align: center;
 }
 #editlist{
-    height: 60px;
+    height: 40px;
     display: grid;
-    grid-template-columns: 1fr 2fr 5fr 2fr 1fr;
+    grid-template-columns: 1fr 1fr 5fr 2fr 2fr;
     align-content: center;
     text-align: center;
     border-bottom: 1px solid grey;
     font-size: 20px;
 }
 #cb1{
-    width: 20px;
-	height: 20px;
+    width: 15px;
+	height: 15px;
 	border: 2px solid #bcbcbc;
 	cursor: pointer; 
+}
+#detail_btn{
+	cursor: pointer;
 }
 </style>
 <body>
@@ -169,7 +181,7 @@
 	<div id="wrap">
 	<div id="main">
 	    <div id="boardinfo">
-	       <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
+	       <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
 	       <div id="hm1">나의 좋아요</div>
 	       <div id="hm"><%=MypageLikehomeList.size() %>개</div>
 	       <div id="hm1"></div>
@@ -177,13 +189,13 @@
 	    </div>
 	    
         <div id="dom">
-	        <div id="dominfo" onclick="location.href='/sseudam/mypage/likecheckyum';">혼자서냠냠</div>
+	        <div id="dominfo" onclick="location.href='/sseudam/mypage/likeyum?pno=1';">혼자서냠냠</div>
 	    </div>
 	    <div id="dom2">
-	        <div id="dominfo2" onclick="location.href='/sseudam/mypage/likecheckhome';">안에서뒹굴뒹굴</div>
+	        <div id="dominfo2" onclick="location.href='/sseudam/mypage/likecheckhome?pno=1';">안에서뒹굴뒹굴</div>
 	    </div>
 	    <div id="dom3">
-	        <div id="dominfo3" onclick="location.href='/sseudam/mypage/likecheckout';">밖에서뚜벅뚜벅</div>
+	        <div id="dominfo3" onclick="location.href='/sseudam/mypage/likecheckout?pno=1';">밖에서뚜벅뚜벅</div>
 	    </div>
 	    <div id="editbar">
 	        <button id="allselect" ><img id="checkbox" src="/sseudam/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
@@ -200,11 +212,28 @@
 		    <div id="editlist">
 		        <div><input type="checkbox" id="cb1"></div>
 		        <div><%= MypageLikehomeList.get(i).getNo()%></div>
-		        <div><%= MypageLikehomeList.get(i).getTitle()%></div>
+		        <div id="detail_btn" onclick="location.href='/sseudam/mypage/insidedetail?no=<%=MypageLikehomeList.get(i).getNo()%>'"><%= MypageLikehomeList.get(i).getTitle()%></div>
 		        <div>안에서뒹굴뒹굴</div>
 		        <div><%= MypageLikehomeList.get(i).getWrite_date()%></div>
 		    </div>
 	    <%}%>
+	     <div id="page-area">
+        
+        <%if(pv.getStartPage() !=1){%>
+		        <a href="/sseudam/mypage/likecheckhome?pno=<%=pv.getStartPage()-1%>" class="btn btn-primary btn-sm">PRE</a> 
+        	<%}%>
+        
+        
+        <%for(int i =pv.getStartPage(); i <= pv.getEndPage(); ++i){%>
+       		<a href="/sseudam/mypage/likecheckhome?pno=<%=i %>" class="btn btn-primary btn-sm"><%=i %></a> 
+       	<%}%>
+       	
+       	<%if(pv.getEndPage() != pv.getMaxPage()){%>
+    		<a href="/sseudam/mypage/likecheckhome?pno=<%=pv.getEndPage()+1%>" class="btn btn-primary btn-sm">NEXT</a> 
+   		<%}%>
+       	
+       	
+        </div>
 	    </div>
 	</div>
 <%@ include file="/views/common/footer.jsp" %>

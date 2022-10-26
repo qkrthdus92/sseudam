@@ -59,6 +59,7 @@ public class MypageAllreserController extends HttpServlet {
 		  pv.setEndPage(endPage);
 		
 		List<MypageAllreserVo> MypageAllreserList = new MypageAllreserService().selectList(pv,"1");
+		
 		req.setAttribute("pv", pv);
 		req.setAttribute("MypageAllreserList", MypageAllreserList);
 		req.getRequestDispatcher("/views/mypage/reserpay.jsp").forward(req, resp);

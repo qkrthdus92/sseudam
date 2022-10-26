@@ -66,6 +66,8 @@ public class MypageBoardController extends HttpServlet{
 		
 		List<MypageBoardVo> MypageBoardList = new MypageBoardService().selectList(pv,"1");
 		
+
+		
 		req.setAttribute("pv", pv);
 		req.setAttribute("MypageBoardList", MypageBoardList);
 		req.getRequestDispatcher("/views/mypage/boardcheck.jsp").forward(req, resp);

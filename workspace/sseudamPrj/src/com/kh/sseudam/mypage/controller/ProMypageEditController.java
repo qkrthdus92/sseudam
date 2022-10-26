@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.kh.sseudam.counsel.pro.vo.ProVo;
 import com.kh.sseudam.member.vo.MemberVo;
 import com.kh.sseudam.mypage.service.MypageEditService;
+import com.kh.sseudam.pro.vo.ProMemberJoinVo;
 
 @WebServlet(urlPatterns = "/mypage/proeditmypage")
 public class ProMypageEditController extends HttpServlet {
@@ -19,7 +20,7 @@ public class ProMypageEditController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession s = req.getSession();
-		ProVo ProloginMember = (ProVo)s.getAttribute("ProloginMember");
+		ProMemberJoinVo ProloginMember = (ProMemberJoinVo)s.getAttribute("ProloginMember");
 		if(ProloginMember != null) {
 			req.getRequestDispatcher("/views/mypage/proeditmypage.jsp").forward(req, resp);
 		}else {
@@ -41,12 +42,12 @@ public class ProMypageEditController extends HttpServlet {
 		String memberEmail = req.getParameter("memberEmail");
 		String introduce = req.getParameter("introduce");
 		
-		ProVo ProloginMember = (ProVo)session.getAttribute("ProloginMember");
+		ProMemberJoinVo ProloginMember = (ProMemberJoinVo)session.getAttribute("ProloginMember");
 		String no = ProloginMember.getNo();
 		String id = ProloginMember.getId();
 		String pwd = ProloginMember.getPwd();
 		
-		ProVo vo = new ProVo();
+		ProMemberJoinVo vo = new ProMemberJoinVo();
 		vo.setPwd(memberPwd1);
 		vo.setName(Name);
 		vo.setPhone(memberPhone);
@@ -56,7 +57,7 @@ public class ProMypageEditController extends HttpServlet {
 		vo.setPwd(pwd);
 
 		
-		ProVo updatedMember = new MypageEditService().proedit(vo);
+		ProMemberJoinVo updatedMember = new MypageEditService().proedit(vo);
 		
 		if(updatedMember != null) {
 			 req.getSession().setAttribute("loginMember", updatedMember);
