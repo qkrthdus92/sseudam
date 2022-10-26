@@ -221,8 +221,10 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
   .dropdown:hover .dropdown-content {
     display: block;
   }
-
-  #login-popup {
+  
+  /* 로그인, 아이디 찾기 팝업 */
+  #login-popup,
+  #find-id-popup{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -242,18 +244,21 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
   cursor: pointer;
 }
 
-/* 로그인 팝업 */
+/* 로그인, 아이디 찾기 팝업 */
 
-#login-popup.hide {
+#login-popup.hide,
+#find-id-popup.hide{
   display: none;	/* 아예 코드도 사라짐 */
 }
 
-#login-popup.has-filter {
+#login-popup.has-filter,
+#find-id-popup.has-filter{
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
 
-#login-popup .login-popup {
+#login-popup .login-popup,
+#find-id-popup .login-popup {
   width: 477px;
   height: 634px;
   display: grid;
@@ -263,12 +268,14 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
   box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);
 }
 
-#login-popup .login-popup-header{
+#login-popup .login-popup-header,
+#find-id-popup .login-popup-header{
   border-radius: 10px 10px 0px 0px;
   background-color: rgba(217, 217, 217, 1);
 }
 
-#login-popup .login-popup-btn{
+#login-popup .login-popup-btn,
+#find-id-popup .login-popup-btn{
   width: 30px;
   height: 30px;
   margin-top: 5px;
@@ -287,6 +294,24 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
   margin-left: 20%;
   margin-top: 13%;
   font-size: 18px;
+}
+
+.phoneNum,
+.confmNum{
+	margin-top: 10px
+}
+
+/* 인증번호 버튼 */
+.confirmbtn{
+    color: rgba(253, 121, 0, 1);
+    border: 1px solid rgba(253, 121, 0, 1);
+    font-size: 13px;
+    border-radius: 15px;
+    background-color: white;
+    width: 75px;
+    height: 25px;
+    cursor: pointer;
+    margin-left: 5px
 }
 
 .login-pwd{
@@ -319,6 +344,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 .login-popup-button a{
   text-decoration: none;
   color: black;
+  cursor: pointer;
 }
 
 .join-btn,
@@ -353,7 +379,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   <div class="main-header-title">
     <div class="main-wrapper main-header-title-wrapper">
       <div class="main-header-logo">
-        <a href="<%=root%>/views/main/main.jsp"
+        <a href="<%=root%>/sseudam/main"
           ><img src="<%= root %>/resources/img/header/logo.png" alt=""
         /></a>
       </div>
@@ -417,27 +443,92 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	          <div class="login-input">
 	            <div class="login-in" >아이디</div>
 	            <div>
-	            	<input type="text" name="memberId" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black;">
+	            	<input type="text" name="memberId" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
 	            </div>
 	            <div class="login-pwd">비밀번호</div>
 	            <div>
-	                <input type="password" name="memberPwd" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black;">
+	                <input type="password" name="memberPwd" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
 	            </div>
 	          </div>
 	            <div>
-	              <br><a href=''><input type="submit" value="로그인" class="login-btn" ></a>
+	              <br><a><input type="submit" value="로그인" class="login-btn" ></a>
 	            </div>
 	      </div>
 	      
 	      <div class="login-popup-button">
 	        <div><a href='<%=root%>/views/common/join.jsp'>회원가입</a></div>
-	        <div><a href=''>아이디 찾기</a></div>
+	        <div><a onclick="idFind()">아이디 찾기</a></div>
 	        <div><a href=''>비밀번호 찾기</a></div>
 	      </div>
 	      
 	    </div>
 	  </div>
   </form>
+  
+    <!-- 아이디 찾기 팝업 -->
+  <form action="/sseudam/findId" method="post">
+	    <div id="find-id-popup" class="hide">
+	    <div class="login-popup">
+	      <div class="login-popup-header">
+	        <img src="<%=root%>/resources/img/join/close.png" class="login-popup-btn" onclick="closeFindIdPopup()">
+	      </div>
+	      <div class="login-popup-middle">
+	          <div class="login-header">아이디 찾기</div>
+	          <div class="login-input">
+	            <div>이름</div>
+	            <div>
+	            	<input type="text" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
+	            </div>
+	            <div class="phoneNum">연락처</div>
+	            <div>
+	                <input type="tel" style="width: 55%; font-size: 18px; border: none; border-bottom: 1px solid black; required"><button type="button" id="confirmbtn" class="confirmbtn" onclick="" >인증번호</button>
+	            </div>
+	            <div class="confmNum">인증번호 입력</div>
+	            <div>
+	            	<input type="text" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
+	            </div>
+	          </div>
+	          	<div>
+	            <br><a><input type="submit" value="아이디 찾기" class="login-btn" onclick="idFindSuc()"></a>
+	            </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+  </form>
+  
+    <!-- 인증번호 입력 후, 아이디 찾기 팝업 -->
+  <form action="/sseudam/findId" method="post">
+	    <div id="find-id-popup" class="hide">
+	    <div class="login-popup">
+	      <div class="login-popup-header">
+	        <img src="<%=root%>/resources/img/join/close.png" class="login-popup-btn" onclick="closeFindIdPopup()">
+	      </div>
+	      <div class="login-popup-middle">
+	          <div class="login-header">아이디 찾기</div>
+	          <div class="login-input">
+	            <div>이름</div>
+	            <div>
+	            	<input type="text" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
+	            </div>
+	            <div class="phoneNum">연락처</div>
+	            <div>
+	                <input type="tel" style="width: 55%; font-size: 18px; border: none; border-bottom: 1px solid black; required"><button type="button" id="confirmbtn" class="confirmbtn" onclick="" >인증번호</button>
+	            </div>
+	            <div class="confmNum">인증번호 입력</div>
+	            <div>
+	            	<input type="text" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
+	            </div>
+	          </div>
+	          	<div>
+	            <br><a><input type="submit" value="아이디 찾기" class="login-btn" onclick="idFindSuc()"></a>
+	            </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+  </form>  
+  
   
   <%}else if(loginMember != null){%>
     <div class="main-header-top">
@@ -449,7 +540,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   <div class="main-header-title">
     <div class="main-wrapper main-header-title-wrapper">
       <div class="main-header-logo">
-        <a href="<%=root%>/views/main/main.jsp"
+        <a href="<%=root%>/sseudam/main"
           ><img src="<%= root %>/resources/img/header/logo.png" alt=""
         /></a>
       </div>
@@ -511,7 +602,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   <div class="main-header-title">
     <div class="main-wrapper main-header-title-wrapper">
       <div class="main-header-logo">
-        <a href="<%=root%>/views/main/main.jsp"
+        <a href="<%=root%>/sseudam/main"
           ><img src="<%= root %>/resources/img/header/logo.png" alt=""
         /></a>
       </div>
@@ -521,8 +612,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
         </div>
         <div class="main-header-icon">
           <a href="<%=root%>/views/mypage/main.jsp"
-            ><i class="fa-regular fa-user"></i><span>마이</span></a
-          >
+            ><i class="fa-regular fa-user"></i><span>마이</span></a>
         </div>
       </div>
     </div>
@@ -574,17 +664,53 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 <script>
     // 로그인 팝업
     function loginPopup(hasFilter) {
-    const popup = document.querySelector('#login-popup');
+    	const popup = document.querySelector('#login-popup');
     
-    if (hasFilter) {
-      popup.classList.add();
-    }
-    popup.classList.remove('hide');
-  }
-
-  function closeLoginPopup() {
-    const popup = document.querySelector('#login-popup');
-    popup.classList.add('hide');
-  }
+	    if (hasFilter) {
+	      popup.classList.add();
+	    }
+	    popup.classList.remove('hide');
+  	}
+	//로그인 팝업 닫기
+  	function closeLoginPopup() {
+	    const popup = document.querySelector('#login-popup');
+	    popup.classList.add('hide');
+  	}
+  
+  	//아이디 찾기 팝업
+  	function idFind(hasFilter){
+		//로그인 팝업부터 닫아줘야 함
+	    const closePopup = document.querySelector('#login-popup');
+	    closePopup.classList.add('hide');
+    
+	    //아이디 찾기 팝업 ON
+	    const popup = document.querySelector('#find-id-popup');
+	    
+	    if (hasFilter) {
+	      popup.classList.add();
+	    }
+	    popup.classList.remove('hide');
+	  }
+  
+  	//아이디 찾기 팝업 OFF
+  	function closeFindIdPopup() {
+	    const popup = document.querySelector('#find-id-popup');
+	    popup.classList.add('hide');
+	  }
+  	
+  	//인증번호 입력 후, 아이디 찾기 -> 팝업 ON
+  	function idFindSuc(hasFilter){
+		//아이디 찾기 팝업부터 닫아줘야 함
+	    const closePopup = document.querySelector('#find-id-popup');
+	    closePopup.classList.add('hide');
+    
+	    //인증번호 입력 후, 아이디 찾기 -> 팝업 ON
+	    const popup = document.querySelector('#');
+	    
+	    if (hasFilter) {
+	      popup.classList.add();
+	    }
+	    popup.classList.remove('hide');
+	  }	
 </script>
 

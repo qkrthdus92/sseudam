@@ -49,7 +49,8 @@ public class MemberJoinController extends HttpServlet{
 			req.getSession().setAttribute("alertMsg", "회원가입 완료");
 			resp.sendRedirect("/sseudam/main");
 		}else {
-			
+			req.getSession().setAttribute("msg", "error : 회원가입 실패");
+			resp.sendRedirect("/views/common/errorPage.jsp");
 		}
 		
 	}
