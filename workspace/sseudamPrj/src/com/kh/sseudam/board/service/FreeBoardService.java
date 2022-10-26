@@ -23,10 +23,10 @@ public class FreeBoardService {
 	}
 	
 	// 자유게시판 댓글 갯수 조회
-	public int selectCountCmt() {
+	public int selectCountCmt(String bno) {
 		Connection conn = JDBCTemplate.getConnection();
 
-		int result = FreeBoardDao.selectCountCmt(conn);
+		int result = FreeBoardDao.selectCountCmt(conn, bno);
 
 		JDBCTemplate.close(conn);
 
@@ -45,10 +45,10 @@ public class FreeBoardService {
 	}
 	
 	// 자유게시판 댓글 조회
-	public List<FreeBoardCmtVo> selectCmt(PageVo pv, String no) {
+	public List<FreeBoardCmtVo> selectCmt(PageVo pv, String bno) {
 		Connection conn = JDBCTemplate.getConnection();
 
-		List<FreeBoardCmtVo> x = FreeBoardDao.selectCmt(conn, pv, no);
+		List<FreeBoardCmtVo> x = FreeBoardDao.selectCmt(conn, pv, bno);
 
 		JDBCTemplate.close(conn);
 

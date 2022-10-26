@@ -33,7 +33,7 @@ public class FreeBoardListController extends HttpServlet {
 		int endPage;
 
 		// 게시글 갯수 조회
-		listCount = new FreeBoardService().selectCountCmt();
+		listCount = new FreeBoardService().selectCount();
 		currentPage = Integer.parseInt(req.getParameter("pno"));
 		pageLimit = 10; // 5페이지씩 볼수있게 설정하는곳
 		boardLimit = 10; // 한페이지당 10개씩 볼수 있게 설정하는곳

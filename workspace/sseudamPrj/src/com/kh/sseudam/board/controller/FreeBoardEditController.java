@@ -71,7 +71,7 @@ public class FreeBoardEditController extends HttpServlet{
 		if(result == 1) {
 			//성공 => 성공 알람 + 공지사항 상세조회 페이지로
 			req.getSession().setAttribute("alertMsg", "게시글을 수정하였습니다.");
-			resp.sendRedirect("/sseudam/board/freeBoardDetail?bno=" + no); //방금 수정한 게시글 상세페이지로 보내기
+			resp.sendRedirect("/sseudam/board/freeBoardDetail?bno=" + no + "&cmtPno=1"); //방금 수정한 게시글 상세페이지로 보내기
 			//resp.sendRedirect("/sseudam/board/freeBoardList?pno=1"); //1페이지로 보내기
 		}else {
 			
