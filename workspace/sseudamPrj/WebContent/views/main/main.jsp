@@ -27,43 +27,43 @@
 	<%@ include file="/views/common/header.jsp" %>
     <div class=topBtn onclick="window.scrollTo(0,0);">TOP</div>
     <nav>
-        <div class="head-slider hs1">
-            <div class="head-slider-in">
-                <div class="ment1">지금 내 상태가 궁금하다면</div>
-                <div class="ment2">스트레스 테스트하기</div>
-                <div class="justGo">바로가기 ></div>
-                <div class="head-slider-img"><img src="<%=root%>/resources/img/main/물음표.png"></div>
-            </div>
-        </div>
         <div class="head-slider hs2">
             <div class="head-slider-in">
                 <div class="ment1">지금 당장 힐링이 필요해</div>
                 <div class="ment2">힐링하러 가기</div>
-                <div class="justGo" OnClick="location.href ='<%=root%>/healing/nyam'" style="cursor:pointer;">바로가기 ></div>
+                <div class="justGo" onclick="location.href ='<%=root%>/healing/nyam'" style="cursor:pointer;">바로가기 ></div>
                 <div class="head-slider-img"><img src="<%=root%>/resources/img/main/자연.png"></div>
             </div>
         </div>
-        <div class="head-slider hs3">
+        <div class="head-slider hs1">
             <div class="head-slider-in">
-                <div class="ment1">상담이 필요한 순간</div>
-                <div class="ment2">전문가와 상담하기</div>
-                <div class="justGo">바로가기 ></div>
-                <div class="head-slider-img"><img src="<%=root%>/resources/img/main/상담하트.png"></div>
+                <div class="ment1">지금 내 상태가 궁금하다면</div>
+                <div class="ment2">스트레스 테스트하기</div>
+                <div class="justGo" onclick="location.href ='<%=root%>/stress/stressTest'" style="cursor:pointer;">바로가기 ></div>
+                <div class="head-slider-img"><img src="<%=root%>/resources/img/main/물음표.png"></div>
             </div>
         </div>
         <div class="head-slider hs4">
             <div class="head-slider-in">
                 <div class="ment1">다른 사람들이 궁금하다면</div>
                 <div class="ment2">게시판 보러가기</div>
-                <div class="justGo">바로가기 ></div>
+                <div class="justGo" onclick="location.href ='<%=root%>/board/freeBoardList'" style="cursor:pointer;">바로가기 ></div>
                 <div class="head-slider-img"><img src="<%=root%>/resources/img/main/게시판.png"></div>
+            </div>
+        </div>
+        <div class="head-slider hs3">
+            <div class="head-slider-in">
+                <div class="ment1">상담이 필요한 순간</div>
+                <div class="ment2">전문가와 상담하기</div>
+                <div class="justGo" onclick="location.href ='<%=root%>/counsel/list?pno=1'" style="cursor:pointer;">바로가기 ></div>
+                <div class="head-slider-img"><img src="<%=root%>/resources/img/main/상담하트.png"></div>
             </div>
         </div>
         <div class="head-slider hs5">
             <div class="head-slider-in">
                 <div class="ment1">필요하신게 있으신가요?</div>
                 <div class="ment2">고객센터에 물어보세요</div>
-                <div class="justGo">바로가기 ></div>
+                <div class="justGo" onclick="location.href ='<%=root%>/healing/nyam'" style="cursor:pointer;">바로가기 ></div>
                 <div class="head-slider-img"><img src="<%=root%>/resources/img/main/큐와에이.png"></div>
             </div>
         </div>
@@ -164,7 +164,7 @@
         <article>
             <div class="little-menu">전문가 상담</div>
             <a href="<%=root%>/counsel/list">
-            	<div class="the-more">더 보기</div>
+            	<div class="the-more"  onclick="location.href ='<%=root%>/counsel/list?pno=1'" style="cursor:pointer;">더 보기</div>
             </a>
             <div class="slider-counseling">      
             	

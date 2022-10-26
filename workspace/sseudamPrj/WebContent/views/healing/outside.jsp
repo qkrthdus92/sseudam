@@ -133,6 +133,16 @@ String sort = (String) request.getAttribute("sort");
 			}
 			%>
 			</section>
+			
+			<%
+				String nowPage = (String)request.getQueryString();
+				int pi = 0;
+				int pageNum = 1;
+				if(nowPage != null){
+					pi = nowPage.indexOf("pno");
+					pageNum = Integer.parseInt(nowPage.substring(pi+4, pi+5));
+				}		
+			%>
 
 		
 		<section class="page">
@@ -140,18 +150,24 @@ String sort = (String) request.getAttribute("sort");
 			if (pv.getStartPage() != 1) {
 			%>
 			<div>
-				<a
-					href="<%=root%>/healing/outside?pno=<%=pv.getStartPage() - 1%><%=sort%>"><</a>
+				<a class="other-pages" href="<%=root%>/healing/outside?pno=<%=pv.getStartPage() - 1%><%=sort%>"><</a>
 			</div>
 			<%
 			}
 			%>
 			<%
-			for (int j = pv.getStartPage(); j <= pv.getEndPage(); j++) {
-			%>
-			<div class="current-page">
-				<a href="<%=root%>/healing/outside?pno=<%=j%><%=sort%>"><%=j%></a>
-			</div>
+			for(int j = pv.getStartPage(); j<=pv.getEndPage() ;j++){
+				String link = root+"/healing/outside?pno="+j+sort;
+		%>
+			<div>
+					<%if(pageNum == j){%>	
+		            	<a href="<%=link%>" class="current-page" >
+	            	<%}else{ %>
+	            		<a href="<%=link%>" class="other-pages" >
+	            	<%} %>
+		            	<%=j %>
+		           		</a> 
+			</div>			
 			<%
 			}
 			%>
@@ -159,8 +175,7 @@ String sort = (String) request.getAttribute("sort");
 			if (pv.getEndPage() != pv.getMaxPage()) {
 			%>
 			<div>
-				<a
-					href="<%=root%>/healing/outside?pno=<%=pv.getEndPage() + 1%><%=sort%>">></a>
+				<a class="other-pages" href="<%=root%>/healing/outside?pno=<%=pv.getEndPage() + 1%><%=sort%>">></a>
 			</div>
 			<%
 			}

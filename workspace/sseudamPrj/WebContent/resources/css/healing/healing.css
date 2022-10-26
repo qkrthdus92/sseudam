@@ -114,16 +114,60 @@ main{
 .order-by{
     height: 80px;
     display: flex;
-    flex-direction: row-reverse; 
+    flex-direction: row;
+    justify-content: space-between; 
     align-items: center;
-    gap: 20px;
 }
-.order-by div{
-    font-size: 15px;
+
+.order-by-type{	
+	display:flex;
+	flex-direction:row;    
+    gap:20px;
+}
+.order-by-type>a>div{
+	text-decoration: none;
+	font-size: 15px;
     font-family: 'Nanum Gothic', sans-serif;
     color: #6F6F6F;
-    
 }
+
+.order-btn {
+  color: #6F6F6F;
+  width: 100px;
+  padding: 10px;
+  font-size: 16px;
+  border: 3px solid;
+}
+
+.order-drop {
+  position: relative;
+  display: inline-block;
+}
+
+.order-drop-content {
+  display: none;
+  width:100px;
+  position: absolute;
+  text-align: center;
+  background-color: #f5f5f5;
+  min-width: 70px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.order-drop-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.order-drop-content a:hover {background-color: #ddd;}
+
+.order-drop:hover .order-drop-content {display: block;}
+
+.order-drop:hover .order-btn {background-color: #f5f5f5;}
+
 .contents{
     border: 1px solid #DFDFDF;
     border-bottom: none;
@@ -147,11 +191,13 @@ article{
 }
 .healing-pic-outline{
     border-radius: 10px; 
-    border: 10px solid #FFFFFF;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); 
+    border: 10px solid white;
+    box-shadow: 0px 0px 10px #000; 
     width: 100%;
     height: 100%;
     overflow: hidden;
+    background-color: black;
+  	background-blend-mode: multiply;
 }
 .healing-heart{
     display: flex;
@@ -194,6 +240,7 @@ article{
     vertical-align: middle;
     opacity: 0.9;
 }
+
 .pop-open:hover>.healing-pic{
     transform: scale(1.4);
     opacity: 1;
@@ -224,21 +271,27 @@ article{
     
 }
 
-.page div a{
+.other-pages{
     font-family: 'Nanum Gothic', sans-serif;
     font-size: 25px;
     color: #6F6F6F;
 }
-.page div a:hover{
+.other-pages:hover{	
 	font-weight: 900;
 	font-color:black;
 }
 
-.current-page1{
-	font-weight: 900;
-	font-color:black;
+.current-page{
 	pointer-events: none;
+	text-decoration: none;
+	font-family: 'Nanum Gothic', sans-serif;
+	font-size: 27px;
+	font-weight: 900;
+	color:black;	
 	cursor: default;
+}
+.current-page:visited{
+	color:black;
 }
 
 
