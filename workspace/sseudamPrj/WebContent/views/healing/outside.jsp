@@ -5,9 +5,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-List<HealingVo> list = (List<HealingVo>) request.getAttribute("outsideList");
-PageVo pv = (PageVo) request.getAttribute("pv");
-String sort = (String) request.getAttribute("sort");
+	List<HealingVo> list = (List<HealingVo>) request.getAttribute("outsideList");
+	PageVo pv = (PageVo) request.getAttribute("pv");
+	String sort = (String) request.getAttribute("sort");
+	String type = (String)request.getAttribute("type");
 %>
 <!DOCTYPE html>
 <html>
@@ -41,15 +42,32 @@ String sort = (String) request.getAttribute("sort");
 			<a href="<%=root%>/healing/inside"><div>뒹굴뒹굴 ></div></a>
 		</section>
 		<section class="order-by">
-			<a href="<%=root%>/healing/outside?pno=1&sort=random">
-				<div>무작위정렬</div>
-			</a> <a href="<%=root%>/healing/outside?pno=1&sort=like">
-				<div>저장순</div>
-			</a> <a href="<%=root%>/healing/outside?pno=1&sort=title">
-				<div>이름순</div>
-			</a> <a href="<%=root%>/healing/outside?pno=1">
-				<div>최근등록순</div>
-			</a>
+			<div class="order-by-type">
+				<div class="order-drop">
+					<button class="order-btn">뚜벅</button>
+					<div class="order-drop-content">
+						<a href="<%=root%>/healing/outside?pno=1&type=culture">문화</a>
+						<a href="<%=root%>/healing/outside?pno=1&type=walk">산책</a>
+						<a href="<%=root%>/healing/outside?pno=1&type=exercise">운동</a>
+					</div>
+				</div>
+			</div>
+		
+			<div class="order-by-type">
+				<a href="<%=root%>/healing/outside?pno=1">
+					<div>등록순</div>
+				</a>
+				<a href="<%=root%>/healing/outside?pno=1&sort=like"> 
+					<div>저장순</div>
+				</a>
+				<a href="<%=root%>/healing/outside?pno=1&sort=title">
+					<div>이름순</div>
+				</a>
+				<a href="<%=root%>/healing/outside?pno=1&sort=random">
+					<div>무작위순</div>
+				</a>
+			</div>
+					
 		</section>
 		<section class="contents">
 			<%
@@ -150,20 +168,19 @@ String sort = (String) request.getAttribute("sort");
 			if (pv.getStartPage() != 1) {
 			%>
 			<div>
-				<a class="other-pages" href="<%=root%>/healing/outside?pno=<%=pv.getStartPage() - 1%><%=sort%>"><</a>
+				<a class="other-pages" href="<%=root%>/healing/outside?pno=<%=pv.getStartPage() - 1%><%=sort%><%=type%>"><</a>
 			</div>
 			<%
 			}
 			%>
 			<%
 			for(int j = pv.getStartPage(); j<=pv.getEndPage() ;j++){
-				String link = root+"/healing/outside?pno="+j+sort;
 		%>
 			<div>
 					<%if(pageNum == j){%>	
-		            	<a href="<%=link%>" class="current-page" >
+		            	<a class="current-page" >
 	            	<%}else{ %>
-	            		<a href="<%=link%>" class="other-pages" >
+	            		<a href="<%=root%>/healing/outside?pno=<%=j%><%=sort%><%=type%>" class="other-pages" >
 	            	<%} %>
 		            	<%=j %>
 		           		</a> 
@@ -175,7 +192,7 @@ String sort = (String) request.getAttribute("sort");
 			if (pv.getEndPage() != pv.getMaxPage()) {
 			%>
 			<div>
-				<a class="other-pages" href="<%=root%>/healing/outside?pno=<%=pv.getEndPage() + 1%><%=sort%>">></a>
+				<a class="other-pages" href="<%=root%>/healing/outside?pno=<%=pv.getEndPage() + 1%><%=sort%><%=type%>">></a>
 			</div>
 			<%
 			}

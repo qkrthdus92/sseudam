@@ -23,8 +23,30 @@ public class HealingInsideController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //회원 넘버 가져오기
+        HttpSession s = req.getSession();
+        MemberVo loginMember = (MemberVo) s.getAttribute("loginMember");
+        int mNo = 0;
+        if(loginMember != null) {
+            mNo = Integer.parseInt(loginMember.getNo());
+        }else {
+            mNo = 0;
+        }  
         
+        //정렬값 받기
+        String sort = req.getParameter("sort");
         
+        //타입값 받기
+        String type = req.getParameter("type");
+        String tNum = "";
+        
+        //타입값 번호지정
+        if(type == null) {type = "";}
+        else if(type.equals("music")) { tNum ="4";}
+        else if(type.equals("movie")) {tNum ="5";}
+        else if(type.equals("therapy")) {tNum ="6";}
+        else if(type.equals("book")){tNum ="7";}
+
         //페이징 처리
         int listCount;
         int currentPage;
@@ -35,8 +57,10 @@ public class HealingInsideController extends HttpServlet{
         int startPage;
         int endPage;
 
-        listCount = new HealingService().selectInsideCount();
+        //페이지 수
+        listCount = new HealingService().selectInsideCount(tNum);
         
+        //페이지 번호 받기 + null 처리
         String pno = req.getParameter("pno");
         if(pno == null) {
             currentPage = 1;
@@ -44,6 +68,7 @@ public class HealingInsideController extends HttpServlet{
             currentPage = Integer.parseInt(pno);
         }
 
+        //페이지 계산
         pageLimit = 5;
         boardLimit = 9;
 
@@ -56,6 +81,7 @@ public class HealingInsideController extends HttpServlet{
             endPage = maxPage;
         }
 
+        //페이지 데이터 뭉치기
         PageVo pv = new PageVo();
         pv.setListCount(listCount);
         pv.setCurrentPage(currentPage);
@@ -64,24 +90,16 @@ public class HealingInsideController extends HttpServlet{
         pv.setMaxPage(maxPage);
         pv.setStartPage(startPage);
         pv.setEndPage(endPage);
-        
-        //정렬값 받기
-        String sort = req.getParameter("sort");
-        
-        
-        //회원 넘버 가져오기
-        HttpSession s = req.getSession();
-        MemberVo loginMember = (MemberVo) s.getAttribute("loginMember");
-        int mNo = 0;
-        if(loginMember != null) {
-            mNo = Integer.parseInt(loginMember.getNo());
-        }else {
-            mNo = 0;
-        }        
+                  
         
         //디비 다녀오기
-        List<HealingVo> insideList = new HealingService().InsidePage(pv, sort, mNo);                    
+        List<HealingVo> insideList = new HealingService().InsidePage(pv, sort, mNo, tNum);                    
 
+        //type null처리
+        if(type != "") {
+            type = "&type=" + type;
+        }
+        
         //sort null처리
         if(sort == null){
             sort= "";        
@@ -90,6 +108,7 @@ public class HealingInsideController extends HttpServlet{
         }
         //화면 보여주기
 
+        req.setAttribute("type", type);
         req.setAttribute("sort", sort);
         req.setAttribute("pv", pv);
         req.setAttribute("insideList", insideList);

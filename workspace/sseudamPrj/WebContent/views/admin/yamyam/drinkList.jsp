@@ -1,6 +1,26 @@
+<%@page import="com.kh.sseudam.common.PageVo"%>
+<%@page import="com.kh.sseudam.healing.vo.HealingVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%><% String root1 = request.getContextPath();%>
 <!DOCTYPE html>
+
+<%
+	List<HealingVo> list = (List<HealingVo>) request.getAttribute("list");
+	PageVo pv = (PageVo)request.getAttribute("pv");
+	String sort = (String)request.getAttribute("sort");
+	String type = (String)request.getAttribute("type");
+%>
+
+<%
+	String nowPage = (String)request.getQueryString();
+	int pi = 0;
+	int pageNo = 1;
+	if(nowPage != null){
+		pi = nowPage.indexOf("pno");
+		pageNo = Integer.parseInt(nowPage.substring(pi+4, pi+5));
+	}	
+%>
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -24,13 +44,13 @@ pageEncoding="UTF-8"%><% String root1 = request.getContextPath();%>
     <main class="admin-main">
       <header class="admin-main-header">
         <select name="" id="" onchange="window.open(value,'_self');">
-          <option value="<%=root%>/views/admin/yamyam/drink/list.jsp">
+          <option value="<%=root%>/admin/nyam?pno=1&type=3">
             혼자서냠냠 - 혼술
           </option>
-          <option value="<%=root%>/views/admin/yamyam/bob/list.jsp">
+          <option value="<%=root%>/admin/nyam?pno=1&type=1">
             혼자서냠냠 - 혼밥
           </option>
-          <option value="<%=root%>/views/admin/yamyam/cafe/list.jsp">
+          <option value="<%=root%>/admin/nyam?pno=1&type=2">
             혼자서냠냠 - 혼카페
           </option>
         </select>
@@ -56,10 +76,10 @@ pageEncoding="UTF-8"%><% String root1 = request.getContextPath();%>
               <span>전체 게시글</span><span>10</span>
             </div>
             <div class="main-select-btn">
-              <select name="" id="">
-                <option value="">모든 게시글 조회</option>
-                <option value="">게시 완료 조회</option>
-                <option value="">게시 취소 조회</option>
+              <select name="" id=""  onchange="window.open(value,'_self');">
+                <option value="<%=root%>/admin/nyam?pno=1&type=3&sort=1">모든 게시글 조회</option>
+                <option value="<%=root%>/admin/nyam?pno=1&type=3&sort=2">게시 완료 조회</option>
+                <option value="<%=root%>/admin/nyam?pno=1&type=3&sort=3">게시 취소 조회</option>
               </select>
             </div>
           </div>
@@ -75,21 +95,18 @@ pageEncoding="UTF-8"%><% String root1 = request.getContextPath();%>
             <div>좋아요</div>
             <div>edit</div>
 
-            <%for(int i=1; i<=5; i++) {%>
-            <div>5</div>
+            <%for (int i = 0; i < list.size(); i++) {%>
+            <div><%=list.get(i).getNo()%></div>
             <div>
-              <img
-                src="../../../../resources/img/admin/476078_1662402070214584.jpg"
-                alt=""
-              />
+              <img src="<%=root%>/resources/upload/nyam/<%=list.get(i).getImgPath()%>">
             </div>
-            <div>포비</div>
-            <div>서울특별시 종로구 종로3길 17</div>
-            <div>010-1234-5678</div>
-            <div>2022-10-04 12:12:12</div>
-            <div>2022-10-04 12:12:12</div>
-            <div>게시완료</div>
-            <div>100</div>
+            <div><%=list.get(i).getTitle()%></div>
+            <div><%=list.get(i).getInfoA()%></div>
+            <div><%=list.get(i).getInfoB()%></div>
+            <div><%=list.get(i).getWriteDate()%></div>
+            <div><%=list.get(i).getModifyDate()%></div>
+            <div><%=list.get(i).getDeleteYn()%></div>
+            <div><%=list.get(i).getLiked()%></div>
             <div>
               <a href="<%=root%>/views/admin/yamyam/drink/edit.jsp"
                 ><i class="fa-solid fa-pen-to-square"></i

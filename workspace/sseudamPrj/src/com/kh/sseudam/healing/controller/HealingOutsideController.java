@@ -23,6 +23,28 @@ public class HealingOutsideController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //회원 넘버 가져오기
+        HttpSession s = req.getSession();
+        MemberVo loginMember = (MemberVo) s.getAttribute("loginMember");
+        int mNo;
+        if(loginMember != null) {
+            mNo = Integer.parseInt(loginMember.getNo());
+        }else {
+            mNo = 0;
+        }
+        
+        //정렬값 받기
+        String sort = req.getParameter("sort");
+        
+        //타입값 받기
+        String type = req.getParameter("type");
+        String tNum = "";
+        
+        //타입값 번호지정
+        if(type == null) {type = "";}
+        else if(type.equals("culture")) { tNum ="8";}
+        else if(type.equals("walk")) {tNum ="9";}
+        else if(type.equals("exercise")) {tNum ="10";}
         
         //페이징 처리
         int listCount;
@@ -34,7 +56,7 @@ public class HealingOutsideController extends HttpServlet{
         int startPage;
         int endPage;
 
-        listCount = new HealingService().selectOutsideCount();
+        listCount = new HealingService().selectOutsideCount(tNum);
         
         String pno = req.getParameter("pno");
         if(pno == null) {
@@ -64,23 +86,16 @@ public class HealingOutsideController extends HttpServlet{
         pv.setStartPage(startPage);
         pv.setEndPage(endPage);
         
-        //정렬값 받기
-        String sort = req.getParameter("sort");
         
-        
-        //회원 넘버 가져오기
-        HttpSession s = req.getSession();
-        MemberVo loginMember = (MemberVo) s.getAttribute("loginMember");
-        int mNo;
-        if(loginMember != null) {
-            mNo = Integer.parseInt(loginMember.getNo());
-        }else {
-            mNo = 0;
-        }
         
         //디비 다녀오기
-        List<HealingVo> outsideList = new HealingService().OutsidePage(pv, sort, mNo);                    
+        List<HealingVo> outsideList = new HealingService().OutsidePage(pv, sort, mNo, tNum);                    
  
+        //type null처리
+        if(type != "") {
+            type = "&type=" + type;
+        }
+        
         //sort null처리
         if(sort == null){
             sort= "";        
@@ -89,6 +104,7 @@ public class HealingOutsideController extends HttpServlet{
         }
         //화면 보여주기
 
+        req.setAttribute("type", type);
         req.setAttribute("sort", sort);
         req.setAttribute("pv", pv);
         req.setAttribute("outsideList", outsideList);
