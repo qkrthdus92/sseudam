@@ -84,6 +84,13 @@
         text-decoration: none;
         color: black;
     }
+/*      #current{
+    	color: black;
+    	pointer-events:
+    }
+    #current:visited{
+    	color: #26AA82;
+    } */
     #views{
     	--font-size: 230%;
         font-weight: 800;
@@ -121,8 +128,16 @@
         </div>
         <div id="main">
             <div id="title">자유게시판</div>
+            <div id="write"><button id="write-btn" onclick="loginPopup(true)">글쓰기</button></div>
+            <%if(loginMember!=null){ %>
+            <script>
+              const wirteBtn = document.querySelector('#write-btn');
+              wirteBtn.addEventListener('click',function() {
+                location.href='<%=root%>/board/freeBoardWrite';
+              })
+            </script>
+            <%} %>
             
-            <div id="write"><button onclick="location.href='<%=root%>/board/freeBoardWrite'">글쓰기</button></div>
             
             <div class="board-top">번호</div>
             <div class="board-top">제목</div>
@@ -147,7 +162,7 @@
         	
         <%
         	for(int i = pv.getStartPage(); i <= pv.getEndPage(); ++i){%>
-        		<a href="/sseudam/board/freeBoardList?pno=<%=i%>"><%=i%></a>
+        		<a id="current" href="/sseudam/board/freeBoardList?pno=<%=i%>"><%=i%></a>
         <%}%>
         
         

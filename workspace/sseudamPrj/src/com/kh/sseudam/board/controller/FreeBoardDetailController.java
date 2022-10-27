@@ -43,7 +43,7 @@ public class FreeBoardDetailController extends HttpServlet {
 		// 댓글 갯수 조회
 		listCount = new FreeBoardService().selectCountCmt(bno);
 
-		System.out.println("디테일컨틀러 cmtPno : "+req.getParameter("cmtPno"));
+		System.out.println("디테일컨틀러 cmtPno : "+req.getParameter("cmtPno"));///////////
 		currentPage = Integer.parseInt(req.getParameter("cmtPno"));
 		pageLimit = 5; // 5페이지씩 볼수있게 설정하는곳
 		boardLimit = 5; // 한페이지당 10개씩 볼수 있게 설정하는곳
@@ -117,7 +117,7 @@ public class FreeBoardDetailController extends HttpServlet {
 			s.setAttribute("alertMsg", "댓글 등록이 완료되었습니다.");
 			resp.sendRedirect("/sseudam/board/freeBoardDetail?bno="+bno+"&cmtPno=1");
 		} else {
-			req.setAttribute("msg", "로그인 후 이용해주세요.");
+			req.setAttribute("msg", "댓글 등록 실패.");
 			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
 		}
 
