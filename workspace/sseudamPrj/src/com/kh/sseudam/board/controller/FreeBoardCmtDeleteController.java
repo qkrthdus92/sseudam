@@ -24,22 +24,28 @@ public class FreeBoardCmtDeleteController extends HttpServlet {
 
 		// 데이터 꺼내기
 		String bno = req.getParameter("bno");
-		String cmtNo = req.getParameter("cmtNo"); //삭제하려는 댓글 번호 null나옴
-		System.out.println("게시글 번호 : " + bno);
-		System.out.println("댓글 번호 : " + cmtNo);
+		String cmtNo = req.getParameter("cmtNo");
+		System.out.println("게시글 번호 : " + bno);/////////////////////
+		System.out.println("댓글 번호 : " + cmtNo);///////////////////////
 		
 		
 		// 디비 다녀오기
 		FreeBoardCmtVo cmtVo = new FreeBoardService().cmtList(cmtNo);
 		//삭제하려는 댓글번호 가지고 작성자번호, 작성자닉네임 가져와서 객체로 만듬
 		
-		// 작성자 여부 확인
+		// 댓글 작성자 여부 확인
 		HttpSession s = req.getSession();
 		MemberVo loginMember = (MemberVo) s.getAttribute("loginMember");
+		if(req.getSession().getAttribute("loginMember") == null){
+			req.setAttribute("msg", "로그인 후 이용해주세요.");
+			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
+			return;
+		}
+			
 		boolean isWriter = (loginMember != null) && loginMember.getNick().equals(cmtVo.getWriterNo());
-		System.out.println("cmtvo : " + cmtVo);
-		System.out.println("로그인멤버 닉네임 : " + loginMember.getNick());
-		System.out.println("댓글작성자 닉네임 : " + cmtVo.getWriterNo());
+		System.out.println("cmtvo : " + cmtVo);/////////////////////////
+		System.out.println("로그인멤버 닉네임 : " + loginMember.getNick());////////////
+		System.out.println("댓글작성자 닉네임 : " + cmtVo.getWriterNo());////////////////
 		if (isWriter) {
 			int result = new FreeBoardService().cmtDelete(cmtNo);
 			// 화면선택
@@ -50,10 +56,6 @@ public class FreeBoardCmtDeleteController extends HttpServlet {
 				req.setAttribute("msg", "댓글 삭제 실패.");
 				req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
 			}
-		}else {
-			req.setAttribute("msg", "작성자만 삭제가 가능합니다.");
-			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
-			return;
 		}
 	}
 
