@@ -160,7 +160,7 @@ AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin"); %>
       <h1>컨텐츠 관리</h1>
       <ul>
         <li>
-          <a href="<%=root%>/views/admin/yamyam/bob/list.jsp">혼자서 냠냠</a>
+          <a href="<%=root%>/admin/nyam">혼자서 냠냠</a>
         </li>
         <li>
           <a href="<%=root%>/views/admin/tiptap/culture/list.jsp"
