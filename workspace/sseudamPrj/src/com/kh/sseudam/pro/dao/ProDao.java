@@ -148,7 +148,7 @@ public class ProDao {
 	//전문가 아이디 중복 확인
 	public boolean proIdDup(Connection conn, String proIdCheck) {
 		
-		String sql = "SELECT * FROM PRO_MEMBER WHERE ID = ?";
+		String sql = "SELECT ID FROM MEMBER WHERE ID = ? UNION SELECT ID FROM PRO_MEMBER WHERE ID = ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -157,6 +157,8 @@ public class ProDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, proIdCheck);
+			pstmt.setString(2, proIdCheck);
+			
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
