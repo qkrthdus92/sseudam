@@ -388,7 +388,15 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   <div class="main-header-nav">
     <div class="main-wrapper">
       <div>
-        <a href="<%=root%>/stress/stressTest">스트레스 테스트</a>
+             <a id="test-btn" onclick="loginPopup(true)">스트레스 테스트</a>
+          	<%if(loginMember!=null){ %>
+          	<script>
+            const wirteBtn = document.querySelector('#test-btn');
+            testBtn.addEventListener('click',function() {
+              location.href='<%=root%>/stress/stressTest';
+            })
+          	</script>
+          <%} %>
         <div class="main-header-nav-color"></div>
       </div>
       <div class="dropdown">
@@ -514,15 +522,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   <div class="main-header-nav">
     <div class="main-wrapper">
       <div>
-              <a id="test-btn" onclick="loginPopup(true)">스트레스 테스트</a>
-          <%if(loginMember!=null){ %>
-          <script>
-            const wirteBtn = document.querySelector('#test-btn');
-            testBtn.addEventListener('click',function() {
-              location.href='<%=root%>/stress/stressTest';
-            })
-          </script>
-          <%} %>
+		<a href="<%=root%>/stress/stressTest">스트레스 테스트</a>
         <div class="main-header-nav-color"></div>
       </div>
       <div class="dropdown">
