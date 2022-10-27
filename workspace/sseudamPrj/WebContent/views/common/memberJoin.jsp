@@ -115,7 +115,7 @@
 	            <div>
 	            	<input type="text" id="memberId" class="memberId-input" name="memberId" placeholder="6~14자 이내 영문, 숫자를 포함하여 작성" required>
 	            	<button type="button" onclick="idCheck();" id="idCheckBtn" class="overlap-check-btn">중복확인</button>
-	            	<div id="result" type="hidden"></div>
+	            	<div id="result" type="hidden" value=""></div>
 	            </div>					
 	
 	            <div>비밀번호</div>
@@ -232,7 +232,7 @@
     				},
     			success : function(x){
     				console.log(x);
-    				$('#result').text(x);
+    				$('div#result').text(x);
     			},
     			error : function(y){
     				console.log(y);

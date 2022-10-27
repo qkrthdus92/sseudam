@@ -293,8 +293,6 @@
     	// 아이디 중복 검사
     	function proIdCheck(){
     		
-    		alert("여기까진 옴ㅇㅇ");
-    		
     		$.ajax({
     			url : "/sseudam/ProIdCheck",
     			method : "GET",
@@ -304,7 +302,7 @@
     				},
     			success : function(x){
     				console.log(x);
-    				$('#result').text(x);
+    				$('div#result').text(x);
     			},
     			error : function(y){
     				console.log(y);

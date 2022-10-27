@@ -96,7 +96,7 @@ public class MemberDao {
 	
 	//아이디 중복체크 
 	public boolean checkDup(Connection conn, String checkId) {
-		String sql = "SELECT * FROM MEMBER WHERE ID = ? AND QUIT_YN = 'N'";
+		String sql = "SELECT ID FROM MEMBER WHERE ID = ? UNION SELECT ID FROM PRO_MEMBER WHERE ID = ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -105,6 +105,7 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, checkId);
+			pstmt.setString(2, checkId);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
