@@ -8,6 +8,7 @@
 	List<HealingVo> list = (List<HealingVo>) request.getAttribute("insideList");
 	PageVo pv = (PageVo)request.getAttribute("pv");
 	String sort = (String)request.getAttribute("sort");
+	String type = (String)request.getAttribute("type");
 	
 %>
 <!DOCTYPE html>
@@ -33,7 +34,7 @@
 	<nav class="inside-color">
 		<div class="head-in">
 			<div class="ment1">밖은 좀 시끄러우니까</div>
-			<div class="ment2">안에서 뒹굴뒹굴</a></div>
+			<div class="ment2">안에서 뒹굴뒹굴</div>
 			<div class="head-slider-img">
 				<img src="<%=root%>/resources/img/healing/침대.png">
 			</div>
@@ -47,19 +48,19 @@
 		<section class="order-by">
 			<div class="order-by-type">
 				<div class="order-drop">
-					<button class="order-btn">뒹굴뒹굴</button>
+					<button class="order-btn">뒹굴</button>
 					<div class="order-drop-content">
-						<a href="#">음악</a>
-						<a href="#">영화</a>
-						<a href="#">명상</a>
-						<a href="#">독서</a>
+						<a href="<%=root%>/healing/inside?pno=1&type=music">음악</a>
+						<a href="<%=root%>/healing/inside?pno=1&type=movie">영화</a>
+						<a href="<%=root%>/healing/inside?pno=1&type=therapy">명상</a>
+						<a href="<%=root%>/healing/inside?pno=1&type=book">독서</a>
 					</div>
 				</div>
 			</div>
 		
 			<div class="order-by-type">
-				<a href="<%=root%>/healing/inside?pno=1&sort=random">
-					<div>무작위정렬</div>
+				<a href="<%=root%>/healing/inside?pno=1">
+					<div>등록순</div>
 				</a>
 				<a href="<%=root%>/healing/inside?pno=1&sort=like"> 
 					<div>저장순</div>
@@ -67,13 +68,11 @@
 				<a href="<%=root%>/healing/inside?pno=1&sort=title">
 					<div>이름순</div>
 				</a>
-				<a href="<%=root%>/healing/inside?pno=1">
-					<div>최근등록순</div>
+				<a href="<%=root%>/healing/inside?pno=1&sort=random">
+					<div>무작위순</div>
 				</a>
 			</div>
-		
-						
-			
+					
 		</section>
 		<section class="contents">
 			<%
@@ -165,26 +164,24 @@
 		<section class="page">
 			<%if(pv.getStartPage() != 1){ %>	        
 				<div>
-			        	<a class="other-pages" href="<%=root%>/healing/inside?pno=<%=pv.getStartPage() - 1 %><%=sort%>"><</a>        
+			        	<a class="other-pages" href="<%=root%>/healing/inside?pno=<%=pv.getStartPage() - 1 %><%=sort%><%=type%>"><</a>        
 				</div>
         	<%} %>  
 			<% 
 				for(int j = pv.getStartPage(); j<=pv.getEndPage() ;j++){
-					String link = root+"/healing/inside?pno="+j+sort;
 			%>
 				<div>
 						<%if(pageNum == j){%>	
-			            	<a href="<%=link%>" class="current-page" >
+			            	<a class="current-page" >
 		            	<%}else{ %>
-		            		<a href="<%=link%>" class="other-pages" >
-		            	<%} %>
-			            	<%=j %>
-			           		</a> 
+		            		<a href="<%=root%>/healing/inside?pno=<%=j%><%=sort%><%=type%>" class="other-pages" >
+		            	<%}%> <%=j %>
+	           				</a> 
 				</div>			
 	        <%} %>
 			<%if(pv.getEndPage() != pv.getMaxPage()){ %>	        
 				<div>
-		        	<a class="other-pages" href="<%=root%>/healing/inside?pno=<%=pv.getEndPage() + 1 %><%=sort%>">></a>        
+		        	<a class="other-pages" href="<%=root%>/healing/inside?pno=<%=pv.getEndPage() + 1 %><%=sort%><%=type%>">></a>        
 	        	</div>
         	<%} %>
 		</section>

@@ -29,3 +29,38 @@
 .total-num-info span:last-child::after {
   content: "개";
 }
+
+.page {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	height: 30px;
+	gap: 20px;
+}
+
+.other-pages {
+	font-family: 'Nanum Gothic', sans-serif;
+	font-size:18px;
+	color: #6F6F6F;
+}
+
+.other-pages:hover {
+	font-weight: 600;
+	font-color: black;
+}
+
+.current-page {
+	font-size:18px;
+	pointer-events: none;
+	text-decoration: none;
+	font-family: 'Nanum Gothic', sans-serif;
+	font-weight: 600;
+	color: black;
+	cursor: default;
+}
+
+.current-page:visited {
+	color: black;
+}

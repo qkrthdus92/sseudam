@@ -14,11 +14,11 @@ public class HealingService {
     private final HealingDao dao = new HealingDao();    
     
     //뒹굴 리스트 갯수
-    public int selectInsideCount() {
+    public int selectInsideCount(String tNum) {
         
         Connection conn = JDBCTemplate.getConnection();
         
-        int count = dao.InsideListCount(conn);
+        int count = dao.InsideListCount(conn, tNum);
         
         JDBCTemplate.close(conn);
        
@@ -26,11 +26,11 @@ public class HealingService {
     }
     
     //뚜벅 리스트 갯수
-    public int selectOutsideCount() {
+    public int selectOutsideCount(String tNum) {
         
         Connection conn = JDBCTemplate.getConnection();
         
-        int count = dao.OutsideListCount(conn);
+        int count = dao.OutsideListCount(conn, tNum);
         
         JDBCTemplate.close(conn);
        
@@ -38,11 +38,11 @@ public class HealingService {
     }
     
     //냠냠 리스트 갯수
-    public int selectNyamCount() {
+    public int selectNyamCount(String tNum) {
         
         Connection conn = JDBCTemplate.getConnection();
         
-        int count = dao.NyamListCount(conn);
+        int count = dao.NyamListCount(conn, tNum);
         
         JDBCTemplate.close(conn);
        
@@ -50,71 +50,35 @@ public class HealingService {
     }
     
     //뒹굴 기본 페이지
-    public List<HealingVo> InsidePage(PageVo pv, String sort, int mNo){
+    public List<HealingVo> InsidePage(PageVo pv, String sort, int mNo, String tNum){
        
         Connection conn = JDBCTemplate.getConnection();
         
-        List<HealingVo> list = null;
-        
-        if(sort == null) {
-            list = dao.InsideDefaultList(conn, pv, mNo);
-        }else if(sort.equals("random")) {
-            list = dao.InsideRandomList(conn, pv, mNo);                  
-        }else if(sort.equals("like")){
-            list = dao.InsideLikeList(conn, pv, mNo);
-        }else if(sort.equals("title")){
-            list = dao.InsideTitleList(conn, pv, mNo);
-        }else {
-            return null;
-        }
-   
+        List<HealingVo> list = dao.InsideDefaultList(conn, pv, mNo, sort, tNum);
+
         JDBCTemplate.close(conn);
 
         return list;
         
     }
     //뚜벅 기본 페이지
-    public List<HealingVo> OutsidePage(PageVo pv, String sort, int mNo) {
+    public List<HealingVo> OutsidePage(PageVo pv, String sort, int mNo, String tNum) {
         
         Connection conn = JDBCTemplate.getConnection();
         
-        List<HealingVo> list = null;
-        
-        if(sort == null) {
-            list = dao.OutsideDefaultList(conn, pv, mNo);
-        }else if(sort.equals("random")) {
-            list = dao.OutsideRandomList(conn, pv, mNo);                  
-        }else if(sort.equals("like")){
-            list = dao.OutsideLikeList(conn, pv, mNo);
-        }else if(sort.equals("title")){
-            list = dao.OutsideTitleList(conn, pv, mNo);
-        }else {
-            return null;
-        }
+        List<HealingVo> list = dao.OutsideDefaultList(conn, pv, mNo, sort, tNum);
    
         JDBCTemplate.close(conn);
 
         return list;
     }
     //냠냠 기본 페이지
-    public List<HealingVo> NyamPage(PageVo pv, String sort, int mNo) {
+    public List<HealingVo> NyamPage(PageVo pv, String sort, int mNo, String tNum) {
         
         Connection conn = JDBCTemplate.getConnection();
         
-        List<HealingVo> list = null;
+        List<HealingVo> list = dao.NyamDefaultList(conn, pv, mNo, sort, tNum);
         
-        if(sort == null) {
-            list = dao.NyamDefaultList(conn, pv, mNo);
-        }else if(sort.equals("random")) {
-            list = dao.NyamRandomList(conn, pv, mNo);                  
-        }else if(sort.equals("like")){
-            list = dao.NyamLikeList(conn, pv, mNo);
-        }else if(sort.equals("title")){
-            list = dao.NyamTitleList(conn, pv, mNo);
-        }else {
-            return null;
-        }
-   
         JDBCTemplate.close(conn);
 
         return list;

@@ -1,4 +1,4 @@
-package com.kh.sseudam.healing.controller;
+package com.kh.sseudam.admin.healing.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,43 +8,39 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.kh.sseudam.admin.common.AdminVo;
+import com.kh.sseudam.admin.healing.service.AdminHealingService;
 import com.kh.sseudam.common.PageVo;
-import com.kh.sseudam.healing.service.HealingService;
 import com.kh.sseudam.healing.vo.HealingVo;
-import com.kh.sseudam.member.vo.MemberVo;
 
-
-
-@WebServlet(urlPatterns = "/healing/nyam")
-public class HealingNyamController extends HttpServlet{
+@WebServlet(urlPatterns = "/admin/nyam")
+public class AdminNyamController extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      
-        //회원 넘버 가져오기
-        HttpSession s = req.getSession();
-        MemberVo loginMember = (MemberVo) s.getAttribute("loginMember");
-        int mNo;
-        if(loginMember != null) {
-            mNo = Integer.parseInt(loginMember.getNo());
+
+        //분류값 받기
+        String sort = req.getParameter("sort");
+        int sNo = 1;
+        
+        if(sort == null) {
+            sort = "&sort=" + sNo; 
         }else {
-            mNo = 0;
+            sNo = Integer.parseInt(sort);
+            sort = "&sort=" + sNo;
         }
         
-        //정렬값 받기
-        String sort = req.getParameter("sort");
-        
-        //타입값 받기
+        //type 값
         String type = req.getParameter("type");
-        String tNum = "";
-        
-        //타입값 번호지정
-        if(type == null) {type = "";}
-        else if(type.equals("rstr")) { tNum ="1";}
-        else if(type.equals("cafe")) {tNum ="2";}
-        else if(type.equals("drink")) {tNum ="3";}
+        int tNum = 1;
+              
+        if(type == null) {
+            type = "&type=" + tNum; 
+        }else {
+            tNum = Integer.parseInt(type);
+            type = "&type=" + tNum;
+        }
         
         //페이징 처리
         int listCount;
@@ -57,7 +53,7 @@ public class HealingNyamController extends HttpServlet{
         int endPage;
 
         //페이지 번호 받기 + null 처리
-        listCount = new HealingService().selectNyamCount(tNum);
+        listCount = new AdminHealingService().NyamCount(sNo, tNum);
         
         String pno = req.getParameter("pno");
         if(pno == null) {
@@ -65,9 +61,9 @@ public class HealingNyamController extends HttpServlet{
         }else {
             currentPage = Integer.parseInt(pno);
         }
-
-        pageLimit = 5;
-        boardLimit = 9;
+        
+        pageLimit = 10;
+        boardLimit = 5;
 
         maxPage = (int) Math.ceil((double) listCount / boardLimit);
         startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
@@ -86,30 +82,33 @@ public class HealingNyamController extends HttpServlet{
         pv.setBoardLimit(boardLimit);
         pv.setMaxPage(maxPage);
         pv.setStartPage(startPage);
-        pv.setEndPage(endPage);
+        pv.setEndPage(endPage);               
         
-       
+        List<HealingVo> list = new AdminHealingService().NyamList(pv,sNo, tNum);    
         
-        //디비 다녀오기
-        List<HealingVo> nyamList = new HealingService().NyamPage(pv, sort, mNo,tNum);                    
- 
-        //type null처리
-        if(type != "") {
-            type = "&type=" + type;
-        }
+        //강제 로그인 -> 추후 삭제
+        AdminVo vo = new AdminVo();
+        vo.setId("1");
+        vo.setPwd("1");
+        req.getSession().setAttribute("loginAdmin", vo);
         
-        //sort null처리
-        if(sort == null){
-            sort= "";        
-        }else {
-            sort = "&sort="+sort;
-        }
-        //화면 보여주기
-
+               
         req.setAttribute("type", type);
         req.setAttribute("sort", sort);
         req.setAttribute("pv", pv);
-        req.setAttribute("nyamList", nyamList);
-        req.getRequestDispatcher("/views/healing/nyam.jsp").forward(req, resp);
+        req.setAttribute("list", list);
+        
+        if(tNum == 1) {
+            req.getRequestDispatcher("/views/admin/yamyam/bobList.jsp").forward(req, resp);
+        }else if(tNum == 2) {
+            req.getRequestDispatcher("/views/admin/yamyam/cafeList.jsp").forward(req, resp);
+        }else {
+            req.getRequestDispatcher("/views/admin/yamyam/drinkList.jsp").forward(req, resp);
+        }
+       
+        
+        
+        
+        
     }
 }
