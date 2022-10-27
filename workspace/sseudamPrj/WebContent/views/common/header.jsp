@@ -365,6 +365,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
     <div class="main-wrapper">
       <span><a href="<%=root%>/sseudam/join">회원가입</a></span>
       <span><button class="popup-btn" onclick="loginPopup(true)">로그인</button></span>
+      <span><a href="<%=root%>/aboutUs">회사소개</a></span>
     </div>
   </div>
   <div class="main-header-title">
@@ -421,7 +422,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   </div>
 
   <!-- 로그인 팝업 -->
-  <form action="/sseudam/login" method="post">
+  <form action="/sseudam/login" name="memberLoginForm" method="post">
 	    <div id="login-popup" class="hide">
 	    <div class="login-popup">
 	      <div class="login-popup-header">
@@ -475,8 +476,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	          </div>
 	          	<div>
 	            <br><button type="button" onclick="idFound();" class="login-btn">아이디 찾기</button>
-	            <div id="result" style="text-align: center; margin-top: 30px;">왜 안 나와</div>
-	            <div>왜 안나와???!</div>
+	            <div id="result" style="text-align: center; margin-top: 30px;"></div>
 	            </div>
 	      </div>
 	      
@@ -489,6 +489,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
     <div class="main-wrapper">
       <span><div class="login-success"><a href="<%=root%>/views/mypage/main.jsp"><%= loginMember.getName() %></a> 님, 환영합니다.</div></span>
       <span><div><a href="<%= root %>/member/logout">로그아웃</a></div></span>
+      <span><a href="<%=root%>/aboutUs">회사소개</a></span>
     </div>
   </div>
   <div class="main-header-title">
@@ -513,7 +514,15 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   <div class="main-header-nav">
     <div class="main-wrapper">
       <div>
-        <a href="<%=root%>/stress/stressTest">스트레스 테스트</a>
+              <a id="test-btn" onclick="loginPopup(true)">스트레스 테스트</a>
+          <%if(loginMember!=null){ %>
+          <script>
+            const wirteBtn = document.querySelector('#test-btn');
+            testBtn.addEventListener('click',function() {
+              location.href='<%=root%>/stress/stressTest';
+            })
+          </script>
+          <%} %>
         <div class="main-header-nav-color"></div>
       </div>
       <div class="dropdown">
@@ -551,6 +560,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
     <div class="main-wrapper">
       <span><div class="login-success"><a href="<%=root%>/views/mypage/main.jsp"><%= proLoginMember.getName() %></a> 님, 환영합니다.</div></span>
       <span><div><a href="<%= root %>/member/logout">로그아웃</a></div></span>
+      <span><a href="<%=root%>/aboutUs">회사소개</a></span>
     </div>
   </div>
   <div class="main-header-title">
@@ -639,21 +649,23 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 </script>
 
 <script>
-	//로그인 체크 (!!다시 확인)
+	//로그인 체크
 	function login(){
-		var getId = document.getElementById("id");
-		var getPwd = document.getElementById("pwd");
+		var getId = document.memberLoginForm.memberId.value;
+		var getPwd = document.memberLoginForm.memberPwd.value;
 		
-		var id = getId.value;
-		var pwd = getPwd1.value;
-		
-		if(!id){
-			alert("아이디를 입력해 주세요.");
-			return false;
-		}else if(!pwd){
-			alert("비밀번호를 입력해 주세요.");
+		if(getId == ""){
+			alert("아이디를 입력해 주세요")
+			document.memberLoginForm.memberId.focus();
 			return false;
 		}
+		
+		if(getPwd == ""){
+			alert("비밀번호를 입력해 주세요")
+			document.memberLoginForm.memberPwd.focus();
+			return false;
+		}
+		
 	}
 
     // 로그인 팝업
