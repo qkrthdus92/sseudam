@@ -143,7 +143,34 @@ public class ProDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return proLoginMember;
+	}
+	
+	//전문가 아이디 중복 확인
+	public boolean proIdDup(Connection conn, String proIdCheck) {
 		
+		String sql = "SELECT * FROM PRO_MEMBER WHERE ID = ?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean isProIdDup = false;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, proIdCheck);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				isProIdDup = true; //중복
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rs);
+		}
+		
+		return isProIdDup;
 	}
 	
 }

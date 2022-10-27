@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.counsel.pro.vo.ProVo;
+import com.kh.sseudam.member.dao.MemberDao;
 import com.kh.sseudam.member.vo.MemberVo;
 import com.kh.sseudam.pro.dao.ProDao;
 import com.kh.sseudam.pro.vo.ProJoinPage1Vo;
@@ -58,5 +59,12 @@ public class ProMemberService {
 		return proMemberLogin;
 	}		
 
-
+	//전문가 아이디 중복 확인
+	public boolean proIdDup(String proIdCheck) {
+		Connection conn = JDBCTemplate.getConnection();
+		boolean isProIdDup = new ProDao().proIdDup(conn, proIdCheck);
+		JDBCTemplate.close(conn);
+		return isProIdDup;
+	}
+	
 }

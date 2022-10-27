@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>쓰담쓰담 회원가입</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
 
     body{
@@ -38,9 +39,21 @@
     }
 
     .join-step > img{
-    	padding: 20px;
+    	padding-left: 20px;
+        padding-right: 20px;
     }
     
+    .join-step-check{
+        width: 350px;
+        padding-bottom: 25px;
+    }
+
+    .join-step-check > img{
+        width: 20px;
+        height: 20px;
+        margin-left: 10px;
+    }
+
     .join-area{
         display: flex;
         flex-direction: column;
@@ -71,9 +84,14 @@
         width: 355px;
     }
 
-    .gender-box>label{
+    .gender-box > label{
         font-size: 16px;
         margin-right: 20px;
+    }
+    
+   label{
+        font-size: 13px;
+        cursor: pointer;
     }
 
     input::placeholder{
@@ -87,8 +105,9 @@
         font-size: 13px;
         border-radius: 15px;
         background-color: white;
-        width: 65px;
+        width: 75px;
         height: 25px;
+        cursor: pointer;
     }
 
     .next-page{
@@ -97,6 +116,15 @@
         border: none;
 		cursor: pointer;
         font-size: 15px;
+    }
+
+	#memberId{
+		width: 273px;
+	}
+
+    #result{
+    	font-size: 13px;
+    	margin-bottom: 5px;
     }
 
 </style>
@@ -117,17 +145,19 @@
                 <img src="<%=root%>/resources/img/join/횐가입.png">
                 <img src="<%=root%>/resources/img/join/자격_정보_작성.png">
                 <img src="<%=root%>/resources/img/join/프로필_작성.png">
-                <img src="<%=root%>/resources/img/join/심사_승인.png">
                 <img src="<%=root%>/resources/img/join/가입_완료.png">
             </div>
-
-
+            
+            <div class="join-step-check">
+                <img src="<%=root%>/resources/img/join/단계체크.png">
+            </div>
 
             <div class="join-1nd">
                 <div>아이디</div>
                 <div>
-                    <input type="text" id="id" name="memberId" style="width: 280px;" placeholder="6~14자 이내 영문, 숫자를 포함하여 작성" required>
-                    <input type="button" class="overlap-check-btn" value="중복확인" onclick="location.href=''">
+                    <input type="text" id="memberId" name="memberId" placeholder="6~14자 이내 영문, 숫자를 포함하여 작성" required>
+                    <button input type="button" onclick="proIdCheck();" id="idCheckBtn" class="overlap-check-btn">중복확인</button>
+                    <div id="result" type="hidden"></div>
                 </div>
             </div>
 
@@ -150,10 +180,10 @@
                 <div class="gender">
                     <div class="gender-box">
                             <label>여자
-                                <input type="checkbox" name="gender" value="F">
+                                <input type="checkbox" id="gender1" name="gender" value="F" onclick='checkOnlyOne(this)'>
                             </label>
                             <label>남자
-                                <input type="checkbox" name="gender" value="M">
+                                <input type="checkbox" id="gender2" name="gender" value="M" onclick='checkOnlyOne(this)'>
                             </label>
                     </div>
                 </div>
@@ -186,7 +216,7 @@
             </div>
             <div class="next">
                 <br>
-                <div><input type="submit" class="next-page" value="다음 페이지 작성"></div>
+                <div><input type="submit" onclick="return joincheck();" class="next-page" value="다음 페이지 작성"></div>
             </div>
             
         </div>
@@ -195,49 +225,94 @@
 
     </nav>
     
-	<script>
-	<!-- 회원가입 유효성 검사 -->
-		function joincheck(){
-			var getId = document.getElementById("id");
-			var getPwd1 = document.getElementById("pwd1");
-			var getPwd2 = document.getElementById("pwd2");
-			var getName = document.getElementById("name");
-			 		
-			var id = getId.value;
-			var pwd1 = getPwd1.value;
-			var pwd2 = getPwd2.value;
-			var name = getName.value;
-			
-			var checkId = /^[a-zA-Z0-9]{6,14}$/;	//영문+숫자
-			var checkPwd = /^(?=.*[a-zA-Z])(?=.*[#?!@$%^&*-])(?=.*[0-9]).{6,14}$/; //문자 + 특수문자
+    <script>
+	    
+    	function joincheck(){
+    		
+    		var getId = document.getElementById("memberId");
+    		var getPwd1 = document.getElementById("pwd1");
+    		var getPwd2 = document.getElementById("pwd2");
+    		var getName = document.getElementById("name");
+    		var getGender1 = document.getElementById("gender2");
+    		var getGender2 = document.getElementById("gender2");
+    		
+    		var id = getId.value;
+    		var pwd1 = getPwd1.value;
+    		var pwd2 = getPwd2.value;
+    		var name = getName.value;
+    		var gender1 = getGender1.value;
+    		var gender2 = getGender2.value;
+    		
+    		var checkId = /^[a-zA-Z0-9]{6,14}$/;	//영문+숫자
+    		var checkPwd = /^(?=.*[a-zA-Z])(?=.*[#?!@$%^&*-])(?=.*[0-9]).{6,14}$/; //문자 + 특수문자
 			var checkName = /^[가-힣a-zA-Z]+$/;	//한글+영문
-			
-			
-			if(!checkId.test(id)){
-				alert("아이디는 6~14자 이내로 영문, 숫자를 포함하여 작성해 주세요.")
-				return false;
-			}
-			
-			if(!checkPwd.test(pwd1)){
-				alert("비밀번호는 6~14자 이내로 영문, 숫자, 특수문자를 포함하여 작성해 주세요.")
-				return false;
-			}
-			
-			if(pwd1 != pwd2){
-				alert("비밀번호가 일치하지 않습니다.")
-				return false;
-			}
-			
-			if(!checkName.test(name)){
-				alert("이름은 한글과 영문으로 입력해 주세요.")
-				return false;
-			}
+
+    		if(!checkId.test(id)){
+    			alert("아이디는 6~14자 이내로 영문, 숫자를 포함하여 작성해 주세요.")
+    			return false;
+    		}
+    		
+    		if(!checkPwd.test(pwd1)){
+    			alert("비밀번호는 6~14자 이내로 영문, 숫자, 특수문자를 포함하여 작성해 주세요.")
+    			return false;
+    		}
+    		
+    		if(pwd1 != pwd2){
+    			alert("비밀번호가 일치하지 않습니다.")
+    			return false;
+    		}
+    		
+    		if(!checkName.test(name)){
+    			alert("이름은 한글과 영문으로 입력해 주세요.")
+    			return false;
+    		}
+    		
+    		if(!checkName.test(nick)){
+    			alert("닉네임은 한글과 영문으로 입력해 주세요.")
+    			return false;
+    		}
 		
-			
-		}
-	</script>
-
-
+    	}
+	
+    	/* 체크박스 하나만 선택 */
+    	function checkOnlyOne(element) {
+    		  
+    		  const checkboxes 
+    		      = document.getElementsByName("gender");
+    		  
+    		  checkboxes.forEach((cb) => {
+    		    cb.checked = false;
+    		  })
+    		  
+    		  element.checked = true;
+    		}
+    	
+    </script>
+    
+	<script type="text/javascript">
+    	// 아이디 중복 검사
+    	function proIdCheck(){
+    		
+    		alert("여기까진 옴ㅇㅇ");
+    		
+    		$.ajax({
+    			url : "/sseudam/ProIdCheck",
+    			method : "GET",
+    			data :
+    				{
+    					"proIdCheck" : $('#memberId').val()
+    				},
+    			success : function(x){
+    				console.log(x);
+    				$('#result').text(x);
+    			},
+    			error : function(y){
+    				console.log(y);
+    			}
+    		});
+    	}
+    </script>
+    
     <%@ include file="/views/common/footer.jsp" %>
 
 </body>

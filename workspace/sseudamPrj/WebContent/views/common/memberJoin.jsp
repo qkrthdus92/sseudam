@@ -5,32 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>(일반) 회원가입</title>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-	//[중복확인] 버튼 클릭 이벤트
-	$('#idCheckBtn').click(function()){
-	//AJAX 통신 시작
-	$.ajax({
-		type : 'POST',
-		url : '/sseudam/memberJoin',
-		data : {userId : $('#id').val()},
-		async : false,
-		success : function(data){
-		var id = data;
-		id(id.length > 1){
-			$('#result').html("중복");
-		}else{
-			$('#result').html("통과");
-		}
-	}
-		
-	});
-	});
-});
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
-
     body{
         padding: 0;
         margin: 0;
@@ -117,9 +93,13 @@ $(document).ready(function(){
         height: 25px;
         cursor: pointer;
     }
+    
+    #result{
+    	font-size: 13px;
+    	margin-bottom: 5px;
+    }
+    
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js">
-</script>
 </head>
 <body>
 
@@ -133,9 +113,9 @@ $(document).ready(function(){
 			<div class="join-area">
 	            <div>아이디</div>
 	            <div>
-	            	<input type="text" id="id" class="memberId-input" name="memberId" placeholder="6~14자 이내 영문, 숫자를 포함하여 작성" required>
-	            	<button type="button" id="idCheckBtn" class="overlap-check-btn" onclick="idCheck()" >중복확인</button>
-	            	<div id="result"></div>
+	            	<input type="text" id="memberId" class="memberId-input" name="memberId" placeholder="6~14자 이내 영문, 숫자를 포함하여 작성" required>
+	            	<button type="button" onclick="idCheck();" id="idCheckBtn" class="overlap-check-btn">중복확인</button>
+	            	<div id="result" type="hidden"></div>
 	            </div>					
 	
 	            <div>비밀번호</div>
@@ -163,24 +143,26 @@ $(document).ready(function(){
 	                <input type="tel" id="phone" name="phone" placeholder="예) 01012345678" required>
 	            </div>
 	
-	            <div>이메일(선택)</div>
+	            <div>이메일</div>
 	            <div>
 	                <input type="email" name="email">
 	            </div>
 				
-	            <div class="join-TOS">
-	            	<form name="checkBox">
-		                <label>
-		                    <input type="checkbox" id="agreeCheck" name="agreeCheck">
-		                    <a style="color: red;">(필수)</a> 서비스 이용약관 및 개인정보 처리방침에 동의합니다.
-		                </label>
-		                <br>
-		                <label>
-		                    <input type="checkbox">
-		                    (선택) 이벤트 진행 등의 마케팅 정보를 수신합니다.
-		                </label>
-	            	</form>
-	            </div>
+                <div class="TOS">
+                    <div class="TOS-1nd">
+                        <br>
+                        <label>
+                            <input type="checkbox" required>
+	                    	<a style="color: red;">(필수)</a> 서비스 이용약관 및 개인정보 처리방침에 동의합니다.
+                        </label>
+                    </div>
+                    <div class="TOS-2nd">
+                        <label>
+                            <input type="checkbox">
+                            (선택) 이벤트 진행 등의 마케팅 정보를 수신합니다.
+                        </label>
+                    </div>
+                </div>
 	
 	            <div class="join-submit">
 	                <br><input type="submit" onclick="return joincheck();" value="가입하기" class="submit">
@@ -193,7 +175,7 @@ $(document).ready(function(){
     <script>
 	    
     	function joincheck(){
-    		var getId = document.getElementById("id");
+    		var getId = document.getElementById("memberId");
     		var getPwd1 = document.getElementById("pwd1");
     		var getPwd2 = document.getElementById("pwd2");
     		var getName = document.getElementById("name");
@@ -207,9 +189,7 @@ $(document).ready(function(){
     		
     		var checkId = /^[a-zA-Z0-9]{6,14}$/;	//영문+숫자
     		var checkPwd = /^(?=.*[a-zA-Z])(?=.*[#?!@$%^&*-])(?=.*[0-9]).{6,14}$/; //문자 + 특수문자
-			var checkName = /^[가-힣a-zA-Z]+$/;	//한글+영문
-    		
-			var cb = document.checkBox;
+			var checkName = /^[가-힣a-zA-Z-Z0-9]+$/;	//한글+영문+숫자
     		
     		if(!checkId.test(id)){
     			alert("아이디는 6~14자 이내로 영문, 숫자를 포함하여 작성해 주세요.")
@@ -232,21 +212,33 @@ $(document).ready(function(){
     		}
     		
     		if(!checkName.test(nick)){
-    			alert("닉네임은 한글과 영문으로 입력해 주세요.")
+    			alert("닉네임은 특수문자를 포함할 수 없습니다.")
     			return false;
     		}
 		
-    		<!-- 체크여부 확인이 안 됨 -->
-    		if(!cb.agreeCheck.checked){
-    			alert("약관에 동의해 주세요.")
-    			cb.agreeCheck.focus();
-    			return false;
-    		}
-    		
     		
     	}
-
-    	
+    </script>
+    
+    <script type="text/javascript">
+    	// 아이디 중복 검사
+    	function idCheck(){
+    		$.ajax({
+    			url : "/sseudam/IdCheck",
+    			method : "GET",
+    			data :
+    				{
+    					"checkID" : $('#memberId').val()
+    				},
+    			success : function(x){
+    				console.log(x);
+    				$('#result').text(x);
+    			},
+    			error : function(y){
+    				console.log(y);
+    			}
+    		});
+    	}
     </script>
 
     <%@ include file="/views/common/footer.jsp" %>

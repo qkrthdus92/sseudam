@@ -108,12 +108,13 @@ public class ProMemberJoinPageController extends HttpServlet{
 			
 			if(result2 == 1) {
 				req.getSession().setAttribute("alertMsg", "회원가입 완료");
-				resp.sendRedirect("/sseudam/main");
+				resp.sendRedirect("/sseudam/proJoin");
 			}else{
-				req.getSession().setAttribute("msg", "회원가입 완료");
+				req.getSession().setAttribute("msg", "회원가입 실패");
 				resp.sendRedirect("/views/common/errorPage.jsp");
 				
 			}
+			
 			
 		}
 

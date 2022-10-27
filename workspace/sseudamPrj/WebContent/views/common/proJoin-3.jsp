@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>프로필 작성</title>
+<title>쓰담쓰담 회원가입</title>
 <style>
 
     body{
@@ -40,7 +40,18 @@
     }
 
     .join-step > img{
-    	padding: 20px;
+    	padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .join-step-check{
+        width: 400px;
+    }
+
+    .join-step-check > img{
+        width: 20px;
+        height: 20px;
+        margin-left: 61%;
     }
 
     .join-area{
@@ -179,8 +190,11 @@
                 <img src="<%=root%>/resources/img/join/횐가입.png">
                 <img src="<%=root%>/resources/img/join/자격_정보_작성.png">
                 <img src="<%=root%>/resources/img/join/프로필_작성.png">
-                <img src="<%=root%>/resources/img/join/심사_승인.png">
                 <img src="<%=root%>/resources/img/join/가입_완료.png">
+            </div>
+            
+            <div class="join-step-check">
+                <img src="<%=root%>/resources/img/join/단계체크.png">
             </div>
 
             <div class="join-guide">

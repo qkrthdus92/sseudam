@@ -35,5 +35,24 @@ public class MemberService {
 		return loginMember;
 		
 	}
+
+	//아이디 중복 확인
+	public boolean checkDup(String idCheck) {
+		Connection conn = JDBCTemplate.getConnection();
+		boolean isIdDup = new MemberDao().checkDup(conn, idCheck);
+		JDBCTemplate.close(conn);
+		return isIdDup;
+		
+	}
+
+	public String findMemberId(MemberVo findvo) {
+		Connection conn = JDBCTemplate.getConnection();
+		String findId = new MemberDao().findMemberId(conn, findvo);
+		JDBCTemplate.close(conn);
+		return findId;
+	
+	}
+	
+
 	
 }
