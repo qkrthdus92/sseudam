@@ -12,10 +12,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>쓰다쓰담 메인</title>
+    <title>쓰담쓰담 메인</title>   	
     
-
-
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 	<link rel="stylesheet"
@@ -163,7 +161,7 @@
         </article>
         <article>
             <div class="little-menu">전문가 상담</div>
-            <a href="<%=root%>/counsel/list">
+            <a href="<%=root%>/counsel/list?pno=1">
             	<div class="the-more"  onclick="location.href ='<%=root%>/counsel/list?pno=1'" style="cursor:pointer;">더 보기</div>
             </a>
             <div class="slider-counseling">      
@@ -292,11 +290,15 @@
             </div>
         </article>
     </main>
-    <%@ include file="/views/common/footer.jsp" %>
+    <%@ include file="/views/common/footer.jsp" %>    
     
-    <script>
-        $( document ).ready( function(){
-            $( 'nav' ).slick({
+	<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript">
+    
+   	 	var jb = jQuery.noConflict();
+    
+   	 	jb( document ).ready( function(){
+   			jb( 'nav' ).slick({
                 arrows: false,
                 autoplay: true,
                 autoplaySpeed: 1500,
@@ -309,8 +311,8 @@
                 speed:1700
             });
         });
-        $( document ).ready( function(){
-            $( '.slider-review' ).slick({
+   		jb( document ).ready( function(){
+   			jb( '.slider-review' ).slick({
                 autoplay: true,
                 autoplaySpeed: 2000,
                 slidesToShow: 4,
@@ -318,8 +320,8 @@
             });
         });
 
-        $( document ).ready( function(){
-            $( '.slider-counseling' ).slick({
+   		jb( document ).ready( function(){
+   			jb( '.slider-counseling' ).slick({
                 slidesToShow: 3,
                 slidesToScroll: 1,
                 centerMode: true,
@@ -334,8 +336,8 @@
             });
         });
         
-        $( document ).ready( function(){
-            $( '.quote' ).slick({
+   		jb( document ).ready( function(){
+   			jb( '.quote' ).slick({
                 dots:false,
                 autoplay: true,
                 autoplaySpeed: 3000,

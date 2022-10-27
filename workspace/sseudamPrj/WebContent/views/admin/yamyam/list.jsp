@@ -2,9 +2,8 @@
 <%@page import="com.kh.sseudam.healing.vo.HealingVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%><% String root1 = request.getContextPath();%>
+pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
 <!DOCTYPE html>
-
 <%
 	List<HealingVo> list = (List<HealingVo>) request.getAttribute("list");
 	PageVo pv = (PageVo)request.getAttribute("pv");
@@ -16,10 +15,21 @@ pageEncoding="UTF-8"%><% String root1 = request.getContextPath();%>
 	String nowPage = (String)request.getQueryString();
 	int pi = 0;
 	int pageNo = 1;
+	int tNo = 1;
 	if(nowPage != null){
 		pi = nowPage.indexOf("pno");
 		pageNo = Integer.parseInt(nowPage.substring(pi+4, pi+5));
 	}	
+	
+	if(nowPage != null){
+		pi = nowPage.indexOf("type");
+		tNo = Integer.parseInt(nowPage.substring(pi+5, pi+6));
+	}
+	String typeName = "";
+	if(type.equals("&type=1")){typeName = "혼밥";}
+	else if(type.equals("&type=2")){typeName = "혼카페";}
+	else{typeName = "혼술";}
+
 %>
 <html>
   <head>
@@ -36,7 +46,7 @@ pageEncoding="UTF-8"%><% String root1 = request.getContextPath();%>
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/yamyam/drink/list.css?ver=2"
+      href="<%=root1%>/resources/css/admin/yamyam/bob/list.css?ver=2"
     />
   </head>
   <body>
@@ -44,14 +54,17 @@ pageEncoding="UTF-8"%><% String root1 = request.getContextPath();%>
     <main class="admin-main">
       <header class="admin-main-header">
         <select name="" id="" onchange="window.open(value,'_self');">
-          <option value="<%=root%>/admin/nyam?pno=1&type=3">
-            혼자서냠냠 - 혼술
+          <option value="">
+            <%=typeName %>페이지
           </option>
           <option value="<%=root%>/admin/nyam?pno=1&type=1">
             혼자서냠냠 - 혼밥
           </option>
           <option value="<%=root%>/admin/nyam?pno=1&type=2">
             혼자서냠냠 - 혼카페
+          </option>
+          <option value="<%=root%>/admin/nyam?pno=1&type=3">
+            혼자서냠냠 - 혼술
           </option>
         </select>
       </header>
@@ -65,21 +78,22 @@ pageEncoding="UTF-8"%><% String root1 = request.getContextPath();%>
           <div class="add-btn">
             <input
               type="button"
-              value="혼술 추가"
-              onclick="location.href='<%=root%>/views/admin/yamyam/drink/add.jsp'"
+              value="냠냠 추가"
+              onclick="location.href='<%=root%>/admin/nyam/add'"
             />
           </div>
         </div>
         <div class="admin-main-wrapper">
           <div class="admin-main-board-top">
             <div class="total-num-info">
-              <span>전체 게시글</span><span>10</span>
+              <span>전체 게시글</span><span><%=pv.getListCount() %></span>
             </div>
             <div class="main-select-btn">
               <select name="" id=""  onchange="window.open(value,'_self');">
-                <option value="<%=root%>/admin/nyam?pno=1&type=3&sort=1">모든 게시글 조회</option>
-                <option value="<%=root%>/admin/nyam?pno=1&type=3&sort=2">게시 완료 조회</option>
-                <option value="<%=root%>/admin/nyam?pno=1&type=3&sort=3">게시 취소 조회</option>
+                <option value="">게시글 조회</option>
+                <option value="<%=root%>/admin/nyam?pno=1<%=type %>&sort=1">모든 게시글 조회</option>
+                <option value="<%=root%>/admin/nyam?pno=1<%=type %>&sort=2">게시 완료 조회</option>
+                <option value="<%=root%>/admin/nyam?pno=1<%=type %>&sort=3">게시 취소 조회</option>
               </select>
             </div>
           </div>
@@ -91,7 +105,7 @@ pageEncoding="UTF-8"%><% String root1 = request.getContextPath();%>
             <div>전화번호</div>
             <div>등록일자</div>
             <div>최종수정일자</div>
-            <div>게시여부</div>
+            <div>삭제여부</div>
             <div>좋아요</div>
             <div>edit</div>
 
@@ -108,12 +122,37 @@ pageEncoding="UTF-8"%><% String root1 = request.getContextPath();%>
             <div><%=list.get(i).getDeleteYn()%></div>
             <div><%=list.get(i).getLiked()%></div>
             <div>
-              <a href="<%=root%>/views/admin/yamyam/drink/edit.jsp"
-                ><i class="fa-solid fa-pen-to-square"></i
-              ></a>
+              <a href="<%=root%>/views/admin/yamyam/bob/edit.jsp">
+            		<i class="fa-solid fa-pen-to-square"></i>
+              </a>
             </div>
 
             <%}%>
+            
+            <div class="page">
+			<%if(pv.getStartPage() != 1){ %>	        
+				<div>
+			        	<a class="other-pages" href="<%=root%>/admin/nyam?pno=<%=pv.getStartPage() - 1 %><%=sort%><%=type%>"><</a>        
+				</div>
+        	<%} %>  
+			<% 
+				for(int j = pv.getStartPage(); j<=pv.getEndPage() ;j++){
+			%>
+				<div>
+						<%if(pageNo == j){%>	
+			            	<a class="current-page" >
+		            	<%}else{ %>
+		            		<a href="<%=root%>/admin/nyam?pno=<%=j%><%=sort%><%=type%>" class="other-pages" >
+		            	<%}%> <%=j %>
+	           				</a> 
+				</div>			
+	        <%} %>
+			<%if(pv.getEndPage() != pv.getMaxPage()){ %>	        
+				<div>
+		        	<a class="other-pages" href="<%=root%>/admin/nyam?pno=<%=pv.getEndPage() + 1 %><%=sort%><%=type%>">></a>        
+	        	</div>
+        	<%} %>
+		</section>
           </div>
         </div>
       </section>

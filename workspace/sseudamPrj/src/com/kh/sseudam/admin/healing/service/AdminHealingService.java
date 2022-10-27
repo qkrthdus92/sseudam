@@ -37,5 +37,16 @@ public class AdminHealingService {
         
     }
 
+    public int addNyamOne(HealingVo vo) {
+        
+        Connection conn = JDBCTemplate.getConnection();
+        
+        int result = dao.InsertNyamOne(conn, vo);
+        
+        JDBCTemplate.close(conn);
+
+        return result;
+    }
+
 
 }
