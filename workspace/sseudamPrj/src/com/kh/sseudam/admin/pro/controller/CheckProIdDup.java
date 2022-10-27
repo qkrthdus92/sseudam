@@ -29,6 +29,8 @@ public class CheckProIdDup extends HttpServlet{
 		}else {
 			if(isIdDup) {
 				resp.getWriter().write("이미 사용중인 아이디입니다");
+			}else if(id.trim().equals("")) {
+				resp.getWriter().write("아이디를 입력해주세요");
 			}else {
 				resp.getWriter().write("사용가능한 아이디입니다");
 			}

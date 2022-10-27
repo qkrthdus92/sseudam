@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
+pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%> <% String
+pno = (String)request.getAttribute("pno"); String quitYn =
+(String)request.getAttribute("quitYn"); %> <% String search =
+(String)request.getAttribute("search"); %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -30,10 +33,29 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
               class="cancel-btn"
               type="button"
               value="취소"
-              onclick="history.back()"
+              onclick="location.href='<%=root%>/admin/member/list?pno=<%=pno %>&quitYn=<%=quitYn %>'"
             />
-            <input class="save-btn" type="submit" value="저장" />
+            <input
+              class="save-btn"
+              type="submit"
+              value="저장"
+              onclick="return checkId();"
+            />
           </div>
+          <script>
+            function checkId() {
+              let checkId = $("#printDupId").text();
+
+              console.log(checkId);
+
+              if (checkId.includes("현재") || checkId.includes("사용가능한")) {
+                return true;
+              } else {
+                Swal.fire("아이디 중복체크해주세요!");
+                return false;
+              }
+            }
+          </script>
         </header>
         <section class="admin-main-section">
           <div class="admin-main-wrapper">
@@ -52,10 +74,37 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
                 placeholder="아이디를 입력해주세요"
                 class="input-edit"
                 name="id"
+                id="targetId"
               />
               <div>
-                <input type="submit" value="중복확인" class="check-btn" />
+                <input
+                  type="button"
+                  value="중복확인"
+                  class="check-btn"
+                  onclick="checkDupId();"
+                />
+                <div id="printDupId"></div>
               </div>
+              <script>
+                let id = document.querySelector("#targetId").value;
+                console.log(id);
+                function checkDupId() {
+                  console.log("여기여기");
+                  $.ajax({
+                    url: "<%=root1%>/admin/addMember/checkDupId",
+                    type: "get",
+                    data: {
+                      id: $("#targetId").val(),
+                    },
+                    success: function (x) {
+                      $("#printDupId").html(x);
+                    },
+                    error: function () {
+                      alert("통신에러발생~");
+                    },
+                  });
+                }
+              </script>
               <div>닉네임</div>
               <input
                 type="text"

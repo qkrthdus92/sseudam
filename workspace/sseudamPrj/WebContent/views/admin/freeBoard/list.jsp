@@ -12,12 +12,26 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/common/component.css"
+      href="<%=root1%>/resources/css/admin/common/component.css?ver=1"
     />
     <link
       rel="stylesheet"
       href="<%=root1%>/resources/css/admin/freeBoard/list.css?ver=2"
     />
+    <style>
+      .search-area {
+        display: flex;
+      }
+
+      .search-area select {
+        width: 100px;
+        padding: 0px 2px;
+        border: none;
+        border: 1px solid #b0b0b0;
+        cursor: pointer;
+        font-size: 15px;
+      }
+    </style>
   </head>
   <body>
     <%@ include file="/views/admin/common/menu.jsp"%>
@@ -27,11 +41,17 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
       </header>
       <section class="admin-main-section">
         <div class="admin-main-section-top">
-          <div class="admin-search">
-            <input type="text" placeholder="내용을 입력해주세요" />
-            <i class="fa-solid fa-magnifying-glass"></i>
+          <div class="search-area">
+            <div class="admin-search">
+              <input type="text" placeholder="내용을 입력해주세요" />
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <select name="searchType" id="">
+              <option value="title">제목</option>
+              <option value="content">내용</option>
+              <option value="writer">작성자</option>
+            </select>
           </div>
-
           <div class="add-btn">
             <input
               type="button"

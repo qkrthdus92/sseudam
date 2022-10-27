@@ -62,7 +62,7 @@ List<ProVo>
                 <input
                   type="button"
                   value="전문가 추가"
-                  onclick="location.href='<%=root%>/admin/pro/add'"
+                  onclick="location.href='<%=root%>/admin/pro/add?&pno=<%=pno%>&status=<%=status%>'"
                 />
               </div>
             </div>
@@ -140,7 +140,8 @@ List<ProVo>
                 <%} %>
 
                 <div>
-                  <a href="<%=root%>/views/admin/pro/counsel.jsp"
+                  <a
+                    href="<%=root%>/admin/pro/counsel?mno=<%=proList.get(i).getNo()%>&pno=<%=pno%>&status=<%=status%>"
                     ><i class="fa-solid fa-magnifying-glass"></i
                   ></a>
                 </div>

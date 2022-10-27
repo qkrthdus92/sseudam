@@ -46,8 +46,8 @@ AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin"); %>
   }
 
   .admin-menu-header {
-    height: 60px;
-    border-bottom: 1px solid #808080;
+    height: 100px;
+    /* border-bottom: 1px solid #808080; */
     font-size: 28px;
     font-weight: 600;
 
@@ -59,6 +59,7 @@ AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin"); %>
 
   .admin-menu-header a {
     color: white;
+    margin-bottom: 10px;
   }
 
   /* 메뉴 부분 */

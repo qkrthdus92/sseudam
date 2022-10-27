@@ -27,6 +27,11 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
+.admin-add-certificate2 {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
 .admin-pro-certificate div {
   height: 50px;
   display: flex;
@@ -43,7 +48,43 @@
   border-bottom: 1px solid var(--border);
 }
 
+.admin-add-certificate2 div {
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
 .admin-pro-certificate div:nth-child(-n + 3) {
   background-color: var(--adminMenu);
   color: white;
+}
+
+.black {
+  background-color: #353535;
+  color: white;
+}
+
+.admin-cer-wrapper {
+  margin-top: 40px;
+}
+
+.border-left {
+  border-top-left-radius: 5px;
+}
+
+.border-right {
+  border-top-right-radius: 5px;
+}
+
+.cer-target div {
+  font-size: 15px;
+}
+
+.x-btn {
+  font-size: 20px;
+  color: #353535;
+  cursor: pointer;
+  margin-left: 20px;
 }

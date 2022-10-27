@@ -10,13 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
-import com.kh.sseudam.admin.member.service.AdminMemberService;
 import com.kh.sseudam.admin.pro.service.AdminProService;
 import com.kh.sseudam.common.AttachmentVo;
 import com.kh.sseudam.common.FileUploader;
 import com.kh.sseudam.counsel.pro.vo.ProVo;
-import com.kh.sseudam.member.vo.MemberVo;
+
 
 @WebServlet(urlPatterns = "/admin/pro/add")
 @MultipartConfig(
@@ -31,14 +29,37 @@ public class ProAddController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		String pno = req.getParameter("pno");
+		String status = req.getParameter("status");
+		String search = req.getParameter("search");
+		System.out.println("add get들어옴!");
+		System.out.println(pno);
+		System.out.println(status);
+		System.out.println(search);
+		
+		req.setAttribute("pno", pno);
+		req.setAttribute("status", status);
+		req.setAttribute("search", search);
 		
 		req.getRequestDispatcher("/views/admin/pro/add.jsp").forward(req, resp);
-		
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		
+		
+		System.out.println("add post들어옴!");
+		//수정 후 리다이렉트할 페이지 정보
+		String pno = req.getParameter("pno");
+		String status = req.getParameter("status");
+		String search = req.getParameter("search");
+		
+		System.out.println("t"+pno);
+		System.out.println("t"+status);
+		System.out.println("t"+search);
+		
 		String name = req.getParameter("name");
 		String id = req.getParameter("id");
 		String counselType = req.getParameter("counselType");
@@ -72,7 +93,8 @@ public class ProAddController extends HttpServlet{
 		int result = new AdminProService().insertOne(vo, aVo);
 		if(result == 1) {
 			req.getSession().setAttribute("alertMsg", "전문가 추가 완료!");
-			resp.sendRedirect("/sseudam/admin/pro/list?pno=1&status=all");
+			resp.sendRedirect("/sseudam/admin/pro/list?&pno="+pno+"&status="+status+"&search="+search);
+			//resp.sendRedirect("/sseudam/admin/pro/list?pno=1&status=all");
 		}else {
 			if(aVo != null) {
 				String savePath = rootPath + aVo.getFilePath() + "/" + aVo.getChangeName();

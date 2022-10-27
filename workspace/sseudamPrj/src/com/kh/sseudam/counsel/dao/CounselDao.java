@@ -1072,12 +1072,12 @@ public class CounselDao {
 			while(rs.next()) {
 				String no = rs.getString("NO");
 				String proNo = rs.getString("PRO_MEMBER_NO");
-				String name = rs.getString("NAME");
-				String num = rs.getString("NUM");
+				String name = rs.getString("CERTIFICATE_NAME");
+				String num = rs.getString("CERTIFICATE_NUM");
 				String img = rs.getString("IMG_PATH");
 				
 				CertificateVo vo = new CertificateVo();
-				vo.setNo(proNo);
+				vo.setNo(no);
 				vo.setProNo(proNo);
 				vo.setName(name);
 				vo.setNum(num);
