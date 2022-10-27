@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.sseudam.common.PageVo;
+import com.kh.sseudam.member.vo.MemberVo;
 import com.kh.sseudam.mypage.board.vo.MypageBoardVo;
 import com.kh.sseudam.mypage.board.vo.MypageLikeVo;
 import com.kh.sseudam.mypage.service.MypageBoardService;
@@ -23,11 +24,11 @@ public class MypageLikeController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-//		HttpSession s = req.getSession();
-//		
-//		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
-//		
-//		String num = loginMember.getNo();
+		HttpSession s = req.getSession();
+		
+		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
+		
+		String num = loginMember.getNo();
 		
 		//페이징 처리
 		int listCount; 			//총 ㅐ시글 갯수
@@ -38,8 +39,8 @@ public class MypageLikeController extends HttpServlet{
 		int startPage;			//페이징바 시작 페이지
 		int endPage;			//페이징바 종료 페이지
 		
-		listCount = new MypageLikeService().selectCount("1");//회원번호 임의지정
-		currentPage = Integer.parseInt(req.getParameter("pno")) ;
+		listCount = new MypageLikeService().selectCount(num);//회원번호 임의지정
+		currentPage = Integer.parseInt(req.getParameter("pno"));
 		pageLimit = 5;   //임의로 정함
 		boardLimit = 10; //임의로 정함
 		
@@ -63,7 +64,7 @@ public class MypageLikeController extends HttpServlet{
 		 
 	
 		
-		List<MypageLikeVo> MypageLikeList = new MypageLikeService().selectList(pv,"1");
+		List<MypageLikeVo> MypageLikeList = new MypageLikeService().selectList(pv,num);
 		
 		req.setAttribute("pv", pv);
 		req.setAttribute("MypageLikeList", MypageLikeList);

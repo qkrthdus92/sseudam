@@ -1,5 +1,13 @@
+<%@page import="com.kh.sseudam.common.PageVo"%>
+<%@page import="com.kh.sseudam.mypage.board.vo.MypageProMoneyListVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	List<MypageProMoneyListVo> MypageProMoneyList = (List<MypageProMoneyListVo>)request.getAttribute("MypageProMoneyList");	
+ 	PageVo pv = (PageVo)request.getAttribute("pv");
+ 	List<MypageProMoneyListVo> MypageProPaySum = (List<MypageProMoneyListVo>)request.getAttribute("MypageProPaySum");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +32,12 @@
         /* border */
 
         border: 1px solid #DFDFDF;
+    }
+    #main > #page-area{
+        grid-column: span 5;
+        text-align: center;
+        margin-top: 20px;
+        border-bottom: none;
     }
 #boardinfo{
     width: 1100px;
@@ -237,7 +251,11 @@
     }
     #moneyinfotext{
         margin-top: 10px;
-        margin-left: 20px;
+        margin-left: 40px;
+    }
+    #moneyinfotext0{
+    	margin-top: 10px;
+    	 margin-left: -20px;
     }
     #moneyinfotext2{
         margin-top: 10px;
@@ -255,21 +273,26 @@
     #moneylisttop{
         margin-top: 15px;
         display: grid;
-        grid-template-columns: 1fr 1fr 5fr 1fr;
+        grid-template-columns: 1fr 1fr 5fr 2fr;
         align-content: center;
         text-align: center;
         border-bottom:1px solid rgb(177, 175, 175) ;
         border-top:1px solid rgb(177, 175, 175) ;
     }
     #moneylistinfo{
-        height: 60px;
+        height: 35px;
         display: grid;
-        grid-template-columns: 1fr 1fr 5fr 1fr;
+        grid-template-columns: 1fr 1fr 5fr 2fr;
         align-content: center;
         text-align: center;
         border-bottom:1px solid rgb(177, 175, 175) ;
-        font-size: 20px;
+        font-size: 18px;
     }
+    #datechoice{
+    padding-top: 15px;
+    margin-left: 880px;
+    }
+
 </style>
 </head>
 <body>
@@ -277,38 +300,36 @@
 	<div id="wrap">
     <div id="main">
         <div id="boardinfo">
-            <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
+            <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
             <div id="hm1">총 결제내역</div>
-            <div id="hm">5건</div>
+            <div id="hm"><%=MypageProMoneyList.size() %>건</div>
             <div id="hm1"></div>
             <div idg="hm"></div>
         </div>
     
         <div id="dom">
-            <div id="dominfo" onclick="location.href='/sseudam/views/mypage/proresercheck.jsp';">상담예약</div>
+            <div id="dominfo" onclick="location.href='/sseudam/mypage/proresercheck?pno=1';">상담예약</div>
         </div>
         <div id="dom2">
-            <div id="dominfo2" onclick="location.href='/sseudam/views/mypage/promoneycheck.jsp';">수익조회</div>
+            <div id="dominfo2" onclick="location.href='/sseudam/mypage/promoneycheck?pno=1';">수익조회</div>
         </div>
         <div id="dom3">
             <div id="dominfo3"></div>
         </div>
         <div id="editbar">
-            <button id="allselect" ><img id="checkbox" src="/sseudam/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
-            <button id="delete">삭제</button>
-        	<span id="datechoice">
+        	<div id="datechoice">
 	            <input id="date" type="date" value="2022-10-12">
 	            <span>~</span>
 	            <input id="date" type="date" value="2022-10-12">
                 <button> 조회</button>
-        	</span>
+        	</div>
         </div>
 
         <div id="moneyinfo">
-                <div id="moneyinfotext">아이디님의 총 수익</div>
-                <div id="moneyinfotext">아이디님의 출금 가능 금액</div>
+                <div id="moneyinfotext">아이디의 총 수익 ▼</div>
+                <div id="moneyinfotext0">아이디님의 출금 가능 금액 ▼</div>
                 <div></div>
-                <div id="moneyinfotext2">2000,000원</div>
+                <div id="moneyinfotext2"><%=MypageProPaySum.get(0).getPay_sum()%>원</div>
                 <div id="moneyinfotext2">100,000원</div>
                 <div id="moneyinfotext3" onclick="showPopup(true)" >출금하기 > </div>
         </div>
@@ -320,32 +341,37 @@
 		        <div>예약일시</div>
 		        <div>금액</div>
 		    </div>
-            <div id="moneylistinfo">
-                <div><input type="checkbox" id="chk1" name="chk"></div>
-                <div>0113</div>
-                <div>2022.10.12</div>
-                <div>50,000</div>
-            </div>
-            <div id="moneylistinfo">
-                <div><input type="checkbox" id="chk1" name="chk"></div>
-                <div>0113</div>
-                <div>2022.10.12</div>
-                <div>50,000</div>
-            </div>
-            <div id="moneylistinfo">
-                <div><input type="checkbox" id="chk1" name="chk"></div>
-                <div>0113</div>
-                <div>2022.10.12</div>
-                <div>50,000</div>
-            </div>
+		    <%for(int i = 0 ; i < MypageProMoneyList.size(); ++i){%>
+			    <div id="moneylistinfo">
+	                <div></div>
+			        <div><%=MypageProMoneyList.get(i).getNo() %></div>
+			        <div><%=MypageProMoneyList.get(i).getAdvice_date() %></div>
+			        <div>+<%=MypageProMoneyList.get(i).getPay() %></div>
+			    </div>
+		     <%}%> 
         </div>
-    
+    	 <div id="page-area">
+        
+        <%if(pv.getStartPage() !=1){%>
+		        <a href="/sseudam/mypage/promoneycheck?pno=<%=pv.getStartPage()-1%>" class="btn btn-primary btn-sm">PRE</a> 
+        	<%}%>
+        
+        
+        <%for(int i =pv.getStartPage(); i <= pv.getEndPage(); ++i){%>
+       		<a href="/sseudam/mypage/promoneycheck?pno=<%=i %>" class="btn btn-primary btn-sm"><%=i %></a> 
+       	<%}%>
+       	
+       	<%if(pv.getEndPage() != pv.getMaxPage()){%>
+    		<a href="/sseudam/mypage/promoneycheck?pno=<%=pv.getEndPage()+1%>" class="btn btn-primary btn-sm">NEXT</a> 
+   		<%}%>
+        </div>
+    	
     </div>
 
     <div id="popup" class="hide">
         <div class="content">
-              <div class="popup-head">
-                  <div  ><img id="popup-logo" src="../../resources/img/header/logo.png" alt=""></div>
+              <div class="popup-head">                     
+                  <div  ><img id="popup-logo" src="/sseudam/resources/img/header/logo.png" alt=""></div>
                   <div class="head-title">&nbsp;&nbsp;&nbsp;&nbsp;수익금 출금을 위해 <br> 비밀번호를 입력해주세요.</div>
               </div>
               <div class="popup-body">

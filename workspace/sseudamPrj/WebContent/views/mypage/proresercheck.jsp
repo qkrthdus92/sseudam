@@ -219,7 +219,10 @@
 #datechoice{
 	margin-left: 650px;
 }
-
+#datechoice{
+	margin-left: 880px;
+	padding-top: 15px;
+}
 
 
 
@@ -230,7 +233,7 @@
 	<div id="wrap">
     <div id="main">
         <div id="boardinfo">
-            <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
+            <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
             <div id="hm1">총 결제내역</div>
             <div id="hm"><%=MypageProreserList.size() %>건</div>
             <div id="hm1"></div>
@@ -247,21 +250,19 @@
             <div id="dominfo3"></div>
         </div>
         <div id="editbar">
-            <button id="allselect" ><img id="checkbox" src="/sseudam/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
-            <button id="delete">삭제</button>
-        	<span id="datechoice">
+        	<div id="datechoice">
 	            <input id="date" type="date" value="2022-10-12">
 	            <span>~</span>
 	            <input id="" type="date" value="2022-10-12">
                 <button> 조회</button>
-        	</span>
+        	</div>
         </div>
 
         <div id="pro-box-wrap">
         
         	<%for(int i = 0 ; i < MypageProreserList.size(); ++i){%>
                 <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/mypage/프로필.png" alt=""></span> 
+                    <span><img id="profil2" src="/sseudam/resources/img/mypage/프로필.png" alt=""></span> 
                     <div id="proname">
                         <span><%= MypageProreserList.get(i).getName()%></span> 
                     </div>             

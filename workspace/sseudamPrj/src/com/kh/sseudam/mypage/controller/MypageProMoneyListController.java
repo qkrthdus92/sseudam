@@ -8,24 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.sseudam.common.PageVo;
-import com.kh.sseudam.member.vo.MemberVo;
-import com.kh.sseudam.mypage.board.vo.MypageLikehomeVo;
-import com.kh.sseudam.mypage.service.MypageLikehomeService;
-import com.kh.sseudam.mypage.service.MypageReserService;
+import com.kh.sseudam.mypage.board.vo.MypageProMoneyListVo;
+import com.kh.sseudam.mypage.service.MypageProMoneyListService;
 
-@WebServlet(urlPatterns="/mypage/likecheckhome")
-public class MypageLikehomeController extends HttpServlet{
-
+@WebServlet(urlPatterns = "/mypage/promoneycheck")
+public class MypageProMoneyListController extends HttpServlet{
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession s = req.getSession();
 		
-		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
-		
-		String num = loginMember.getNo();
+//		HttpSession s = req.getSession();
+//		
+//		ProMemberJoinVo proLoginMember = (ProMemberJoinVo)s.getAttribute("loginMember");
+//		
+//		String num = proLoginMember.getNo();
 		
 		//페이징 처리
 		int listCount; 			//총 ㅐ시글 갯수
@@ -36,7 +34,7 @@ public class MypageLikehomeController extends HttpServlet{
 		int startPage;			//페이징바 시작 페이지
 		int endPage;			//페이징바 종료 페이지
 		
-		listCount = new MypageLikehomeService().selectCount(num);//회원번호 임의지정
+		listCount = new MypageProMoneyListService().selectCount("2");//회원번호 임의지정
 		currentPage = Integer.parseInt(req.getParameter("pno")) ;
 		pageLimit = 5;   //임의로 정함
 		boardLimit = 10; //임의로 정함
@@ -50,8 +48,8 @@ public class MypageLikehomeController extends HttpServlet{
 		 if(endPage > maxPage) {
 	         endPage = maxPage;
 	      }
-	      
-	      PageVo pv =  new PageVo();
+		 
+		 PageVo pv =  new PageVo();
 		  pv.setListCount(listCount);
 		  pv.setCurrentPage(currentPage);
 		  pv.setPageLimit(pageLimit);
@@ -59,11 +57,16 @@ public class MypageLikehomeController extends HttpServlet{
 		  pv.setMaxPage(maxPage);
 		  pv.setStartPage(startPage);
 		  pv.setEndPage(endPage);
-				
-		List<MypageLikehomeVo> MypageLikehomeList = new MypageLikehomeService().selectList(pv,num);
-		
+	      
+		  List<MypageProMoneyListVo> MypageProMoneyList = new MypageProMoneyListService().selectList(pv,"2");
+		  List<MypageProMoneyListVo> MypageProPaySum = new MypageProMoneyListService().paysum("2");
+
 		req.setAttribute("pv", pv);
-		req.setAttribute("MypageLikehomeList", MypageLikehomeList);
-		req.getRequestDispatcher("/views/mypage/likecheckhome.jsp").forward(req, resp);
+		req.setAttribute("MypageProMoneyList", MypageProMoneyList);
+		req.setAttribute("MypageProPaySum", MypageProPaySum);
+		req.getRequestDispatcher("/views/mypage/promoneycheck.jsp").forward(req, resp);
+
+		
 	}
+
 }
