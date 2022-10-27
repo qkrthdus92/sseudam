@@ -72,12 +72,10 @@ public class FreeBoardEditController extends HttpServlet{
 			//성공 => 성공 알람 + 공지사항 상세조회 페이지로
 			req.getSession().setAttribute("alertMsg", "게시글을 수정하였습니다.");
 			resp.sendRedirect("/sseudam/board/freeBoardDetail?bno=" + no + "&cmtPno=1"); //방금 수정한 게시글 상세페이지로 보내기
-			//resp.sendRedirect("/sseudam/board/freeBoardList?pno=1"); //1페이지로 보내기
-		}else {
-			
+		}else {	
 			//실패
-			req.setAttribute("msg", "공지사항 수정 실패...");
-			//req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
+			req.setAttribute("msg", "게시글 수정 실패");
+			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
 		}
 		
 	}

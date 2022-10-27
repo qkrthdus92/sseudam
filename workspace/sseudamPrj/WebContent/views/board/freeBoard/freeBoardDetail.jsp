@@ -38,9 +38,9 @@
     #main{
         border-top: 1px solid #dfdfdf;
         width: 1200px;
-        height: 1650px;
+        height: 1500px;
         display: grid;
-        grid-template-rows: 1.5fr 0.5fr 0.5fr 5fr 0.5fr 5fr 1fr;
+        grid-template-rows: 1.5fr 0.5fr 0.5fr 4fr 0.5fr 5fr 1fr;
         margin: 0 auto;
         align-content: center;
     }
@@ -117,14 +117,25 @@
     }
     #cmt-id{
         float: left;
+        
     }
     #cmt-date{
         float: right;
+        margin-right: 1%;
     }
     #cmt-content{
-        position: relative;
         margin-top: 10px;
-        white-space: pre-wrap;  
+        white-space: pre-wrap;
+        display: flex;
+    }
+    #cmt-cmt{
+    	width: 85%;
+    	margin-bottom: 10px;
+    }
+    #cmt-edit{
+    	display:flex;
+    	float: right;
+    	--margin-left : 70%;
     }
     #cmt-write > *{
        margin: 20px;
@@ -197,79 +208,35 @@
                         <div id="cmt-date"><%=cmtVo.get(i).getModifyDate()%></div>
                     </div>
                     <br>
-                    <div id="cmt-content"><%=cmtVo.get(i).getCmt()%>
+                    <div id="cmt-content"><div id="cmt-cmt"><%=cmtVo.get(i).getCmt()%></div>
+                    <form id="cmt-edit">
+                    <div><a href="/sseudam/board/freeBoardDetail?bno=<%=vo.getNo()%>&cmtNo=<%= cmtVo.get(i).getNo()%>">수정하기</a></div>
+                    <div>&nbsp;|&nbsp;</div>
+                    <div><a href="/sseudam/board/freeBoardCmtDelete?bno=<%=vo.getNo()%>&cmtNo=<%= cmtVo.get(i).getNo()%>&cmtPno=1">삭제하기</a></div> </form>                    
                     </div>
+
                 </div>
                 <%}%>
                 
          <div id="page">
         		<a href="/sseudam/board/freeBoardDetail?bno=<%=vo.getNo()%>&cmtPno=<%=cmtPv.getStartPage()-1%>"> < </a>	        		
        		 <%for(int i = cmtPv.getStartPage(); i <= cmtPv.getEndPage(); ++i){%>
-        		<a href="/sseudam/board/freeBoardDetail?cmtPno=<%=i%>&bno=<%=vo.getNo()%>"><%=i%></a>
+        		<a href="/sseudam/board/freeBoardDetail?bno=<%=vo.getNo()%>&cmtPno=<%=i%>"><%=i%></a>
        		 <%}%>       
         		<a href="/sseudam/board/freeBoardDetail?bno=<%=vo.getNo()%>&cmtPno=<%=cmtPv.getEndPage()+1%>"> > </a>	        		  	      
         </div>
-        
- <%--        		<div id="ajax">
-                       <%for(int i = 0; i < cmtVo.size(); i++){%> <!-- 댓글부분 5개씩 페이지 넘겨서 보여주게 하기 -->
-                <div id="cmt">
-                    <div id="cmt-info">
-                        <div id="cmt-id"><%=cmtVo.get(i).getWriterNo()%></div>
-                        <div id="cmt-date"><%=cmtVo.get(i).getModifyDate()%></div>
-                    </div>
-                    <br>
-                    <div id="cmt-content"><%=cmtVo.get(i).getCmt()%>
-                    </div>
-                </div>
-                <%}%>
-                
-         <div id="page">
-        		<a href="#" onclick="before();"> < </a>	        		
-       		 <%for(int i = cmtPv.getStartPage(); i <= cmtPv.getEndPage(); ++i){%>
-        		<a href="/sseudam/board/freeBoardDetail?cmtPno=<%=i%>&bno=<%=vo.getNo()%>"><%=i%></a>
-       		 <%}%>       
-        		<a href="#" onclick="after();"> > </a>	        		  	      
-        </div>
-        </div>
-        
-        <script>
-        function before(url){
-        	        // ajax option
-        	        var ajaxOption = {
-        	                url : "/sseudam/board/freeBoardDetail?bno=<%=vo.getNo()%>&cmtPno=<%=cmtPv.getStartPage()-1%>",
-        	                async : true,
-        	                type : "POST",
-        	                dataType : "html",
-        	                cache : false
-        	        };
-        	        
-        	        $.ajax(ajaxOption).done(function(data){
-        	            // Contents 영역 삭제
-        	            $('#ajax').children().remove();
-        	            // Contents 영역 교체
-        	            $('#ajax').html(data);
-        	        });
-        	    }
-
-        
-        </script> --%>
-        
-        
-        
-        
-                     
                 <div id="cmt-write">
-                    <form>
+                    <form action="/sseudam/board/freeBoardDetail?bno=<%=vo.getNo()%>&cmtPno=1" method="post">
                     <div>
-                        <textarea cols="135%" rows="5" style="resize:none;" placeholder="댓글 내용을 입력하세요."></textarea>
+                        <textarea cols="135%" rows="5" style="resize:none;" placeholder="댓글 내용을 입력하세요." name="cmtContent"></textarea>
                     </div>
                     <div>
-                        <button id="cmt-btn">등록</button>
+                        <input type="submit" value="등록" id="cmt-btn">
                     </div>
                     </form>
                 </div>
               </div> 
-            <div id="list-btn-div"><button type="button" id="list-btn" onclick = "location.href='/sseudam/board/freeBoardList?pno=1';">목록</button></div>
+            <div id="list-btn-div"><button type="button" id="list-btn" onclick ="location.href='<%=root%>/board/freeBoardList?pno=1'">목록</button></div>
                 
             </div>
         </div>

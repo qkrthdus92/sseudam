@@ -10,8 +10,13 @@ public class FreeBoardVo {
 	private String deleteYn;
 	private String modifyDate;
 	private String views;
+	private int cmtCount;
+	public FreeBoardVo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public FreeBoardVo(String no, String writerNo, String title, String content, String writeDate, String deleteYn,
-			String modifyDate, String views) {
+			String modifyDate, String views, int cmtCount) {
 		super();
 		this.no = no;
 		this.writerNo = writerNo;
@@ -21,10 +26,7 @@ public class FreeBoardVo {
 		this.deleteYn = deleteYn;
 		this.modifyDate = modifyDate;
 		this.views = views;
-	}
-	public FreeBoardVo() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.cmtCount = cmtCount;
 	}
 	public String getNo() {
 		return no;
@@ -74,12 +76,18 @@ public class FreeBoardVo {
 	public void setViews(String views) {
 		this.views = views;
 	}
+	public int getCmtCount() {
+		return cmtCount;
+	}
+	public void setCmtCount(int cmtCount) {
+		this.cmtCount = cmtCount;
+	}
 	@Override
 	public String toString() {
 		return "FreeBoardVo [no=" + no + ", writerNo=" + writerNo + ", title=" + title + ", content=" + content
 				+ ", writeDate=" + writeDate + ", deleteYn=" + deleteYn + ", modifyDate=" + modifyDate + ", views="
-				+ views + "]";
+				+ views + ", cmtCount=" + cmtCount + "]";
 	}
 	
-	
+		
 }

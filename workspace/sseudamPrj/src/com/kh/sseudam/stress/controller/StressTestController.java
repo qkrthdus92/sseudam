@@ -18,7 +18,18 @@ public class StressTestController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/views/stress/stressTest.jsp").forward(req, resp);	
+		
+		//로그인여부 확인
+		if(req.getSession().getAttribute("loginMember") == null && req.getSession().getAttribute("proLoginMember") != null) {
+			req.setAttribute("msg", "일반회원만 이용이 가능합니다.");
+			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
+		}else if(req.getSession().getAttribute("loginMember") == null){
+			req.setAttribute("msg", "로그인 후 이용해주세요.");
+			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
+		}else {
+			req.getRequestDispatcher("/views/stress/stressTest.jsp").forward(req, resp);				
+		}
+		
 	}
 	
 }
