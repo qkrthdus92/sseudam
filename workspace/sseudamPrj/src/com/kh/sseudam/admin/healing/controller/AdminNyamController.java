@@ -97,18 +97,7 @@ public class AdminNyamController extends HttpServlet{
         req.setAttribute("sort", sort);
         req.setAttribute("pv", pv);
         req.setAttribute("list", list);
-        
-        if(tNum == 1) {
-            req.getRequestDispatcher("/views/admin/yamyam/bobList.jsp").forward(req, resp);
-        }else if(tNum == 2) {
-            req.getRequestDispatcher("/views/admin/yamyam/cafeList.jsp").forward(req, resp);
-        }else {
-            req.getRequestDispatcher("/views/admin/yamyam/drinkList.jsp").forward(req, resp);
-        }
-       
-        
-        
-        
-        
+        req.getRequestDispatcher("/views/admin/yamyam/list.jsp").forward(req, resp);
+ 
     }
 }

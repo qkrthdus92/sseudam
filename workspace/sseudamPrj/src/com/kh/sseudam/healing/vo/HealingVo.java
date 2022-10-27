@@ -17,8 +17,6 @@ public class HealingVo {
     private String liked;
     private String memberLike;
     
-    
-    
     public String getNo() {
         return no;
     }
@@ -97,12 +95,26 @@ public class HealingVo {
     public void setLiked(String liked) {
         this.liked = liked;
     }
+    public String getMemberLike() {
+        return memberLike;
+    }
+    public void setMemberLike(String memberLike) {
+        this.memberLike = memberLike;
+    }
   
-   
+
+    @Override
+    public String toString() {
+        return "HealingVo [no=" + no + ", cNum=" + cNum + ", title=" + title + ", infoA=" + infoA + ", infoB=" + infoB
+                + ", infoC=" + infoC + ", stress=" + stress + ", link=" + link + ", imgPath=" + imgPath + ", writeDate="
+                + writeDate + ", modifyDate=" + modifyDate + ", deleteYn=" + deleteYn + ", liked=" + liked
+                + ", memberLike=" + memberLike + "]";
+    }
+    
+    
     public HealingVo(String no, String cNum, String title, String infoA, String infoB, String infoC, String stress,
             String link, String imgPath, String writeDate, String modifyDate, String deleteYn, String liked,
             String memberLike) {
-        super();
         this.no = no;
         this.cNum = cNum;
         this.title = title;
@@ -116,19 +128,6 @@ public class HealingVo {
         this.modifyDate = modifyDate;
         this.deleteYn = deleteYn;
         this.liked = liked;
-        this.memberLike = memberLike;
-    }
-    @Override
-    public String toString() {
-        return "HealingVo [no=" + no + ", cNum=" + cNum + ", title=" + title + ", infoA=" + infoA + ", infoB=" + infoB
-                + ", infoC=" + infoC + ", stress=" + stress + ", link=" + link + ", imgPath=" + imgPath + ", writeDate="
-                + writeDate + ", modifyDate=" + modifyDate + ", deleteYn=" + deleteYn + ", liked=" + liked
-                + ", memberLike=" + memberLike + "]";
-    }
-    public String getMemberLike() {
-        return memberLike;
-    }
-    public void setMemberLike(String memberLike) {
         this.memberLike = memberLike;
     }
     public HealingVo() {

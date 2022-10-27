@@ -96,11 +96,10 @@ public class AdminHealingDao {
                 + "                WRITE_DATE, \r\n"
                 + "                MODIFY_DATE,\r\n"
                 + "                DELETE_YN\r\n"
-                + "            ORDER BY WRITE_DATE DESC\r\n"
+                + "            ORDER BY NO DESC\r\n"
                 + "            ) T\r\n"
                 + "    )\r\n"
-                + "   \r\n"
-                + "WHERE RNUM BETWEEN ? AND ?";
+                + "WHERE RNUM BETWEEN ? AND ?\r\n";
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<HealingVo> list = new ArrayList<HealingVo>();
@@ -158,6 +157,50 @@ public class AdminHealingDao {
             JDBCTemplate.close(pstmt);
         }
         return list;
+    }
+
+    public int InsertNyamOne(Connection conn, HealingVo vo) {
+        
+        String sql = "INSERT INTO EAT_ALONE\r\n"
+                + "( \r\n"
+                + "    NO ,\r\n"
+                + "    C_NUM ,\r\n"
+                + "    NAME ,\r\n"
+                + "    ADDRESS ,\r\n"
+                + "    PHONE ,\r\n"
+                + "    IMG_PATH ,\r\n"
+                + "    LINK \r\n"
+                + ") \r\n"
+                + "VALUES ( \r\n"
+                + "    SEQ_EAT_ALONE_NO.NEXTVAL ,\r\n"
+                + "    ?,\r\n"
+                + "    ?,\r\n"
+                + "    ?,\r\n"
+                + "    ?,\r\n"
+                + "    ?,\r\n"
+                + "    ?\r\n"
+                + ")";
+        PreparedStatement pstmt = null;
+        int result = 0;
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setString(1,vo.getcNum() );
+            pstmt.setString(2,vo.getTitle() );
+            pstmt.setString(3,vo.getInfoA() );
+            pstmt.setString(4,vo.getInfoB() );
+            pstmt.setString(5,vo.getImgPath() );
+            pstmt.setString(6,vo.getLink() );
+            
+            result = pstmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTemplate.close(pstmt);
+        }
+        return result;
     }
 
 }

@@ -26,7 +26,8 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
   </head>
   <body>
     <%@ include file="/views/admin/common/menu.jsp"%>
-    <main class="admin-main">
+    <form action="" method="post" enctype="multipart/form-data">
+    <main class="admin-main">   
       <header class="admin-main-header flex-between">
         <h1>혼자서 냠냠 - 혼밥 추가</h1>
         <div class="btn-set">
@@ -43,25 +44,37 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
         <div class="admin-main-wrapper">
           <div class="admin-main-board grid-col3">
             <div>이름</div>
-            <div>이름을 입력해주세요</div>
+            <div><input type = "text" name = "name" size="100" placeholder="이름을 입력하세요" required></div>
             <div></div>
-            <div>주소</div>
-            <div>주소를 입력해주세요</div>
-            <div></div>
-            <div>전화번호</div>
-            <div>전화번호를 입력해주세요</div>
-            <div></div>
-            <div>링크</div>
-            <div>링크를 입력해주세요</div>
-            <div></div>
-            <div>대표사진</div>
+            
+            <div>타입</div>
             <div>
-              <input type="file" value="업로드" class="upload-btn" />
+            	<input type = "radio" name = "cNum" value = "1" checked>맛집 
+            	<input type = "radio" name = "cNum" value = "2">카페
+            	<input type = "radio" name = "cNum" value = "3">술집
             </div>
             <div></div>
+            
+            <div>주소</div>
+            <div><input type = "text" name = "addr" size="100" placeholder="주소을 입력하세요"></div>
+            <div></div>
+            
+            <div>전화번호</div>
+            <div><input type = "text" name = "phone" size="100" placeholder="번호를 입력하세요"></div>
+            <div></div>
+            
+            <div>링크</div>
+            <div><input type = "text" name = "link" size="100" placeholder="링크를 입력하세요"></div>
+            <div></div>
+            
+            <div>대표사진</div>            
+            <div><input type="file" value="upload" class="upload-btn" name="file"></div>
+            <div></div>
+            
           </div>
         </div>
       </section>
     </main>
+    </form>
   </body>
 </html>

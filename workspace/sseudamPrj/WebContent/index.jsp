@@ -376,7 +376,7 @@ body{
     </svg>
   </div>
   
-  <h1>Sseudam</h1>
+  <h1>SseuDam</h1>
 
 </div>
 </body>
