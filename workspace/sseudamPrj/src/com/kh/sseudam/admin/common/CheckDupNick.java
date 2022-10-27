@@ -27,9 +27,14 @@ public class CheckDupNick extends HttpServlet{
 		}else {
 			if(isNickDup) {
 				resp.getWriter().write("이미 사용중인 닉네임입니다");
+			}else if(nick.trim().equals("")) {
+				resp.getWriter().write("닉네임을 입력해주세요");
 			}else {
 				resp.getWriter().write("사용가능한 닉네임입니다");
 			}
+			
+			
+			
 			
 		}
 	}

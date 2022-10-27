@@ -42,6 +42,7 @@ div {
   padding-top: 30px;
   padding-left: 25px;
   padding-right: 25px;
+  padding-bottom: 30px;
 }
 
 /* 검색창 + 추가버튼 부분 */
@@ -60,7 +61,7 @@ div {
 }
 
 .admin-search input {
-  width: 100%;
+  width: 855px;
   height: 40px;
   border: 1px solid #b0b0b0;
   background-color: var(--search);
@@ -72,7 +73,7 @@ div {
 
 .admin-search i {
   position: absolute;
-  right: -10px;
+  right: 25px;
   bottom: 12px;
   color: #666666;
 }
@@ -286,6 +287,32 @@ i.fa-magnifying-glass {
   font-weight: 600;
 }
 
+.cer-edit {
+  border: none;
+
+  height: 100%;
+
+  box-sizing: border-box;
+  padding-left: 28px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.select-edit {
+  margin-left: 0px;
+  border: none !important;
+  border-bottom: 1px solid var(--border);
+  height: 100%;
+
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.select-edit:hover {
+  cursor: pointer;
+}
+
 #printDupId,
 #printDupNick {
   width: 200px;
@@ -297,4 +324,8 @@ i.fa-magnifying-glass {
 .small-img {
   width: 45px;
   height: 45px;
+}
+
+input[type="radio"] {
+  accent-color: rgb(18, 144, 87);
 }

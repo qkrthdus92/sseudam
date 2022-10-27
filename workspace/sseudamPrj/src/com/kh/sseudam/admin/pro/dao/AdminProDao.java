@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.sseudam.admin.pro.vo.ProCounselListVo;
 import com.kh.sseudam.common.AttachmentVo;
 import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.common.PageVo;
@@ -593,6 +594,332 @@ public class AdminProDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+	public int updateOneWithImg(Connection conn, ProVo vo, AttachmentVo aVo) {
+		String sql = "UPDATE PRO_MEMBER SET NAME = ?, GENDER = ?, ID =?, PWD = ?, COUNSEL_TYPE_NO = ?, EMAIL = ?, PHONE = ?, EDUCATION = ?, PRICE = ?, IMG = ?, INTRODUCE = ?, MODIFY_DATE = SYSDATE WHERE NO = ? ";
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String x = "";
+		switch(vo.getCounselType()) {
+		case "청소년상담" :
+			x = "1";
+			break;
+		case "가족심리상담" :
+			x = "2";
+			break;
+		case "우울증상담" :
+			x = "3";
+			break;
+		case "취업/진로상담" :
+			x = "4";
+			break;	
+		}
+		
+		String y = null;
+		if(!vo.getPrice().equals("미정")) {
+			y= vo.getPrice();
+		}
+	
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getGender());
+			pstmt.setString(3, vo.getId());
+			pstmt.setString(4, vo.getPwd());
+			pstmt.setString(5, x);
+			pstmt.setString(6, vo.getEmail());
+			pstmt.setString(7, vo.getPhone());
+			pstmt.setString(8, vo.getEducation());
+			pstmt.setString(9, y);
+			pstmt.setString(10, aVo.getChangeName());
+			pstmt.setString(11, vo.getIntroduce());
+			pstmt.setString(12, vo.getNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateOneWithoutImg(Connection conn, ProVo vo) {
+		String sql = "UPDATE PRO_MEMBER SET NAME = ?, GENDER = ?, ID =?, PWD = ?, COUNSEL_TYPE_NO = ?, EMAIL = ?, PHONE = ?, EDUCATION = ?, PRICE = ?, INTRODUCE = ?, MODIFY_DATE = SYSDATE WHERE NO = ? ";
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		int x = 0;
+		switch(vo.getCounselType()) {
+		case "청소년상담" :
+			x = 1;
+			break;
+		case "가족심리상담" :
+			x = 2;
+			break;
+		case "우울증상담" :
+			x = 3;
+			break;
+		case "취업/진로상담" :
+			x = 4;
+			break;	
+		}
+		
+		String y = null;
+		if(!vo.getPrice().equals("미정")) {
+			y= vo.getPrice();
+		}
+	
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getGender());
+			pstmt.setString(3, vo.getId());
+			pstmt.setString(4, vo.getPwd());
+			pstmt.setInt(5, x);
+			pstmt.setString(6, vo.getEmail());
+			pstmt.setString(7, vo.getPhone());
+			pstmt.setString(8, vo.getEducation());
+			pstmt.setString(9, y);
+			pstmt.setString(10, vo.getIntroduce());
+			pstmt.setString(11, vo.getNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	//전문가 승인 업데이트
+	public int okOne(Connection conn, String mno) {
+		String sql = "UPDATE PRO_MEMBER SET PRO_STATUS = 'J' WHERE NO = ?";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mno);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	//전문가 승인취소 업데이트
+	public int cancelOne(Connection conn, String mno) {
+		String sql = "UPDATE PRO_MEMBER SET PRO_STATUS = 'W' WHERE NO = ?";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mno);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertCerOne(Connection conn, CertificateVo cv, AttachmentVo aVo) {
+		String sql = "INSERT INTO CERTIFICATE VALUES(SEQ_CERTIFICATE_NO.NEXTVAL, ?,?,?,?)";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cv.getNo());
+			pstmt.setString(2, cv.getName());
+			pstmt.setString(3, cv.getNum());
+			pstmt.setString(4, aVo.getChangeName());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteCer(Connection conn, String img) {
+		String sql = "DELETE FROM CERTIFICATE WHERE IMG_PATH = ?";
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, img);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public String getProfit(Connection conn, String mno) {
+		String sql = "SELECT SUM(PAY) FROM PRO_APPOINT WHERE PRO_NO = ?";
+		
+		PreparedStatement pstmt = null;
+		String result = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mno);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getString("SUM(PAY)");
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rs);
+		}
+	
+		return result;
+	}
+
+	public String getAvgStar(Connection conn, String mno) {
+		String sql = "SELECT TO_CHAR(AVG(STAR),'fm0.0') AVG_STAR FROM PRO_APPOINT WHERE PRO_NO = ?";
+		
+		PreparedStatement pstmt = null;
+		String result = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mno);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getString("AVG_STAR");
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rs);
+		}
+	
+		return result;
+	}
+
+	public String getFinishCnt(Connection conn, String mno) {
+		String sql = "SELECT COUNT(*) FROM PRO_APPOINT WHERE PRO_NO = ? AND ADVICE_DATE < SYSDATE";
+		
+		PreparedStatement pstmt = null;
+		String result = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mno);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getString("COUNT(*)");
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rs);
+		}
+	
+		return result;
+	}
+
+	public String getWaitCnt(Connection conn, String mno) {
+		String sql = "SELECT COUNT(*) FROM PRO_APPOINT WHERE PRO_NO = ? AND ADVICE_DATE >= SYSDATE";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String result = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mno);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getString("COUNT(*)");
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rs);
+		}
+	
+		return result;
+	}
+
+	public List<ProCounselListVo> getCounselList(Connection conn, String mno) {
+		String sql = "SELECT P.NO, P.ADVICE_DATE, P.PAY_DATE, M.ID, P.PAY, P.STAR ,CASE WHEN P.ADVICE_DATE >= SYSDATE THEN '미완료' ELSE '완료' END \"상담상태\" FROM PRO_APPOINT P JOIN MEMBER M ON P.MEMBER_NO = M.NO WHERE PRO_NO = ? ORDER BY ADVICE_DATE DESC";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<ProCounselListVo> list = new ArrayList();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mno);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String no = rs.getString("NO");
+				String adviceDate = rs.getString("ADVICE_DATE");
+				String payDate = rs.getString("PAY_DATE");
+				String id = rs.getString("ID");
+				String price = rs.getString("PAY");
+				String star = rs.getString("STAR");
+				String status = rs.getString("상담상태");
+				
+				ProCounselListVo vo = new ProCounselListVo();
+				vo.setNo(no);
+				vo.setAdviceDate(adviceDate);
+				vo.setPayDate(payDate);
+				vo.setId(id);
+				vo.setPrice(price);
+				vo.setStar(star);
+				vo.setStatus(status);
+				
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rs);
+		}
+		
+		return list;
 	}
 
 }

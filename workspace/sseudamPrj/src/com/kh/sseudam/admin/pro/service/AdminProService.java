@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.kh.sseudam.admin.member.dao.AdminMemberDao;
 import com.kh.sseudam.admin.pro.dao.AdminProDao;
+import com.kh.sseudam.admin.pro.vo.ProCounselListVo;
 import com.kh.sseudam.common.AttachmentVo;
 import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.common.PageVo;
@@ -190,6 +191,149 @@ public class AdminProService {
 			JDBCTemplate.rollback(conn);
 		}
 		return result;
+	}
+
+	public int updateOneWithImg(ProVo vo, AttachmentVo aVo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new AdminProDao().updateOneWithImg(conn, vo, aVo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result; 
+	}
+
+	public int updateOneWithoutImg(ProVo vo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new AdminProDao().updateOneWithoutImg(conn, vo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result; 
+	}
+
+	//전문가 승인 update
+	public int okOne(String mno) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new AdminProDao().okOne(conn, mno);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result; 
+	}
+
+	//전문가 승인취소 업데이트
+	public int cancelOne(String mno) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new AdminProDao().cancelOne(conn, mno);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result; 
+	}
+
+	public int insertCerOne(CertificateVo cv, AttachmentVo aVo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new AdminProDao().insertCerOne(conn, cv, aVo);
+		
+		if(result == 0) {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result; 
+	}
+
+	public int deleteCer(String img) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new AdminProDao().deleteCer(conn, img);
+		
+		if(result == 0) {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result; 
+	}
+
+	//누적수익
+	public String getProfit(String mno) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String result = new AdminProDao().getProfit(conn, mno);
+		JDBCTemplate.close(conn);
+		
+		if(result == null) {
+			result = "0";
+		}
+		return result; 
+	}
+
+	public String getAvgStar(String mno) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String result = new AdminProDao().getAvgStar(conn, mno);
+		JDBCTemplate.close(conn);
+		
+		if(result == null) {
+			result = "평점없음";
+		}
+		return result; 
+	}
+
+	public String getFinishCnt(String mno) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String result = new AdminProDao().getFinishCnt(conn, mno);
+		
+		JDBCTemplate.close(conn);
+		
+		return result; 
+	}
+
+	public String getWaitCnt(String mno) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String result = new AdminProDao().getWaitCnt(conn, mno);
+		
+		JDBCTemplate.close(conn);
+		
+		return result; 
+	}
+
+	public List<ProCounselListVo> getCounselList(String mno) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<ProCounselListVo> counselList = new AdminProDao().getCounselList(conn, mno);
+		
+		JDBCTemplate.close(conn);
+		
+		return counselList; 
 	}
 
 }

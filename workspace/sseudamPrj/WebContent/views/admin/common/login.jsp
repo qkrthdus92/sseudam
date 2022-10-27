@@ -51,7 +51,7 @@ pageEncoding="UTF-8"%>
       .admin-input-label {
         background-color: rgb(224, 224, 224);
         color: rgb(105, 105, 105);
-        width: 40px;
+        width: 60px;
         height: 100%;
       }
 
@@ -60,7 +60,7 @@ pageEncoding="UTF-8"%>
         line-height: 100%;
         outline: none;
         border: none;
-        padding-left: 10px;
+        padding-left: 20px;
       }
 
       .admin-login-id .admin-input-label {

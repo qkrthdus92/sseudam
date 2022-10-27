@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
+pageEncoding="UTF-8"%> <% String root1 = request.getContextPath(); String pno =
+(String)request.getAttribute("pno"); String status =
+(String)request.getAttribute("status"); String search =
+(String)request.getAttribute("search"); %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -23,7 +26,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
     <%@ include file="/views/admin/common/menu.jsp"%>
     <main class="admin-main">
       <form
-        action="<%=root1%>/admin/pro/add"
+        action="<%=root1%>/admin/pro/add?pno=<%=pno %>&status=<%=status %>&search=<%=search%>"
         method="post"
         enctype="multipart/form-data"
       >
@@ -34,9 +37,14 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
               class="cancel-btn"
               type="button"
               value="취소"
-              onclick="history.back()"
+              onclick="location.href='<%=root%>/admin/pro/list?pno=<%=pno %>&status=<%=status %>&search=<%=search%>'"
             />
-            <input class="save-btn" type="submit" value="저장" />
+            <input
+              class="save-btn"
+              type="submit"
+              value="저장"
+              onclick="return checkId();"
+            />
           </div>
         </header>
         <section class="admin-main-section">
@@ -59,10 +67,17 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
                   placeholder="아이디를 입력해주세요"
                   class="admin-input"
                   name="id"
+                  id="targetId"
                 />
               </div>
               <div>
-                <input type="submit" value="중복확인" class="check-btn" />
+                <input
+                  type="button"
+                  value="중복확인"
+                  class="check-btn"
+                  onclick="checkDupId();"
+                />
+                <div id="printDupId"></div>
               </div>
               <div>상담분야</div>
               <div>
@@ -142,5 +157,39 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
         </section>
       </form>
     </main>
+    <script>
+      function checkId() {
+        let checkId = $("#printDupId").text();
+
+        console.log(checkId);
+
+        if (checkId.includes("현재") || checkId.includes("사용가능한")) {
+          return true;
+        } else {
+          Swal.fire("아이디 중복체크해주세요!");
+          return false;
+        }
+      }
+    </script>
+    <script>
+      let id = document.querySelector("#targetId").value;
+      console.log(id);
+      function checkDupId() {
+        console.log("여기여기");
+        $.ajax({
+          url: "<%=root1%>/admin/addMember/checkDupId",
+          type: "get",
+          data: {
+            id: $("#targetId").val(),
+          },
+          success: function (x) {
+            $("#printDupId").html(x);
+          },
+          error: function () {
+            alert("통신에러발생~");
+          },
+        });
+      }
+    </script>
   </body>
 </html>

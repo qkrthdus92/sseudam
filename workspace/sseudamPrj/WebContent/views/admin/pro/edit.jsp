@@ -23,15 +23,15 @@ request.getContextPath();%>
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/pro/list.css?ver=4"
+      href="<%=root1%>/resources/css/admin/pro/list.css?ver=7"
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/common/component.css?ver=3"
+      href="<%=root1%>/resources/css/admin/common/component.css?ver=6"
     />
     <style>
       .grid-col3 {
-        grid-template-rows: repeat(14, 50px);
+        grid-template-rows: repeat(15, 50px);
       }
     </style>
   </head>
@@ -41,6 +41,7 @@ request.getContextPath();%>
       <form
         action="<%=root1 %>/admin/pro/edit?mno=<%=vo.getNo() %>&pno=<%=pno %>&status=<%=status %>&search=<%=search%>"
         method="post"
+        enctype="multipart/form-data"
       >
       <header class="admin-main-header flex-between">
         <h1>전문가 정보 수정</h1>
@@ -49,7 +50,7 @@ request.getContextPath();%>
             class="cancel-btn"
             type="button"
             value="취소"
-            onclick="location.href='<%=root%>/admin/pro/list?pno=<%=pno %>&status=<%=status %>'"
+            onclick="location.href='<%=root%>/admin/pro/list?mno=<%=vo.getNo()%>&pno=<%=pno %>&status=<%=status %>&search=<%=search%>'"
           />
           <input class="save-btn" type="submit" value="저장" onclick="return checkId();"/>
         </div>
@@ -67,6 +68,16 @@ request.getContextPath();%>
                 class="input-edit"
                 name="name"
               />
+            <div></div>
+            <div>성별</div>
+              <div>
+                <label for="">남
+                  <input type="radio" name="gender" value="M">
+                </label>
+                <label for="">여
+                  <input type="radio" name="gender" value="F">
+                </label>
+              </div>
             <div></div>
             <div>아이디</div>
             <input
@@ -89,12 +100,16 @@ request.getContextPath();%>
           />
             <div></div>
             <div>상담분야</div>
-            <input
-            type="text"
-            value="<%= vo.getCounselType() %>"
-            class="input-edit"
-            name="counselType"
-          />
+          
+          <div>
+            <select name="counselType" id="" class="select-edit">
+              <option value="청소년상담">청소년상담</option>
+              <option value="가족심리상담">가족심리상담</option>
+              <option value="우울증상담">우울증상담</option>
+              <option value="취업/진로상담">취업/진로상담</option>
+            </select>
+
+          </div>
             
             <div></div>
             <div>이메일</div>
@@ -147,7 +162,7 @@ request.getContextPath();%>
               />
               <input type="text" disabled value="<%=vo.getImg()%>" class="input-edit">
             </div>
-            <div><input type="file" name="f" class="upload-btn" /></div>
+            <div><input type="file" name="img" class="upload-btn" /></div>
             <div>소개글</div>
             <input
             type="text"
@@ -164,10 +179,17 @@ request.getContextPath();%>
             <%} %> <%if(vo.getProStatus().equals("Q")) {%>
             <div>탈퇴회원</div>
             <%} %>
-            <%if(vo.getProStatus().equals("W")){%>
+           
+
+            <%if(vo.getProStatus().equals("W")) {%>  
             <div>
-              <input type="submit" value="전문가승인" class="check-btn" />
+              <input type="button" value="전문가승인" class="check-btn" onclick="proOk();"/>
             </div>
+            <%}else if(vo.getProStatus().equals("J")) {%>
+              <div>
+                <input type="button" value="승인취소" class="check-btn" onclick="proCancel();"/>
+              </div>
+              
             <%}else {%>
               <div></div>
               <%}%>
@@ -180,46 +202,103 @@ request.getContextPath();%>
           </div>
           <input type="button" value="회원탈퇴" class="delete-btn" onclick="quit();"/>
         </div>
-        <div class="admin-pro-certificate admin-main-wrapper ">
-          <div>자격증이름</div>
-          <div>자격번호</div>
-          <div>자격증첨부파일</div>
-          <%for(int i=0; i<voList.size(); i++) {%>
-          <div><%= voList.get(i).getName() %></div>
-          <div><%= voList.get(i).getNum() %></div>
-          <div><%= voList.get(i).getImg() %></div>
-          <%}%>
+        <div class="admin-main-wrapper admin-cer-wrapper">
+          <div class="admin-add-certificate ">
+            <div class="black border-left">자격증이름</div>
+            <div class="black">자격번호</div>
+            <div class="black border-right">자격증첨부파일</div>
+
+          </div>
+          <div class="admin-add-certificate">
+            <%for(int i=0; i<voList.size(); i++) {%>
+              <div><%= voList.get(i).getName() %></div>
+              <div><%= voList.get(i).getNum() %></div>
+              <div><span> <%= voList.get(i).getImg() %></span>
+               <i class='fa-solid fa-square-xmark x-btn' onclick='dbDeleteCer(this);'></i></div>
+              <%}%>
+            
+            
+       
+          </div>
+          <div class="admin-add-certificate2 cer-target">
           
-        </div>
-        <div class="admin-main-wrapper admin-add-certificate">
-          <div>자격증이름</div>
-          <div>자격번호</div>
-          <div>자격증첨부파일</div>
-        </div>
-        <div class="admin-main-wrapper admin-add-certificate">
-          <div>
-            <input
-              type="text"
-              placeholder="이름을 입력해주세요"
-              class="admin-input"
-            />
+           
+            
+            
+       
           </div>
-          <div>
-            <input
-              type="text"
-              placeholder="자격번호를 입력해주세요"
-              class="admin-input"
-            />
+          <div class=" admin-add-certificate">
+            <div>
+            </div>
+            <div>
+              <input type="button" value="추가" class="small-add-btn " onclick="cerAd();"/>
+              
+            </div>
+            <div></div>
+            
           </div>
-          <div><input type="file" value="업로드" class="upload-btn" /></div>
-          <input type="submit" value="추가" class="small-add-btn pro-add-btn" />
         </div>
+       
       </section>
     </form>
       
     </main>
     <script>
-      function checkIdNick() {
+      
+      function dbDeleteCer(x) {
+        const parent = x.parentNode;
+        
+        const targetSpan = parent.firstChild;
+        console.log(targetSpan.innerText);
+        Swal.fire({
+          title: "전문가 자격증 삭제",
+          text: "정말로 삭제 하시겠습니까?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#26aa82",
+          cancelButtonColor: "#f85a2a",
+          confirmButtonText: "삭제",
+          cancelButtonText: "취소"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.href='<%=root%>/admin/pro/deleteCer?mno=<%=vo.getNo()%>&pno=<%=pno %>&status=<%=status %>&img='+targetSpan.innerText;
+          }
+        });
+      }
+    </script>
+    <script>
+      function cerAd() {
+      
+        const cerTarget = document.querySelector('.cer-target');
+        const newDiv0 = document.createElement('div');
+
+        const newDiv1 = document.createElement('div');
+        newDiv1.innerHTML = "<input type='text' class='cer-edit' name='cerName' placeholder='자격증이름을 입력하세요' />";
+        const newDiv2 = document.createElement('div');
+        newDiv2.innerHTML = "<input type='text' class='cer-edit' name='cerNum' placeholder='자격번호를 입력하세요' />";
+        const newDiv3 = document.createElement('div');
+        newDiv3.innerHTML = "<input type='file' class='upload-btn' name='f'  multiple/><i class='fa-solid fa-square-xmark x-btn' onclick='deleteCer(this);'></i>";
+
+        newDiv0.appendChild(newDiv1);
+        newDiv0.appendChild(newDiv2);
+        newDiv0.appendChild(newDiv3);
+
+        cerTarget.appendChild(newDiv0);
+       
+
+
+      }
+    </script>
+    <script>
+      function deleteCer(x) {
+      
+        var parent = x.parentNode.parentNode;
+        parent.remove();
+
+      }
+    </script>
+    <script>
+      function checkId() {
         let checkId = $("#printDupId").text();
      
         console.log(checkId);
@@ -271,6 +350,68 @@ request.getContextPath();%>
             location.href='<%=root%>/admin/pro/quit?mno=<%=vo.getNo()%>&pno=<%=pno %>&status=<%=status %>';
           }
         });
+      }
+    </script>
+    <script>
+      function proOk() {
+        Swal.fire({
+          title: <%=vo.getNo()%>+"번 전문가 승인",
+          text: "정말로 승인처리 하시겠습니까?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#26aa82",
+          cancelButtonColor: "#f85a2a",
+          confirmButtonText: "승인",
+          cancelButtonText: "취소"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.href='<%=root%>/admin/pro/ok?mno=<%=vo.getNo()%>&pno=<%=pno %>&status=<%=status %>';
+          }
+        });
+      }
+    </script>
+    <script>
+      function proCancel() {
+        Swal.fire({
+          title: <%=vo.getNo()%>+"번 전문가 승인취소",
+          text: "정말로 승인취소 하시겠습니까?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#26aa82",
+          cancelButtonColor: "#f85a2a",
+          confirmButtonText: "승인취소",
+          cancelButtonText: "취소"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.href='<%=root%>/admin/pro/cancel?mno=<%=vo.getNo()%>&pno=<%=pno %>&status=<%=status %>';
+          }
+        });
+      }
+    </script>
+    <script>
+      //상담분야 체크하기
+      const counselTypeArr = document.querySelectorAll('select[name=counselType] option');
+      const counselTypeStr = "<%=vo.getCounselType()%>";
+   
+      const genderArr = document.querySelectorAll('input[name=gender]');
+      const genderStr = "<%=vo.getGender()%>";
+
+      for(let i=0; i<counselTypeArr.length; i++) {
+        const x = counselTypeArr[i].value;
+        let result = counselTypeStr.search(x);
+        if(result >= 0) {
+          counselTypeArr[i].selected = true;
+        }
+
+      }
+
+      for(let i=0; i<genderArr.length; i++) {
+        const x = genderArr[i].value;
+        let result = genderStr.search(x);
+        if(result >= 0) {
+          genderArr[i].checked = true;
+        }
+
       }
     </script>
   </body>
