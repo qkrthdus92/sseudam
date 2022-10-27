@@ -7,13 +7,6 @@ request.getContextPath();%> <%ProVo vo = (ProVo)request.getAttribute("vo"); %>
   <head>
     <meta charset="UTF-8" />
     <title>Insert title here</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-    <script
-      src="http://code.jquery.com/jquery-3.5.1.js"
-      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-      crossorigin="anonymous"
-    ></script>
 
     <link
       rel="stylesheet"
@@ -21,9 +14,6 @@ request.getContextPath();%> <%ProVo vo = (ProVo)request.getAttribute("vo"); %>
       type="text/css"
     />
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
-    <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="<%= root1 %>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"
@@ -76,7 +66,7 @@ request.getContextPath();%> <%ProVo vo = (ProVo)request.getAttribute("vo"); %>
             name="counselDate"
           />
           <script>
-                    $(function () {
+                  $(function () {
                     //input을 datepicker로 선언
                     console.log("되나");
                     $("#datepicker").datepicker({
@@ -92,7 +82,6 @@ request.getContextPath();%> <%ProVo vo = (ProVo)request.getAttribute("vo"); %>
                       buttonImageOnly: true, //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
                       buttonText: "선택", //버튼에 마우스 갖다 댔을 때 표시되는 텍스트
                       yearSuffix: "년", //달력의 년도 부분 뒤에 붙는 텍스트
-
                       monthNamesShort: [
                         "1",
                         "2",
@@ -134,19 +123,14 @@ request.getContextPath();%> <%ProVo vo = (ProVo)request.getAttribute("vo"); %>
                       minDate: "+1D", //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
                       maxDate: "+3M", //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
                     });
-
                     //초기값을 오늘 날짜로 설정
                     $("#datepicker").datepicker("setDate", "+1D"); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-
                     //제외할 날짜
-
                     function disableDates(date) {
                       var bookedDays = [<%= dateList%>];
-
                       var m = date.getMonth() + 1;
                       var d = date.getDate();
                       var y = date.getFullYear();
-
                       for (let i = 0; i < bookedDays.length; i++) {
                         if ($.inArray(y + "-" + m + "-" + d, bookedDays) != -1) {
                           console.log(y);
@@ -157,33 +141,27 @@ request.getContextPath();%> <%ProVo vo = (ProVo)request.getAttribute("vo"); %>
                       }
                       return [true];
                     }
-
             const form = document.querySelector("#counsel-pay-form");
             console.log(form);
             const pw = document.querySelector("select[name=payway]");
             const bank = document.querySelector("select[name=bank]");
             const payCard = document.querySelector(".counsel-pay-card");
             const payPhone = document.querySelector(".counsel-pay-phone");
-
             pw.addEventListener("change", (e) => {
               console.log("여기용");
               const choose = e.currentTarget.selectedIndex;
-
               const value = e.currentTarget[choose].value;
-
               if (value == "카드") {
                 bank.classList.remove("hidden");
                 payCard.classList.remove("hidden");
                 payPhone.classList.add("hidden");
               }
-
               if (value == "휴대폰") {
                 bank.classList.add("hidden");
                 payCard.classList.add("hidden");
                 payPhone.classList.remove("hidden");
               }
             });
-
             form.addEventListener("submit", function check(e) {
               const choose = pw.selectedIndex;
               const bankVal = bank.selectedIndex;
@@ -232,13 +210,11 @@ request.getContextPath();%> <%ProVo vo = (ProVo)request.getAttribute("vo"); %>
                 title: "상담날짜 : " + counselDate,
                 text: "결제 후 환불이 불가합니다",
                 icon: "warning",
-
                 showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
                 confirmButtonColor: "#26aa82", // confrim 버튼 색깔 지정
                 cancelButtonColor: "#ff4000", // cancel 버튼 색깔 지정
                 confirmButtonText: "결제", // confirm 버튼 텍스트 지정
                 cancelButtonText: "취소", // cancel 버튼 텍스트 지정
-
                 reverseButtons: true, // 버튼 순서 거꾸로
               }).then((result) => {
                 // 만약 Promise리턴을 받으면,
@@ -248,7 +224,6 @@ request.getContextPath();%> <%ProVo vo = (ProVo)request.getAttribute("vo"); %>
                 }
               });
             }); //form submit
-
             //휴대폰 인증 타이머
             var timer = null;
             var isRunning = false;
@@ -262,7 +237,6 @@ request.getContextPath();%> <%ProVo vo = (ProVo)request.getAttribute("vo"); %>
                 var display = $(".time");
                 // 유효시간 설정
                 var leftSec = 120;
-
                 // 버튼 클릭 시 시간 연장
                 if (isRunning) {
                   clearInterval(timer);
@@ -273,19 +247,15 @@ request.getContextPath();%> <%ProVo vo = (ProVo)request.getAttribute("vo"); %>
                 }
               }
             });
-
             function startTimer(count, display) {
               var minutes, seconds;
               timer = setInterval(function () {
                 minutes = parseInt(count / 60, 10);
                 seconds = parseInt(count % 60, 10);
-
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
-
                 const div = $("#countDown");
                 div.html(minutes + ":" + seconds);
-
                 // 타이머 끝
                 if (--count < 0) {
                   clearInterval(timer);
@@ -381,5 +351,15 @@ request.getContextPath();%> <%ProVo vo = (ProVo)request.getAttribute("vo"); %>
     <script></script>
 
     <%@ include file="/views/common/footer.jsp" %>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script
+      src="http://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+    <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
   </body>
 </html>
