@@ -14,6 +14,6 @@ public class AboutUsController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        resp.sendRedirect("/views/aboutUs/aboutUs.jsp");
+        req.getRequestDispatcher("views/aboutUs/aboutUs.jsp").forward(req, resp);
     }
 }

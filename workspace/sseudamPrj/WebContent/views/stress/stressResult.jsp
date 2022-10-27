@@ -109,6 +109,8 @@
 	}
 	
 	#suggest>pre {
+		overflow: hidden;
+		text-overflow: ellipsis;
 		text-align: center;
 		font-size: 1.1rem;
 		font-weight: 600;

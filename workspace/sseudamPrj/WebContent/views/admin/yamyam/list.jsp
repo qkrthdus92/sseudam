@@ -1,8 +1,8 @@
 <%@page import="com.kh.sseudam.common.PageVo"%>
 <%@page import="com.kh.sseudam.healing.vo.HealingVo"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<% String root1 = request.getContextPath();%>
 <!DOCTYPE html>
 <%
 	List<HealingVo> list = (List<HealingVo>) request.getAttribute("list");
@@ -34,7 +34,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Insert title here</title>
+    <title>냠냠 관리자</title>
     <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>쓰담쓰담 소개</title>
-<link rel="stylesheet" href="aboutUs.css?after" type="text/css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/main/aboutUs.css" type="text/css">
 </head>
 <body>
 <%@ include file="/views/common/header.jsp" %>

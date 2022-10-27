@@ -16,9 +16,7 @@
     
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-	<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/main/main.css"
-	type="text/css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/main/main.css" type="text/css">
 
 </head>
 <body>
@@ -166,7 +164,7 @@
             </a>
             <div class="slider-counseling">      
             	
-            	<%
+<%--             	<%
             		for(int i = 0;i<proVo.size();i++){ 
             			int s = Integer.parseInt(proVo.get(i).getStar());
             	%>
@@ -178,7 +176,7 @@
 	                    	평점 : <%for(int j = 0 ;j<s ;j++){%>★<%}%>	                    	
 	                    </div>
 	                </div>
-            	<%} %>
+            	<%} %> --%>
               
                 <div class="slider-box">
                     <div class="counseling-box-img"><img src="<%=root%>/resources/img/main/심원용.jpg"></div>
