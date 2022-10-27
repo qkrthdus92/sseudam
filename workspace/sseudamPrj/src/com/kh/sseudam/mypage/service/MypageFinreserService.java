@@ -36,10 +36,10 @@ public class MypageFinreserService {
 	}
 
 	//별점주기
-	public MypageFinreserVo updateStar(String star, String a_no, String num) {
+	public int updateStar(String star, String a_no, String num) {
 		
 		Connection conn = JDBCTemplate.getConnection();
-		MypageFinreserVo updateStar = MypageFinreserDao.updateStar(star,a_no,num,conn);
+		int updateStar = MypageFinreserDao.updateStar(star,a_no,num,conn);
 		JDBCTemplate.close(conn);
 		
 		return updateStar;

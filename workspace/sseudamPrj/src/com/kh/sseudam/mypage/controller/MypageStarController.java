@@ -26,10 +26,15 @@ public class MypageStarController extends HttpServlet{
 		String star =req.getParameter("value");
 		String a_no =req.getParameter("no");
 		
-		MypageFinreserVo StarUpdate = new MypageFinreserService().updateStar(star,a_no,"2");
+		int StarUpdate = new MypageFinreserService().updateStar(star,a_no,"2");
+		if(StarUpdate == 1) {
+			req.setAttribute("StarUpdate", StarUpdate);
+			req.getRequestDispatcher("/views/mypage/fin_resercheck.jsp").forward(req, resp);
+		}else {
+			//실패
+		}
 		
-		req.setAttribute("StarUpdate", StarUpdate);
-		req.getRequestDispatcher("/views/mypage/fin_resercheck.jsp").forward(req, resp);
+		
 	}
 	
 }

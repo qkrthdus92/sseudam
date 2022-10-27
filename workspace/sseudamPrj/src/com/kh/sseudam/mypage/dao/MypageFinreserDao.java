@@ -101,9 +101,27 @@ public class MypageFinreserDao {
 	}
 
 	//별점주기
-	public static MypageFinreserVo updateStar(String star, String a_no, String num, Connection conn) {
+	public static int updateStar(String star, String a_no, String num, Connection conn) {
 		
 		String sql="UPDATE PRO_APPOINT SET STAR = ? WHERE NO = ? AND MEMBER_NO=?";
+	
+		PreparedStatement pstmt = null;
+	    int result = 0;
+	    try {
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setString(1, star);
+	        pstmt.setString(2, a_no);
+	        pstmt.setString(3, num);
+	        
+	        result = pstmt.executeUpdate();
+	     
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {            
+	        JDBCTemplate.close(pstmt);
+	    }
+	    return result;
+	
 	}
 
 }
