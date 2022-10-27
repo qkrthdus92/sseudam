@@ -12,12 +12,16 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
 	ProMemberJoinVo proLoginMember = (ProMemberJoinVo)session.getAttribute("proLoginMember");
 %>
 
-<script>
-		<%if(alertMsg != null){%>
-						alert('<%= alertMsg %>');
-		<%}%>
-</script>
+	<script>
+			<%if(alertMsg != null){%>
+							alert('<%= alertMsg %>');
+			<%}%>
+	</script>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	
 <style>
   @font-face {
     font-family: "S-CoreDream-3Light";
@@ -258,7 +262,7 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
 }
 
 #login-popup .login-popup,
-#find-id-popup .login-popup {
+#find-id-popup .login-popup{
   width: 477px;
   height: 634px;
   display: grid;
@@ -296,22 +300,9 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
   font-size: 18px;
 }
 
-.phoneNum,
+.email,
 .confmNum{
 	margin-top: 10px
-}
-
-/* 인증번호 버튼 */
-.confirmbtn{
-    color: rgba(253, 121, 0, 1);
-    border: 1px solid rgba(253, 121, 0, 1);
-    font-size: 13px;
-    border-radius: 15px;
-    background-color: white;
-    width: 75px;
-    height: 25px;
-    cursor: pointer;
-    margin-left: 5px
 }
 
 .login-pwd{
@@ -380,8 +371,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
     <div class="main-wrapper main-header-title-wrapper">
       <div class="main-header-logo">
         <a href="<%=root%>/sseudam/main"
-          ><img src="<%= root %>/resources/img/header/logo.png" alt=""
-        /></a>
+          ><img src="<%= root %>/resources/img/header/logo.png" alt=""/></a>
       </div>
       <div class="main-header-icons">
         <div class="main-header-icon">
@@ -389,8 +379,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
         </div>
         <div class="main-header-icon">
           <a href="<%=root%>/views/mypage/main.jsp"
-            ><i class="fa-regular fa-user"></i><span>마이</span></a
-          >
+            ><i class="fa-regular fa-user"></i><span>마이</span></a>
         </div>
       </div>
     </div>
@@ -443,15 +432,15 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	          <div class="login-input">
 	            <div class="login-in" >아이디</div>
 	            <div>
-	            	<input type="text" name="memberId" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
+	            	<input type="text" id="id" name="memberId" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black;">
 	            </div>
 	            <div class="login-pwd">비밀번호</div>
 	            <div>
-	                <input type="password" name="memberPwd" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
+	                <input type="password" id="pwd" name="memberPwd" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black;">
 	            </div>
 	          </div>
 	            <div>
-	              <br><a><input type="submit" value="로그인" class="login-btn" ></a>
+	              <br><a><input type="submit" value="로그인" onclick="return login();" class="login-btn"></a>
 	            </div>
 	      </div>
 	      
@@ -477,58 +466,23 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	          <div class="login-input">
 	            <div>이름</div>
 	            <div>
-	            	<input type="text" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
+	            	<input type="text" id="memberName" name="memberName" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
 	            </div>
-	            <div class="phoneNum">연락처</div>
+	            <div class="email">이메일</div>
 	            <div>
-	                <input type="tel" style="width: 55%; font-size: 18px; border: none; border-bottom: 1px solid black; required"><button type="button" id="confirmbtn" class="confirmbtn" onclick="" >인증번호</button>
-	            </div>
-	            <div class="confmNum">인증번호 입력</div>
-	            <div>
-	            	<input type="text" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
+	                <input type="email" id="memberEmail" name="memberEmail" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
 	            </div>
 	          </div>
 	          	<div>
-	            <br><a><input type="submit" value="아이디 찾기" class="login-btn" onclick="idFindSuc()"></a>
+	            <br><button type="button" onclick="idFound();" class="login-btn">아이디 찾기</button>
+	            <div id="result" style="text-align: center; margin-top: 30px;">왜 안 나와</div>
+	            <div>왜 안나와???!</div>
 	            </div>
 	      </div>
 	      
 	    </div>
 	  </div>
-  </form>
-  
-    <!-- 인증번호 입력 후, 아이디 찾기 팝업 -->
-  <form action="/sseudam/findId" method="post">
-	    <div id="find-id-popup" class="hide">
-	    <div class="login-popup">
-	      <div class="login-popup-header">
-	        <img src="<%=root%>/resources/img/join/close.png" class="login-popup-btn" onclick="closeFindIdPopup()">
-	      </div>
-	      <div class="login-popup-middle">
-	          <div class="login-header">아이디 찾기</div>
-	          <div class="login-input">
-	            <div>이름</div>
-	            <div>
-	            	<input type="text" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
-	            </div>
-	            <div class="phoneNum">연락처</div>
-	            <div>
-	                <input type="tel" style="width: 55%; font-size: 18px; border: none; border-bottom: 1px solid black; required"><button type="button" id="confirmbtn" class="confirmbtn" onclick="" >인증번호</button>
-	            </div>
-	            <div class="confmNum">인증번호 입력</div>
-	            <div>
-	            	<input type="text" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
-	            </div>
-	          </div>
-	          	<div>
-	            <br><a><input type="submit" value="아이디 찾기" class="login-btn" onclick="idFindSuc()"></a>
-	            </div>
-	      </div>
-	      
-	    </div>
-	  </div>
-  </form>  
-  
+  </form> 
   
   <%}else if(loginMember != null){%>
     <div class="main-header-top">
@@ -661,7 +615,47 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   crossorigin="anonymous"
 ></script>
 
+<script type="text/javascript">
+	// 아이디 찾기
+	function idFound(){
+		$.ajax({
+			url : "/sseudam/findId",
+			method : "GET",
+			data :
+				{
+					"userName" : $('#memberName').val(),
+					"userEmail" : $('#memberEmail').val()
+				},
+			success : function(x){
+				console.log(x);
+				$('#result').text(x);
+			},
+			error : function(y){
+				alert("아이디 찾기 실패");
+				console.log(y);
+			}
+		});
+	}
+</script>
+
 <script>
+	//로그인 체크 (!!다시 확인)
+	function login(){
+		var getId = document.getElementById("id");
+		var getPwd = document.getElementById("pwd");
+		
+		var id = getId.value;
+		var pwd = getPwd1.value;
+		
+		if(!id){
+			alert("아이디를 입력해 주세요.");
+			return false;
+		}else if(!pwd){
+			alert("비밀번호를 입력해 주세요.");
+			return false;
+		}
+	}
+
     // 로그인 팝업
     function loginPopup(hasFilter) {
     	const popup = document.querySelector('#login-popup');
@@ -692,25 +686,11 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	    popup.classList.remove('hide');
 	  }
   
-  	//아이디 찾기 팝업 OFF
+  	//아이디 찾기 팝업 닫기
   	function closeFindIdPopup() {
 	    const popup = document.querySelector('#find-id-popup');
 	    popup.classList.add('hide');
 	  }
-  	
-  	//인증번호 입력 후, 아이디 찾기 -> 팝업 ON
-  	function idFindSuc(hasFilter){
-		//아이디 찾기 팝업부터 닫아줘야 함
-	    const closePopup = document.querySelector('#find-id-popup');
-	    closePopup.classList.add('hide');
-    
-	    //인증번호 입력 후, 아이디 찾기 -> 팝업 ON
-	    const popup = document.querySelector('#');
-	    
-	    if (hasFilter) {
-	      popup.classList.add();
-	    }
-	    popup.classList.remove('hide');
-	  }	
+
 </script>
 

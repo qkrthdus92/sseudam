@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>승인 심사</title>
+<title>쓰담쓰담 회원가입</title>
 <style>
 
     body{
@@ -38,7 +38,19 @@
     }
 
     .join-step > img{
-    	padding: 20px;
+    	padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .join-step-check{
+        width: 400px;
+        padding-bottom: 25px;
+    }
+
+    .join-step-check > img{
+        width: 20px;
+        height: 20px;
+        margin-left: 87%;
     }
 
     .join-area{
@@ -76,7 +88,7 @@
     .join-wait > img{
         width: 180px;
         height: 180px;
-        margin-top: 100px;
+        margin-top: 55px;
     }
 
     .join-wait-comment{
@@ -98,15 +110,18 @@
         <div class="join-area">
 
             <div class="join-step">
-                <img src="../../resources/img/join/횐가입.png">
-                <img src="../../resources/img/join/자격_정보_작성.png">
-                <img src="../../resources/img/join/프로필_작성.png">
-                <img src="../../resources/img/join/심사_승인.png">
-                <img src="../../resources/img/join/가입_완료.png">
+                <img src="<%=root%>/resources/img/join/횐가입.png">
+                <img src="<%=root%>/resources/img/join/자격_정보_작성.png">
+                <img src="<%=root%>/resources/img/join/프로필_작성.png">
+                <img src="<%=root%>/resources/img/join/가입_완료.png">
+            </div>
+            
+            <div class="join-step-check">
+                <img src="<%=root%>/resources/img/join/단계체크.png">
             </div>
 
             <div class="join-wait">
-                <img src="../../resources/img/join/승인 대기.png">
+                <img src="<%=root%>/resources/img/join/승인 대기.png">
             </div>
 
             <div class="join-wait-comment">
@@ -116,7 +131,7 @@
         </div>
 
         
-    </nav>>
+    </nav>
 
     <%@ include file="/views/common/footer.jsp" %>
 

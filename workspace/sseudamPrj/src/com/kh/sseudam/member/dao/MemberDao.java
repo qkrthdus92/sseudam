@@ -10,6 +10,8 @@ import com.kh.sseudam.member.vo.MemberVo;
 
 public class MemberDao {
 
+	Connection conn = null;
+	
 	//회원가입
 	public int insertOne(Connection conn, MemberVo vo) {
 		
@@ -90,11 +92,68 @@ public class MemberDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return loginMember;
-		
 	}
 	
-}
+	//아이디 중복체크 
+	public boolean checkDup(Connection conn, String checkId) {
+		String sql = "SELECT * FROM MEMBER WHERE ID = ? AND QUIT_YN = 'N'";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean isIdDup = false;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, checkId);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				isIdDup = true; //중복
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rs);
+		}
+		
+		return isIdDup;
+		
+	}
 
+	//아이디 찾기
+	public String findMemberId(Connection conn, MemberVo findvo) {
+		
+		String sql = "SELECT ID FROM MEMBER WHERE NAME = ? AND EMAIL = ? AND QUIT_YN = 'N'";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String foundId = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, findvo.getName());
+			pstmt.setString(2, findvo.getEmail());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				foundId = rs.getString("id");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return foundId;
+		
+	}
+}
 
 
 

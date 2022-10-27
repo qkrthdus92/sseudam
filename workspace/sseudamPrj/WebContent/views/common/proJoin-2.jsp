@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자격 정보 입력</title>
+<title>쓰담쓰담 회원가입</title>
 <style>
 
     body{
@@ -40,9 +40,20 @@
     }
 
     .join-step > img{
-    	padding: 20px;
+    	padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .join-step-check{
+        width: 400px;
+        padding-bottom: 25px;
     }
 
+    .join-step-check > img{
+        width: 20px;
+        height: 20px;
+        margin-left: 35%;
+    }
 
     .join-area{
         display: flex;
@@ -77,12 +88,6 @@
         width: 65px;
         height: 25px;
     }
-
-    /* .join-sequence > img{
-        width: 50px;
-        height: 15px;
-        margin-right: 40px;
-    } */
 
     .license{
         display: flex;
@@ -128,17 +133,12 @@
                 <img src="<%=root%>/resources/img/join/횐가입.png">
                 <img src="<%=root%>/resources/img/join/자격_정보_작성.png">
                 <img src="<%=root%>/resources/img/join/프로필_작성.png">
-                <img src="<%=root%>/resources/img/join/심사_승인.png">
                 <img src="<%=root%>/resources/img/join/가입_완료.png">
             </div>
-
-            <!-- <div class="join-sequence">
-                <img src="../../resources/img/join/now.png">
-                <img src="../../resources/img/join/next.png">
-                <img src="../../resources/img/join/next.png">
-                <img src="../../resources/img/join/next.png">
-                <img src="../../resources/img/join/next.png">
-            </div> -->
+            
+            <div class="join-step-check">
+                <img src="<%=root%>/resources/img/join/단계체크.png">
+            </div>
 
             <div class="join-0nd">
                 <div>최종학력</div>
