@@ -370,15 +370,15 @@
                     <div id="proname">
                         <span>전문가 <br> <%= MypageFinreserList.get(i).getName()%></span> 
                     </div>             
-                    <div id="bor-top"><label>에약일시</label></div>
+                    <div id="bor-top"><label>예약일시</label></div>
                     <div id="noborder"><label> <%= MypageFinreserList.get(i).getAdvice_date()%></label></div>
-                    <div id="bor-top"><label>에약번호</label></div>
+                    <div id="bor-top"><label>예약번호</label></div>
                     <div id="noborder"><label> <%= MypageFinreserList.get(i).getA_no()%></label></div>
                 </div>
-<%--                 <%if(MypageFinreserList.get(i).getStar() == null){%>
- --%>	                <div><button id="review_bnt" onclick="showPopup(true,<%=i%>)">별점주기</button></div> <!--i를 어떻게 자바스크립트로 넘길것인지.?-->
-<%--                 <%}%>
- --%>            </div>
+                 <%if(MypageFinreserList.get(i).getStar() == null){%>
+	                <div><button id="review_bnt" onclick="showPopup(true,<%=i%>)">별점주기</button></div> <!--i를 어떻게 자바스크립트로 넘길것인지.?-->
+                 <%}%>
+            </div>
     		<div id="popup" class="hide">
 		  		<div class="content">
 					<div class="popup-head">                   
@@ -400,12 +400,28 @@
 				   </div>
 				<div class="popup-foot">
 					<!-- 별점주는 컨트롤러로 이동 -->
-					<button class="pop-btn" id="confirm" onclick="star(<%=i %>)" >확인</button> 
+					<button class="pop-btn" id="confirm" onclick="star(this,<%=MypageFinreserList.get(i).getA_no()%>)" >확인</button> 
 					<button class="pop-btn" id="close" onclick="closePopup(<%=i %>)" >창 닫기</button>
 				</div>
 		  </div>
 		</div>
  	  <%}%>  
+ 	   <script type="text/javascript">
+		 	function star(x,y){
+		 		const content = x.parentNode.parentNode;
+		 		const value = content.querySelector('input[type=radio]:checked').value;
+		 		const no = y;
+		 		$.ajax({
+		 			type : "get",
+		 			url : "/sseudam/mypage/star",
+		 			data:{
+		 				"value" : value,
+		 				"no" :	no
+		 			}
+		 		});
+		 		
+		 	}
+		</script> 
               
 	</div>
          <div id="page-area">
@@ -452,27 +468,7 @@
 
 
 
- <script type="text/javascript">
- 	
- 	function star(i){
- 		const starArr = document.querySelectorAll('#popup');
- 		var value = $('input:radio[name="rating"]:checked'). val();
-	    alert(value);
- 	}
- 
 
-	    
- 	   	/*  $.ajax({
-	    	url : "/sseudam/star",
-    		method : "GET" ,
-	    	data:"star":selected,	
-	    	success: function closePopup(i){
-	    		const popupArr = document.querySelectorAll('#popup');
-	    		popupArr[i].classList.add('hide');
-	    	}
-	    });  */
-	
-</script> 
 
 
 

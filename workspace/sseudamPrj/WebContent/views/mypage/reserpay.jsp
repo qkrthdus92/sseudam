@@ -245,7 +245,7 @@
 	<div id="wrap">
     <div id="main">
         <div id="boardinfo">
-            <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
+            <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
             <div id="hm1">총 결제내역</div>
             <div id="hm"><%=MypageAllreserList.size() %>건</div>
             <div id="hm1"></div>
