@@ -21,10 +21,11 @@ public class FreeBoardDeleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		// 데이터 꺼내기
-		String no = req.getParameter("no");
+		String no = req.getParameter("no"); //삭제하려는 게시글 번호
 		
 		// 디비 다녀오기
 		FreeBoardVo vo = new FreeBoardService().detail(no);
+		//삭제하려는 게시글번호 가지고 작성자번호, 작성자닉네임 가져와서 객체로 만듬
 		
 		// 작성자 여부 확인
 		HttpSession s = req.getSession();
@@ -39,9 +40,8 @@ public class FreeBoardDeleteController extends HttpServlet {
 				resp.sendRedirect("/sseudam/board/freeBoardList?pno=1");
 			} else {
 				// 실패 => 메세지, 에러페이지
-				req.setAttribute("msg", "공지사항 삭제 실패");
-				// req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
-
+				req.setAttribute("msg", "게시글 삭제 실패");
+				req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
 			}
 		} else {
 			req.setAttribute("msg", "작성자만 삭제가 가능합니다.");

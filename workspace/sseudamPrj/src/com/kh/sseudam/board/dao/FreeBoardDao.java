@@ -96,12 +96,15 @@ public class FreeBoardDao {
 				String writeDate = rs.getString("WRITE_DATE");
 				String views = rs.getString("VIEWS");
 
+				int cmtCount = selectCountCmt(conn, no);
+				
 				FreeBoardVo vo = new FreeBoardVo();
 				vo.setNo(no);
 				vo.setTitle(title);
 				vo.setWriterNo(writerNo);
 				vo.setViews(views);
 				vo.setWriteDate(writeDate);
+				vo.setCmtCount(cmtCount);
 				voList.add(vo);
 			}
 
@@ -113,6 +116,40 @@ public class FreeBoardDao {
 		}
 		return voList;
 
+	}
+	
+	//댓글 삭제를 위한 리스트 조회
+	public static FreeBoardCmtVo cmtList(Connection conn, String cmtNo) {
+		String sql = "SELECT C.NO, M.NICK AS WRITER_NO FROM FREE_BOARD_CMT C JOIN MEMBER M ON C.WRITER_NO = M.NO WHERE C.NO=?";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		FreeBoardCmtVo cmtVo = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, cmtNo);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String no = rs.getString("NO");
+				String writerNo = rs.getString("WRITER_NO");
+
+				cmtVo = new FreeBoardCmtVo();
+				cmtVo.setNo(no);
+				cmtVo.setWriterNo(writerNo);
+				
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		return cmtVo;
 	}
 	
 	//자유게시판 댓글조회
@@ -145,10 +182,10 @@ public class FreeBoardDao {
 				String deleteYn = rs.getString("DELETE_YN");
 
 				FreeBoardCmtVo cmtVo = new FreeBoardCmtVo();
-				cmtVo.setNo(no);
-				cmtVo.setFreeBoardNo(freeBoardNo);
-				cmtVo.setCmt(cmt);
-				cmtVo.setWriterNo(writerNo);
+				cmtVo.setNo(no); //댓글번호
+				cmtVo.setFreeBoardNo(freeBoardNo); //게시글번호
+				cmtVo.setCmt(cmt); //댓글내용
+				cmtVo.setWriterNo(writerNo); //작성자번호 닉네임으로 가져오기
 				cmtVo.setModifyDate(modifyDate);
 				cmtVo.setDeleteYn(deleteYn);
 				cmtList.add(cmtVo);
@@ -256,9 +293,34 @@ public class FreeBoardDao {
 
 		return result;
 	}
+	
+	//댓글 작성
+	public static int writeCmt(Connection conn, FreeBoardCmtVo cmtVo) {
+		String sql = "INSERT INTO FREE_BOARD_CMT (NO, FREE_BOARD_NO, WRITER_NO, CMT) VALUES (SEQ_FREE_BOARD_CMT_NO.NEXTVAL, ?,  ?, ?)";
 
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, cmtVo.getFreeBoardNo());
+			pstmt.setString(2, cmtVo.getWriterNo());
+			pstmt.setString(3, cmtVo.getCmt());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
+	// 자유게시판 게시글 삭제
 	public static int delete(Connection conn, String no) {
-		// 자유게시판 게시글 삭제
 		String sql = "UPDATE FREE_BOARD SET DELETE_YN = 'Y' WHERE NO = ?";
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -279,6 +341,29 @@ public class FreeBoardDao {
 		return result;
 
 	}
+	
+	// 댓글 삭제
+	public static int cmtDelete(Connection conn, String cmtNo) {
+		String sql = "UPDATE FREE_BOARD_CMT SET DELETE_YN = 'Y' WHERE NO = ?";
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, cmtNo);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
 
 	//자유게시판 게시글 수정
 	public static int edit(Connection conn, FreeBoardVo vo) {
@@ -445,6 +530,7 @@ public class FreeBoardDao {
 		}
 		return voList;	
 	}
+
 
 
 

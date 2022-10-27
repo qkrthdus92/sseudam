@@ -61,6 +61,7 @@ public class FreeBoardWriteController extends HttpServlet{
 			s.setAttribute("alertMsg", "게시글 등록이 완료되었습니다.");
 			resp.sendRedirect("/sseudam/board/freeBoardList?pno=1");
 		}else {
+			req.setAttribute("msg", "게시글 작성 실패");
 			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
 		}
 		

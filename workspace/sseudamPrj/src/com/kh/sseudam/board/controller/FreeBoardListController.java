@@ -55,6 +55,11 @@ public class FreeBoardListController extends HttpServlet {
 		pv.setStartPage(startPage);
 		pv.setEndPage(endPage);
 		
+		//댓글 갯수 받아오기
+		
+		
+		
+		
 		// 디비 다녀오기
 		List<FreeBoardVo> x = new FreeBoardService().selectList(pv);
 		

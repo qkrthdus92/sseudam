@@ -44,8 +44,19 @@ public class FreeBoardService {
 		return x;
 	}
 	
+	//댓글 삭제를 위한 리스트 조회
+	public FreeBoardCmtVo cmtList(String cmtNo) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		FreeBoardCmtVo cmtVo = FreeBoardDao.cmtList(conn, cmtNo);
+
+		JDBCTemplate.close(conn);
+
+		return cmtVo;
+	}
+	
 	// 자유게시판 댓글 조회
-	public List<FreeBoardCmtVo> selectCmt(PageVo pv, String bno) {
+	public List<FreeBoardCmtVo> selectCmt(PageVo pv, String bno, String cmtNo) {
 		Connection conn = JDBCTemplate.getConnection();
 
 		List<FreeBoardCmtVo> x = FreeBoardDao.selectCmt(conn, pv, bno);
@@ -86,12 +97,47 @@ public class FreeBoardService {
 
 		return result;
 	}
+	
+	//댓글 작성
+	public static int writeCmt(FreeBoardCmtVo cmtVo) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		int result = FreeBoardDao.writeCmt(conn, cmtVo);
+
+		if (result == 1) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+
+		JDBCTemplate.close(conn);
+
+		return result;
+	}
+
 
 	// 자유게시판 게시글 삭제
 	public int delete(String no) {
 		Connection conn = JDBCTemplate.getConnection();
 
 		int result = FreeBoardDao.delete(conn, no);
+
+		if (result == 1) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+
+		JDBCTemplate.close(conn);
+
+		return result;
+	}
+	
+	//댓글 삭제
+	public int cmtDelete(String cmtNo) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		int result = FreeBoardDao.cmtDelete(conn, cmtNo);
 
 		if (result == 1) {
 			JDBCTemplate.commit(conn);
@@ -154,6 +200,11 @@ public class FreeBoardService {
 
 		return x;	
 	}
+
+
+
+
+
 
 
 }

@@ -134,7 +134,7 @@
 	    	for(int i = 0; i < voList.size(); ++i){%>
 	        <div class="board-list"><%=voList.get(i).getNo() %></div>
 	        <div class="board-list"><a href="<%=root%>/board/freeBoardDetail?bno=<%=voList.get(i).getNo() %>&cmtPno=1"><%=voList.get(i).getTitle() %>
-	        						&nbsp;<span id="views">[<%=voList.get(i).getViews() %>]</span></a></div>
+	        						&nbsp;<span id="views">[<%=voList.get(i).getCmtCount() %>]</span></a></div>
 	        <div class="board-list"><%=voList.get(i).getWriterNo() %></div>
 	        <div class="board-list"><%=voList.get(i).getWriteDate() %></div>
 	        <div class="board-list"><%=voList.get(i).getViews() %></div>
