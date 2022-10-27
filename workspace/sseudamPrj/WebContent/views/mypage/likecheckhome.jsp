@@ -198,7 +198,7 @@
 	        <div id="dominfo3" onclick="location.href='/sseudam/mypage/likecheckout?pno=1';">밖에서뚜벅뚜벅</div>
 	    </div>
 	    <div id="editbar">
-	        <button id="allselect" ><img id="checkbox" src="/sseudam/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
+	        <button id="allselect" ><img id="checkbox" src="/sseudam/resources/img/mypage/체크.png"  alt="체크"> 전체선택</button>
 	        <button id="delete">삭제</button>
 	    </div>
 	    <div id="edittop">
