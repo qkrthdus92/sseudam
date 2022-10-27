@@ -247,7 +247,7 @@
 	        <div id="left">
 	            <div id="leftftop">
 	                <div><h1 align="center">마이페이지</h1></div>
-	                <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
+	                <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
 	                <div><h2 align="center">이름</h2></div>
 	                <div><h3 align="center">닉네임</h3></div>
 	                <div id="ment">아이디님 좋은 하루되세요.</div>
@@ -360,12 +360,12 @@
 		<div id="popup" class="hide">
 		  <div class="content">
 				<div class="popup-head">
-					<div  ><img id="popup-logo" src="../../resources/img/header/logo.png" alt=""></div>
+					<div  ><img id="popup-logo" src="/sseudam/resources/img/header/logo.png" alt=""></div>
 					<div class="head-title">아이디님의 테스트 점수는</div>
 				</div>
 				<div class="popup-body">
-                    <div id="popup_test_score">
-                        <div><img id="popup_test_logo" src="../../resources/img/mypage/테스트.png" alt=""></div>
+                    <div id="popup_test_score">               
+                        <div><img id="popup_test_logo" src="/sseudam/resources/img/mypage/테스트.png" alt=""></div>
                         <div id="popup-text"> <%=MypageTestscoreList.get(0).getTest_score() %>점 </div>
                     </div>
                     <div id="popup_text2">입니다.</div>

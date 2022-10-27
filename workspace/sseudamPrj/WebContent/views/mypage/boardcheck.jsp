@@ -193,7 +193,7 @@
 			        }else{
 			        	bp ="/board/reviewBoardDetail?bno=";
 			        }%>
-			        <div id ="detaillocation" onclick="location.href='<%=root%><%=bp%><%=MypageBoardList.get(i).getNo() %>'"><%= MypageBoardList.get(i).getTitle() %></div>
+			        <div id ="detaillocation" onclick="location.href='<%=root%><%=bp%><%=MypageBoardList.get(i).getNo() %>&cmtPno=1'"><%= MypageBoardList.get(i).getTitle() %></div>
 			        <div><%= MypageBoardList.get(i).getType()%></div>
 			        <div><%= MypageBoardList.get(i).getWriteDate() %></div>
 			    </div>

@@ -23,11 +23,11 @@ public class MypageLikeyumDeleteController extends HttpServlet{
 	
 		if(result == 1) {
 			//성공 => 알람 , 리스트조회
-			req.getSession().setAttribute("alerMsg", "공지사항 삭제 성공!");
+			req.getSession().setAttribute("alerMsg", "삭제 성공!");
 			resp.sendRedirect("/sseudam/mypage/likeyum?pno=1");
 		}else {
 			//실패 => 메세지 , 에러페이지
-			req.setAttribute("msg", "공지사항 삭제 실패...");
+			req.setAttribute("msg", "삭제 실패...");
 			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
 		}
 	

@@ -141,7 +141,7 @@
         text-align: center;
     }
     #editlist{
-        height: 40px;
+        height:30px;
         display: grid;
         grid-template-columns: 1fr 1fr 5fr 2fr 2fr;
         align-content: center;
@@ -150,9 +150,9 @@
         font-size: 20px;
     }
     #cb1{
-    width: 20px;
-	height: 20px;
-	border: 2px solid #bcbcbc;
+    width: 13px;
+	height: 13px;
+	border: 1px solid #bcbcbc;
 	cursor: pointer; 
 }
 </style>
@@ -189,7 +189,7 @@
 			        <div><%= MypageCommentList.get(i).getNo()%></div>
 			        <div><%= MypageCommentList.get(i).getCmt()%></div>
 			        <div><%= MypageCommentList.get(i).getType()%></div>
-			        <div><%= MypageCommentList.get(i).getWriter_no()%></div>
+			        <div><%= MypageCommentList.get(i).getModify_date()%></div>
 			    </div>
 		    <%}%>
 		   		    <%for(int i = 0 ; i < MypageCommentList2.size(); ++i){%>
@@ -198,7 +198,7 @@
 			        <div><%= MypageCommentList2.get(i).getNo()%></div>
 			        <div><%= MypageCommentList2.get(i).getCmt()%></div>
 			        <div><%= MypageCommentList2.get(i).getType()%></div>
-			        <div><%= MypageCommentList2.get(i).getWriter_no()%></div>
+			        <div><%= MypageCommentList2.get(i).getModify_date()%></div>
 			    </div>
 		    <%}%>
 		    

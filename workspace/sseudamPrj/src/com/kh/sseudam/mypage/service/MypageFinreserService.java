@@ -33,6 +33,16 @@ public class MypageFinreserService {
 		JDBCTemplate.close(conn);
 		
 		return result;
+	}
+
+	//별점주기
+	public MypageFinreserVo updateStar(String star, String a_no, String num) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		MypageFinreserVo updateStar = MypageFinreserDao.updateStar(star,a_no,num,conn);
+		JDBCTemplate.close(conn);
+		
+		return updateStar;
 	}	
 
 }

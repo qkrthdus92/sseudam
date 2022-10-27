@@ -22,11 +22,11 @@ public class MypageBoardController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
-//		HttpSession s = req.getSession();
-//		
-//		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
-//		
-//		String num = loginMember.getNo();
+		HttpSession s = req.getSession();
+		
+		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
+		
+		String num = loginMember.getNo();
 		
 		//페이징 처리
 		int listCount; 			//총 ㅐ시글 갯수
@@ -38,7 +38,7 @@ public class MypageBoardController extends HttpServlet{
 		int endPage;			//페이징바 종료 페이지
 		
 		
-		listCount = new MypageBoardService().selectCount("1");//회원번호 임의지정
+		listCount = new MypageBoardService().selectCount(num);//회원번호 임의지정
 		
 		currentPage = Integer.parseInt(req.getParameter("pno")) ;
 		pageLimit = 5;   //임의로 정함
@@ -64,7 +64,7 @@ public class MypageBoardController extends HttpServlet{
 	      
 	
 		
-		List<MypageBoardVo> MypageBoardList = new MypageBoardService().selectList(pv,"1");
+		List<MypageBoardVo> MypageBoardList = new MypageBoardService().selectList(pv,num);
 		
 
 		

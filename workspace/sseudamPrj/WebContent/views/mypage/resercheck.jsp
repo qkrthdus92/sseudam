@@ -228,7 +228,7 @@
 	<div id="wrap">
     <div id="main">
         <div id="boardinfo">
-            <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
+            <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
             <div id="hm1">상담 예정내역</div>
             <div id="hm"><%=MypageReserList.size() %>건</div>
             <div id="hm1"></div>
@@ -252,7 +252,7 @@
 		<%for(int i = 0 ; i < MypageReserList.size(); ++i){%>
             <div id="pro-box-all">
                 <div id="pro-box"> 
-                    <span><img id="profil2" src="../../resources/img/main/강형욱.jpg" alt=""></span> 
+                    <span><img id="profil2" src="/sseudam/resources/img/main/강형욱.jpg" alt=""></span> 
                     <div id="proname">
                         <span>전문가 <br> <%= MypageReserList.get(i).getName()%></span> 
                     </div>             

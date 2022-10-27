@@ -100,4 +100,10 @@ public class MypageFinreserDao {
 		return result;
 	}
 
+	//별점주기
+	public static MypageFinreserVo updateStar(String star, String a_no, String num, Connection conn) {
+		
+		String sql="UPDATE PRO_APPOINT SET STAR = ? WHERE NO = ? AND MEMBER_NO=?";
+	}
+
 }
