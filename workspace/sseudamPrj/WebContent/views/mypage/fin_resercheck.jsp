@@ -13,6 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
 
 #wrap{
@@ -306,26 +307,26 @@
 	#confirm{                
 	border-right:1px solid #FFFFFF;
 	}
-	#myform input[type=radio]{
+	.starform input[type=radio]{
 	    display: none; /* 라디오박스 감춤 */
 	}
-	#myform label{
+	.starform label{
 	    font-size: 2.5em; /* 이모지 크기 */
 	    color: transparent; /* 기존 이모지 컬러 제거 */
 	    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
 	}
-    #myform label:hover{
+    .starform label:hover{
     text-shadow: 0 0 0 #87C57D; /* 마우스 호버 */
 	}
-	#myform label:hover ~ label{
+	.starform label:hover ~ label{
 	    text-shadow: 0 0 0 #87C57D; /* 마우스 호버 뒤에오는 이모지들 */
 	}
-	#myform fieldset{
+	.starform fieldset{
     display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
     direction: rtl; /* 이모지 순서 반전 */
     border: 0; /* 필드셋 테두리 제거 */
 	}
-	#myform input[type=radio]:checked ~ label{
+	.starform input[type=radio]:checked ~ label{
     text-shadow: 0 0 0 #87C57D; /* 마우스 클릭 체크 */
 	}
 	#viewstar{
@@ -341,7 +342,7 @@
 	<div id="wrap">
     <div id="main">
         <div id="boardinfo">
-            <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
+            <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
             <div id="hm1">상담완료</div>
             <div id="hm"><%=MypageFinreserList.size() %>건</div>
             <div id="hm1"></div>
@@ -365,7 +366,7 @@
         <%for(int i = 0 ; i < MypageFinreserList.size(); ++i){%>
             <div id="pro-box-all">
                 <div id="pro-box"> 
-                    <span><img id="profil2" src="/sseudam/WebContent/resources/img/프로필.png" alt=""></span> 
+                    <span><img id="profil2" src="/sseudam/resources/img/mypage/프로필.png" alt=""></span> 
                     <div id="proname">
                         <span>전문가 <br> <%= MypageFinreserList.get(i).getName()%></span> 
                     </div>             
@@ -374,30 +375,32 @@
                     <div id="bor-top"><label>에약번호</label></div>
                     <div id="noborder"><label> <%= MypageFinreserList.get(i).getA_no()%></label></div>
                 </div>
-                <div><button id="review_bnt" onclick="showPopup(true,<%=i%>)">별점주기</button></div> <!--i를 어떻게 자바스크립트로 넘길것인지.?-->
-            </div>
+<%--                 <%if(MypageFinreserList.get(i).getStar() == null){%>
+ --%>	                <div><button id="review_bnt" onclick="showPopup(true,<%=i%>)">별점주기</button></div> <!--i를 어떻게 자바스크립트로 넘길것인지.?-->
+<%--                 <%}%>
+ --%>            </div>
     		<div id="popup" class="hide">
-		  <div class="content">
-				<div class="popup-head">
-					<div  ><img id="popup-logo" src="../../resources/img/header/logo.png" alt=""></div>
-					<div class="head-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예약번호<%= MypageFinreserList.get(i).getA_no()%>의 <br> &nbsp;&nbsp;&nbsp;&nbsp;상담은 어떠셨나요?</div>
-				</div>
-				<div class="popup-body">
-					<div id="viewstar">
-						<form name="myform" id="myform" method="post" action="./save">
-						    <fieldset>
-						        <input type="radio" name="rating" value="1" id="rate1"><label for="rate1">⭐</label>
-						        <input type="radio" name="rating" value="2" id="rate2"><label for="rate2">⭐</label>
-						        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
-						        <input type="radio" name="rating" value="4" id="rate4"><label for="rate4">⭐</label>
-						        <input type="radio" name="rating" value="5" id="rate5"><label for="rate5">⭐</label>
-						    </fieldset>
-						</form>
-					</div>
-				</div>
+		  		<div class="content">
+					<div class="popup-head">                   
+						<div  ><img id="popup-logo" src="/sseudam/resources/img/header/logo.png" alt=""></div>
+ 						<div class="head-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예약번호<%= MypageFinreserList.get(i).getA_no()%> 의 <br> &nbsp;&nbsp;&nbsp;&nbsp;상담은 어떠셨나요?</div>
+  					</div>
+					<div class="popup-body">
+						<div id="viewstar">
+							<form class ="starform" name="starform" id="starform" method="post" action="">
+						  	  <fieldset>
+					  		      <input type="radio" name="rating" value="5" id="rate<%=i%>-1"><label for="rate<%=i%>-1">⭐</label>
+						      	  <input type="radio" name="rating" value="4" id="rate<%=i%>-2"><label for="rate<%=i%>-2">⭐</label>
+						    	  <input type="radio" name="rating" value="3" id="rate<%=i%>-3"><label for="rate<%=i%>-3">⭐</label>
+						          <input type="radio" name="rating" value="2" id="rate<%=i%>-4"><label for="rate<%=i%>-4">⭐</label>
+						          <input type="radio" name="rating" value="1" id="rate<%=i%>-5"><label for="rate<%=i%>-5">⭐</label>
+						      </fieldset>
+						  </form>
+					  </div>
+				   </div>
 				<div class="popup-foot">
 					<!-- 별점주는 컨트롤러로 이동 -->
-					<button class="pop-btn" id="confirm" onclick="location.href=''" >확인</button> 
+					<button class="pop-btn" id="confirm" onclick="star(<%=i %>)" >확인</button> 
 					<button class="pop-btn" id="close" onclick="closePopup(<%=i %>)" >창 닫기</button>
 				</div>
 		  </div>
@@ -426,17 +429,10 @@
 <%@ include file="/views/common/footer.jsp" %>	
 
 <script type="text/javascript">
-
-	function showPopup(multipleFilter,i) {
+	function showPopup(multipleFilter,i,starform) {
 		const popupArr = document.querySelectorAll('#popup');
 	  
-	  if (multipleFilter) {
-		  popupArr[i].classList.add('multiple-filter');
-	  } else {
-		  popupArr[i].classList.remove('multiple-filter');
-	  }
-	  
-	  popupArr[i].classList.remove('hide');
+	    popupArr[i].classList.remove('hide');
 	}
 	
 	function closePopup(i) {
@@ -445,22 +441,40 @@
 	}
 </script>
 
-<script type="text/javascript">
+
+
+ <script type="text/javascript">
 	const drawStar = (target) => {
     document.querySelector(`.star span`).style.width = `${target.value * 10}%`;
   	}
 </script>
 
-<!-- <script type="text/javascript">
 
-	document.getElementById('confirm').onclick = function() {
-	    var radios = document.getElementsByName("rating");
-	    var selected = Array.from(radios).find(radio => radio.checked);
-	    alert(selected.value);
-	}
-	console.log(selected);
 
-</script> -->
+
+ <script type="text/javascript">
+ 	
+ 	function star(i){
+ 		const starArr = document.querySelectorAll('#popup');
+ 		var value = $('input:radio[name="rating"]:checked'). val();
+	    alert(value);
+ 	}
+ 
+
+	    
+ 	   	/*  $.ajax({
+	    	url : "/sseudam/star",
+    		method : "GET" ,
+	    	data:"star":selected,	
+	    	success: function closePopup(i){
+	    		const popupArr = document.querySelectorAll('#popup');
+	    		popupArr[i].classList.add('hide');
+	    	}
+	    });  */
+	
+</script> 
+
+
 
 </body>
 </html>

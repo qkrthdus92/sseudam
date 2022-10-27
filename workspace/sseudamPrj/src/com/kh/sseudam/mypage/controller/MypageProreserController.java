@@ -22,9 +22,9 @@ public class MypageProreserController extends HttpServlet {
 	
 //		HttpSession s = req.getSession();
 //		
-//		ProVo loginMember = (ProVo)s.getAttribute("loginMember");
+//		ProMemberJoinVo proLoginMember = (ProMemberJoinVo)s.getAttribute("loginMember");
 //		
-//		String num = loginMember.getNo();
+//		String num = proLoginMember.getNo();
 		
 		//페이징 처리
 		int listCount; 			//총 ㅐ시글 갯수

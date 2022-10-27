@@ -364,9 +364,9 @@
                   </div>
               </div>
               <div class="popup-foot">
-                  <!-- 출금완료페이지로 이동 -->
-                  <button class="pop-btn" id="confirm" onclick="location.href='/sseudam/views/mypage/promoneycheck.jsp';" >확인</button> 
-                  <button class="pop-btn" id="close" onclick="location.href='/sseudam/views/mypage/promoneycheck.jsp';" >창 닫기</button>
+                  <!-- 출금완료페이지로 이동 -->                         
+                  <button class="pop-btn" id="confirm" onclick="location.href='/sseudam/mypage/promoneycheck?pno=1';" >확인</button> 
+                  <button class="pop-btn" id="close" onclick="location.href='/sseudam/mypage/promoneycheck?pno=1';" >창 닫기</button>
               </div>
         </div>
     </div>
