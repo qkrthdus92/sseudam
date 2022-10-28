@@ -3,20 +3,20 @@
 	pageEncoding="UTF-8"%>
 <%
 	String root1 = request.getContextPath();
-	HealingVo vo = (HealingVo) request.getAttribute("nyamDetailVo");
+	HealingVo vo = (HealingVo) request.getAttribute("outsideDetailVo");
 	
 	int cn = Integer.parseInt(vo.getcNum());
 	String yn = vo.getDeleteYn();
 	
-	String check1 = "";
-	String check2 = "";
-	String check3 = "";
+	String check8 = "";
+	String check9 = "";
+	String check10 = "";
 	String checkY = "";
 	String checkN = "";
 	
-	if(cn == 1){check1 = "checked";}
-	else if(cn == 2){check2 = "checked";}
-	else{check3 = "checked";}
+	if(cn == 1){check8 = "checked";}
+	else if(cn == 2){check9 = "checked";}
+	else{check10 = "checked";}
 	
 	if(yn.equals("N")){checkN = "checked";}
 	else{checkY = "checked";}
@@ -35,7 +35,7 @@
 	href="<%=root1%>/resources/css/admin/common/component.css?ver=1" />
 <style>
 .grid-col3 {
-	grid-template-rows: repeat(10, 50px);
+	grid-template-rows: repeat(12, 50px);
 }
 
 .upload-name {
@@ -98,27 +98,40 @@
 
 						<div>타입</div>
 						<div>
-							<input type="radio" name="cNum" value="1" <%=check1%>>맛집 
-							<input type="radio" name="cNum" value="2" <%=check2%>>카페 
-							<input type="radio" name="cNum" value="3" <%=check3%>>술집
+							<input type="radio" name="cNum" value="8" <%=check8%>>문화 
+							<input type="radio" name="cNum" value="9" <%=check9%>>산책 
+							<input type="radio" name="cNum" value="10" <%=check10%>>등산
+						</div>
+						<div></div>
+
+						<div>기간</div>
+						<div>
+							<input class="upload-name" type="text" name="infoA" value="<%=vo.getInfoA()%>">
 						</div>
 						<div></div>
 
 						<div>주소</div>
 						<div>
-							<input class="upload-name" type="text" name="addr" value="<%=vo.getInfoA()%>">
+							<input class="upload-name" type="text" name="infoB" value="<%=vo.getInfoB()%>">
 						</div>
 						<div></div>
-
-						<div>전화번호</div>
+						
+						<div>번호</div>
 						<div>
-							<input class="upload-name" type="text" name="phone" value="<%=vo.getInfoB()%>">
+							<input class="upload-name" type="text" name="infoC" value="<%=vo.getInfoC()%>">
 						</div>
 						<div></div>
+						
 
 						<div>링크</div>
 						<div>
-							<input class="upload-name" type="text" name="link" value="<%=vo.getLink()%>">
+							<input class="upload-name" type="text" name="link" value="<%=vo.getLink()%>" required>
+						</div>
+						<div></div>
+						
+						<div>스트레스</div>
+						<div>
+							<input class="upload-name" type="number" name="stress" value="<%=vo.getStress()%>" required>
 						</div>
 						<div></div>
 
@@ -130,7 +143,7 @@
 						</div>
 						<div></div>
 						
-						<div>링크</div>
+						<div>등록일</div>
 						<div>
 							<input class="upload-name" type="text" name="writeDate" value="<%=vo.getWriteDate()%>" readonly>
 						</div>
@@ -143,7 +156,7 @@
 						</div>
 						<div></div>
 						
-						<div><input class="save-btn" type="submit" value="삭제" onclick="javascript: form.action='<%=root1%>/admin/nyam/delete';"></div>
+						<div><input class="save-btn" type="submit" value="삭제" onclick="javascript: form.action='<%=root1%>/admin/outside/delete';"></div>
 						<div></div>
 						<div></div>
 					</div>

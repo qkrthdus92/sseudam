@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Insert title here</title>
+    <title>뚜벅뚜벅 추가</title>
     <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"
@@ -12,7 +12,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/yamyam/bob/list.css?ver=2"
+      href="<%=root1%>/resources/css/admin/yamyam/wallow/list.css?ver=2"
     />
     <link
       rel="stylesheet"
@@ -20,7 +20,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
     />
     <style>
       .grid-col3 {
-        grid-template-rows: repeat(6, 50px);
+        grid-template-rows: repeat(8, 50px);
       }
       
       .upload-name {
@@ -60,7 +60,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
     <form action="" method="post" enctype="multipart/form-data">
     <main class="admin-main">   
       <header class="admin-main-header flex-between">
-        <h1>혼자서 냠냠 추가</h1>
+        <h1>밖에서 뚜벅뚜벅 추가</h1>
         <div class="btn-set">
           <input
             class="cancel-btn"
@@ -75,27 +75,35 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
         <div class="admin-main-wrapper">
           <div class="admin-main-board grid-col3">
             <div>이름</div>
-            <div><input class="upload-name" type = "text" name = "name" placeholder="이름을 입력하세요" required></div>
+            <div><input class="upload-name" type = "text" name = "title" placeholder="이름을 입력하세요" required></div>
             <div></div>
             
             <div>타입</div>
             <div>
-            	<input type = "radio" name = "cNum" value = "1" checked>맛집 
-            	<input type = "radio" name = "cNum" value = "2">카페
-            	<input type = "radio" name = "cNum" value = "3">술집
+            	<input type = "radio" name = "cNum" value = "8" checked>문화
+            	<input type = "radio" name = "cNum" value = "9">산책
+            	<input type = "radio" name = "cNum" value = "10">운동
             </div>
             <div></div>
             
+            <div>기간</div>
+            <div><input class="upload-name" type = "text" name = "infoA" placeholder="기간을 입력하세요"></div>
+            <div></div>
+            
             <div>주소</div>
-            <div><input class="upload-name" type = "text" name = "addr" placeholder="주소를 입력하세요"></div>
+            <div><input class="upload-name" type = "text" name = "infoB" placeholder="주소를 입력하세요"></div>
             <div></div>
             
             <div>전화번호</div>
-            <div><input class="upload-name" type = "text" name = "phone" placeholder="번호를 입력하세요"></div>
+            <div><input class="upload-name" type = "text" name = "infoC" placeholder="번호를 입력하세요"></div>
             <div></div>
             
             <div>링크</div>
-            <div><input class="upload-name" type = "text" name = "link" placeholder="링크를 입력하세요"></div>
+            <div><input class="upload-name" type = "text" name = "link" placeholder="링크를 입력하세요" required></div>
+            <div></div>
+            
+            <div>스트레스 지수</div>
+            <div><input class="upload-name" type = "number" name = "stress" placeholder="스트레스 수치를 입력하세요" required></div>
             <div></div>
             
             <div>대표사진</div>            

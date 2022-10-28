@@ -18,23 +18,23 @@ import javax.servlet.http.Part;
 import com.kh.sseudam.admin.healing.service.AdminHealingService;
 import com.kh.sseudam.healing.vo.HealingVo;
 
-@WebServlet(urlPatterns = "/admin/nyam/edit")
+@WebServlet(urlPatterns = "/admin/inside/edit")
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024,
         maxFileSize = 1024 * 1024 * 50,
         maxRequestSize = 1024  *1024 * 50 * 5
     )
-public class AdminNyamEditController extends HttpServlet{
+public class AdminInsideEditController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String no = req.getParameter("no");
         
-        HealingVo vo = new AdminHealingService().NyamDetailSelect(no);
+        HealingVo vo = new AdminHealingService().InsideDetailSelect(no);
         
-        req.setAttribute("nyamDetailVo", vo);
-        req.getRequestDispatcher("/views/admin/yamyam/edit.jsp").forward(req, resp);
+        req.setAttribute("insideDetailVo", vo);
+        req.getRequestDispatcher("/views/admin/wallow/edit.jsp").forward(req, resp);
     }
     
     @Override
@@ -55,9 +55,10 @@ public class AdminNyamEditController extends HttpServlet{
         String no = req.getParameter("no");
         String title = req.getParameter("name");
         String cNum = req.getParameter("cNum");
-        String addr = req.getParameter("addr");
-        String phone = req.getParameter("phone");
+        String infoA = req.getParameter("infoA");
+        String infoB = req.getParameter("infoB");
         String link = req.getParameter("link");
+        String stress = req.getParameter("stress");
         String deleteYn = req.getParameter("deleteYn");
         String writeDate = req.getParameter("writeDate");
         String imgPath = req.getParameter("currentFile"); 
@@ -70,10 +71,10 @@ public class AdminNyamEditController extends HttpServlet{
             
             //파일정보 디비에 저장
             String rootPath = req.getServletContext().getRealPath("/");
-            String path = rootPath +"resources/upload/nyam/"; //최상단경로
+            String path = rootPath +"resources/upload/inside/"; //최상단경로
            
             //기존 파일 삭제
-            //new File(path+imgPath).delete();
+            new File(path+imgPath).delete();
             
             if(f.getSubmittedFileName().length() > 0) {
                 
@@ -102,19 +103,20 @@ public class AdminNyamEditController extends HttpServlet{
         vo.setNo(no);
         vo.setTitle(title);
         vo.setcNum(cNum);
-        vo.setInfoA(addr);
-        vo.setInfoB(phone);
+        vo.setInfoA(infoA);
+        vo.setInfoB(infoB);
         vo.setLink(link);
+        vo.setStress(stress);
         vo.setDeleteYn(deleteYn);
         vo.setImgPath(imgPath);
         vo.setWriteDate(writeDate);
         
-        int result = new AdminHealingService().EditNyamOne(vo);
+        int result = new AdminHealingService().EditInsideOne(vo);
         
         if(result == 1) {
-            //성공       
+            //성공        
             s.setAttribute("alertMsg", "컨텐츠 수정 성공");
-            resp.sendRedirect(root + "/admin/nyam?pno=1&type="+cNum);
+            resp.sendRedirect(root + "/admin/inside?pno=1&type="+cNum);
         }else {
             //실패
             req.setAttribute("msg", "컨텐츠 수정 실패");

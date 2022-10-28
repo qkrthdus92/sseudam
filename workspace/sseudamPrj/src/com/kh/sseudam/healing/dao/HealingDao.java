@@ -354,9 +354,9 @@ public class HealingDao {
             sort = defSql;
         }else if(sort.equals("like")) {
             sort = likeSql;         
-        }else if(sort.equals("title")){
-            sort = randomSql; 
         }else if(sort.equals("random")){
+            sort = randomSql; 
+        }else if(sort.equals("title")){
             sort = titleSql; 
         }else {
             return null;
