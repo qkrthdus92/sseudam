@@ -2,7 +2,7 @@ package com.kh.sseudam.board.vo;
 
 public class ReviewBoardImgVo {
 
-	private String img_no;
+	private String imgNo;
 	private String reviewBoardNo;
 	private String originName;
 	private String changeName;
@@ -10,14 +10,10 @@ public class ReviewBoardImgVo {
 	private String enrollDate;
 	private String thumbYn;
 	private String status;
-	public ReviewBoardImgVo() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public ReviewBoardImgVo(String img_no, String reviewBoardNo, String originName, String changeName, String filePath,
+	public ReviewBoardImgVo(String imgNo, String reviewBoardNo, String originName, String changeName, String filePath,
 			String enrollDate, String thumbYn, String status) {
 		super();
-		this.img_no = img_no;
+		this.imgNo = imgNo;
 		this.reviewBoardNo = reviewBoardNo;
 		this.originName = originName;
 		this.changeName = changeName;
@@ -26,11 +22,15 @@ public class ReviewBoardImgVo {
 		this.thumbYn = thumbYn;
 		this.status = status;
 	}
-	public String getImg_no() {
-		return img_no;
+	public ReviewBoardImgVo() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	public void setImg_no(String img_no) {
-		this.img_no = img_no;
+	public String getImgNo() {
+		return imgNo;
+	}
+	public void setImgNo(String imgNo) {
+		this.imgNo = imgNo;
 	}
 	public String getReviewBoardNo() {
 		return reviewBoardNo;
@@ -76,10 +76,11 @@ public class ReviewBoardImgVo {
 	}
 	@Override
 	public String toString() {
-		return "ReviewBoardImgVo [img_no=" + img_no + ", reviewBoardNo=" + reviewBoardNo + ", originName=" + originName
+		return "ReviewBoardImgVo [imgNo=" + imgNo + ", reviewBoardNo=" + reviewBoardNo + ", originName=" + originName
 				+ ", changeName=" + changeName + ", filePath=" + filePath + ", enrollDate=" + enrollDate + ", thumbYn="
 				+ thumbYn + ", status=" + status + "]";
 	}
+
 	
 	
 }

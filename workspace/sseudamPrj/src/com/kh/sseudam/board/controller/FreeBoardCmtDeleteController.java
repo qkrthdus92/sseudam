@@ -56,6 +56,10 @@ public class FreeBoardCmtDeleteController extends HttpServlet {
 				req.setAttribute("msg", "댓글 삭제 실패.");
 				req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
 			}
+		}else {
+			req.setAttribute("msg", "작성자만 삭제가 가능합니다.");
+			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
+			return;
 		}
 	}
 

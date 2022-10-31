@@ -145,19 +145,17 @@
             <div class="board-top">작성일자</div>
             <div class="board-top">조회수</div>
             
-        <%
-	    	for(int i = 0; i < voList.size(); ++i){%>
-	        <div class="board-list"><%=voList.get(i).getNo() %></div>
+        <%for(int i = 0; i < voList.size(); ++i){%>
+	        <div class="board-list"><%=voList.get(i).getNo()%></div>
 	        <div class="board-list"><a href="<%=root%>/board/freeBoardDetail?bno=<%=voList.get(i).getNo() %>&cmtPno=1"><%=voList.get(i).getTitle() %>
 	        						&nbsp;<span id="views">[<%=voList.get(i).getCmtCount() %>]</span></a></div>
-	        <div class="board-list"><%=voList.get(i).getWriterNo() %></div>
-	        <div class="board-list"><%=voList.get(i).getWriteDate() %></div>
-	        <div class="board-list"><%=voList.get(i).getViews() %></div>
+	        <div class="board-list"><%=voList.get(i).getWriterNo()%></div>
+	        <div class="board-list"><%=voList.get(i).getWriteDate()%></div>
+	        <div class="board-list"><%=voList.get(i).getViews()%></div>
         <%}%>
 
         <div id="page">
-            
-        
+                  
         	<a href="/sseudam/board/freeBoardList?pno=<%=pv.getStartPage()-1%>">< </a>	        		
         	
         <%
@@ -165,10 +163,8 @@
         		<a id="current" href="/sseudam/board/freeBoardList?pno=<%=i%>"><%=i%></a>
         <%}%>
         
-        
         	<a href="/sseudam/board/freeBoardList?pno=<%=pv.getEndPage()+1%>"> ></a>	        		
-        	
-            
+
         </div>
             <div id="search">
                 <div>

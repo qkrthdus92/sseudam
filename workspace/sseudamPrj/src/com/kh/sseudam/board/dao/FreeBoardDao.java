@@ -16,6 +16,7 @@ public class FreeBoardDao {
 
 	// 자유게시판 게시글 갯수 조회
 	public static int selectCount(Connection conn) {
+		
 		String sql = "SELECT COUNT(*) AS CNT FROM FREE_BOARD WHERE DELETE_YN = 'N'";
 
 		PreparedStatement pstmt = null;
@@ -69,7 +70,7 @@ public class FreeBoardDao {
 		return result;
 	}
 
-	// 자유게시판 게시글 리스트 불러오기
+	// 자유게시판 게시글 목록 조회
 	public static List<FreeBoardVo> selectList(Connection conn, PageVo pv) {
 
 		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM , T.* FROM (SELECT B.NO, B.TITLE, M.NICK AS WRITER_NO, TO_CHAR(B.WRITE_DATE, 'yyyy-mm-dd') AS WRITE_DATE, B.VIEWS FROM FREE_BOARD B JOIN MEMBER M ON B.WRITER_NO = M.NO WHERE DELETE_YN = 'N' ORDER BY NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
