@@ -259,15 +259,6 @@ div {
   color: black;
 }
 
-/* 페이징바 */
-
-#page-area {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  margin-top: 20px;
-}
-
 .hidden {
   display: none;
 }
@@ -285,6 +276,31 @@ i.fa-magnifying-glass {
   padding-left: 28px;
   font-size: 14px;
   font-weight: 600;
+}
+
+.board-title-edit {
+  border: none;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  height: 100%;
+
+  box-sizing: border-box;
+  padding-left: 28px;
+  font-size: 14px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.board-cmt-edit {
+  resize: none;
+  border: none;
+  outline: auto;
+  outline-color: rgb(175, 206, 193);
+  border-bottom: 1px solid var(--border);
+  height: 100%;
+
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .cer-edit {
@@ -328,4 +344,88 @@ i.fa-magnifying-glass {
 
 input[type="radio"] {
   accent-color: rgb(18, 144, 87);
+}
+
+/* 페이징바 */
+
+.page-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.page-area a {
+  box-sizing: border-box;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.page-area a > span {
+  box-sizing: border-box;
+  display: inline-block;
+  line-height: 30px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0px 5px;
+}
+
+.page-area a > span:hover {
+  border: 2px solid var(--main);
+  line-height: 25px;
+  color: var(--main);
+}
+
+.page-area a > i:hover {
+  color: var(--main);
+}
+
+.counsel-paging-left {
+  margin-right: 5px;
+}
+
+.counsel-paging-right {
+  margin-left: 5px;
+}
+
+.freeBoard-content {
+  padding: 10px 10px;
+  width: 100%;
+
+  resize: none;
+  border: none;
+  background-color: white;
+  font-size: 15px;
+  line-height: 25px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.freeBoard-content-edit {
+  outline-color: rgb(175, 206, 193);
+}
+
+.admin-main-board-detail {
+  padding: 20px 40px 20px 20px;
+  height: 500px;
+}
+
+.flex-start {
+  justify-content: flex-start !important;
+}
+
+.reply-header {
+  font-size: 16px !important;
+}
+
+.reply-detail {
+  font-size: 15px !important;
+}
+
+.light-color {
+  color: rgb(175, 168, 168);
 }

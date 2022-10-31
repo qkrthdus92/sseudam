@@ -29,7 +29,7 @@ List<ProVo>
         />
         <link
           rel="stylesheet"
-          href="<%=root1%>/resources/css/admin/pro/list.css?ver=3"
+          href="<%=root1%>/resources/css/admin/pro/list.css?ver=4"
         />
       </head>
       <body>
@@ -153,107 +153,107 @@ List<ProVo>
                 </div>
                 <%}%>
               </div>
-              <div id="page-area">
+              <div class="page-area">
                 <% if(status.equals("all") && search == null) { %>
                 <%if(pv.getStartPage()!=1) {%>
                 <a
                   href="<%=root1%>/admin/pro/list?status=all&pno=<%=pv.getStartPage()-1 %>"
                   class="btn btn-primary btn-sm"
-                  >이전</a
-                >
+                  ><i class="fa-solid fa-angles-left counsel-paging-left"></i
+                ></a>
                 <%}%> <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++)
                 {%>
                 <a
                   href="<%=root1%>/admin/pro/list?status=all&pno=<%=i %>"
                   class="btn btn-primary btn-sm"
-                  ><%=i %></a
-                >
+                  ><span><%=i %></span>
+                </a>
                 <%}%> <%if(pv.getEndPage() != pv.getMaxPage()) { %>
                 <a
                   href="<%=root1%>/admin/pro/list?status=all&pno=<%=pv.getEndPage()+1 %>"
                   class="btn btn-primary btn-sm"
-                  >다음</a
-                >
+                  ><i class="fa-solid fa-angles-right counsel-paging-right"></i
+                ></a>
                 <%}%> <%} %> <% if(status.equals("J") && search == null) { %>
                 <%if(pv.getStartPage()!=1) {%>
                 <a
                   href="<%=root1%>/admin/pro/list?status=J&pno=<%=pv.getStartPage()-1 %>"
                   class="btn btn-primary btn-sm"
-                  >이전</a
-                >
+                  ><i class="fa-solid fa-angles-left counsel-paging-left"></i
+                ></a>
                 <%}%> <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++)
                 {%>
                 <a
                   href="<%=root1%>/admin/pro/list?status=J&pno=<%=i %>"
                   class="btn btn-primary btn-sm"
-                  ><%=i %></a
+                  ><span><%=i %></span></a
                 >
                 <%}%> <%if(pv.getEndPage() != pv.getMaxPage()) { %>
                 <a
                   href="<%=root1%>/admin/pro/list?status=J&pno=<%=pv.getEndPage()+1 %>"
                   class="btn btn-primary btn-sm"
-                  >다음</a
-                >
+                  ><i class="fa-solid fa-angles-right counsel-paging-right"></i
+                ></a>
                 <%}%> <%} %> <% if(status.equals("W") && search == null) { %>
                 <%if(pv.getStartPage()!=1) {%>
                 <a
                   href="<%=root1%>/admin/pro/list?status=W&pno=<%=pv.getStartPage()-1 %>"
                   class="btn btn-primary btn-sm"
-                  >이전</a
-                >
+                  ><i class="fa-solid fa-angles-left counsel-paging-left"></i
+                ></a>
                 <%}%> <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++)
                 {%>
                 <a
                   href="<%=root1%>/admin/pro/list?status=W&pno=<%=i %>"
                   class="btn btn-primary btn-sm"
-                  ><%=i %></a
+                  ><span><%=i %></span></a
                 >
                 <%}%> <%if(pv.getEndPage() != pv.getMaxPage()) { %>
                 <a
                   href="<%=root1%>/admin/pro/list?status=W&pno=<%=pv.getEndPage()+1 %>"
                   class="btn btn-primary btn-sm"
-                  >다음</a
-                >
+                  ><i class="fa-solid fa-angles-right counsel-paging-right"></i
+                ></a>
                 <%}%> <%} %> <% if(status.equals("Q") && search == null) { %>
                 <%if(pv.getStartPage()!=1) {%>
                 <a
                   href="<%=root1%>/admin/pro/list?status=Q&pno=<%=pv.getStartPage()-1 %>"
                   class="btn btn-primary btn-sm"
-                  >이전</a
-                >
+                  ><i class="fa-solid fa-angles-left counsel-paging-left"></i
+                ></a>
                 <%}%> <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++)
                 {%>
                 <a
                   href="<%=root1%>/admin/pro/list?status=Q&pno=<%=i %>"
                   class="btn btn-primary btn-sm"
-                  ><%=i %></a
+                  ><span><%=i %></span></a
                 >
                 <%}%> <%if(pv.getEndPage() != pv.getMaxPage()) { %>
                 <a
                   href="<%=root1%>/admin/pro/list?status=Q&pno=<%=pv.getEndPage()+1 %>"
                   class="btn btn-primary btn-sm"
-                  >다음</a
-                >
+                  ><i class="fa-solid fa-angles-right counsel-paging-right"></i
+                ></a>
                 <%}%> <%} %> <% if(search!=null) { %> <%if(pv.getStartPage()!=1)
                 {%>
                 <a
                   href="<%=root1%>/admin/pro/list?search=<%=search %>&pno=<%=pv.getStartPage()-1 %>"
                   class="btn btn-primary btn-sm"
-                  >이전</a
-                >
+                  ><i class="fa-solid fa-angles-left counsel-paging-left"></i
+                ></a>
                 <%}%> <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++)
                 {%>
                 <a
                   href="<%=root1%>/admin/pro/list?search=<%=search %>&pno=<%=i %>"
                   class="btn btn-primary btn-sm"
-                  ><%=i %></a
+                  ><span><%=i %></span></a
                 >
                 <%}%> <%if(pv.getEndPage() != pv.getMaxPage()) { %>
                 <a
                   href="<%=root1%>/admin/por/list?search=<%=search %>&pno=<%=pv.getEndPage()+1 %>"
                   class="btn btn-primary btn-sm"
-                  >다음</a
-                >
+                  ><i class="fa-solid fa-angles-right counsel-paging-right"></i
+                ></a>
                 <%}%> <%} %>
               </div>
             </div>

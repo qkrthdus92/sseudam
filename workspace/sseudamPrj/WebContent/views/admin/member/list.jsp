@@ -135,54 +135,54 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
             </div>
             <%}%>
           </div>
-          <div id="page-area">
+          <div id="page-area" class="page-area">
           
           <% if(quitYn.equals("both") && search == null) { %>
             <%if(pv.getStartPage()!=1) {%>
-            <a href="<%=root1%>/admin/member/list?quitYn=both&pno=<%=pv.getStartPage()-1 %>" class="btn btn-primary btn-sm">이전</a>
+            <a href="<%=root1%>/admin/member/list?quitYn=both&pno=<%=pv.getStartPage()-1 %>" class="btn btn-primary btn-sm"><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
             <%}%>
 	          <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
-	            <a href="<%=root1%>/admin/member/list?quitYn=both&pno=<%=i %>" class="btn btn-primary btn-sm"><%=i %></a>
+	            <a href="<%=root1%>/admin/member/list?quitYn=both&pno=<%=i %>" class="btn btn-primary btn-sm"><span><%=i %></span> </a>
 	          <%}%>
 	          <%if(pv.getEndPage() != pv.getMaxPage()) { %>
-	           <a href="<%=root1%>/admin/member/list?quitYn=both&pno=<%=pv.getEndPage()+1 %>" class="btn btn-primary btn-sm">다음</a>
+	           <a href="<%=root1%>/admin/member/list?quitYn=both&pno=<%=pv.getEndPage()+1 %>" class="btn btn-primary btn-sm"><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
 	          <%}%>
           
           <%} %>
           <% if(quitYn.equals("N") && search == null) { %>
             <%if(pv.getStartPage()!=1) {%>
-            <a href="<%=root1%>/admin/member/list?quitYn=N&pno=<%=pv.getStartPage()-1 %>" class="btn btn-primary btn-sm">이전</a>
+            <a href="<%=root1%>/admin/member/list?quitYn=N&pno=<%=pv.getStartPage()-1 %>" class="btn btn-primary btn-sm"><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
             <%}%>
 	          <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
-	            <a href="<%=root1%>/admin/member/list?quitYn=N&pno=<%=i %>" class="btn btn-primary btn-sm"><%=i %></a>
+	            <a href="<%=root1%>/admin/member/list?quitYn=N&pno=<%=i %>" class="btn btn-primary btn-sm"><span><%=i %></span></a>
 	          <%}%>
 	          <%if(pv.getEndPage() != pv.getMaxPage()) { %>
-	           <a href="<%=root1%>/admin/member/list?quitYn=N&pno=<%=pv.getEndPage()+1 %>" class="btn btn-primary btn-sm">다음</a>
+	           <a href="<%=root1%>/admin/member/list?quitYn=N&pno=<%=pv.getEndPage()+1 %>" class="btn btn-primary btn-sm"><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
 	          <%}%>
           
           <%} %>
           <% if(quitYn.equals("Y") && search == null) { %>
             <%if(pv.getStartPage()!=1) {%>
-            <a href="<%=root1%>/admin/member/list?quitYn=Y&pno=<%=pv.getStartPage()-1 %>" class="btn btn-primary btn-sm">이전</a>
+            <a href="<%=root1%>/admin/member/list?quitYn=Y&pno=<%=pv.getStartPage()-1 %>" class="btn btn-primary btn-sm"><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
             <%}%>
 	          <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
-	            <a href="<%=root1%>/admin/member/list?quitYn=Y&pno=<%=i %>" class="btn btn-primary btn-sm"><%=i %></a>
+	            <a href="<%=root1%>/admin/member/list?quitYn=Y&pno=<%=i %>" class="btn btn-primary btn-sm"><span><%=i %></span></a>
 	          <%}%>
 	          <%if(pv.getEndPage() != pv.getMaxPage()) { %>
-	           <a href="<%=root1%>/admin/member/list?quitYn=Y&pno=<%=pv.getEndPage()+1 %>" class="btn btn-primary btn-sm">다음</a>
+	           <a href="<%=root1%>/admin/member/list?quitYn=Y&pno=<%=pv.getEndPage()+1 %>" class="btn btn-primary btn-sm"><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
 	          <%}%>
           
           <%} %>
           
           <% if(search!=null) { %>
             <%if(pv.getStartPage()!=1) {%>
-            <a href="<%=root1%>/admin/member/list?search=<%=search %>&pno=<%=pv.getStartPage()-1 %>" class="btn btn-primary btn-sm">이전</a>
+            <a href="<%=root1%>/admin/member/list?search=<%=search %>&pno=<%=pv.getStartPage()-1 %>" class="btn btn-primary btn-sm"><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
             <%}%>
 	          <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
-	            <a href="<%=root1%>/admin/member/list?search=<%=search %>&pno=<%=i %>" class="btn btn-primary btn-sm"><%=i %></a>
+	            <a href="<%=root1%>/admin/member/list?search=<%=search %>&pno=<%=i %>" class="btn btn-primary btn-sm"><span><%=i %></span></a>
 	          <%}%>
 	          <%if(pv.getEndPage() != pv.getMaxPage()) { %>
-	           <a href="<%=root1%>/admin/member/list?search=<%=search %>&pno=<%=pv.getEndPage()+1 %>" class="btn btn-primary btn-sm">다음</a>
+	           <a href="<%=root1%>/admin/member/list?search=<%=search %>&pno=<%=pv.getEndPage()+1 %>" class="btn btn-primary btn-sm"><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
 	          <%}%>
           
           <%} %>

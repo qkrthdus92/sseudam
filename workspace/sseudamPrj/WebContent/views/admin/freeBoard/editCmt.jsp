@@ -12,6 +12,9 @@ pageEncoding="UTF-8"%>
 	String status = (String)request.getAttribute("status");
 	String search = (String)request.getAttribute("search");
 	String searchType = (String)request.getAttribute("searchType");
+	
+	String cno = (String)request.getAttribute("cno");
+	
 	AdminFreeBoardVo freeBoardVo = (AdminFreeBoardVo)request.getAttribute("freeBoardVo");
 	List<AdminFreeBoardCmtVo> list = (List<AdminFreeBoardCmtVo>)request.getAttribute("freeBoardCmtList");
 
@@ -104,12 +107,13 @@ pageEncoding="UTF-8"%>
   <body>
     <%@ include file="/views/admin/common/menu.jsp"%>
     <main class="admin-main">
-      <form action="<%=root1%>/admin/freeBoard/edit" method="post">
+      <form action="<%=root1%>/admin/freeBoard/editCmt" method="post">
         <input type="hidden" name="bno" value="<%=bno%>">
         <input type="hidden" name="pno" value="<%=pno%>">
         <input type="hidden" name="status" value="<%=status%>">
         <input type="hidden" name="search" value="<%=search%>">
         <input type="hidden" name="searchType" value="<%=searchType%>">
+        <input type="hidden" name="cno" value="<%=cno%>">
         <header class="admin-main-header flex-between">
           <h1>자유게시판 수정</h1>
           <div class="btn-set">
@@ -126,8 +130,8 @@ pageEncoding="UTF-8"%>
           <div class="admin-main-wrapper">
             <div class="admin-main-board grid-col8">
               <div><%= freeBoardVo.getNo() %></div>
-              
-              <input class="board-title-edit" type="text" value="<%= freeBoardVo.getTitle()%>" name="title">
+              <div><%= freeBoardVo.getTitle()%></div>
+             
               <div><%= freeBoardVo.getNick() %></div>
   
               <div><%= freeBoardVo.getEnrollDate() %></div>
@@ -142,7 +146,7 @@ pageEncoding="UTF-8"%>
               </div>
             </div>
             <div class="admin-main-board-detail">
-              <textarea class="freeBoard-content freeBoard-content-edit" spellcheck="false" name="content" id="" cols="30" rows="17"><%= freeBoardVo.getContent() %></textarea>
+              <textarea class="freeBoard-content freeBoard-content-edit" spellcheck="false" name="content" id="" cols="30" rows="17" disabled><%= freeBoardVo.getContent() %></textarea>
             </div>
             <div class="reply-header">
               <i class="fa-solid fa-comment-dots"></i>
@@ -160,7 +164,11 @@ pageEncoding="UTF-8"%>
   
               <%for(int i=0; i<list.size(); i++) {%>
               <div><%= list.get(i).getNick() %></div>
+              <% if(list.get(i).getNo().equals(cno)) { %>
+              <textarea name="cmt" id="" cols="30" rows="1"  class="board-cmt-edit"><%= list.get(i).getCmt()%></textarea>
+              <%}else { %>
               <div class="flex-start"><%= list.get(i).getCmt()%></div>
+              <%} %>
               <div><%= list.get(i).getEnrollDate() %></div>
               <div><%= list.get(i).getModifyDate() %></div>
               <% if(list.get(i).getDeleteYn().equals("N")){ %>
@@ -168,8 +176,9 @@ pageEncoding="UTF-8"%>
               <%}else { %>
               <div>게시취소</div>
               <%} %>
-              <div><i class="fa-solid fa-pen-to-square icon-block"></i>
-                
+              <div>
+                <i class="fa-solid fa-pen-to-square icon-block"></i
+                >
               </div>
               <div>
                 <i class="fa-solid fa-trash-can icon-block"></i>

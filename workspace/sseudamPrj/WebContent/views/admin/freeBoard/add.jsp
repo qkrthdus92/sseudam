@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
+pageEncoding="UTF-8"%> <% String root1 = request.getContextPath(); String pno =
+(String)request.getAttribute("pno"); String status =
+(String)request.getAttribute("status"); String search =
+(String)request.getAttribute("search"); String searchType =
+(String)request.getAttribute("searchType"); %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,7 +21,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/common/component.css?ver=3"
+      href="<%=root1%>/resources/css/admin/common/component.css?ver=5"
     />
     <style>
       .grid-col3 {
@@ -44,11 +49,6 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
         align-items: center;
       }
 
-      .admin-main-board-detail {
-        padding: 20px 20px;
-        height: 500px;
-      }
-
       input {
         border: none;
         outline: none;
@@ -56,48 +56,52 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
         margin-left: 20px;
         font-size: 15px;
       }
-
-      textarea {
-        border: none;
-        outline: none;
-      }
     </style>
   </head>
   <body>
     <%@ include file="/views/admin/common/menu.jsp"%>
     <main class="admin-main">
-      <header class="admin-main-header flex-between">
-        <h1>자유게시판 작성</h1>
-        <div class="btn-set">
-          <input
-            class="cancel-btn"
-            type="button"
-            value="취소"
-            onclick="history.back()"
-          />
-          <input class="save-btn" type="submit" value="저장" />
-        </div>
-      </header>
-      <section class="admin-main-section">
-        <div class="admin-main-wrapper">
-          <div class="admin-main-board grid-col3">
-            <div>제목</div>
-            <div><input type="text" placeholder="제목을 입력해주세요" /></div>
-            <div>관리자</div>
+      <form action="<%=root1%>/admin/freeBoard/write" method="post">
+        <header class="admin-main-header flex-between">
+          <h1>자유게시판 작성</h1>
+          <div class="btn-set">
+            <input
+              class="cancel-btn"
+              type="button"
+              value="취소"
+              onclick="location.href='<%=root%>/admin/freeBoard/list?pno=<%=pno%>&status=<%=status%>&search=<%=search%>&searchType=<%=searchType%>'"
+            />
+            <input class="save-btn" type="submit" value="저장" />
           </div>
-          <div class="admin-main-board-detail">
-            <div>
-              <textarea
-                name=""
-                id=""
-                cols="30"
-                rows="10"
-                placeholder="내용을 입력해주세요"
-              ></textarea>
+        </header>
+        <section class="admin-main-section">
+          <div class="admin-main-wrapper">
+            <div class="admin-main-board grid-col3">
+              <div>제목</div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="제목을 입력해주세요"
+                  name="title"
+                />
+              </div>
+              <div>관리자</div>
+            </div>
+            <div class="admin-main-board-detail">
+              <div>
+                <textarea
+                  class="freeBoard-content freeBoard-content-edit"
+                  name="content"
+                  id=""
+                  cols="30"
+                  rows="17"
+                  placeholder="내용을 입력해주세요"
+                ></textarea>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </form>
     </main>
   </body>
 </html>
