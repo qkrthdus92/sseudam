@@ -3,20 +3,22 @@
 	pageEncoding="UTF-8"%>
 <%
 	String root1 = request.getContextPath();
-	HealingVo vo = (HealingVo) request.getAttribute("nyamDetailVo");
+	HealingVo vo = (HealingVo) request.getAttribute("insideDetailVo");
 	
 	int cn = Integer.parseInt(vo.getcNum());
 	String yn = vo.getDeleteYn();
 	
-	String check1 = "";
-	String check2 = "";
-	String check3 = "";
+	String check4 = "";
+	String check5 = "";
+	String check6 = "";
+	String check7 = "";
 	String checkY = "";
 	String checkN = "";
 	
-	if(cn == 1){check1 = "checked";}
-	else if(cn == 2){check2 = "checked";}
-	else{check3 = "checked";}
+	if(cn == 4){check4 = "checked";}
+	else if(cn == 5){check5 = "checked";}
+	else if(cn == 6){check6 = "checked";}
+	else{check7 = "checked";}
 	
 	if(yn.equals("N")){checkN = "checked";}
 	else{checkY = "checked";}
@@ -25,7 +27,7 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>냠냠 수정</title>
+<title>뒹굴 수정</title>
 <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
 <link rel="stylesheet"
 	href="<%=root1%>/resources/css/common/variables.css?ver=2" />
@@ -75,7 +77,7 @@
 	<form method="post" enctype="multipart/form-data">
 		<main class="admin-main">
 			<header class="admin-main-header flex-between">
-				<h1>혼자서 냠냠 - 정보 수정</h1>
+				<h1>안에서 뒹굴뒹굴 - 정보수정</h1>
 				<div class="btn-set">
 					<input class="cancel-btn" type="button" value="취소" onclick="history.back()"> 
 					<input class="save-btn" type="submit" value="저장" onclick="javascript: form.action='';">
@@ -90,7 +92,7 @@
 						</div>
 						<div></div>
 
-						<div>이름</div>
+						<div>제목</div>
 						<div>
 							<input class="upload-name" type="text" name="name" value="<%=vo.getTitle()%>" required>
 						</div>
@@ -98,27 +100,34 @@
 
 						<div>타입</div>
 						<div>
-							<input type="radio" name="cNum" value="1" <%=check1%>>맛집 
-							<input type="radio" name="cNum" value="2" <%=check2%>>카페 
-							<input type="radio" name="cNum" value="3" <%=check3%>>술집
+							<input type="radio" name="cNum" value="4" <%=check4%>>음악 
+							<input type="radio" name="cNum" value="5" <%=check5%>>영화 
+							<input type="radio" name="cNum" value="6" <%=check6%>>명상
+							<input type="radio" name="cNum" value="7" <%=check7%>>책
 						</div>
 						<div></div>
 
-						<div>주소</div>
+						<div>상세정보1</div>
 						<div>
-							<input class="upload-name" type="text" name="addr" value="<%=vo.getInfoA()%>">
+							<input class="upload-name" type="text" name="infoA" value="<%=vo.getInfoA()%>">
 						</div>
 						<div></div>
 
-						<div>전화번호</div>
+						<div>상세정보2</div>
 						<div>
-							<input class="upload-name" type="text" name="phone" value="<%=vo.getInfoB()%>">
+							<input class="upload-name" type="text" name="infoB" value="<%=vo.getInfoB()%>">
 						</div>
 						<div></div>
 
 						<div>링크</div>
 						<div>
-							<input class="upload-name" type="text" name="link" value="<%=vo.getLink()%>">
+							<input class="upload-name" type="text" name="link" value="<%=vo.getLink()%>" required>
+						</div>
+						<div></div>
+						
+						<div>스트레스</div>
+						<div>
+							<input class="upload-name" type="number" name="stress" value="<%=vo.getStress()%>" required>
 						</div>
 						<div></div>
 
@@ -130,7 +139,7 @@
 						</div>
 						<div></div>
 						
-						<div>링크</div>
+						<div>등록일</div>
 						<div>
 							<input class="upload-name" type="text" name="writeDate" value="<%=vo.getWriteDate()%>" readonly>
 						</div>
@@ -143,7 +152,7 @@
 						</div>
 						<div></div>
 						
-						<div><input class="save-btn" type="submit" value="삭제" onclick="javascript: form.action='<%=root1%>/admin/nyam/delete';"></div>
+						<div><input class="save-btn" type="submit" value="삭제" onclick="javascript: form.action='<%=root1%>/admin/inside/delete';"></div>
 						<div></div>
 						<div></div>
 					</div>

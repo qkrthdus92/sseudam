@@ -135,7 +135,7 @@ pageEncoding="UTF-8"%> <% String root2 = request.getContextPath();%>
       </div>
     </div>
     <div class="main-footer-logo">
-      <img src="/sseudamPrj/resources/img/header/logo2.png" alt="" />
+      <img src="<%=root2 %>/resources/img/header/logo2.png" alt="" />
       <div>(주)쓰담쓰담</div>
       <div class="main-footer-sns">
         <a href=""

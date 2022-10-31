@@ -14,8 +14,8 @@ import com.kh.sseudam.admin.healing.service.AdminHealingService;
 import com.kh.sseudam.common.PageVo;
 import com.kh.sseudam.healing.vo.HealingVo;
 
-@WebServlet(urlPatterns = "/admin/nyam")
-public class AdminNyamController extends HttpServlet{
+@WebServlet(urlPatterns = "/admin/inside")
+public class AdminInsideController extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,7 +33,7 @@ public class AdminNyamController extends HttpServlet{
         
         //type 값
         String type = req.getParameter("type");
-        int tNum = 1;
+        int tNum = 4;
               
         if(type == null) {
             type = "&type=" + tNum; 
@@ -59,8 +59,8 @@ public class AdminNyamController extends HttpServlet{
         int endPage;
 
         //페이지 번호 받기 + null 처리
-        listCount = new AdminHealingService().NyamCount(sNo, tNum, search);
-        
+        listCount = new AdminHealingService().InsideCount(sNo, tNum, search);
+
         String pno = req.getParameter("pno");
         if(pno == null) {
             currentPage = 1;
@@ -90,20 +90,19 @@ public class AdminNyamController extends HttpServlet{
         pv.setStartPage(startPage);
         pv.setEndPage(endPage);               
         
-        List<HealingVo> list = new AdminHealingService().NyamList(pv,sNo, tNum, search);    
+        List<HealingVo> list = new AdminHealingService().InsideList(pv,sNo, tNum, search);    
         
         //강제 로그인 -> 추후 삭제
         AdminVo vo = new AdminVo();
         vo.setId("1");
         vo.setPwd("1");
         req.getSession().setAttribute("loginAdmin", vo);
-        
                
         req.setAttribute("type", type);
         req.setAttribute("sort", sort);
         req.setAttribute("pv", pv);
-        req.setAttribute("nyamList", list);
-        req.getRequestDispatcher("/views/admin/yamyam/list.jsp").forward(req, resp);
+        req.setAttribute("insideList", list);
+        req.getRequestDispatcher("/views/admin/wallow/list.jsp").forward(req, resp);
  
     }
 }
