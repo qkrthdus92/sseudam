@@ -15,25 +15,27 @@ import com.kh.sseudam.pro.vo.ProMemberJoinVo;
 
 public class ProDao {
 
-	public int proInsertOne(Connection conn, ProJoinPage1Vo page1vo, ProJoinPage2Vo page2vo, ProJoinPage3Vo page3vo) {
+	//전문가 회원가입 + 프로필 사진 첨부파일
+	public int proInsertOne(Connection conn, ProJoinPage1Vo proVo1, ProJoinPage2Vo proVo2, ProJoinPage3Vo proVo3) {
 
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String sql = "INSERT INTO PRO_MEMBER (NO, ID, NAME, PWD, GENDER, PHONE, EMAIL, EDUCATION, COUNSEL_TYPE_NO) VALUES ( SEQ_PRO_MEMBER_NO.NEXTVAL, ? , ? , ? , ? , ? , ? , ? , ? )";
+		String sql = "INSERT INTO PRO_MEMBER (NO, ID, NAME, PWD, GENDER, PHONE, EMAIL, EDUCATION, COUNSEL_TYPE_NO, IMG) VALUES ( SEQ_PRO_MEMBER_NO.NEXTVAL, ? , ? , ? , ? , ? , ? , ? , ? ,?)";
 		
 		try {
 			//전문가 정보
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, page1vo.getId());
-			pstmt.setString(2, page1vo.getName());
-			pstmt.setString(3, page1vo.getPwd());
-			pstmt.setString(4, page1vo.getGender());
-			pstmt.setString(5, page1vo.getPhone());
-			pstmt.setString(6, page1vo.getEmail());
-			pstmt.setString(7, page2vo.getEducation());
-			pstmt.setString(8, page3vo.getCounselType());
+			pstmt.setString(1, proVo1.getId());
+			pstmt.setString(2, proVo1.getName());
+			pstmt.setString(3, proVo1.getPwd());
+			pstmt.setString(4, proVo1.getGender());
+			pstmt.setString(5, proVo1.getPhone());
+			pstmt.setString(6, proVo1.getEmail());
+			pstmt.setString(7, proVo2.getEducation());
+			pstmt.setString(8, proVo3.getCounselType());
+			pstmt.setString(9, proVo3.getImg());
 			
 			result = pstmt.executeUpdate();
 
@@ -47,21 +49,22 @@ public class ProDao {
 		return result;
 	}
 	
-	public int projoinlicense(Connection conn, ProJoinPage2Vo page2vo) {
+	//전문가 자격정보 + 자격증 첨부파일
+	public int projoinlicense(Connection conn, ProJoinPage2Vo proVo2) {
+		String prosql = "INSERT INTO CERTIFICATE (NO , PRO_MEMBER_NO , CERTIFICATE_NAME , CERTIFICATE_NUM , IMG_PATH) VALUES ( SEQ_CERTIFICATE_NO.NEXTVAL , (SELECT NO FROM PRO_MEMBER ORDER BY NO DESC OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY) , ? , ? , ? )";
 
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
-		String prosql = "INSERT INTO CERTIFICATE VALUES ( SEQ_CERTIFICATE_NO.NEXTVAL , (SELECT NO FROM PRO_MEMBER ORDER BY NO DESC OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY) , ? , ? , ? )";
 		
 		try {
 			
 			//전문가 자격정보
 			pstmt = conn.prepareStatement(prosql);
 			
-			pstmt.setString(1, page2vo.getCertificateName());
-			pstmt.setString(2, page2vo.getCertificateNum());
-			pstmt.setString(3, page2vo.getImgPath());
+			pstmt.setString(1, proVo2.getCertificateName());
+			pstmt.setString(2, proVo2.getCertificateNum());
+			//전문가 자격증 파일 업로드
+			pstmt.setString(3, proVo2.getImgPath());
 			
 			result = pstmt.executeUpdate();
 			
@@ -174,5 +177,6 @@ public class ProDao {
 		
 		return isProIdDup;
 	}
+
 	
 }

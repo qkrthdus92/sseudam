@@ -41,9 +41,10 @@ public class MemberDao {
 		return result;
 	}
 	
+	//일반회원 로그인
 	public MemberVo selectOne(Connection conn, MemberVo vo) {
 			
-		String sql = "SELECT NO , ID , PWD , NAME , NICK , PHONE , EMAIL , TEST_SCORE , JOIN_DATE , QUIT_YN , MODIFY_DATE FROM MEMBER WHERE ID = ? AND PWD = ?";
+		String sql = "SELECT NO , ID , PWD , NAME , NICK , PHONE , EMAIL , TEST_SCORE , JOIN_DATE , QUIT_YN , MODIFY_DATE FROM MEMBER WHERE ID = ? AND PWD = ? AND QUIT_YN = 'Y'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

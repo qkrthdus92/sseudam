@@ -1,3 +1,4 @@
+<%@page import="com.kh.sseudam.pro.vo.ProJoinPage1Vo"%>
 <%@page import="com.kh.sseudam.counsel.pro.vo.ProVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -81,11 +82,9 @@
 
     .attached-file-btn{
         color: rgba(253, 121, 0, 1);
-        border: 1px solid rgba(253, 121, 0, 1);
+        border: 1px solid white;
         font-size: 13px;
-        border-radius: 15px;
-        background-color: white;
-        width: 65px;
+        width: 73px;
         height: 25px;
     }
 
@@ -118,7 +117,8 @@
 </style>
 </head>
 <body>
-
+	<% ProJoinPage1Vo proVo1 = (ProJoinPage1Vo)request.getAttribute("proVo1"); %>
+	
     <%@ include file="/views/common/header.jsp" %>
 
 	<nav>
@@ -126,7 +126,16 @@
         <h1 align="center">회원가입</h1>
         <h4 align="center">이곳은 쓰담쓰담에서 상담사로 활동하실 분들을 위한 회원가입 페이지 입니다.</h4>
 
-	<form action="/sseudam/join/proJoinPage=1" method="post"> 
+	<form action="/sseudam/join/proJoinPage?page=2" method="post" enctype="multipart/form-data">
+	
+		<input type="hidden" name="memberId" value="<%= proVo1.getId() %>">
+		<input type="hidden" name="memberPwd1" value="<%= proVo1.getPwd() %>">
+		<input type="hidden" name="memberName" value="<%= proVo1.getName() %>">
+		<input type="hidden" name="gender" value="<%= proVo1.getGender() %>">
+		<input type="hidden" name="phone" value="<%= proVo1.getPhone() %>">
+		<input type="hidden" name="email" value="<%= proVo1.getEmail() %>">
+		
+	
         <div class="join-area">
             
             <div class="join-step">
@@ -142,7 +151,7 @@
 
             <div class="join-0nd">
                 <div>최종학력</div>
-                <div><input type="text" name="education" required></div>
+                <div><input type="text" name="education" placeholder="예) ㅇㅇㅇ대학교 석사" required></div>
             </div>
 
             <div class="join-1nd">
@@ -156,15 +165,27 @@
             <div class="join-3nd">
                 <div>
                     증빙서류
-                    <input type="button" class="attached-file-btn" name="imgPath" value="첨부파일" onclick="location.href=''">
+                    <input type="file" id="cerFile" class="attached-file-btn" name="imgPath" value="첨부파일">
                 </div>
                 <div>
-                    <div><input type="text" name="attached-file-name"></div>
+                    <div>
+                    <input type="text" id="cer-file-upload-name" name="attached-file-name">
+					<script type="text/javascript">
+				      var jq = jQuery.noConflict();
+				      
+				      jq("#cerFile").on('change', function() {
+				         var fileName = jq("#cerFile").val();
+				         jq("#cer-file-upload-name").val(fileName);
+				      });
+				   </script>
+                    </div>
                 </div>
             </div>
             <div class="license">
                 <div class="license-header">&nbsp;자격증 목록</div>
-                <div class="license-list"></div>
+               	<div>자격증 이름</div>
+               	<div>자격증 번호</div>
+               	<div>증빙서류</div>
             </div>
             
             <div class="next">
@@ -175,7 +196,7 @@
         </div>
 	</form>
 
-    </nav>>
+    </nav>
 
     <%@ include file="/views/common/footer.jsp" %>
 

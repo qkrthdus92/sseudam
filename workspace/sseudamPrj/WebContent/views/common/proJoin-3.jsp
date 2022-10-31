@@ -1,3 +1,5 @@
+<%@page import="com.kh.sseudam.pro.vo.ProJoinPage1Vo"%>
+<%@page import="com.kh.sseudam.pro.vo.ProJoinPage2Vo"%>
 <%@page import="com.kh.sseudam.counsel.pro.vo.ProVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -115,13 +117,6 @@
         margin-left: 20px;
         margin-top: 12px;
     }
-
-    input[type="button"]{
-        border: none;
-        background-color: white;
-        margin-top: 70%;
-        margin-left: 10px;
-    }
     
     #profile-button-left{
         border-right: 1px solid black;
@@ -136,6 +131,7 @@
     }
 
     #profile-button-right-province > label{
+    
         font-size: 13px;
         margin-left: 10px;
     }
@@ -171,10 +167,17 @@
         margin-left: 20px;
         margin-top: 5px;
     }
+    
+    #profile-img-btn{
+    	height: 50px;
+    	border: 1px solid red;
+    }
 
 </style>
 </head>
 <body>
+	<% ProJoinPage1Vo proVo1 = (ProJoinPage1Vo)request.getAttribute("proVo1"); %>
+	<% ProJoinPage2Vo proVo2 = (ProJoinPage2Vo)request.getAttribute("proVo2"); %>
 
     <%@ include file="/views/common/header.jsp" %>
 
@@ -183,7 +186,20 @@
         <h1 align="center">회원가입</h1>
         <h4 align="center">이곳은 쓰담쓰담에서 상담사로 활동하실 분들을 위한 회원가입 페이지 입니다.</h4>
 
-	<form action="/sseudam/join/proJoinPage=1" method="post"> 
+	<form action="/sseudam/join/proJoinPage?page=3" method="post" enctype="multipart/form-data"> 
+	
+		<input type="hidden" name="memberId" value="<%= proVo1.getId() %>">
+		<input type="hidden" name="memberPwd1" value="<%= proVo1.getPwd() %>">
+		<input type="hidden" name="memberName" value="<%= proVo1.getName() %>">
+		<input type="hidden" name="gender" value="<%= proVo1.getGender() %>">
+		<input type="hidden" name="phone" value="<%= proVo1.getPhone() %>">
+		<input type="hidden" name="email" value="<%= proVo1.getEmail() %>">
+		
+		<input type="hidden" name="education" value="<%= proVo2.getEducation() %>">
+		<input type="hidden" name="certificateName" value="<%= proVo2.getCertificateName() %>">
+		<input type="hidden" name="certificateNum" value="<%= proVo2.getCertificateNum() %>">
+		<input type="hidden" name="cerImg" value="<%= proVo2.getImgPath() %>">
+	
         <div class="join-area">
 
             <div class="join-step">
@@ -210,8 +226,8 @@
                             <img src="<%=root%>/resources/img/join/프로필.png" id="profile">
                         </div>
                         <div id="profile-img-btn">
-                            <input type="button" id="profile-img" value="사진 선택" name="img" onclick="location.href=''">
-                            <input type="button" id="profile-img-delet" value="삭제" onclick="location.href=''">
+                            <input type="file" id="profile-img" value="사진 선택" name="img">
+                            <input type="button" value="삭제">
                         </div>
                 </div>
                 <div id="profile-button-left">소개</div>
