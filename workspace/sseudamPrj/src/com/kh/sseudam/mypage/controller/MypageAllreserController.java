@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.sseudam.common.PageVo;
+import com.kh.sseudam.member.vo.MemberVo;
 import com.kh.sseudam.mypage.board.vo.MypageAllreserVo;
 import com.kh.sseudam.mypage.service.MypageAllreserService;
 import com.kh.sseudam.mypage.service.MypageReserService;
@@ -19,11 +21,11 @@ public class MypageAllreserController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		HttpSession s = req.getSession();
-//		
-//		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
-//		
-//		String num = loginMember.getNo();
+		HttpSession s = req.getSession();
+		
+		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
+		
+		String num = loginMember.getNo();
 		
 		//페이징 처리
 		int listCount; 			//총 ㅐ시글 갯수
@@ -34,7 +36,7 @@ public class MypageAllreserController extends HttpServlet {
 		int startPage;			//페이징바 시작 페이지
 		int endPage;			//페이징바 종료 페이지
 		
-		listCount = new MypageReserService().selectCount("1");//회원번호 임의지정
+		listCount = new MypageReserService().selectCountAll(num);
 		currentPage = Integer.parseInt(req.getParameter("pno")) ;
 		pageLimit = 5;   //임의로 정함
 		boardLimit = 10; //임의로 정함
@@ -58,7 +60,7 @@ public class MypageAllreserController extends HttpServlet {
 		  pv.setStartPage(startPage);
 		  pv.setEndPage(endPage);
 		
-		List<MypageAllreserVo> MypageAllreserList = new MypageAllreserService().selectList(pv,"1");
+		List<MypageAllreserVo> MypageAllreserList = new MypageAllreserService().selectList(pv,num);
 		
 		req.setAttribute("pv", pv);
 		req.setAttribute("MypageAllreserList", MypageAllreserList);

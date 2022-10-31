@@ -4,10 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.counsel.pro.vo.ProVo;
 import com.kh.sseudam.member.vo.MemberVo;
+import com.kh.sseudam.mypage.board.vo.MypageAllreserVo;
+import com.kh.sseudam.mypage.board.vo.MypageFinreserVo;
 import com.kh.sseudam.pro.vo.ProMemberJoinVo;
 
 public class MypageEditDao {
@@ -44,7 +48,6 @@ public class MypageEditDao {
 	//일반회원 조회
 	public MemberVo selectOne(Connection conn, MemberVo vo) {
 		
-		System.out.println("dao");
 		String sql = "SELECT NO ,ID ,PWD ,NAME,NICK ,PHONE ,EMAIL ,TEST_SCORE,JOIN_DATE ,QUIT_YN ,MODIFY_DATE FROM MEMBER WHERE ID = ? AND PWD = ? AND QUIT_YN = 'N'";
 		
 		PreparedStatement pstmt = null;
@@ -190,6 +193,62 @@ public class MypageEditDao {
 	return loginMember;
 		
 	}
+
+	//전문가 별점 평균 조회
+	public static int proUpdateStar(Connection conn, String num) {
+		
+		String sql="SELECT AVG (STAR) FROM PRO_APPOINT WHERE PRO_NO=?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("STAR");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+		
+	}
+
+	public int quit(Connection conn, String no) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = "UPDATE MEMBER SET QUIT_YN ='Y' WHERE NO = ?";
+	
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+
 	
 	
 	

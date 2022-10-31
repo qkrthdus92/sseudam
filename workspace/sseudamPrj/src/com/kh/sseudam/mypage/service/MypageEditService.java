@@ -6,6 +6,7 @@ import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.counsel.pro.vo.ProVo;
 import com.kh.sseudam.member.dao.MemberDao;
 import com.kh.sseudam.member.vo.MemberVo;
+import com.kh.sseudam.mypage.board.vo.MypageFinreserVo;
 import com.kh.sseudam.mypage.dao.MypageEditDao;
 import com.kh.sseudam.pro.vo.ProMemberJoinVo;
 
@@ -50,6 +51,40 @@ public class MypageEditService {
 		JDBCTemplate.close(conn);
 		return updatedMember;
 		
+	}
+
+	//별점 평균 조회
+	public int updatestar(String num) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MypageEditDao().proUpdateStar(conn, num);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+		
+	}
+
+	//회원탈퇴
+	public int quit(String no) {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result= new MypageEditDao().quit(conn, no);
+		
+		if(result ==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	
+	
 	}
 	
 }//class

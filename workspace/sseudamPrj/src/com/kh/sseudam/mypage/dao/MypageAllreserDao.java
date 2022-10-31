@@ -54,6 +54,7 @@ public class MypageAllreserDao {
 				vo.setPay(pay);
 				vo.setPay_date(pay_date);
 				vo.setStar(star);
+				vo.setPay_method(pay_method);
 				
 				voList.add(vo);
 			}

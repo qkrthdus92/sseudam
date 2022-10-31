@@ -11,8 +11,9 @@ public class MypageFinreserVo {
 	private String pay_date;
 	private String star;
 	private String name;
+	private String img;
 	public MypageFinreserVo(String a_no, String member_no, String pro_no, String advice_date, String pay_method,
-			String pay, String pay_date, String star, String name) {
+			String pay, String pay_date, String star, String name, String img) {
 		super();
 		this.a_no = a_no;
 		this.member_no = member_no;
@@ -23,6 +24,7 @@ public class MypageFinreserVo {
 		this.pay_date = pay_date;
 		this.star = star;
 		this.name = name;
+		this.img = img;
 	}
 	public MypageFinreserVo() {
 		super();
@@ -81,13 +83,18 @@ public class MypageFinreserVo {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	@Override
 	public String toString() {
 		return "MypageFinreserVo [a_no=" + a_no + ", member_no=" + member_no + ", pro_no=" + pro_no + ", advice_date="
 				+ advice_date + ", pay_method=" + pay_method + ", pay=" + pay + ", pay_date=" + pay_date + ", star="
-				+ star + ", name=" + name + "]";
+				+ star + ", name=" + name + ", img=" + img + "]";
 	}
-	
 	
 	
 	

@@ -1,5 +1,10 @@
+<%@page import="com.kh.sseudam.mypage.board.vo.MypageFinreserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%-- <%
+	int updatestar = (int)request.getAttribute("updatestar");	
+%> --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -203,9 +208,9 @@
             <div id="leftftop">
                 <div><h1 align="center">마이페이지</h1></div>
                 <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
-                <div><h2 align="center"><%= proLoginMember.getName() %></h2></div>
-                <div><h3 align="center">나의 별점 ★★★★☆</h3></div>
-                <div id="ment"><%= proLoginMember.getId() %>님 좋은 하루되세요.</div>
+                <div><h2 align="center"><%-- <%= proLoginMember.getName() %> --%></h2></div>
+                <div><h3 align="center">나의 별점 <label id="starupdate"></label> 점</h3></div>
+                <div id="ment"><%-- <%= proLoginMember.getId() %> --%>님 좋은 하루되세요.</div>
             </div>
             <div id="leftbot">
                 <table>
@@ -312,6 +317,16 @@
 	}
 
 </script>
+
+<!-- <script type="text/javascript">
+	$.ajax({
+		url:"/sseudam/mypage/starupdate",
+		method:"get",
+		success: function(x){
+			$('#starupdate').text(x);
+		}
+	});
+</script> -->
 
 </body>
 </html>

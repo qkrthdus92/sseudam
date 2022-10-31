@@ -7,12 +7,14 @@
 	List<MypageProMoneyListVo> MypageProMoneyList = (List<MypageProMoneyListVo>)request.getAttribute("MypageProMoneyList");	
  	PageVo pv = (PageVo)request.getAttribute("pv");
  	List<MypageProMoneyListVo> MypageProPaySum = (List<MypageProMoneyListVo>)request.getAttribute("MypageProPaySum");
+
 %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
 
 #wrap{
@@ -233,8 +235,15 @@
 	}
 	#popup-text{
 		font-size: 20px;
-		margin-top: 80px;
+        margin-top: 10px;
 	}
+	#withdraw{
+		font-size: 20px;
+        margin-top: 10px;
+	}
+    #pop_text2{
+        margin-top: 50px;
+    }
     #moneyinfo{
         margin-top: 15px;
         margin-left: 150px;
@@ -263,6 +272,11 @@
         font-size: 30px;
     }
     #moneyinfotext3{
+        margin-top: 10px;
+        margin-left: 60px;
+        font-size: 30px;
+    }
+    #moneyinfotext4{
         margin-left: 70px;
         cursor: pointer;
     } 
@@ -330,8 +344,8 @@
                 <div id="moneyinfotext0">아이디님의 출금 가능 금액 ▼</div>
                 <div></div>
                 <div id="moneyinfotext2"><%=MypageProPaySum.get(0).getPay_sum()%>원</div>
-                <div id="moneyinfotext2">100,000원</div>
-                <div id="moneyinfotext3" onclick="showPopup(true)" >출금하기 > </div>
+                <div id="moneyinfotext3">300000원</div>
+                <div id="moneyinfotext4" onclick="showPopup(true)" >출금하기 > </div>
         </div>
 
         <div id="moneylist">
@@ -370,20 +384,39 @@
 
     <div id="popup" class="hide">
         <div class="content">
-              <div class="popup-head">                     
+              <div class="popup-head">
                   <div  ><img id="popup-logo" src="/sseudam/resources/img/header/logo.png" alt=""></div>
-                  <div class="head-title">&nbsp;&nbsp;&nbsp;&nbsp;수익금 출금을 위해 <br> 비밀번호를 입력해주세요.</div>
+                  <div class="head-title">&nbsp;&nbsp;&nbsp;&nbsp;출금하시겠습니까?</div>
               </div>
               <div class="popup-body">
-                  <label id="popup-text"> 비밀번호 :</label>
-                  <input id="popup-text" type="password">
+                  <div>
+                      <div>
+                          <label id="popup-text"> 은행 :</label>
+                            <select id="pop_text2">
+                              <option value="신한">신한</option>
+                              <option value="국민">국민</option>
+                              <option value="우리">우리</option>
+                              <option value="기업">기업</option>
+                              <option value="농협">농협</option>
+                              <option value="카카오뱅크">카카오뱅크</option>
+                              <option value="SC제일">SC제일</option>
+                              <option value="케이뱅크">케이뱅크</option>
+                            </select>
+                      </div>  
+                      <label id="popup-text"> 계좌번호 :</label>
+                      <input id="popup-text" type="text">
+                      <br>
+                     	<label id="popup-text"> 출금금액 :</label>
+                      	<input id="withdraw" type="text" name="withdraw">
+                  </div>
               </div>
               <div class="popup-foot">
-                  <button class="pop-btn" id="confirm" onclick="location.href='/sseudam/views/mypage/withdraw.jsp';" >확인</button> 
-                  <button class="pop-btn" id="close" onclick="closePopup()" >창 닫기</button>
+                  <!-- 출금완료페이지로 이동 -->                         
+                  <button class="pop-btn" id="confirm" onclick="withdraw()" >확인</button> 
+                  <button class="pop-btn" id="close" onclick="location.href='/sseudam/mypage/promoneycheck?pno=1';" >창 닫기</button>
               </div>
         </div>
-      </div>
+    </div>
 </div>
 <%@ include file="/views/common/footer.jsp" %>	
 
@@ -406,6 +439,42 @@
 	}
 
 </script>
+
+
+ <script type="text/javascript">
+ 
+ function withdraw(){
+	 location.reload();
+	 alert("출금완료!");
+	 $('#withdraw2').text('0원');
+	 
+ };
+
+/* 
+   function withdraw(){
+		const change = null;
+		const change = document.getElementById('#moneyinfotext3');
+		change.Text ='0원'
+		alert("출금완료");
+	}   */
+ 
+ 
+/*   	 function withdraw(){
+		const withdraw = document.getElementById('withdraw').value;
+		$.ajax({
+			type: "get",
+			url:"/sseudam/mypage/withdraw", 
+			data:  {"withdraw" : withdraw},
+			success:function(){
+				location.reload();
+				alert("출금완료!");
+				$('#withdraw2').replaceWith("0원");
+			}
+		 });
+	}   */
+
+</script> 
+
 
 </body>
 </html>

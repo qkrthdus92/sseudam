@@ -183,7 +183,7 @@
 	    <div id="boardinfo">
 	       <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
 	       <div id="hm1">나의 좋아요</div>
-	       <div id="hm"><%= MypageLikeList.size() %>개</div>
+	       <div id="hm"><%=pv.getListCount() %>개</div>
 	       <div id="hm1"></div>
 	       <div id="hm"></div>
 	    </div>

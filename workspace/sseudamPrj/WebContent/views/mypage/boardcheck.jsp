@@ -161,7 +161,7 @@
 		       <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
 		       <div id="hm1">총 게시글</div>
 		       
-		       <div id="hm"><%= MypageBoardList.size() %>개</div>
+		       <div id="hm"><%=pv.getListCount() %>개</div>
 		      
 		    </div>
 		

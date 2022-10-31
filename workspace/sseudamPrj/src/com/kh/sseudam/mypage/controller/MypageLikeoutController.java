@@ -36,7 +36,7 @@ public class MypageLikeoutController extends HttpServlet{
 		int startPage;			//페이징바 시작 페이지
 		int endPage;			//페이징바 종료 페이지
 
-		listCount = new MypageLikeoutService().selectCount(num);//회원번호 임의지정
+		listCount = new MypageLikeoutService().selectCount(num);
 		currentPage = Integer.parseInt(req.getParameter("pno")) ;
 		pageLimit = 5;   //임의로 정함
 		boardLimit = 10; //임의로 정함
