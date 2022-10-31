@@ -437,11 +437,14 @@ public class AdminHealingDao {
                 vo.setNo(no);                
                 vo.setcNum(cNum);                                                        
                 vo.setTitle(title);
+                
+                System.out.println(infoA);
+                System.out.println(infoB);
 
-                if(infoA == null) {vo.setInfoA("-");}
+                if(infoA == null) {vo.setInfoA("");}
                 else{vo.setInfoA(infoA);}
                 
-                if(infoB == null) {vo.setInfoB("-");}
+                if(infoB == null) {vo.setInfoB("");}
                 else{vo.setInfoB(infoB);}
                 
                 vo.setLink(link);
