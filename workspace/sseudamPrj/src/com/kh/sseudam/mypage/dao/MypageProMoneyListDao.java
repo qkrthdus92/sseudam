@@ -151,4 +151,34 @@ public class MypageProMoneyListDao {
 		
 	}
 
+	public static int updatesum(String withdrawbal, String num, Connection conn) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		String sql="SELECT PAY_SUM -? AS WITHDRAW FROM (SELECT * FROM (SELECT PA.NO ,PA.MEMBER_NO ,PA.PRO_NO ,PA.ADVICE_DATE ,PA.PAY_METHOD ,SUM(PA.PAY) OVER(ORDER BY PA.MEMBER_NO)AS PAY_SUM ,PA.PAY_DATE ,PA.STAR ,M.NAME ,M.PHONE FROM PRO_APPOINT PA LEFT JOIN MEMBER M ON PA.MEMBER_NO = M.NO WHERE PRO_NO =? ORDER BY ROWNUM DESC) WHERE ROWNUM = 1)";
+		System.out.println("다오 넘어옴");//출력됨
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1,withdrawbal);
+			pstmt.setString(2,num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("withdraw");
+				System.out.println(result);// 출력안됨
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
 }

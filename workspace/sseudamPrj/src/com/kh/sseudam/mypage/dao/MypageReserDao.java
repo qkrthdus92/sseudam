@@ -101,7 +101,7 @@ public class MypageReserDao {
 		
 	}
 
-	//예약 갯수 조회
+	//상담예정 갯수 조회
 	public static int selectCount(Connection conn , String num) {
 		
 		//SQL
@@ -130,5 +130,58 @@ public class MypageReserDao {
 		return result;
 	}
 
+	//전체 예약 갯수
+	public static int selectCountAll(Connection conn, String num) {
+		
+		String sql ="SELECT COUNT(*) AS CNT FROM PRO_APPOINT A LEFT JOIN PRO_MEMBER M  ON A.PRO_NO = M.NO WHERE MEMBER_NO=?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("CNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 
+	public static int selectCountFin(Connection conn, String num) {
+		
+		String sql="SELECT COUNT(*) AS CNT FROM PRO_APPOINT A LEFT JOIN PRO_MEMBER M  ON A.PRO_NO = M.NO WHERE MEMBER_NO=? AND ADVICE_DATE < SYSDATE";
+	
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("CNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 }

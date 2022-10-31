@@ -53,6 +53,7 @@ public class ProMypageEditController extends HttpServlet {
 		vo.setPhone(memberPhone);
 		vo.setEmail(memberEmail);
 		vo.setIntroduce(introduce);
+		vo.setNo(no);
 		vo.setId(id);
 		vo.setPwd(pwd);
 

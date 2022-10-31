@@ -361,7 +361,7 @@
 		  <div class="content">
 				<div class="popup-head">
 					<div  ><img id="popup-logo" src="/sseudam/resources/img/header/logo.png" alt=""></div>
-					<div class="head-title">아이디님의 테스트 점수는</div>
+					<div class="head-title"><%=MypageTestscoreList.get(0).getNick() %>님의 테스트 점수는</div>
 				</div>
 				<div class="popup-body">
                     <div id="popup_test_score">               

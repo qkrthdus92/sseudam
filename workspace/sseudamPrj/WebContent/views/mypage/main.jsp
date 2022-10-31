@@ -223,6 +223,11 @@
 		font-size: 20px;
 		margin-top: 80px;
 	}
+	#quit{
+		padding-left: 35px;
+		cursor:pointer;   
+	}
+	
 </style>
 </head>
 <body>
@@ -253,6 +258,10 @@
 	                    </tr>
 	                    <tr>
 	                        <th id="leftmenu">&nbsp;&nbsp; 나의좋아요</th>
+	                        <td></td>
+	                    </tr>
+	                     <tr>
+	                        <th id="quit" align="left" onclick="location.href='/sseudam/mypage/quit';">회원탈퇴</th>
 	                        <td></td>
 	                    </tr>
 	                </table>

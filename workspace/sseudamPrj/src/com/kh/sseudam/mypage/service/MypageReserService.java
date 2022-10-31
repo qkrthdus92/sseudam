@@ -21,9 +21,30 @@ public class MypageReserService {
 		return selectList;
 	}
 
-	//예약 갯수 조회
-	public int selectCount(String num) {
+	//전체 예약 갯수 조회
+	public int selectCountAll(String num) {
 		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = MypageReserDao.selectCountAll(conn,num);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	//완료된 예약 갯수 조회
+	public int selectCountFin(String num) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = MypageReserDao.selectCountFin(conn,num);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	public int selectCount(String num) {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		int result = MypageReserDao.selectCount(conn,num);

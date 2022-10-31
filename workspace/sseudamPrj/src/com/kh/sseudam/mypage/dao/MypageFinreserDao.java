@@ -15,7 +15,7 @@ public class MypageFinreserDao {
 
 	public static List<MypageFinreserVo> selectList(String num, Connection conn, PageVo pv) {
 		
-		String sql="SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM(SELECT A.NO AS \"예약번호\" ,A.MEMBER_NO ,A.PRO_NO ,A.ADVICE_DATE ,A.PAY_METHOD ,A.PAY ,A.PAY_DATE ,A.STAR ,M.NAME FROM PRO_APPOINT A FULL OUTER JOIN PRO_MEMBER M  ON A.PRO_NO = M.NO WHERE MEMBER_NO=? AND ADVICE_DATE < SYSDATE)T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql="SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM(SELECT A.NO AS \"예약번호\" ,A.MEMBER_NO ,A.PRO_NO ,A.ADVICE_DATE ,A.PAY_METHOD ,A.PAY ,A.PAY_DATE ,A.STAR ,M.NAME, M.IMG FROM PRO_APPOINT A FULL OUTER JOIN PRO_MEMBER M  ON A.PRO_NO = M.NO WHERE MEMBER_NO=? AND ADVICE_DATE < SYSDATE)T ) WHERE RNUM BETWEEN ? AND ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -44,6 +44,7 @@ public class MypageFinreserDao {
 				String pay_date = rs.getString("PAY_DATE"); 
 				String star = rs.getString("STAR"); 
 				String name = rs.getString("NAME"); 
+				String img = rs.getString("IMG"); 
 				
 				MypageFinreserVo vo = new MypageFinreserVo();
 				vo.setA_no(a_no);
@@ -55,6 +56,7 @@ public class MypageFinreserDao {
 				vo.setPay_date(pay_date);
 				vo.setStar(star);
 				vo.setName(name);
+				vo.setImg(img);
 				
 				
 				voList.add(vo);
@@ -100,18 +102,20 @@ public class MypageFinreserDao {
 		return result;
 	}
 
-	//별점주기
-	public static int updateStar(String star, String a_no, String num, Connection conn) {
+	//별점업데이트
+	public static int updateStar(MypageFinreserVo vo, Connection conn) {
+		
 		
 		String sql="UPDATE PRO_APPOINT SET STAR = ? WHERE NO = ? AND MEMBER_NO=?";
 	
 		PreparedStatement pstmt = null;
 	    int result = 0;
+	    
 	    try {
 	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setString(1, star);
-	        pstmt.setString(2, a_no);
-	        pstmt.setString(3, num);
+	        pstmt.setString(1, vo.getStar());
+	        pstmt.setString(2, vo.getA_no());
+	        pstmt.setString(3, vo.getMember_no());
 	        
 	        result = pstmt.executeUpdate();
 	     
@@ -123,5 +127,6 @@ public class MypageFinreserDao {
 	    return result;
 	
 	}
+
 
 }

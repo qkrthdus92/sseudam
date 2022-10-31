@@ -194,7 +194,7 @@
     height: 204px;
     background: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
     border-radius: 30px;
     margin-left: 20px;
 }
@@ -203,10 +203,10 @@
     margin-top: 5px;
 }
 #profil2{
-    margin-top: 15;
-    width: 70px;
+    margin-top: 10px;
+    width: 80px;
     height: 70px;
-    border-radius: 100px;
+    border-radius: 90px;
     margin-left: 15px;
 }
 #proname{
@@ -338,13 +338,15 @@
 </style>
 </head>
 <body>
+
+
 <%@ include file="/views/common/header.jsp" %>	
 	<div id="wrap">
     <div id="main">
         <div id="boardinfo">
             <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
             <div id="hm1">상담완료</div>
-            <div id="hm"><%=MypageFinreserList.size() %>건</div>
+            <div id="hm"><%=pv.getListCount() %>건</div>
             <div id="hm1"></div>
             <div id="hm"></div>
         </div>
@@ -366,7 +368,7 @@
         <%for(int i = 0 ; i < MypageFinreserList.size(); ++i){%>
             <div id="pro-box-all">
                 <div id="pro-box"> 
-                    <span><img id="profil2" src="/sseudam/resources/img/mypage/프로필.png" alt=""></span> 
+                    <span><img id="profil2" src="/sseudam/resources/img/counsel/<%=MypageFinreserList.get(i).getImg() %>" alt=""></span> 
                     <div id="proname">
                         <span>전문가 <br> <%= MypageFinreserList.get(i).getName()%></span> 
                     </div>             
@@ -376,7 +378,7 @@
                     <div id="noborder"><label> <%= MypageFinreserList.get(i).getA_no()%></label></div>
                 </div>
                  <%if(MypageFinreserList.get(i).getStar() == null){%>
-	                <div><button id="review_bnt" onclick="showPopup(true,<%=i%>)">별점주기</button></div> <!--i를 어떻게 자바스크립트로 넘길것인지.?-->
+	                <div><button id="review_bnt" onclick="showPopup(true,<%=i%>)">별점주기</button></div>
                  <%}%>
             </div>
     		<div id="popup" class="hide">
@@ -417,6 +419,10 @@
 		 			data:{
 		 				"value" : value,
 		 				"no" :	no
+		 			},
+		 			success: function star(){
+		 				 location.reload();
+		 				 alert("별점리뷰 등록완료!");
 		 			}
 		 		});
 		 		

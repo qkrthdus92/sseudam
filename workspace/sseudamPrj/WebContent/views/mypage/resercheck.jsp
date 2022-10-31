@@ -195,7 +195,7 @@
     height: 204px;
     background: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
     border-radius: 30px;
     margin-left: 20px;
 }
@@ -204,15 +204,15 @@
     margin-top: 5px;
 }
 #profil2{
-    margin-top: 15;
-    width: 70px;
+    margin-top: 10px;
+    width: 80px;
     height: 70px;
-    border-radius: 100px;
+    border-radius: 90px;
     margin-left: 15px;
 }
 #proname{
     margin-right: 35px;
-    margin-top:10px;
+    margin-top:35px;
     float: right;
 }
 #bor-top>label{
@@ -230,7 +230,7 @@
         <div id="boardinfo">
             <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
             <div id="hm1">상담 예정내역</div>
-            <div id="hm"><%=MypageReserList.size() %>건</div>
+            <div id="hm"><%=pv.getListCount() %>건</div>
             <div id="hm1"></div>
             <div id="hm"></div>
         </div>
@@ -252,7 +252,7 @@
 		<%for(int i = 0 ; i < MypageReserList.size(); ++i){%>
             <div id="pro-box-all">
                 <div id="pro-box"> 
-                    <span><img id="profil2" src="/sseudam/resources/img/main/강형욱.jpg" alt=""></span> 
+                    <span><img id="profil2" src="/sseudam/resources/img/counsel/<%=MypageReserList.get(i).getImg() %>" alt=""></span> 
                     <div id="proname">
                         <span>전문가 <br> <%= MypageReserList.get(i).getName()%></span> 
                     </div>             

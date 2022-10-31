@@ -135,6 +135,11 @@
 	            <div>
 	                <input type="text" name="introduce">
 	            </div>
+	            
+    	        <div>프로필 사진 변경</div>
+	            <div>
+	                <input type="file" name="f">
+	            </div>
 	
 	            <div>
 	                <br><input type="submit" value="수정하기" class="btn">

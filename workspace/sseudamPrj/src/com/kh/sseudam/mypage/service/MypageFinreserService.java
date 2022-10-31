@@ -7,6 +7,7 @@ import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.common.PageVo;
 import com.kh.sseudam.mypage.board.vo.MypageFinreserVo;
 import com.kh.sseudam.mypage.board.vo.MypageReserVo;
+import com.kh.sseudam.mypage.dao.MypageEditDao;
 import com.kh.sseudam.mypage.dao.MypageFinreserDao;
 import com.kh.sseudam.mypage.dao.MypageReserDao;
 
@@ -36,13 +37,21 @@ public class MypageFinreserService {
 	}
 
 	//별점주기
-	public int updateStar(String star, String a_no, String num) {
+	public int updateStar(MypageFinreserVo vo) {
 		
 		Connection conn = JDBCTemplate.getConnection();
-		int updateStar = MypageFinreserDao.updateStar(star,a_no,num,conn);
-		JDBCTemplate.close(conn);
 		
-		return updateStar;
+		int result = MypageFinreserDao.updateStar(vo,conn);
+		
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
 	}	
 
 }

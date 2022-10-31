@@ -163,17 +163,17 @@
 		    <div id="boardinfo">
 		       <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
 		       <div id="hm1">총 댓글</div>
-		       <div id="hm"><%= MypageCommentList.size() + MypageCommentList2.size()%>개</div>
+		       <div id="hm"><%=pv.getListCount() %>개</div>
 		    </div>
 		
 		    <div id="dom">
-		        <div id="dominfo" onclick="location.href='/sseudam/mypage/boardcheck'';">내가 쓴 게시글</div>
+		        <div id="dominfo" onclick="location.href='/sseudam/mypage/boardcheck?pno=1';">내가 쓴 게시글</div>
 		    </div>
             <div id="dom2">
                 <div id="dominfo2"">내가 쓴 댓글</div>
             </div>
 		    <div id="editbar">
-		        <button id="allselect" ><img id="checkbox" src="/sseudam/WebContent/resources/img/체크.png" alt="체크"> 전체선택</button>
+		        <button id="allselect" ><img id="checkbox" src="/sseudam/resources/img/mypage/체크.png" alt="체크"> 전체선택</button>
 		        <button id="delete">삭제</button>
 		    </div>
 		    <div id="edittop">

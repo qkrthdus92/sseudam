@@ -15,7 +15,7 @@ public class MypageTestscoreDao {
 
 	public static List<MypageTestscoreVo> selectList(String num, Connection conn) {
 	
-		String sql="SELECT TEST_SCORE FROM MEMBER WHERE NO=?";
+		String sql="SELECT TEST_SCORE ,NICK FROM MEMBER WHERE NO=?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -29,9 +29,11 @@ public class MypageTestscoreDao {
 			
 			while(rs.next()) {
 				int test_score = rs.getInt("TEST_SCORE");
+				String nick=rs.getString("NICK");
 				
 				MypageTestscoreVo vo= new MypageTestscoreVo();
 				vo.setTest_score(test_score);
+				vo.setNick(nick);
 				
 				voList.add(vo);
 			}

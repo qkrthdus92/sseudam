@@ -25,11 +25,11 @@ public class MypageCommentController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-//		HttpSession s = req.getSession();
-//		
-//		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
-//		
-//		String num = loginMember.getNo();
+		HttpSession s = req.getSession();
+		
+		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
+		
+		String num = loginMember.getNo();
 		
 		int listCount; 			//총 ㅐ시글 갯수
 		int currentPage; 		//현재페이지
@@ -40,7 +40,7 @@ public class MypageCommentController extends HttpServlet{
 		int endPage;			//페이징바 종료 페이지
 		
 		
-		listCount = new MypageCommentService().selectCount("1");//회원번호 임의지정
+		listCount = new MypageCommentService().selectCount(num);//회원번호 임의지정
 		currentPage = Integer.parseInt(req.getParameter("pno")) ;
 		pageLimit = 5;   //임의로 정함
 		boardLimit = 10; //임의로 정함
@@ -64,8 +64,8 @@ public class MypageCommentController extends HttpServlet{
 			pv.setEndPage(endPage);
 		
 		
-		List<MypageCommentVo> MypageCommentList = new MypageCommentService().selectList(pv,"1");
-		List<MypageCommentVo2> MypageCommentList2 = new MypageCommentService().selectList2(pv,"1");
+		List<MypageCommentVo> MypageCommentList = new MypageCommentService().selectList(pv,num);
+		List<MypageCommentVo2> MypageCommentList2 = new MypageCommentService().selectList2(pv,num);
 		
 		req.setAttribute("pv", pv);
 		req.setAttribute("MypageCommentList", MypageCommentList);
