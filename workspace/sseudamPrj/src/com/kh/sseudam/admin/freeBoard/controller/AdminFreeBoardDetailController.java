@@ -1,0 +1,59 @@
+package com.kh.sseudam.admin.freeBoard.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.kh.sseudam.admin.freeBoard.service.AdminFreeBoardService;
+import com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardCmtVo;
+import com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardVo;
+
+@WebServlet(urlPatterns = "/admin/freeBoard/detail")
+public class AdminFreeBoardDetailController extends HttpServlet{
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		//취소버튼 누를시에 바로 이전페이지로 이동하기위해서 이전페이지 정보 받아옴
+		String pno = req.getParameter("pno");
+		String search = req.getParameter("search");
+		String searchType = req.getParameter("searchType");
+		String status = req.getParameter("status");
+		
+		//글번호 받아오기
+		String bno = req.getParameter("bno");
+		
+		req.setAttribute("pno", pno);
+		req.setAttribute("search", search);
+		req.setAttribute("searchType", searchType);
+		req.setAttribute("status", status);
+		req.setAttribute("bno", bno);
+		
+		//자유게시판 글번호에 해당하는 상세정보 받아오기
+		AdminFreeBoardVo freeBoardVo = new AdminFreeBoardService().selectFreeBoardDetailByNo(bno);
+		
+		List<AdminFreeBoardCmtVo> freeBoardCmtList = null;
+		//자유게시판 글번호에 해당하는 댓글목록 받아오기
+		if(freeBoardVo != null) {
+			freeBoardCmtList = new AdminFreeBoardService().selectFreeBoardCmtByNo(bno);
+		}
+		
+		
+		if(freeBoardCmtList != null) {
+			req.setAttribute("freeBoardVo", freeBoardVo);
+			req.setAttribute("freeBoardCmtList", freeBoardCmtList);
+			req.getRequestDispatcher("/views/admin/freeBoard/detail.jsp").forward(req, resp);
+		}else {
+			req.setAttribute("msg", "관리자페이지 자유게시판 상세조회 중 에러발생");
+			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
+		}
+		
+		
+	}
+
+}

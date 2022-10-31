@@ -19,11 +19,11 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Insert title here</title>
+    <title>쓰담쓰담 - 내 상황에 딱 맞는 전문 심리상담사 찾기</title>
     <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/counsel/list.css?ver=8"
+      href="<%=root1%>/resources/css/counsel/list.css?ver=11"
     />
     <link
       rel="stylesheet"
@@ -33,7 +33,7 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <%@ include file="/views/common/header.jsp" %>
-    <main id="counsel-main">
+    <main id="counsel-main" class="counsel-main-font">
       <div class="main-wrapper counsel-main-wrapper">
         <form id="form-search-pro-name" action="<%=root %>/counsel/list?pno=1" method="get" onsubmit="return false">
         <aside class="counsel-aside">
@@ -141,7 +141,27 @@ pageEncoding="UTF-8"%>
                   <span>상세 조건</span>
                 </div>
                 <div class="counsel-pro-level counsel-type-box">
-                  <span>상담사 등급</span>
+                  <span>상담사 등급<i class="fa-solid fa-circle-info counsel-pro-level-info"></i>
+                  <div class="counsel-pro-level-info-detail hidden">
+                    <div><span>마스터</span>: 1급자격증 보유, 평점 4.5 이상, 후기 10개 이상</div>
+                    <div><span>전 문</span>: 1급자격증을 보유했거나 평점 4.5 이상, 후기 10개 이상</div>
+                    <div><span>일 반</span>: 상담심리 관련 학사 졸업 이상</div>
+                  </div>
+                  </span>
+                  <script>
+                    const body = document.querySelector('body');
+                    body.addEventListener('click', function(e) {
+                      const info = document.querySelector('.counsel-pro-level-info-detail');
+                      if(!e.target.className.includes('counsel-pro-level-info') && !e.target.className.includes('counsel-pro-level-info-detail')) {
+                        info.classList.add('hidden');
+                      }
+                    })
+                    const icon = document.querySelector('.counsel-pro-level-info');
+                    icon.addEventListener('click',function() {
+                      const info = document.querySelector('.counsel-pro-level-info-detail');
+                      info.classList.toggle('hidden');
+                    })
+                  </script>
                   <ul class="counsel-type-list counsel-level-list">
                     <li>
                       <label>
@@ -250,6 +270,57 @@ pageEncoding="UTF-8"%>
             </form>
             
           </aside>
+
+          <script>
+            //상세조회 체크한거 유지시키기
+
+            //상담분야
+            const proCounselTypeArr = document.querySelectorAll('input[name=counselType]');
+            const proCounselTypeStr = "<%= counselType%>";
+            for(let i=0; i<proCounselTypeArr.length; i++) {
+              const x = proCounselTypeArr[i].value;
+              let result = proCounselTypeStr.search(x);
+              if(result>=0) {
+                proCounselTypeArr[i].checked = true;
+              }
+            }
+
+            //전문가 등급
+            const proLevelArr = document.querySelectorAll('input[name=proLevel]');
+            const proLevelStr = "<%= proLevel%>";
+            for(let i=0; i<proLevelArr.length; i++) {
+              const x = proLevelArr[i].value;
+              let result = proLevelStr.search(x);
+              if(result>=0) {
+                proLevelArr[i].checked = true;
+              }
+            }
+
+            //성별
+            const proGenderArr = document.querySelectorAll('input[name=gender]');
+            const proGenderStr = "<%= gender%>";
+            for(let i=0; i<proGenderArr.length; i++) {
+              const x = proGenderArr[i].value;
+              let result = proGenderStr.search(x);
+              if(result>=0) {
+                proGenderArr[i].checked = true;
+              }
+            }
+
+
+            //몇급
+            const proCerArr = document.querySelectorAll('input[name=certificate]');
+            const proCerStr = "<%= certificate%>";
+            for(let i=0; i<proCerArr.length; i++) {
+              const x = proCerArr[i].value;
+              let result = proCerStr.search(x);
+              if(result>=0) {
+                proCerArr[i].checked = true;
+              }
+            }
+      
+           
+          </script>
    
 
         <section class="counsel-section">
@@ -273,7 +344,7 @@ pageEncoding="UTF-8"%>
 	                    alt=""
 	                /></a>
 	              </div>
-	              <div>
+	              <div class="counsel-pro-detail__detail">
 	                <div class="counsel-pro-name">
 	                  <a href="<%=root%>/counsel/detail?bno=<%=proList.get(i).getNo() %>"><%= proList.get(i).getName() %></a>
 	                </div>
@@ -301,13 +372,13 @@ pageEncoding="UTF-8"%>
           <%if(proName != null ) {%>
         	  <div class="counsel-pro-list-page">
 	          <%if(pv.getStartPage()!=1) {%>
-	      		<a href="<%= root %>/counsel/list?proName=<%=proName %>&pno=<%=pv.getStartPage()-1 %>" >이전</a>
+	      		<a href="<%= root %>/counsel/list?proName=<%=proName %>&pno=<%=pv.getStartPage()-1 %>" class="counsel-paging"><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
 	      	  <%}%>
 		      <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
-		      	<a href="<%= root %>/counsel/list?proName=<%=proName %>&pno=<%=i %>" ><%=i %></a>
+		      	<a href="<%= root %>/counsel/list?proName=<%=proName %>&pno=<%=i %>" class="counsel-paging"><span><%=i %></span></a>
 		      <%}%>
 		      <%if(pv.getEndPage() != pv.getMaxPage()) { %>
-		       <a href="<%= root %>/counsel/list?proName=<%=proName %>&pno=<%=pv.getEndPage()+1 %>" >다음</a>
+		       <a href="<%= root %>/counsel/list?proName=<%=proName %>&pno=<%=pv.getEndPage()+1 %>" class="counsel-paging"><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
 		      <%}%>
 	          </div> 
           <%} %>
@@ -315,13 +386,13 @@ pageEncoding="UTF-8"%>
           <%if(order != null) {%>
 	         <div class="counsel-pro-list-page">
 	          <%if(pv.getStartPage()!=1) {%>
-	      		<a href="<%= root %>/counsel/list?order=<%=order %>&pno=<%=pv.getStartPage()-1 %>" >이전</a>
+	      		<a href="<%= root %>/counsel/list?order=<%=order %>&pno=<%=pv.getStartPage()-1 %>" class="counsel-paging"><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
 	      	  <%}%>
 		      <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
-		      	<a href="<%= root %>/counsel/list?order=<%=order %>&pno=<%=i %>" ><%=i %></a>
+		      	<a href="<%= root %>/counsel/list?order=<%=order %>&pno=<%=i %>" class="counsel-paging"><span><%=i %></span></a>
 		      <%}%>
 		      <%if(pv.getEndPage() != pv.getMaxPage()) { %>
-		       <a href="<%= root %>/counsel/list?order=<%=order %>&pno=<%=pv.getEndPage()+1 %>" >다음</a>
+		       <a href="<%= root %>/counsel/list?order=<%=order %>&pno=<%=pv.getEndPage()+1 %>" class="counsel-paging"><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
 		      <%}%>
 	          </div> 
           
@@ -329,13 +400,13 @@ pageEncoding="UTF-8"%>
            <%if(choose != null) {%>
         	  <div class="counsel-pro-list-page">
 	          <%if(pv.getStartPage()!=1) {%>
-	      		<a href="<%= root %>/counsel/list?<%=counselType %>&<%=proLevel %>&gender=<%= gender %>&certificate=<%= certificate %>&pno=<%=pv.getStartPage()-1 %>" >이전</a>
+	      		<a href="<%= root %>/counsel/list?<%=counselType %>&<%=proLevel %>&gender=<%= gender %>&certificate=<%= certificate %>&pno=<%=pv.getStartPage()-1 %>" class="counsel-paging"><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
 	      	  <%}%>
 		      <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
-		      	<a href="<%= root %>/counsel/list?<%=counselType %>&<%=proLevel %>&gender=<%= gender %>&certificate=<%= certificate %>&pno=<%=i %>" ><%=i %></a>
+		      	<a href="<%= root %>/counsel/list?<%=counselType %>&<%=proLevel %>&gender=<%= gender %>&certificate=<%= certificate %>&pno=<%=i %>" class="counsel-paging"><span><%=i %></span></a>
 		      <%}%>
 		      <%if(pv.getEndPage() != pv.getMaxPage()) { %>
-		       <a href="<%= root %>/counsel/list?<%=counselType %>&<%=proLevel %>&gender=<%= gender %>&certificate=<%= certificate %>&pno=<%=pv.getEndPage()+1 %>" >다음</a>
+		       <a href="<%= root %>/counsel/list?<%=counselType %>&<%=proLevel %>&gender=<%= gender %>&certificate=<%= certificate %>&pno=<%=pv.getEndPage()+1 %>" class="counsel-paging counsel-paging-right"><i class="fa-solid fa-angles-right"></i></a>
 		      <%}%>
 	          </div> 
           <%} %> 

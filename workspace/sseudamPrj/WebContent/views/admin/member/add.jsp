@@ -33,7 +33,7 @@ pno = (String)request.getAttribute("pno"); String quitYn =
               class="cancel-btn"
               type="button"
               value="취소"
-              onclick="location.href='<%=root%>/admin/member/list?pno=<%=pno %>&quitYn=<%=quitYn %>'"
+              onclick="history.back();"
             />
             <input
               class="save-btn"

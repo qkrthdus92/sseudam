@@ -65,7 +65,7 @@ AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin"); %>
   /* 메뉴 부분 */
 
   .admin-menu-main {
-    padding: 30px 30px;
+    padding: 40px 30px;
     -ms-overflow-style: none;
   }
 
@@ -84,7 +84,7 @@ AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin"); %>
   }
 
   .admin-menu-main div {
-    margin-bottom: 35px;
+    margin-bottom: 45px;
   }
   .admin-menu-main div h1 {
     color: var(--adminMenuTitle);
@@ -153,7 +153,7 @@ AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin"); %>
           <a href="<%=root%>/admin/member/list?pno=1&quitYn=both">사용자</a>
         </li>
         <li><a href="<%=root%>/admin/pro/list?pno=1&status=all">전문가</a></li>
-        <li><a href="<%=root%>/views/admin/admin/list.jsp">관리자</a></li>
+        <!-- <li><a href="<%=root%>/views/admin/admin/list.jsp">관리자</a></li> -->
       </ul>
     </div>
     <div class="admin-menu-main-content">
@@ -178,26 +178,29 @@ AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin"); %>
       <h1>게시판 관리</h1>
       <ul>
         <li>
-          <a href="<%=root%>/views/admin/freeBoard/list.jsp">자유게시판</a>
+          <a
+            href="<%=root%>/admin/freeBoard/list?pno=1&status=all&searchType=title&search="
+            >자유게시판</a
+          >
         </li>
         <li>
           <a href="<%=root%>/views/admin/reviewBoard/list.jsp">후기게시판</a>
         </li>
       </ul>
     </div>
-    <div class="admin-menu-main-test">
+    <!-- <div class="admin-menu-main-test">
       <h1>테스트 관리</h1>
       <ul>
         <li>
           <a href="<%=root%>/views/admin/test/list.jsp">스트레스 테스트</a>
         </li>
       </ul>
-    </div>
+    </div> -->
     <div class="admin-menu-main-counsel">
       <h1>전문가 상담 관리</h1>
       <ul>
         <li>
-          <a href="<%=root%>/views/admin/counselPay/list.jsp">결제 내역</a>
+          <a href="<%=root%>/admin/counselPay/list">결제 내역</a>
         </li>
       </ul>
     </div>

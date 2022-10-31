@@ -11,7 +11,7 @@
 
 .admin-main-board {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: 1fr 5fr 1fr 1.5fr 1fr 1fr 1.5fr 1fr;
   grid-template-rows: repeat(11, 50px);
 }
 

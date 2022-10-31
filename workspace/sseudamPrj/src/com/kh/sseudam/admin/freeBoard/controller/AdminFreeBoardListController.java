@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.sseudam.admin.freeBoard.service.AdminFreeBoardService;
+import com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardVo;
 import com.kh.sseudam.admin.pro.service.AdminProService;
-import com.kh.sseudam.board.vo.FreeBoardVo;
+
 import com.kh.sseudam.common.PageVo;
 import com.kh.sseudam.common.Paging;
 import com.kh.sseudam.counsel.pro.vo.ProVo;
@@ -21,11 +22,16 @@ public class AdminFreeBoardListController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		String pno = req.getParameter("pno");
 		String status = req.getParameter("status");
 		String search1 = req.getParameter("search");		
 		String searchType = req.getParameter("searchType");
+
 		
+		if(search1 == null) {
+			search1 = "";
+		}
 		
 		List<ProVo> proList = null;
 		int currentPage = Integer.parseInt(req.getParameter("pno"));
@@ -33,12 +39,14 @@ public class AdminFreeBoardListController extends HttpServlet{
 		int boardLimit = 10;
 		int listCount = 0;
 		
-		List<FreeBoardVo> freeBoardList = null;
+		List<AdminFreeBoardVo> freeBoardList = null;
 		
 		//자유게시판 디비다녀오기
 		
-		//1.모든게시글조회
-		if(status.equals("all") && search1==null) {
+		boolean isSearchTypeAll = searchType.equals("title") || searchType.equals("content") || searchType.equals("writer");
+		
+		//1.모든게시글조회 (+메뉴바에서 처음 접속했을때 페이지)
+		if(status.equals("all") && search1.equals("") && isSearchTypeAll) {
 	
 			listCount = new AdminFreeBoardService().getCntFreeAll();
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
@@ -46,7 +54,8 @@ public class AdminFreeBoardListController extends HttpServlet{
 			
 			req.setAttribute("pno", pno);
 			req.setAttribute("status", "all");
-			req.setAttribute("search", null);
+			req.setAttribute("search", search1);
+			req.setAttribute("searchType", "title");
 			req.setAttribute("freeBoardList", freeBoardList);
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
@@ -56,15 +65,16 @@ public class AdminFreeBoardListController extends HttpServlet{
 		}
 		
 		//2.게시완료조회
-		if(status.equals("F") && search1==null) {
+		if(status.equals("F") && search1.equals("") && isSearchTypeAll) {
 			
 			listCount = new AdminFreeBoardService().getCntFreeF();
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
 			freeBoardList = new AdminFreeBoardService().getFreeF(pv); 
 			
 			req.setAttribute("pno", pno);
-			req.setAttribute("status", "all");
-			req.setAttribute("search", null);
+			req.setAttribute("status", "F");
+			req.setAttribute("search", search1);
+			req.setAttribute("searchType", "title");
 			req.setAttribute("freeBoardList", freeBoardList);
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
@@ -74,15 +84,16 @@ public class AdminFreeBoardListController extends HttpServlet{
 		}
 		
 		//3.게시취소조회
-		if(status.equals("C") && search1==null) {
+		if(status.equals("C") && search1.equals("") && isSearchTypeAll) {
 			
 			listCount = new AdminFreeBoardService().getCntFreeC();
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
 			freeBoardList = new AdminFreeBoardService().getFreeC(pv); 
 			
 			req.setAttribute("pno", pno);
-			req.setAttribute("status", "all");
-			req.setAttribute("search", null);
+			req.setAttribute("status", "C");
+			req.setAttribute("search", search1);
+			req.setAttribute("searchType", "title");
 			req.setAttribute("freeBoardList", freeBoardList);
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
@@ -92,7 +103,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 		}
 		
 		//4.제목+모든 조회
-		if(status.equals("all") && search1!=null && searchType.equals("title")) {
+		if(status.equals("all") && !search1.equals("") && searchType.equals("title")) {
 			
 			String search = search1.trim();
 			listCount = new AdminFreeBoardService().getCntFreeTitleAll(search);
@@ -112,7 +123,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 		}
 		
 		//5.제목+완료 조회
-		if(status.equals("F") && search1!=null && searchType.equals("title")) {
+		if(status.equals("F") && !search1.equals("") && searchType.equals("title")) {
 			
 			String search = search1.trim();
 			listCount = new AdminFreeBoardService().getCntFreeTitleF(search);
@@ -120,7 +131,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 			freeBoardList = new AdminFreeBoardService().getFreeTitleF(pv, search); 
 			
 			req.setAttribute("pno", pno);
-			req.setAttribute("status", "all");
+			req.setAttribute("status", "F");
 			req.setAttribute("search", search);
 			req.setAttribute("searchType", searchType);
 			req.setAttribute("freeBoardList", freeBoardList);
@@ -132,7 +143,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 		}
 		
 		//6.제목+취소 조회
-		if(status.equals("C") && search1!=null && searchType.equals("title")) {
+		if(status.equals("C") && !search1.equals("") && searchType.equals("title")) {
 			
 			String search = search1.trim();
 			listCount = new AdminFreeBoardService().getCntFreeTitleC(search);
@@ -140,7 +151,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 			freeBoardList = new AdminFreeBoardService().getFreeTitleC(pv, search); 
 			
 			req.setAttribute("pno", pno);
-			req.setAttribute("status", "all");
+			req.setAttribute("status", "C");
 			req.setAttribute("search", search);
 			req.setAttribute("searchType", searchType);
 			req.setAttribute("freeBoardList", freeBoardList);
@@ -152,7 +163,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 		}
 		
 		//7.내용+모든 조회
-		if(status.equals("all") && search1!=null && searchType.equals("content")) {
+		if(status.equals("all") && !search1.equals("") && searchType.equals("content")) {
 			
 			String search = search1.trim();
 			listCount = new AdminFreeBoardService().getCntFreeContentAll(search);
@@ -172,7 +183,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 		}
 		
 		//8.내용+완료 조회
-		if(status.equals("F") && search1!=null && searchType.equals("content")) {
+		if(status.equals("F") && !search1.equals("") && searchType.equals("content")) {
 			
 			String search = search1.trim();
 			listCount = new AdminFreeBoardService().getCntFreeContentF(search);
@@ -180,7 +191,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 			freeBoardList = new AdminFreeBoardService().getFreeContentF(pv, search); 
 			
 			req.setAttribute("pno", pno);
-			req.setAttribute("status", "all");
+			req.setAttribute("status", "F");
 			req.setAttribute("search", search);
 			req.setAttribute("searchType", searchType);
 			req.setAttribute("freeBoardList", freeBoardList);
@@ -192,7 +203,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 		}
 		
 		//9.내용+취소 조회
-		if(status.equals("C") && search1!=null && searchType.equals("content")) {
+		if(status.equals("C") && !search1.equals("") && searchType.equals("content")) {
 			
 			String search = search1.trim();
 			listCount = new AdminFreeBoardService().getCntFreeContentC(search);
@@ -200,7 +211,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 			freeBoardList = new AdminFreeBoardService().getFreeContentC(pv, search); 
 			
 			req.setAttribute("pno", pno);
-			req.setAttribute("status", "all");
+			req.setAttribute("status", "C");
 			req.setAttribute("search", search);
 			req.setAttribute("searchType", searchType);
 			req.setAttribute("freeBoardList", freeBoardList);
@@ -212,7 +223,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 		}
 		
 		//10.작성자+모든 조회
-		if(status.equals("all") && search1!=null && searchType.equals("writer")) {
+		if(status.equals("all") && !search1.equals("") && searchType.equals("writer")) {
 			
 			String search = search1.trim();
 			listCount = new AdminFreeBoardService().getCntFreeWriterAll(search);
@@ -232,7 +243,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 		}
 		
 		//11.작성자+완료 조회
-		if(status.equals("F") && search1!=null && searchType.equals("writer")) {
+		if(status.equals("F") && !search1.equals("") && searchType.equals("writer")) {
 			
 			String search = search1.trim();
 			listCount = new AdminFreeBoardService().getCntFreeWriterF(search);
@@ -240,7 +251,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 			freeBoardList = new AdminFreeBoardService().getFreeWriterF(pv, search); 
 			
 			req.setAttribute("pno", pno);
-			req.setAttribute("status", "all");
+			req.setAttribute("status", "F");
 			req.setAttribute("search", search);
 			req.setAttribute("searchType", searchType);
 			req.setAttribute("freeBoardList", freeBoardList);
@@ -252,7 +263,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 		}
 		
 		//12.작성자+취소 조회
-		if(status.equals("C") && search1!=null && searchType.equals("writer")) {
+		if(status.equals("C") && !search1.equals("") && searchType.equals("writer")) {
 			
 			String search = search1.trim();
 			listCount = new AdminFreeBoardService().getCntFreeWriterC(search);
@@ -260,7 +271,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 			freeBoardList = new AdminFreeBoardService().getFreeWriterC(pv, search); 
 			
 			req.setAttribute("pno", pno);
-			req.setAttribute("status", "all");
+			req.setAttribute("status", "C");
 			req.setAttribute("search", search);
 			req.setAttribute("searchType", searchType);
 			req.setAttribute("freeBoardList", freeBoardList);

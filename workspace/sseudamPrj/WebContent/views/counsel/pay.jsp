@@ -6,7 +6,7 @@ request.getContextPath();%> <%ProVo vo = (ProVo)request.getAttribute("vo"); %>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Insert title here</title>
+    <title>쓰담쓰담 - 내 상황에 딱 맞는 전문 심리상담사 찾기</title>
 
     <link
       rel="stylesheet"

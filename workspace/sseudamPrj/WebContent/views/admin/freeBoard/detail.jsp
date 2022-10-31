@@ -1,5 +1,45 @@
+<%@page import="java.util.List"%>
+<%@page import="com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardCmtVo"%>
+<%@page import="com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
+pageEncoding="UTF-8"%> 
+
+<% 
+	String root1 = request.getContextPath();
+
+	String pno = (String)request.getAttribute("pno");
+	String search = (String)request.getAttribute("search");
+	String searchType = (String)request.getAttribute("searchType");
+	String status = (String)request.getAttribute("status");
+	String bno = (String)request.getAttribute("bno");
+	
+	AdminFreeBoardVo freeBoardVo = (AdminFreeBoardVo)request.getAttribute("freeBoardVo");
+	List<AdminFreeBoardCmtVo> list = (List<AdminFreeBoardCmtVo>)request.getAttribute("freeBoardCmtList");
+	
+	String pno2 = (String)session.getAttribute("pno2");
+	String bno2 = (String)session.getAttribute("bno2");
+	String search2 = (String)session.getAttribute("search2");
+	String searchType2 = (String)session.getAttribute("searchType2");
+	String status2 = (String)session.getAttribute("status2");
+	
+	if((pno2 != null) && (bno2 != null) && (search2 != null) && (searchType2 != null) && (status2 != null)) {
+		System.out.println("세션값으로 대체됨!");
+		pno = pno2;
+		search = search2;
+		searchType = searchType2;
+		status = status2;
+		bno = bno2;
+		
+		session.removeAttribute("pno2");
+		session.removeAttribute("bno2");
+		session.removeAttribute("search2");
+		session.removeAttribute("searchType2");
+		session.removeAttribute("status2");
+		
+	}
+
+
+%>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +57,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/common/component.css?ver=2"
+      href="<%=root1%>/resources/css/admin/common/component.css?ver=3"
     />
     <style>
       .grid-col8 {
@@ -42,7 +82,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
         display: flex;
         align-items: center;
         padding-left: 20px;
-        font-size: 18px;
+        font-size: 16px;
       }
 
       .reply-header span:nth-child(2) {
@@ -60,6 +100,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
       .reply-detail {
         display: grid;
         grid-template-columns: 2fr 6fr 2fr 2fr 1fr 1fr 1fr;
+        font-size: 15px;
       }
 
       .reply-detail div,
@@ -87,6 +128,17 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
       .admin-reply-form div:nth-child(2) {
         justify-content: flex-start;
       }
+
+      .freeBoard-content {
+        width: 100%;
+        height: 100%;
+        resize: none;
+        border: none;
+        background-color: white;
+        font-size: 15px;
+        line-height: 25px;
+        font-family: "Noto Sans KR", sans-serif;;
+      }
     </style>
   </head>
   <body>
@@ -99,7 +151,8 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
             class="cancel-btn"
             type="button"
             value="목록"
-            onclick="history.back()"
+            onclick="location.href='<%=root%>/admin/freeBoard/list?pno=<%=pno%>&status=<%=status%>&search=<%=search%>&searchType=<%=searchType%>'"
+
           />
           <!-- <input class="save-btn" type="submit" value="저장" /> -->
         </div>
@@ -107,29 +160,30 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
       <section class="admin-main-section">
         <div class="admin-main-wrapper">
           <div class="admin-main-board grid-col8">
-            <div>10</div>
-            <div>여행가고싶다~~</div>
-            <div>한혜원</div>
+            <div><%= freeBoardVo.getNo() %></div>
+            <div><%= freeBoardVo.getTitle() %></div>
+            <div><%= freeBoardVo.getNick() %></div>
 
-            <div>2022-10-08 12:12:12</div>
-            <div><i class="fa-regular fa-eye"></i><span>100</span></div>
-            <div><i class="fa-solid fa-comment-dots"></i><span>3</span></div>
+            <div><%= freeBoardVo.getEnrollDate() %></div>
+            <div><i class="fa-regular fa-eye"></i><span><%= freeBoardVo.getView() %></span></div>
+            <div><i class="fa-solid fa-comment-dots"></i><span><%= freeBoardVo.getCmtCnt() %></span></div>
             <div>
-              <a href="<%=root%>/views/admin/freeBoard/edit.jsp"
+              <a href="<%=root%>/admin/freeBoard/edit?bno=<%=bno %>&pno=<%=pno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"
                 ><i class="fa-solid fa-pen-to-square"></i
               ></a>
             </div>
             <div>
-              <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+              <a href="<%=root%>/admin/freeBoard/delete?bno=<%=bno %>&pno=<%=pno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"><i class="fa-solid fa-trash-can"></i></a>
             </div>
           </div>
           <div class="admin-main-board-detail">
-            <div>여행가고싶네여</div>
+            <textarea class="freeBoard-content" name="" id="" cols="30" rows="10" disabled><%= freeBoardVo.getContent() %></textarea>
+            
           </div>
           <div class="reply-header">
             <i class="fa-solid fa-comment-dots"></i>
             <span>댓글</span>
-            <span>3</span>
+            <span><%= freeBoardVo.getCmtCnt() %></span>
           </div>
           <div class="reply-detail">
             <div>작성자</div>
@@ -140,35 +194,52 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
             <div></div>
             <div></div>
 
-            <%for(int i=1; i<=3; i++) {%>
-            <div>hyewon</div>
-            <div>나도 가고싶다~~</div>
-            <div>2022-10-08 12:12:12</div>
-            <div>2022-10-08 12:12:12</div>
+            <%for(int i=0; i<list.size(); i++) {%>
+            <div><%=  list.get(i).getNick()%></div>
+            <% if(list.get(i).getDeleteYn().equals("N")){ %>
+              <div class="flex-start"><%=  list.get(i).getCmt()%></div>
+              <%}else { %>
+                <div class="flex-start light-color"><%=  list.get(i).getCmt()%></div>
+              <%} %>
+            <div><%=  list.get(i).getEnrollDate()%></div>
+            <div><%=  list.get(i).getModifyDate()%></div>
+            <% if(list.get(i).getDeleteYn().equals("N")){ %>
             <div>게시완료</div>
+            <%}else { %>
+            <div>게시취소</div>
+            <%} %>
             <div>
-              <a href="<%=root%>/views/admin/freeBoard/edit.jsp"
+              <a href="<%=root%>/admin/freeBoard/editCmt?cno=<%=list.get(i).getNo() %>&bno=<%=bno %>&pno=<%=pno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"
                 ><i class="fa-solid fa-pen-to-square"></i
               ></a>
             </div>
             <div>
-              <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+              <a href="<%=root%>/admin/freeBoard/deleteCmt?cno=<%=list.get(i).getNo() %>&bno=<%=bno %>&pno=<%=pno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"><i class="fa-solid fa-trash-can"></i></a>
             </div>
             <%}%>
           </div>
-          <div class="admin-reply-form">
-            <div>관리자</div>
-            <div>
-              <input
-                type="text"
-                placeholder="댓글을 입력해주세요"
-                class="admin-input"
-              />
+          <form action="<%=root1%>/admin/freeBoard/writeCmt" method="post">
+            <input type="hidden" name="bno" value="<%=bno%>">
+            <input type="hidden" name="pno" value="<%=pno%>">
+            <input type="hidden" name="status" value="<%=status%>">
+            <input type="hidden" name="search" value="<%=search%>">
+            <input type="hidden" name="searchType" value="<%=searchType%>">
+            <div class="admin-reply-form">
+              <div>관리자</div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="댓글을 입력해주세요"
+                  class="admin-input"
+                  name="cmt"
+                />
+              </div>
+              <div>
+                <input type="submit" value="등록" class="small-add-btn" />
+              </div>
             </div>
-            <div>
-              <input type="submit" value="등록" class="small-add-btn" />
-            </div>
-          </div>
+
+          </form>
         </div>
       </section>
     </main>

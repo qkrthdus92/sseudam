@@ -221,10 +221,10 @@ public class CounselListController extends HttpServlet{
 			
 			if(proLevel != null && (proLevel.length == 1 || proLevel.length == 2)) {
 				listCount = new CounselService().cntLevel3(counselTypeArr, proLevel, gender, certificate);
-				System.out.println(listCount + "전문가수!!!!");
+			
 			}
 			
-		
+			System.out.println("리스트카운트 :" +listCount);
 			
 			int currentPage = Integer.parseInt(req.getParameter("pno"));
 			int pageLimit = 5;
