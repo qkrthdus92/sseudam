@@ -113,14 +113,14 @@
 			<div class="join-area">
 	            <div>아이디</div>
 	            <div>
-	            	<input type="text" id="memberId" class="memberId-input" name="memberId" placeholder="6~14자 이내 영문, 숫자를 포함하여 작성" required>
+	            	<input type="text" id="memberId" class="memberId-input" name="memberId" placeholder="6~14자 이내 영문, 숫자를 포함하여 작성" maxlength="14" required>
 	            	<button type="button" onclick="idCheck();" id="idCheckBtn" class="overlap-check-btn">중복확인</button>
 	            	<div id="result" type="hidden" value=""></div>
 	            </div>					
 	
 	            <div>비밀번호</div>
 	            <div>
-	                <input type="password" id="pwd1" name="memberPwd1" placeholder="6~14자 이내 영문, 숫자, 특수문자를 포함하여 작성" required>
+	                <input type="password" id="pwd1" name="memberPwd1" placeholder="6~14자 이내 영문, 숫자, 특수문자를 포함하여 작성" maxlength="14" required>
 	            </div>
 	
 	            <div>비밀번호 확인</div>
@@ -135,17 +135,17 @@
 	
 	            <div>닉네임</div>
 	            <div>
-	                <input type="text" id="nick" name="memberNick" placeholder="6~14자 이내로 작성(특수문자 불가능)" required>
+	                <input type="text" id="nick" name="memberNick" maxlength="14" placeholder="6~14자 이내로 작성(특수문자 불가능)" required>
 	            </div>
 	
 	            <div>연락처</div>
 	            <div>
-	                <input type="tel" id="phone" name="phone" placeholder="예) 01012345678" required>
+	                <input type="tel" id="phone" name="phone" placeholder="예) 01012345678" maxlength="13" required>
 	            </div>
 	
 	            <div>이메일</div>
 	            <div>
-	                <input type="email" name="email">
+	                <input type="email" name="email" maxlength="20" required>
 	            </div>
 				
                 <div class="TOS">

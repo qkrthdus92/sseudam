@@ -1,5 +1,7 @@
 package com.kh.sseudam.pro.vo;
 
+import javax.servlet.http.Part;
+
 public class ProJoinPage2Vo {
 
 	
@@ -68,6 +70,8 @@ public class ProJoinPage2Vo {
 		return "ProJoinPage2Vo [proMemberNo=" + proMemberNo + ", education=" + education + ", certificateName="
 				+ certificateName + ", certificateNum=" + certificateNum + ", imgPath=" + imgPath + "]";
 	}
+
+
 
 	
 }

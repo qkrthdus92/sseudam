@@ -14,12 +14,12 @@ import com.kh.sseudam.pro.vo.ProMemberJoinVo;
 
 public class ProMemberService {
 
-	public int projoin(ProJoinPage1Vo page1vo, ProJoinPage2Vo page2vo, ProJoinPage3Vo page3vo) {
+	public int projoin(ProJoinPage1Vo proVo1, ProJoinPage2Vo proVo2, ProJoinPage3Vo proVo3) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
 		ProDao prodao = new ProDao();
-		int result = prodao.proInsertOne(conn, page1vo, page2vo, page3vo);
+		int result = prodao.proInsertOne(conn, proVo1, proVo2, proVo3);
 		
 		if(result == 1) {
 			JDBCTemplate.commit(conn);
@@ -31,13 +31,31 @@ public class ProMemberService {
 		
 		return result;
 	}
-
-	public int projoinlicense(ProJoinPage2Vo page2vo) {
+	//자격증 첨부파일
+	public int projoinlicense(ProJoinPage2Vo proVo2) {
 
 		Connection conn = JDBCTemplate.getConnection();
 		
 		ProDao prodao = new ProDao();
-		int result = prodao.projoinlicense(conn, page2vo);
+		int result = prodao.projoinlicense(conn, proVo2);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	//프로필 첨부파일
+	public int profileimg(ProJoinPage3Vo proVo3) {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ProDao prodao = new ProDao();
+		int result = prodao.proInsertOne(conn, null, null, proVo3);
 		
 		if(result == 1) {
 			JDBCTemplate.commit(conn);

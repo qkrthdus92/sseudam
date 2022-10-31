@@ -138,7 +138,7 @@
         <h1 align="center">회원가입</h1>
         <h4 align="center">이곳은 쓰담쓰담에서 상담사로 활동하실 분들을 위한 회원가입 페이지 입니다.</h4>
 
-	<form action="/sseudam/join/proJoinPage=1" method="post">      
+	<form action="/sseudam/join/proJoinPage?page=1" method="post" enctype="multipart/form-data">  
         <div class="join-area">
             
             <div class="join-step">
@@ -155,7 +155,7 @@
             <div class="join-1nd">
                 <div>아이디</div>
                 <div>
-                    <input type="text" id="memberId" name="memberId" placeholder="6~14자 이내 영문, 숫자를 포함하여 작성" required>
+                    <input type="text" id="memberId" name="memberId" placeholder="6~14자 이내 영문, 숫자를 포함하여 작성" maxlength="14" required>
                     <button input type="button" onclick="proIdCheck();" id="idCheckBtn" class="overlap-check-btn">중복확인</button>
                     <div id="result" type="hidden"></div>
                 </div>
@@ -163,7 +163,7 @@
 
                 <div class="join-2nd">
                     <div>비밀번호</div>
-                    <div><input type="password" id="pwd1" name="memberPwd1" placeholder="6~14자 이내 영문, 숫자, 특수문자를 포함하여 작성" required></div>
+                    <div><input type="password" id="pwd1" name="memberPwd1" placeholder="6~14자 이내 영문, 숫자, 특수문자를 포함하여 작성" maxlength="14" required></div>
                 </div>
                 <div class="join-2nd2">
                     <div>비밀번호 확인</div>
@@ -191,11 +191,11 @@
             
             <div class="join-5nd">
                 <div>연락처</div>
-                <div><input type="tel" id="phone" name="phone" placeholder="예) 01012345678" required></div>
+                <div><input type="tel" id="phone" name="phone" placeholder="예) 01012345678" maxlength="13" required></div>
             </div>
             <div class="join-6nd">
                 <div>이메일</div>
-                <div><input type="email" id="eamil" name="email" required></div>
+                <div><input type="email" id="eamil" name="email" maxlength="20" required></div>
             </div>
             <div class="join-under">
                 <div class="TOS">

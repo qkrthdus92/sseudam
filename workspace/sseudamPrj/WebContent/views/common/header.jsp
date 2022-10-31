@@ -228,7 +228,8 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
   
   /* 로그인, 아이디 찾기 팝업 */
   #login-popup,
-  #find-id-popup{
+  #find-id-popup,
+  #find-pwd-popup{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -251,18 +252,21 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
 /* 로그인, 아이디 찾기 팝업 */
 
 #login-popup.hide,
-#find-id-popup.hide{
+#find-id-popup.hide,
+#find-pwd-popup.hide{
   display: none;	/* 아예 코드도 사라짐 */
 }
 
 #login-popup.has-filter,
-#find-id-popup.has-filter{
+#find-id-popup.has-filter,
+#find-pwd-popup.has-filter{
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
 
 #login-popup .login-popup,
-#find-id-popup .login-popup{
+#find-id-popup .login-popup,
+#find-pwd-popup .login-popup{
   width: 477px;
   height: 634px;
   display: grid;
@@ -273,13 +277,15 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
 }
 
 #login-popup .login-popup-header,
-#find-id-popup .login-popup-header{
+#find-id-popup .login-popup-header,
+#find-pwd-popup .login-popup-header{
   border-radius: 10px 10px 0px 0px;
   background-color: rgba(217, 217, 217, 1);
 }
 
 #login-popup .login-popup-btn,
-#find-id-popup .login-popup-btn{
+#find-id-popup .login-popup-btn,
+#find-pwd-popup .login-popup-btn{
   width: 30px;
   height: 30px;
   margin-top: 5px;
@@ -418,7 +424,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
         <div class="dropdown-content">
 			<a href="<%=root%>/board/freeBoardList?pno=1"
             >자유게시판</a>
-          	<a href="<%=root%>/views/board/reviewBoard/reviewBoardList.jsp"
+          	<a href="<%=root%>/board/reviewBoardList?pno=1"
             >후기게시판</a>
         </div>
       </div>
@@ -456,7 +462,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	      <div class="login-popup-button">
 	        <div><a href='<%=root%>/views/common/join.jsp'>회원가입</a></div>
 	        <div><a onclick="idFind()">아이디 찾기</a></div>
-	        <div><a href=''>비밀번호 찾기</a></div>
+	        <div><a onclick="pwdFind()">비밀번호 찾기</a></div>
 	      </div>
 	      
 	    </div>
@@ -491,7 +497,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	    </div>
 	  </div>
   </form> 
-  
+
   <%}else if(loginMember != null){%>
     <div class="main-header-top">
     <div class="main-wrapper">
@@ -544,7 +550,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
         <div class="dropdown-content">
 			<a href="<%=root%>/board/freeBoardList?pno=1"
             >자유게시판</a>
-          	<a href="<%=root%>/views/board/reviewBoard/reviewBoardList.jsp"
+          	<a href="<%=root%>/board/reviewBoardList?pno=1"
             >후기게시판</a>
         </div>
       </div>
@@ -606,7 +612,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
         <div class="dropdown-content">
 			<a href="<%=root%>/board/freeBoardList?pno=1"
             >자유게시판</a>
-          	<a href="<%=root%>/views/board/reviewBoard/reviewBoardList.jsp"
+          	<a href="<%=root%>/board/reviewBoardList?pno=1"
             >후기게시판</a>
         </div>
       </div>
@@ -668,14 +674,14 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 		
 	}
 
-    // 로그인 팝업
+    // (1) 로그인 팝업
     function loginPopup(hasFilter) {
-    	const popup = document.querySelector('#login-popup');
+    	const loginpopup = document.querySelector('#login-popup');
     
 	    if (hasFilter) {
-	      popup.classList.add();
+	    	loginpopup.classList.add();
 	    }
-	    popup.classList.remove('hide');
+	    loginpopup.classList.remove('hide');
   	}
 	//로그인 팝업 닫기
   	function closeLoginPopup() {
@@ -683,7 +689,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	    popup.classList.add('hide');
   	}
   
-  	//아이디 찾기 팝업
+  	// (2) 아이디 찾기 팝업
   	function idFind(hasFilter){
 		//로그인 팝업부터 닫아줘야 함
 	    const closePopup = document.querySelector('#login-popup');
@@ -696,6 +702,8 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	      popup.classList.add();
 	    }
 	    popup.classList.remove('hide');
+	    
+	    
 	  }
   
   	//아이디 찾기 팝업 닫기
@@ -703,6 +711,8 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	    const popup = document.querySelector('#find-id-popup');
 	    popup.classList.add('hide');
 	  }
+ 
+  	
 
 </script>
 
