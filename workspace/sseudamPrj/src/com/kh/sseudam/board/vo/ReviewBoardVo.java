@@ -10,12 +10,16 @@ public class ReviewBoardVo {
 	private String deleteYn;
 	private String modifyDate;
 	private String views;
+	private int cmtCount;
+	private String originName;
+	private String changeName;
+	private String filePath;
 	public ReviewBoardVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public ReviewBoardVo(String no, String writerNo, String title, String content, String writeDate, String deleteYn,
-			String modifyDate, String views) {
+			String modifyDate, String views, int cmtCount, String originName, String changeName, String filePath) {
 		super();
 		this.no = no;
 		this.writerNo = writerNo;
@@ -25,6 +29,10 @@ public class ReviewBoardVo {
 		this.deleteYn = deleteYn;
 		this.modifyDate = modifyDate;
 		this.views = views;
+		this.cmtCount = cmtCount;
+		this.originName = originName;
+		this.changeName = changeName;
+		this.filePath = filePath;
 	}
 	public String getNo() {
 		return no;
@@ -74,11 +82,36 @@ public class ReviewBoardVo {
 	public void setViews(String views) {
 		this.views = views;
 	}
+	public int getCmtCount() {
+		return cmtCount;
+	}
+	public void setCmtCount(int cmtCount) {
+		this.cmtCount = cmtCount;
+	}
+	public String getOriginName() {
+		return originName;
+	}
+	public void setOriginName(String originName) {
+		this.originName = originName;
+	}
+	public String getChangeName() {
+		return changeName;
+	}
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
 	@Override
 	public String toString() {
-		return "ReviewBoardBo [no=" + no + ", writerNo=" + writerNo + ", title=" + title + ", content=" + content
+		return "ReviewBoardVo [no=" + no + ", writerNo=" + writerNo + ", title=" + title + ", content=" + content
 				+ ", writeDate=" + writeDate + ", deleteYn=" + deleteYn + ", modifyDate=" + modifyDate + ", views="
-				+ views + "]";
+				+ views + ", cmtCount=" + cmtCount + ", originName=" + originName + ", changeName=" + changeName
+				+ ", filePath=" + filePath + "]";
 	}
 	
 	

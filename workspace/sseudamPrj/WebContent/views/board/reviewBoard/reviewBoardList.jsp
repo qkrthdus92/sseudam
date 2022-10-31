@@ -1,5 +1,13 @@
+<%@page import="com.kh.sseudam.common.PageVo"%>
+<%@page import="com.kh.sseudam.board.vo.ReviewBoardVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%
+	List<ReviewBoardVo> rvoList = (List<ReviewBoardVo>)request.getAttribute("rvoList");
+	PageVo rpv = (PageVo)request.getAttribute("rpv");
+	PageVo cmtPv = (PageVo)request.getAttribute("cmtPv");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +25,7 @@
         width: 100vw;
         height: 1200px;
         box-sizing: border-box;
-        background-color: #FFFFFF;
-        
+        background-color: #FFFFFF;     
     }
     #header{
         width: 100vw;
@@ -135,16 +142,27 @@
         </div>
         <div id="main">
             <div id="title">후기게시판</div>
-            <div id="write"><button onclick="location.href='<%=root%>/views/board/reviewBoard/reviewBoardWrite.jsp'">글쓰기</button></div>
+            <div id="write"><button id="write-btn" onclick="loginPopup(true)">글쓰기</button></div>
+            <%if(loginMember!=null){ %>
+            <script>
+              const wirteBtn = document.querySelector('#write-btn');
+              wirteBtn.addEventListener('click',function() {
+                location.href='<%=root%>/board/reviewBoardWrite';
+              })
+            </script>
+            <%} %>
+       
             <div class="board-list">
+            
+            
                 <div class="board-photo">
-                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
-                        <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
+                    <a href="<%=root%>/board/reviewBoardDetail?bno=<%=rvoList.get(1).getNo() %>&cmtPno=1">
+                        <img src="<%=root%>/resources/img/main/러버덕.jpg"><%=rvoList.get(1).getTitle()%>
                     </a>
-                    <div class="list-info">no | user08 | 2022-10-17 |
+                    <div class="list-info"><%=rvoList.get(1).getNo()%> | <%=rvoList.get(1).getWriterNo()%> | <%=rvoList.get(1).getWriteDate()%> |&nbsp;
                         <div class="view">
                             <img src="<%=root%>/resources/img/board/View.svg">
-                        </div>150
+                        </div>&nbsp;<%=rvoList.get(1).getViews()%>
                     </div>
                 </div>
                 <div class="board-photo">
@@ -177,11 +195,13 @@
                         </div>150
                     </div>
                 </div>
+           
+           
             </div>
 
-
-
             <div class="board-list">
+            
+            
                 <div class="board-photo">
                     <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
                         <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
@@ -222,8 +242,25 @@
                         </div>150
                     </div>
                 </div>
+           
+           
             </div>
-            <div id="page">< 1 2 3 4 5 6 7 8 9 10 ></div>
+            
+            
+            
+        <div id="page">
+                  
+        	<a href="/sseudam/board/reviewBoardList?pno=<%=rpv.getStartPage()-1%>">< </a>	        		
+        	
+        <%
+        	for(int i = rpv.getStartPage(); i <= rpv.getEndPage(); ++i){%>
+        		<a id="current" href="/sseudam/board/reviewBoardList?pno=<%=i%>"><%=i%></a>
+        <%}%>
+        
+        	<a href="/sseudam/board/reviewBoardList?pno=<%=rpv.getEndPage()+1%>"> ></a>	        		
+
+        </div>
+        
             <div id="search">
                 <div>
                     <select name="board-search" form="">

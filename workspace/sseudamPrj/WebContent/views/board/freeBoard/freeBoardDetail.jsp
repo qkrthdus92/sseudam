@@ -111,8 +111,6 @@
         padding-top: 10px;
         padding-left: 10px;
         padding-right: 10px;
-        --margin-left: 10px;
-        --margin-right: 10px;
         background-color: #F5F5F5;
     }
     #cmt-id{
@@ -195,6 +193,9 @@
                 <div><a href="/sseudam/board/freeBoardDelete?no=<%= vo.getNo()%>">삭제하기</a></div>
             </div>
             <div id="board-content"><%= vo.getContent() %></div>
+            
+            
+            
             <div id="cmt-cnt">
                 <img src="<%=root%>/resources/img/board/Chat.svg">
                 <div>댓글 <%=cmtPv.getListCount()%>개</div>
