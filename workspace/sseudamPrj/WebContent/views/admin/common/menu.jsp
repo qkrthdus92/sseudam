@@ -134,9 +134,9 @@ AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin"); %>
     overflow: auto;
   }
   .welcome {
-    font-size: 14px;
-    margin-top: 3px;
-    color: #26aa82;
+    font-size: 15px;
+    margin-top: 5px;
+    color: #a3a3a3;
   }
 </style>
 
@@ -230,12 +230,10 @@ AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin"); %>
     console.log(window.innerHeight);
     const menu = document.querySelector(".admin-menu-main");
     menu.style.height = window.innerHeight - 110 + "px";
-    console.log(menu.style.height);
   });
   console.log(window.innerHeight);
   const menu = document.querySelector(".admin-menu-main");
   menu.style.height = window.innerHeight - 110 + "px";
-  console.log(menu.style.height);
 </script>
 <script>
       <%if(alertMsg != null) {%>

@@ -1,1 +1,5 @@
 /* 관리자 - 후기게시판 조회 */
+.admin-menu-main-board li:last-child a {
+  color: var(--adminMenuHover);
+  font-size: 17px;
+}
