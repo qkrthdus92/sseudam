@@ -1,11 +1,7 @@
 package com.kh.sseudam.board.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,7 +16,6 @@ import javax.servlet.http.Part;
 import com.kh.sseudam.board.service.ReviewBoardService;
 import com.kh.sseudam.board.vo.ReviewBoardImgVo;
 import com.kh.sseudam.board.vo.ReviewBoardVo;
-import com.kh.sseudam.common.AttachmentVo;
 import com.kh.sseudam.common.FileUploader;
 import com.kh.sseudam.member.vo.MemberVo;
 
@@ -49,66 +44,63 @@ public class ReviewBoardWriteController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		 req.setCharacterEncoding("UTF-8");
+
 		// 세션 가져오기
 		HttpSession s = req.getSession();
 
 		// 로그인멤버 가져오기
 		MemberVo loginMember = (MemberVo) s.getAttribute("loginMember");
-		// 인코딩 >>필터에서 작업
-		// req.setCharacterEncoding("UTF-8");
 
 		// 데이터 꺼내기
-		String category = req.getParameter("category");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
-		Part f = req.getPart("f");
+		List<Part> parts = (List<Part>)req.getParts();
 
-		AttachmentVo attachmentVo = null;
+		System.out.println("타이틀 : " + req.getParameter("title"));
+		System.out.println("컨텐트 : " + req.getParameter("content"));
 
-		// -----------파일업로드 start-----------------
-		// 업로드한 파일 정보 디비에 저장
-		String rootPath = req.getServletContext().getRealPath("/");
-
-		if (f.getSubmittedFileName().length() > 0) {
-			ReviewB = FileUploader.uploadFile(f, rootPath);
-			// AttVo 데이터 뭉치기 (위에랑 같은식)
-			// attachmentVo = new AttachmentVo();
-			// AttachmentVo.setBoardNo(게시글번호) 게시글이 먼저 등록되어야 값을 알 수 있음
-			// attachmentVo.setChangeName(changeName);
-			// attachmentVo.setOriginName(originName);
-			// attachmentVo.setFilePath(filePath);
-		}
-
-		// req.getServletContext() : 최상단경로 얻어오는거
-
-		// -----------파일업로드 end-----------------
-
-		// 데이터 뭉치기
+		// 데이터 뭉치기 (게시글)
 		ReviewBoardVo rvo = new ReviewBoardVo();
 		rvo.setTitle(title);
 		rvo.setContent(content);
 		rvo.setWriterNo(loginMember.getNo());
 
-		// 디비 다녀오기
-		int result = ReviewBoardService.write(rvo, attachmentVo);
+		//데이터 뭉치기 (업로드파일)
+		List<ReviewBoardImgVo> imgList = new ArrayList<ReviewBoardImgVo>();
+	    int imgResult = 0;
 
-		// 최상단경로 구하는거 변수에 담기
+		// -----------파일업로드 start-----------------
+	
+		for(int i=0; i<parts.size(); i++) {
+		      
+	         Part part = parts.get(i);
+	         if(!part.getName().equals("f")) continue; //f로 들어온 Part가 아니면 스킵
+	         if(part.getSubmittedFileName().equals("")) continue; //업로드 된 파일 이름이 없으면 스킵
+	         
+	         String rootPath = req.getServletContext().getRealPath("/"); // 업로드한 파일 정보 디비에 저장
+	         System.out.println(rootPath);
+	         
+	         ReviewBoardImgVo imgVo = null;
+	         if(part.getSubmittedFileName().length() > 0) {
+	        	 imgVo = FileUploader.uploadReviewBoard(part, rootPath, "resources/upload/afterBoard");
+	         }
+	         imgList.add(imgVo);
+	         
+	      }
 
-		// 화면선택
-		if (result == 1) {
-			// 게시글 작성 성공 => 알람 + 게시글 목록 1번페이지로 이동
-			s.setAttribute("alertMsg", "게시글 작성 성공!");
-			resp.sendRedirect("/semi/board/list?pno=1");
-		} else {
-			// 게시글 작성실패 => 업로드된 파일 삭제, 알람, 에러페이지,
-			if (attachmentVo != null) {
-				String savePath = rootPath + attachmentVo.getFilePath() + "/" + attachmentVo.getChangeName();
-				new File(savePath).delete();
-			}
-			req.setAttribute("msg", "게시글 작성 실패");
-			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
-		}
-
+		System.out.println(rvo);
+		System.out.println(imgList);
+	      int result = new ReviewBoardService().write(rvo, imgList);
+	      
+	      if(result == 1) {
+	         req.getSession().setAttribute("alertMsg", "게시글 작성 완료");
+	         resp.sendRedirect("/sseudam/board/reviewBoardList?pno=1");
+	      }else {
+	         req.setAttribute("msg", "게시글 작성 실패!");
+	         req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
+	      }
 	}
+
 
 }
