@@ -169,8 +169,11 @@
     }
     
     #profile-img-btn{
-    	height: 50px;
-    	border: 1px solid red;
+    	height: 25px;
+        width: 180px;
+    	border: none;
+    	margin-top: 22%;
+        margin-left: 5%;
     }
 
 </style>
@@ -227,7 +230,6 @@
                         </div>
                         <div id="profile-img-btn">
                             <input type="file" id="profile-img" value="사진 선택" name="img">
-                            <input type="button" value="삭제">
                         </div>
                 </div>
                 <div id="profile-button-left">소개</div>

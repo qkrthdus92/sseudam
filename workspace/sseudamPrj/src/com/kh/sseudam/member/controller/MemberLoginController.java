@@ -17,7 +17,7 @@ import com.kh.sseudam.pro.vo.ProMemberJoinVo;
 
 @WebServlet(urlPatterns = "/login")
 public class MemberLoginController extends HttpServlet{
-
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -26,6 +26,15 @@ public class MemberLoginController extends HttpServlet{
 		//데이터 꺼냄
 		String memberId = req.getParameter("memberId");
 		String memberPwd = req.getParameter("memberPwd");
+		String nextUrl = req.getParameter("abc");
+		
+		System.out.println("현재 페이지 url 경로 원본 :" + nextUrl);
+		
+		int startIdx = nextUrl.indexOf("/sseudam");	// sseudam을 기준으로
+		nextUrl = nextUrl.substring(startIdx);		// 그 앞은 잘라줌
+		
+		System.out.println("자른 url 경로 :" + nextUrl);
+		
 		
 		System.out.println("로그인시 받은 아이디 :" + memberId);
 		System.out.println("로그인시 받은 비번 :" + memberPwd);
@@ -53,7 +62,7 @@ public class MemberLoginController extends HttpServlet{
 		
 		if(loginMember == null && proLoginMember == null) {
 			req.getSession().setAttribute("alertMsg", "2. 일치하는 회원정보가 없습니다.");
-			resp.sendRedirect("/sseudam/main");
+			resp.sendRedirect(nextUrl);
 		}
 		
 		//화면선택
@@ -61,7 +70,7 @@ public class MemberLoginController extends HttpServlet{
 			HttpSession s = req.getSession();
 			s.setAttribute("alertMsg", "로그인 성공");
 			s.setAttribute("loginMember", loginMember);
-			resp.sendRedirect("/sseudam/main");
+			resp.sendRedirect(nextUrl);
 			
 		}else {
 			req.getSession().setAttribute("alertMsg", "3. 일치하는 회원정보가 없습니다.");
@@ -71,7 +80,8 @@ public class MemberLoginController extends HttpServlet{
 			HttpSession s = req.getSession();
 			s.setAttribute("alertMsg", "로그인 성공");
 			s.setAttribute("proLoginMember", proLoginMember);
-			resp.sendRedirect("/sseudam/main");
+			resp.sendRedirect(nextUrl);
+			
 		}else {
 			req.getSession().setAttribute("alertMsg", "로그인 성공");
 		}
