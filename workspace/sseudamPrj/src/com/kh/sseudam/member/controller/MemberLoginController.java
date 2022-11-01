@@ -70,7 +70,6 @@ public class MemberLoginController extends HttpServlet{
 			HttpSession s = req.getSession();
 			s.setAttribute("alertMsg", "로그인 성공");
 			s.setAttribute("loginMember", loginMember);
-
 			
 		}else {
 			req.getSession().setAttribute("alertMsg", "3. 일치하는 회원정보가 없습니다.");
@@ -84,6 +83,7 @@ public class MemberLoginController extends HttpServlet{
 			
 		}else {
 			req.getSession().setAttribute("alertMsg", "로그인 성공");
+			resp.sendRedirect(nextUrl);
 		}
 		
 	}
