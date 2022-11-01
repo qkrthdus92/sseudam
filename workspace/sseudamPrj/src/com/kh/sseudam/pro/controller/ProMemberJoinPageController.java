@@ -1,6 +1,9 @@
 package com.kh.sseudam.pro.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
@@ -15,6 +18,7 @@ import javax.servlet.http.Part;
 import com.kh.sseudam.counsel.pro.vo.CertificateVo;
 import com.kh.sseudam.counsel.pro.vo.ProVo;
 import com.kh.sseudam.member.common.ProCertificateUploader;
+import com.kh.sseudam.member.common.ProfIleUploader;
 import com.kh.sseudam.member.vo.MemberVo;
 import com.kh.sseudam.pro.service.ProMemberService;
 import com.kh.sseudam.pro.vo.ProJoinPage1Vo;
@@ -80,15 +84,25 @@ public class ProMemberJoinPageController extends HttpServlet{
 			String education = req.getParameter("education");
 			String certificateName = req.getParameter("certificateName");
 			String certificateNum = req.getParameter("certificateNum");
-			Part imgPath = req.getPart("imgPath");
+			List<Part> partArr = (List<Part>) req.getParts();
+			
+			List<Part> filePart = new ArrayList<>();
+			
+			for(int i = 0 ; i < partArr.size(); ++i) {
+				String temp = partArr.get(i).getContentType();
+				if(temp.startsWith("image")) {
+					filePart.add(partArr.get(i));
+				}
+			}
+			
 			
 			//자격증 파일 업로드
 			String rootPath = req.getServletContext().getRealPath("/");
 			
 			String x = "";
 			
-			if(imgPath.getSubmittedFileName().length() > 0) {
-				x = ProCertificateUploader.uploadFile(imgPath, rootPath);
+			if(partArr[0].getSubmittedFileName().length() > 0) {
+				x = ProCertificateUploader.uploadFile(partArr[0], rootPath);
 				
 			}
 			
@@ -99,8 +113,8 @@ public class ProMemberJoinPageController extends HttpServlet{
 			proVo1.setPhone(phone);
 			proVo1.setEmail(email);
 			
-			proVo2.setImgPath(x);
 			proVo2.setEducation(education);
+			proVo2.setImgPath(x);
 			proVo2.setCertificateName(certificateName);
 			proVo2.setCertificateNum(certificateNum);
 			
@@ -129,13 +143,13 @@ public class ProMemberJoinPageController extends HttpServlet{
 			String counselType = req.getParameter("counselType");
 			String introduce = req.getParameter("introduce");
 			
-			//자격증 파일 업로드
+			//프로필 사진 파일 업로드
 			String rootPath = req.getServletContext().getRealPath("/");
 			
 			String x = "";
 			
 			if(img.getSubmittedFileName().length() > 0) {
-				x = ProCertificateUploader.uploadFile(img, rootPath);	
+				x = ProfIleUploader.profileUploadFile(img, rootPath);	
 			}
 			
 			System.out.println("프로필 x값 :" + x);

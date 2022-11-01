@@ -114,6 +114,12 @@
         font-size: 15px;
     }
 
+	.license-content{
+	    display: grid;
+  		grid-template-columns: 1fr 1fr 1fr;
+  		text-align: center;
+	}
+
 </style>
 </head>
 <body>
@@ -153,7 +159,8 @@
                 <div>최종학력</div>
                 <div><input type="text" name="education" placeholder="예) ㅇㅇㅇ대학교 석사" required></div>
             </div>
-
+            
+			<!-- 여기부터 자격증 파일 업로드 -->
             <div class="join-1nd">
                 <div>자격증 이름</div>
                 <div><input type="text" name="certificateName" required></div>
@@ -178,25 +185,77 @@
 				         jq("#cer-file-upload-name").val(fileName);
 				      });
 				   </script>
+				   <br>
+       				</div>
+        		          <div class="promember-certificate-file">
+			            	<%for(int i=0; i < voList.size(); i++) {%>
+				              <div><%= voList.get(i).getCertificateName() %></div>
+				              <div><%= voList.get(i).getCertificateNum() %></div>
+				              <div><span> <%= voList.get(i).getImgPath() %></span>
+				               <!-- 파일 업로드 삭제 : <i class='fa-solid fa-square-xmark x-btn' onclick='dbDeleteCer(this);'></i></div> -->
+				            <%}%>
+		          			</div>
+		          <div class="certificate-uplod-list cer-target">
+		          
+		           
+		       
+		          </div>
+		          <div class="pro-certificate">
+		            <div>
+					   <input type="button" value="추가" onclick="cerAd();" float: right; margin-top: 10px;">
+		            </div>
+		          	</div>
+				   
                     </div>
                 </div>
             </div>
             <div class="license">
                 <div class="license-header">&nbsp;자격증 목록</div>
-               	<div>자격증 이름</div>
-               	<div>자격증 번호</div>
-               	<div>증빙서류</div>
+                <div class="license-content">
+	                <span><input type="text" name="proName">자격증 이름</span>
+	               	<span><input type="text" name="proNo">자격증 번호</span>
+	               	<span><input type="text" name="proDoc">자격증 서류</span>
+                </div>
+                
+                <script>
+                
+                
+                </script>
+                
+                <!-- 여러 개 받기 -->
+ 				
+                
             </div>
             
             <div class="next">
               	<br>
                 <div><input type="submit" class="next-page" value="다음 페이지 작성"></div>
             </div>
-            
-        </div>
+        
 	</form>
-
     </nav>
+    
+	<script>
+      function cerAd() {
+      
+        const cerTarget = document.querySelector('.cer-target');
+        const newDiv0 = document.createElement('div');
+
+        const newDiv1 = document.createElement('div');
+        newDiv1.innerHTML = "<input type='text' class='cer-edit' name='cerName' placeholder='자격증이름을 입력하세요' />";
+        const newDiv2 = document.createElement('div');
+        newDiv2.innerHTML = "<input type='text' class='cer-edit' name='cerNum' placeholder='자격번호를 입력하세요' />";
+        const newDiv3 = document.createElement('div');
+        newDiv3.innerHTML = "<input type='file' class='upload-btn' name='f'  multiple/><i class='fa-solid fa-square-xmark x-btn' onclick='deleteCer(this);'></i>";
+
+        newDiv0.appendChild(newDiv1);
+        newDiv0.appendChild(newDiv2);
+        newDiv0.appendChild(newDiv3);
+
+        cerTarget.appendChild(newDiv0);
+
+      }
+	</script>
 
     <%@ include file="/views/common/footer.jsp" %>
 

@@ -32,6 +32,8 @@ public class MemberService {
 		MemberVo loginMember = new MemberDao().selectOne(conn, vo);
 		JDBCTemplate.close(conn);
 		
+		System.out.println("service에서 MemberVo : " + loginMember);
+		
 		return loginMember;
 		
 	}
@@ -45,12 +47,21 @@ public class MemberService {
 		
 	}
 
+	//아이디 찾기
 	public String findMemberId(MemberVo findvo) {
 		Connection conn = JDBCTemplate.getConnection();
 		String findId = new MemberDao().findMemberId(conn, findvo);
 		JDBCTemplate.close(conn);
 		return findId;
 	
+	}
+
+	//비밀번호 찾기
+	public String findMemberPwd(MemberVo findpwdvo) {
+		Connection conn = JDBCTemplate.getConnection();
+		String findPwd = new MemberDao().findMemberPwd(conn, findpwdvo);
+		JDBCTemplate.close(conn);
+		return findPwd;
 	}
 	
 

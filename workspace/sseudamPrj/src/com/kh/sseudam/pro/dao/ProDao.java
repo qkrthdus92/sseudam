@@ -35,6 +35,7 @@ public class ProDao {
 			pstmt.setString(6, proVo1.getEmail());
 			pstmt.setString(7, proVo2.getEducation());
 			pstmt.setString(8, proVo3.getCounselType());
+			//프로필 사진 파일 업로드
 			pstmt.setString(9, proVo3.getImg());
 			
 			result = pstmt.executeUpdate();
@@ -77,6 +78,7 @@ public class ProDao {
 		return result;
 	}
 	
+	//전문가 로그인
 	public ProMemberJoinVo prologin(Connection conn, MemberVo vo) {
 		
 		String sql = "SELECT P.NO , P.COUNSEL_TYPE_NO , P.ID , P.PWD , P.NAME , P.GENDER , P.PHONE , P.EMAIL , P.EDUCATION , P.PRICE , P.PRO_STATUS , P.IMG , P.JOIN_DATE , P.MODIFY_DATE , P.INTRODUCE , C.NO , C.PRO_MEMBER_NO , C.CERTIFICATE_NAME , C.CERTIFICATE_NUM , C.IMG_PATH FROM PRO_MEMBER P FULL OUTER JOIN CERTIFICATE C ON P.NO = C.NO WHERE ID = ? AND PWD = ?";
