@@ -25,6 +25,17 @@ public class ReviewBoardService {
 
 		return result;
 	}
+	
+	//후기게시판 댓글 갯수 조회
+	public int selectCountCmt(String bno) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		int result = ReviewBoardDao.selectCountCmt(conn, bno);
+
+		JDBCTemplate.close(conn);
+
+		return result;
+	}
 
 	// 후기게시판 게시글 목록 조회
 	public List<ReviewBoardVo> selectList(PageVo rpv) {
@@ -35,6 +46,35 @@ public class ReviewBoardService {
 		JDBCTemplate.close(conn);
 
 		return x;
+	}
+	
+	//댓글 삭제를 위한 리스트 조회
+	
+	//후기게시판 댓글 조회
+	public List<ReviewBoardCmtVo> selectCmt(PageVo cmtPv, String bno, String cmtNo) {
+		Connection conn = JDBCTemplate.getConnection();
+
+		List<ReviewBoardCmtVo> x = ReviewBoardDao.selectCmt(conn, cmtPv, bno);
+
+		JDBCTemplate.close(conn);
+
+		return x;
+	}
+	
+	//후기게시판 게시글 상세조회
+	public ReviewBoardVo detail(String bno) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		ReviewBoardVo rvo = null;
+		
+		int result = ReviewBoardDao.increaseViews(conn, bno);
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+			rvo = ReviewBoardDao.detail(conn, bno);	
+		}
+		JDBCTemplate.close(conn);
+		
+		return rvo;
 	}
 
 	//후기게시판 게시글 작성
@@ -60,43 +100,25 @@ public class ReviewBoardService {
 		return result * result2;
 	}
 
-	//후기게시판 댓글 갯수 조회
-	public int selectCountCmt(String bno) {
+	//후기게시판 게시글 수정
+	public int edit(ReviewBoardVo rvo) {
 		Connection conn = JDBCTemplate.getConnection();
-
-		int result = ReviewBoardDao.selectCountCmt(conn, bno);
-
-		JDBCTemplate.close(conn);
-
-		return result;
-	}
-
-	//후기게시판 댓글 조회
-	public List<ReviewBoardCmtVo> selectCmt(PageVo cmtPv, String bno, String cmtNo) {
-		Connection conn = JDBCTemplate.getConnection();
-
-		List<ReviewBoardCmtVo> x = ReviewBoardDao.selectCmt(conn, cmtPv, bno);
-
-		JDBCTemplate.close(conn);
-
-		return x;
-	}
-
-	//후기게시판 상세조회
-	public ReviewBoardVo detail(String bno) {
 		
-		Connection conn = JDBCTemplate.getConnection();
-		ReviewBoardVo rvo = null;
+		int result = ReviewBoardDao.edit(conn, rvo);
 		
-		int result = ReviewBoardDao.increaseViews(conn, bno);
 		if(result == 1) {
 			JDBCTemplate.commit(conn);
-			rvo = ReviewBoardDao.detail(conn, bno);	
+		}else {
+			JDBCTemplate.rollback(conn);
 		}
-		JDBCTemplate.close(conn);
-		
-		return rvo;
+		return result;	
 	}
+
+
+
+
+
+
 
 	
 	
