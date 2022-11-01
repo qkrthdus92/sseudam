@@ -9,6 +9,7 @@ pageEncoding="UTF-8"%>
 	String root1 = request.getContextPath();
 	String bno = (String)request.getAttribute("bno");
 	String pno = (String)request.getAttribute("pno");
+  String dno = (String)request.getAttribute("dno");
 	String status = (String)request.getAttribute("status");
 	String search = (String)request.getAttribute("search");
 	String searchType = (String)request.getAttribute("searchType");
@@ -114,6 +115,7 @@ pageEncoding="UTF-8"%>
         <input type="hidden" name="search" value="<%=search%>">
         <input type="hidden" name="searchType" value="<%=searchType%>">
         <input type="hidden" name="cno" value="<%=cno%>">
+        <input type="hidden" name="dno" value="<%=dno%>">
         <header class="admin-main-header flex-between">
           <h1>자유게시판 수정</h1>
           <div class="btn-set">

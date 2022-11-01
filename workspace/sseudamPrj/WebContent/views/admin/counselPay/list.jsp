@@ -1,5 +1,25 @@
+<%@page import="com.kh.sseudam.admin.counselPay.vo.CounselPayVo"%>
+<%@page import="java.util.List"%>
+<%@page import="com.kh.sseudam.common.PageVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
+pageEncoding="UTF-8"%> 
+<% 
+
+	String root1 = request.getContextPath();
+	String pno = (String)request.getAttribute("pno");
+	String status = (String)request.getAttribute("status");
+	String search = (String)request.getAttribute("search");
+	String searchType = (String)request.getAttribute("searchType");
+	String startDate = (String)request.getAttribute("startDate");
+	String endDate = (String)request.getAttribute("endDate");
+	String range = (String)request.getAttribute("range");
+	PageVo pv = (PageVo)request.getAttribute("pv");
+	String listCount = (String)request.getAttribute("listCount");
+	List<CounselPayVo> list = (List<CounselPayVo>)request.getAttribute("list");
+	
+	boolean isSearchTypeAll = searchType.equals("memberInfo") || searchType.equals("proInfo") ;
+
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,7 +36,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/counselPay/list.css"
+      href="<%=root1%>/resources/css/admin/counselPay/list.css?ver=1"
     />
 
     <style>
@@ -47,7 +67,16 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
         height: 20px;
         border-radius: 5px;
         font-size: 15px;
+        cursor: pointer;
       }
+
+      #range + span{
+        margin-left: 3px;
+       
+        color: var(--main);
+        font-size: 14px;
+      }
+
     </style>
   </head>
   <body>
@@ -58,8 +87,12 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
         method="get"
         class="admin-counselPay-form"
       >
+      <input type="text" class="hidden" name="pno" value="1">
         <header class="admin-main-header">
-          <h1>상담 결제 내역</h1>
+          <h1> <a
+            href="<%=root%>/admin/counselPay/list?pno=1&search=&searchType=memberInfo&status=all&range="
+            >상담 결제 내역</a
+          ></h1>
         </header>
         <section class="admin-main-section">
           <div class="admin-main-section-top flex-start">
@@ -68,8 +101,9 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
                 type="text"
                 placeholder="이름 또는 아이디를 입력해주세요"
                 name="search"
+                onkeyup="if(window.event.keyCode==13){document.querySelector('.admin-counselPay-form').submit();}"
               />
-              <i class="fa-solid fa-magnifying-glass"></i>
+              <i class="fa-solid fa-magnifying-glass "></i>
             </div>
             <select name="searchType" id="">
               <option value="memberInfo">회원정보</option>
@@ -82,9 +116,12 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
             <div class="admin-main-board-top">
               <div class="flex">
                 <div class="total-num-info">
-                  <span>전체 결제 내역</span><span>10</span>
+                  <span>전체 결제 내역</span><span><%= listCount %></span>
                 </div>
-                <input type="text" id="range" name="range" value="" />
+                <div >
+                  <input type="text" id="range" name="range" value="" />
+                  <span>결제날짜 범위를 지정하세요</span> 
+                </div>
               </div>
               <div class="main-select-btn">
                 <select name="status" id="">
@@ -115,6 +152,42 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
                 inputSearchForm.submit();
               });
             </script>
+             <script>
+              console.log('되나용')
+              //검색어, 검색타입, status 검색후에도 유지시키기
+  
+              //검색어
+              const searchInput = document.querySelector('input[name=search]');
+  
+              const reqSearch = "<%= search%>";
+             
+              if('<%=search%>' != 'null') {
+                searchInput.value = "<%= search%>";
+              }
+  
+              //검색타입
+  
+              const searchTypeArr = document.querySelectorAll('select[name=searchType] option');
+              const reqSearchType = "<%=searchType%>";
+              for(let i=0; i<searchTypeArr.length; i++) {
+                const x = searchTypeArr[i].value;
+                if(x == reqSearchType) {
+                  searchTypeArr[i].selected = true;
+                }
+              }
+  
+              //status
+              const statusArr = document.querySelectorAll('select[name=status] option');
+              const reqStatusType = "<%=status%>";
+              for(let i=0; i<statusArr.length; i++) {
+                const x = statusArr[i].value;
+                if(x == reqStatusType) {
+                  statusArr[i].selected = true;
+                }
+              }
+  
+             
+            </script>
             <script>
               $(function () {
                 $("#range").daterangepicker(
@@ -144,8 +217,8 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
                         "12월",
                       ],
                     },
-                    startDate: "2022-08-01",
-                    endDate: new Date(),
+                    startDate: "<%=startDate%>",
+                    endDate: "<%=endDate%>",
 
                     // drops: "auto",
                   },
@@ -165,8 +238,8 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
             </script>
             <div class="admin-main-board">
               <div>번호</div>
-              <div>상담날짜</div>
               <div>결제날짜</div>
+              <div>상담날짜</div>
               <div>전문가아이디</div>
               <div>전문가이름</div>
               <div>회원아이디</div>
@@ -176,21 +249,169 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
               <div>별점</div>
               <div>상담상태</div>
 
-              <%for(int i=1; i<=10; i++) {%>
-              <div>1</div>
-              <div>2022-10-16</div>
-              <div>2022-10-16 12:12:12</div>
-              <div>hyewon</div>
-              <div>한혜원</div>
-              <div>bonghee</div>
-              <div>봉달희</div>
-              <div>50000</div>
-              <div>휴대폰</div>
-              <div>3</div>
-              <div>상담완료</div>
+              <%for(int i=0; i<list.size(); i++) {%>
+              <div><%=list.get(i).getNo() %></div>
+              <div><%= list.get(i).getPayDate() %></div>
+              <div><%= list.get(i).getAdviceDate().substring(0,10)%></div>
+              <div><%= list.get(i).getProId() %></div>
+              <div><%= list.get(i).getProName() %></div>
+              <div><%= list.get(i).getMemberId() %></div>
+              <div><%= list.get(i).getMemberName() %></div>
+              <div><%= list.get(i).getPrice() %></div>
+              <div><%= list.get(i).getPayway()%></div>
+              <%if(list.get(i).getStar()!=null){ %>
+              <div><%= list.get(i).getStar() %></div>
+              <%}else { %>
+              <div>-</div>
+              <%} %>
+              <div><%= list.get(i).getStatus()%></div>
 
               <%}%>
             </div>
+            
+            <!-- 1. 조회 -->
+          	<% if(status.equals("all") && search.equals("") && isSearchTypeAll) { %>
+	          <div class="page-area">
+	            <%if(pv.getStartPage()!=1) {%>
+	            <a href="<%=root1%>/admin/counselPay/list?status=all&pno=<%=pv.getStartPage()-1 %>&searchType=memberInfo&search=&range=<%=range%>" class=""><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
+	            <%}%>
+		        <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
+		          <a href="<%=root1%>/admin/counselPay/list?status=all&pno=<%=i %>&searchType=memberInfo&search=&range=<%=range%>" class=""><span><%=i %></span></a>
+		        <%}%>
+		        <%if(pv.getEndPage() != pv.getMaxPage()) { %>
+		         <a href="<%=root1%>/admin/counselPay/list?status=all&pno=<%=pv.getEndPage()+1 %>&searchType=memberInfo&search=&range=<%=range%>" class=""><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
+		        <%}%>
+          
+	          </div>
+          	<%} %>
+          	
+          	<!-- 2. 조회 -->
+          	<% if(status.equals("F") && search.equals("") && isSearchTypeAll) { %>
+	          <div class="page-area">
+	            <%if(pv.getStartPage()!=1) {%>
+	            <a href="<%=root1%>/admin/counselPay/list?status=F&pno=<%=pv.getStartPage()-1 %>&searchType=memberInfo&search=&range=<%=range%>" class=""><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
+	            <%}%>
+		        <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
+		          <a href="<%=root1%>/admin/counselPay/list?status=F&pno=<%=i %>&searchType=memberInfo&search=&range=<%=range%>" class=""><span><%=i %></span></a>
+		        <%}%>
+		        <%if(pv.getEndPage() != pv.getMaxPage()) { %>
+		         <a href="<%=root1%>/admin/counselPay/list?status=F&pno=<%=pv.getEndPage()+1 %>&searchType=memberInfo&search=&range=<%=range%>" class=""><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
+		        <%}%>
+          
+	          </div>
+          	<%} %>
+          	
+          	<!-- 3. 조회 -->
+          	<% if(status.equals("C") && search.equals("") && isSearchTypeAll) { %>
+	          <div class="page-area">
+	            <%if(pv.getStartPage()!=1) {%>
+	            <a href="<%=root1%>/admin/counselPay/list?status=C&pno=<%=pv.getStartPage()-1 %>&searchType=memberInfo&search=&range=<%=range%>" class=""><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
+	            <%}%>
+		        <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
+		          <a href="<%=root1%>/admin/counselPay/list?status=C&pno=<%=i %>&searchType=memberInfo&search=&range=<%=range%>" class=""><span><%=i %></span></a>
+		        <%}%>
+		        <%if(pv.getEndPage() != pv.getMaxPage()) { %>
+		         <a href="<%=root1%>/admin/counselPay/list?status=C&pno=<%=pv.getEndPage()+1 %>&searchType=memberInfo&search=&range=<%=range%>" class=""><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
+		        <%}%>
+          
+	          </div>
+          	<%} %>
+          	
+          	<!-- 4. 조회 -->
+          	<% if(status.equals("all") && !search.equals("") && searchType.equals("memberInfo")) { %>
+	          <div class="page-area">
+	            <%if(pv.getStartPage()!=1) {%>
+	            <a href="<%=root1%>/admin/counselPay/list?status=all&pno=<%=pv.getStartPage()-1 %>&searchType=memberInfo&search=<%=search %>&range=<%=range%>" class=""><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
+	            <%}%>
+		        <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
+		          <a href="<%=root1%>/admin/counselPay/list?status=all&pno=<%=i %>&searchType=memberInfo&search=<%=search %>&range=<%=range%>" class=""><span><%=i %></span></a>
+		        <%}%>
+		        <%if(pv.getEndPage() != pv.getMaxPage()) { %>
+		         <a href="<%=root1%>/admin/counselPay/list?status=all&pno=<%=pv.getEndPage()+1 %>&searchType=memberInfo&search=<%=search %>&range=<%=range%>" class=""><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
+		        <%}%>
+          
+	          </div>
+          	<%} %>
+          	
+          	<!-- 5. 조회 -->
+          	<% if(status.equals("F") && !search.equals("") && searchType.equals("memberInfo")) { %>
+	          <div class="page-area">
+	            <%if(pv.getStartPage()!=1) {%>
+	            <a href="<%=root1%>/admin/counselPay/list?status=F&pno=<%=pv.getStartPage()-1 %>&searchType=memberInfo&search=<%=search %>&range=<%=range%>" class=""><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
+	            <%}%>
+		        <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
+		          <a href="<%=root1%>/admin/counselPay/list?status=F&pno=<%=i %>&searchType=memberInfo&search=<%=search %>&range=<%=range%>" class=""><span><%=i %></span></a>
+		        <%}%>
+		        <%if(pv.getEndPage() != pv.getMaxPage()) { %>
+		         <a href="<%=root1%>/admin/counselPay/list?status=F&pno=<%=pv.getEndPage()+1 %>&searchType=memberInfo&search=<%=search %>&range=<%=range%>" class=""><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
+		        <%}%>
+          
+	          </div>
+          	<%} %>
+          	
+          	<!-- 6. 조회 -->
+          	<% if(status.equals("C") && !search.equals("") && searchType.equals("memberInfo")) { %>
+	          <div class="page-area">
+	            <%if(pv.getStartPage()!=1) {%>
+	            <a href="<%=root1%>/admin/counselPay/list?status=C&pno=<%=pv.getStartPage()-1 %>&searchType=memberInfo&search=<%=search %>&range=<%=range%>" class=""><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
+	            <%}%>
+		        <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
+		          <a href="<%=root1%>/admin/counselPay/list?status=C&pno=<%=i %>&searchType=memberInfo&search=<%=search %>&range=<%=range%>" class=""><span><%=i %></span></a>
+		        <%}%>
+		        <%if(pv.getEndPage() != pv.getMaxPage()) { %>
+		         <a href="<%=root1%>/admin/counselPay/list?status=C&pno=<%=pv.getEndPage()+1 %>&searchType=memberInfo&search=<%=search %>&range=<%=range%>" class=""><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
+		        <%}%>
+          
+	          </div>
+          	<%} %>
+          	
+          	<!-- 7. 조회 -->
+          	<% if(status.equals("all") && !search.equals("") && searchType.equals("proInfo")) { %>
+	          <div class="page-area">
+	            <%if(pv.getStartPage()!=1) {%>
+	            <a href="<%=root1%>/admin/counselPay/list?status=all&pno=<%=pv.getStartPage()-1 %>&searchType=proInfo&search=<%=search %>&range=<%=range%>" class=""><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
+	            <%}%>
+		        <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
+		          <a href="<%=root1%>/admin/counselPay/list?status=all&pno=<%=i %>&searchType=proInfo&search=<%=search %>&range=<%=range%>" class=""><span><%=i %></span></a>
+		        <%}%>
+		        <%if(pv.getEndPage() != pv.getMaxPage()) { %>
+		         <a href="<%=root1%>/admin/counselPay/list?status=all&pno=<%=pv.getEndPage()+1 %>&searchType=proInfo&search=<%=search %>&range=<%=range%>" class=""><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
+		        <%}%>
+          
+	          </div>
+          	<%} %>
+          	
+          	<!-- 8. 조회 -->
+          	<% if(status.equals("F") && !search.equals("") && searchType.equals("proInfo")) { %>
+	          <div class="page-area">
+	            <%if(pv.getStartPage()!=1) {%>
+	            <a href="<%=root1%>/admin/counselPay/list?status=F&pno=<%=pv.getStartPage()-1 %>&searchType=proInfo&search=<%=search %>&range=<%=range%>" class=""><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
+	            <%}%>
+		        <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
+		          <a href="<%=root1%>/admin/counselPay/list?status=F&pno=<%=i %>&searchType=proInfo&search=<%=search %>&range=<%=range%>" class=""><span><%=i %></span></a>
+		        <%}%>
+		        <%if(pv.getEndPage() != pv.getMaxPage()) { %>
+		         <a href="<%=root1%>/admin/counselPay/list?status=F&pno=<%=pv.getEndPage()+1 %>&searchType=proInfo&search=<%=search %>&range=<%=range%>" class=""><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
+		        <%}%>
+          
+	          </div>
+          	<%} %>
+          	
+          	<!-- 9. 조회 -->
+          	<% if(status.equals("C") && !search.equals("") && searchType.equals("proInfo")) { %>
+	          <div class="page-area">
+	            <%if(pv.getStartPage()!=1) {%>
+	            <a href="<%=root1%>/admin/counselPay/list?status=C&pno=<%=pv.getStartPage()-1 %>&searchType=proInfo&search=<%=search %>&range=<%=range%>" class=""><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
+	            <%}%>
+		        <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
+		          <a href="<%=root1%>/admin/counselPay/list?status=C&pno=<%=i %>&searchType=proInfo&search=<%=search %>&range=<%=range%>" class=""><span><%=i %></span></a>
+		        <%}%>
+		        <%if(pv.getEndPage() != pv.getMaxPage()) { %>
+		         <a href="<%=root1%>/admin/counselPay/list?status=C&pno=<%=pv.getEndPage()+1 %>&searchType=proInfo&search=<%=search %>&range=<%=range%>" class=""><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
+		        <%}%>
+          
+	          </div>
+          	<%} %>
           </div>
         </section>
       </form>

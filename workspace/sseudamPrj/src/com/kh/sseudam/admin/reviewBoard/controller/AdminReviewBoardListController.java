@@ -1,4 +1,4 @@
-package com.kh.sseudam.admin.freeBoard.controller;
+package com.kh.sseudam.admin.reviewBoard.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,17 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.sseudam.admin.freeBoard.service.AdminFreeBoardService;
 import com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardVo;
-import com.kh.sseudam.admin.pro.service.AdminProService;
 import com.kh.sseudam.admin.reviewBoard.service.AdminReviewBoardService;
 import com.kh.sseudam.common.PageVo;
 import com.kh.sseudam.common.Paging;
 import com.kh.sseudam.counsel.pro.vo.ProVo;
 
-@WebServlet(urlPatterns = "/admin/freeBoard/list")
-public class AdminFreeBoardListController extends HttpServlet{
+@WebServlet(urlPatterns = "/admin/reviewBoard/list")
+public class AdminReviewBoardListController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		req.setCharacterEncoding("UTF-8");
 		String pno = req.getParameter("pno");
 		String status = req.getParameter("status");
@@ -33,7 +33,6 @@ public class AdminFreeBoardListController extends HttpServlet{
 			search1 = "";
 		}
 		
-		//List<ProVo> proList = null;
 		int currentPage = Integer.parseInt(req.getParameter("pno"));
 		int pageLimit = 5;
 		int boardLimit = 10;
@@ -48,9 +47,9 @@ public class AdminFreeBoardListController extends HttpServlet{
 		//1.모든게시글조회 (+메뉴바에서 처음 접속했을때 페이지)
 		if(status.equals("all") && search1.equals("") && isSearchTypeAll) {
 	
-			listCount = new AdminFreeBoardService().getCntFreeAll();
+			listCount = new AdminReviewBoardService().getCntFreeAll();
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
-			freeBoardList = new AdminFreeBoardService().getFreeAll(pv); 
+			freeBoardList = new AdminReviewBoardService().getFreeAll(pv); 
 			
 			req.setAttribute("pno", pno);
 			req.setAttribute("status", "all");
@@ -60,16 +59,16 @@ public class AdminFreeBoardListController extends HttpServlet{
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
 			
-			req.getRequestDispatcher("/views/admin/freeBoard/list.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/admin/reviewBoard/list.jsp").forward(req, resp);
 			
 		}
 		
 		//2.게시완료조회
 		if(status.equals("F") && search1.equals("") && isSearchTypeAll) {
 			
-			listCount = new AdminFreeBoardService().getCntFreeF();
+			listCount = new AdminReviewBoardService().getCntFreeF();
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
-			freeBoardList = new AdminFreeBoardService().getFreeF(pv); 
+			freeBoardList = new AdminReviewBoardService().getFreeF(pv); 
 			
 			req.setAttribute("pno", pno);
 			req.setAttribute("status", "F");
@@ -79,16 +78,16 @@ public class AdminFreeBoardListController extends HttpServlet{
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
 			
-			req.getRequestDispatcher("/views/admin/freeBoard/list.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/admin/reviewBoard/list.jsp").forward(req, resp);
 			
 		}
 		
 		//3.게시취소조회
 		if(status.equals("C") && search1.equals("") && isSearchTypeAll) {
 			
-			listCount = new AdminFreeBoardService().getCntFreeC();
+			listCount = new AdminReviewBoardService().getCntFreeC();
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
-			freeBoardList = new AdminFreeBoardService().getFreeC(pv); 
+			freeBoardList = new AdminReviewBoardService().getFreeC(pv); 
 			
 			req.setAttribute("pno", pno);
 			req.setAttribute("status", "C");
@@ -98,7 +97,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
 			
-			req.getRequestDispatcher("/views/admin/freeBoard/list.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/admin/reviewBoard/list.jsp").forward(req, resp);
 			
 		}
 		
@@ -106,9 +105,9 @@ public class AdminFreeBoardListController extends HttpServlet{
 		if(status.equals("all") && !search1.equals("") && searchType.equals("title")) {
 			
 			String search = search1.trim();
-			listCount = new AdminFreeBoardService().getCntFreeTitleAll(search);
+			listCount = new AdminReviewBoardService().getCntFreeTitleAll(search);
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
-			freeBoardList = new AdminFreeBoardService().getFreeTitleAll(pv, search); 
+			freeBoardList = new AdminReviewBoardService().getFreeTitleAll(pv, search); 
 			
 			req.setAttribute("pno", pno);
 			req.setAttribute("status", "all");
@@ -118,7 +117,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
 			
-			req.getRequestDispatcher("/views/admin/freeBoard/list.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/admin/reviewBoard/list.jsp").forward(req, resp);
 			
 		}
 		
@@ -126,9 +125,9 @@ public class AdminFreeBoardListController extends HttpServlet{
 		if(status.equals("F") && !search1.equals("") && searchType.equals("title")) {
 			
 			String search = search1.trim();
-			listCount = new AdminFreeBoardService().getCntFreeTitleF(search);
+			listCount = new AdminReviewBoardService().getCntFreeTitleF(search);
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
-			freeBoardList = new AdminFreeBoardService().getFreeTitleF(pv, search); 
+			freeBoardList = new AdminReviewBoardService().getFreeTitleF(pv, search); 
 			
 			req.setAttribute("pno", pno);
 			req.setAttribute("status", "F");
@@ -138,7 +137,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
 			
-			req.getRequestDispatcher("/views/admin/freeBoard/list.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/admin/reviewBoard/list.jsp").forward(req, resp);
 			
 		}
 		
@@ -146,9 +145,9 @@ public class AdminFreeBoardListController extends HttpServlet{
 		if(status.equals("C") && !search1.equals("") && searchType.equals("title")) {
 			
 			String search = search1.trim();
-			listCount = new AdminFreeBoardService().getCntFreeTitleC(search);
+			listCount = new AdminReviewBoardService().getCntFreeTitleC(search);
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
-			freeBoardList = new AdminFreeBoardService().getFreeTitleC(pv, search); 
+			freeBoardList = new AdminReviewBoardService().getFreeTitleC(pv, search); 
 			
 			req.setAttribute("pno", pno);
 			req.setAttribute("status", "C");
@@ -158,7 +157,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
 			
-			req.getRequestDispatcher("/views/admin/freeBoard/list.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/admin/reviewBoard/list.jsp").forward(req, resp);
 			
 		}
 		
@@ -166,9 +165,9 @@ public class AdminFreeBoardListController extends HttpServlet{
 		if(status.equals("all") && !search1.equals("") && searchType.equals("content")) {
 			
 			String search = search1.trim();
-			listCount = new AdminFreeBoardService().getCntFreeContentAll(search);
+			listCount = new AdminReviewBoardService().getCntFreeContentAll(search);
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
-			freeBoardList = new AdminFreeBoardService().getFreeContentAll(pv, search); 
+			freeBoardList = new AdminReviewBoardService().getFreeContentAll(pv, search); 
 			
 			req.setAttribute("pno", pno);
 			req.setAttribute("status", "all");
@@ -178,7 +177,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
 			
-			req.getRequestDispatcher("/views/admin/freeBoard/list.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/admin/reviewBoard/list.jsp").forward(req, resp);
 			
 		}
 		
@@ -186,9 +185,9 @@ public class AdminFreeBoardListController extends HttpServlet{
 		if(status.equals("F") && !search1.equals("") && searchType.equals("content")) {
 			
 			String search = search1.trim();
-			listCount = new AdminFreeBoardService().getCntFreeContentF(search);
+			listCount = new AdminReviewBoardService().getCntFreeContentF(search);
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
-			freeBoardList = new AdminFreeBoardService().getFreeContentF(pv, search); 
+			freeBoardList = new AdminReviewBoardService().getFreeContentF(pv, search); 
 			
 			req.setAttribute("pno", pno);
 			req.setAttribute("status", "F");
@@ -198,7 +197,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
 			
-			req.getRequestDispatcher("/views/admin/freeBoard/list.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/admin/reviewBoard/list.jsp").forward(req, resp);
 			
 		}
 		
@@ -206,9 +205,9 @@ public class AdminFreeBoardListController extends HttpServlet{
 		if(status.equals("C") && !search1.equals("") && searchType.equals("content")) {
 			
 			String search = search1.trim();
-			listCount = new AdminFreeBoardService().getCntFreeContentC(search);
+			listCount = new AdminReviewBoardService().getCntFreeContentC(search);
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
-			freeBoardList = new AdminFreeBoardService().getFreeContentC(pv, search); 
+			freeBoardList = new AdminReviewBoardService().getFreeContentC(pv, search); 
 			
 			req.setAttribute("pno", pno);
 			req.setAttribute("status", "C");
@@ -218,7 +217,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
 			
-			req.getRequestDispatcher("/views/admin/freeBoard/list.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/admin/reviewBoard/list.jsp").forward(req, resp);
 			
 		}
 		
@@ -226,9 +225,9 @@ public class AdminFreeBoardListController extends HttpServlet{
 		if(status.equals("all") && !search1.equals("") && searchType.equals("writer")) {
 			
 			String search = search1.trim();
-			listCount = new AdminFreeBoardService().getCntFreeWriterAll(search);
+			listCount = new AdminReviewBoardService().getCntFreeWriterAll(search);
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
-			freeBoardList = new AdminFreeBoardService().getFreeWriterAll(pv, search); 
+			freeBoardList = new AdminReviewBoardService().getFreeWriterAll(pv, search); 
 			
 			req.setAttribute("pno", pno);
 			req.setAttribute("status", "all");
@@ -238,7 +237,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
 			
-			req.getRequestDispatcher("/views/admin/freeBoard/list.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/admin/reviewBoard/list.jsp").forward(req, resp);
 			
 		}
 		
@@ -246,9 +245,9 @@ public class AdminFreeBoardListController extends HttpServlet{
 		if(status.equals("F") && !search1.equals("") && searchType.equals("writer")) {
 			
 			String search = search1.trim();
-			listCount = new AdminFreeBoardService().getCntFreeWriterF(search);
+			listCount = new AdminReviewBoardService().getCntFreeWriterF(search);
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
-			freeBoardList = new AdminFreeBoardService().getFreeWriterF(pv, search); 
+			freeBoardList = new AdminReviewBoardService().getFreeWriterF(pv, search); 
 			
 			req.setAttribute("pno", pno);
 			req.setAttribute("status", "F");
@@ -258,7 +257,7 @@ public class AdminFreeBoardListController extends HttpServlet{
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
 			
-			req.getRequestDispatcher("/views/admin/freeBoard/list.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/admin/reviewBoard/list.jsp").forward(req, resp);
 			
 		}
 		
@@ -266,9 +265,9 @@ public class AdminFreeBoardListController extends HttpServlet{
 		if(status.equals("C") && !search1.equals("") && searchType.equals("writer")) {
 			
 			String search = search1.trim();
-			listCount = new AdminFreeBoardService().getCntFreeWriterC(search);
+			listCount = new AdminReviewBoardService().getCntFreeWriterC(search);
 			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
-			freeBoardList = new AdminFreeBoardService().getFreeWriterC(pv, search); 
+			freeBoardList = new AdminReviewBoardService().getFreeWriterC(pv, search); 
 			
 			req.setAttribute("pno", pno);
 			req.setAttribute("status", "C");
@@ -278,11 +277,9 @@ public class AdminFreeBoardListController extends HttpServlet{
 			req.setAttribute("pv", pv);
 			req.setAttribute("listCount", Integer.toString(listCount));
 			
-			req.getRequestDispatcher("/views/admin/freeBoard/list.jsp").forward(req, resp);
+			req.getRequestDispatcher("/views/admin/reviewBoard/list.jsp").forward(req, resp);
 			
 		}
-		
-	
 		
 	}
 

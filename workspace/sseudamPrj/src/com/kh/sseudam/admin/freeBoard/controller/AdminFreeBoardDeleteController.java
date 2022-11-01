@@ -18,6 +18,7 @@ public class AdminFreeBoardDeleteController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String bno = req.getParameter("bno");
+		String dno = req.getParameter("dno");
 		String pno = req.getParameter("pno");
 		String status = req.getParameter("status");
 		//리다이렉트로 넘겨야하기때문에 인코딩해야함!

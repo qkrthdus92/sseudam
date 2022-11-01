@@ -1,4 +1,4 @@
-package com.kh.sseudam.admin.freeBoard.dao;
+package com.kh.sseudam.admin.reviewBoard.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,15 +9,14 @@ import java.util.List;
 
 import com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardCmtVo;
 import com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardVo;
-import com.kh.sseudam.board.vo.FreeBoardVo;
 import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.common.PageVo;
 
-public class AdminFreeBoardDao {
-
+public class AdminReviewBoardDao {
+	
 	//모든게시글 카운트
 	public int getCntFreeAll(Connection conn) {
-		String sql = "SELECT COUNT(*) FROM FREE_BOARD";
+		String sql = "SELECT COUNT(*) FROM REVIEW_BOARD";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -40,7 +39,7 @@ public class AdminFreeBoardDao {
 
 	//게시완료 카운트
 	public int getCntFreeF(Connection conn) {
-		String sql = "SELECT COUNT(*) FROM FREE_BOARD WHERE DELETE_YN = 'N'";
+		String sql = "SELECT COUNT(*) FROM REVIEW_BOARD WHERE DELETE_YN = 'N'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -63,7 +62,7 @@ public class AdminFreeBoardDao {
 
 	//게시취소 카운트
 	public int getCntFreeC(Connection conn) {
-		String sql = "SELECT COUNT(*) FROM FREE_BOARD WHERE DELETE_YN = 'Y'";
+		String sql = "SELECT COUNT(*) FROM REVIEW_BOARD WHERE DELETE_YN = 'Y'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -86,7 +85,7 @@ public class AdminFreeBoardDao {
 
 	//제목+모든 카운트
 	public int getCntFreeTitleAll(Connection conn, String search) {
-		String sql = "SELECT COUNT(*) FROM FREE_BOARD WHERE TITLE LIKE ?";
+		String sql = "SELECT COUNT(*) FROM REVIEW_BOARD WHERE TITLE LIKE ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -110,7 +109,7 @@ public class AdminFreeBoardDao {
 
 	//제목+완료 카운트
 	public int getCntFreeTitleF(Connection conn, String search) {
-		String sql = "SELECT COUNT(*) FROM FREE_BOARD WHERE TITLE LIKE ? AND DELETE_YN = 'N'";
+		String sql = "SELECT COUNT(*) FROM REVIEW_BOARD WHERE TITLE LIKE ? AND DELETE_YN = 'N'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -134,7 +133,7 @@ public class AdminFreeBoardDao {
 
 	//제목+취소 카운트
 	public int getCntFreeTitleC(Connection conn, String search) {
-		String sql = "SELECT COUNT(*) FROM FREE_BOARD WHERE TITLE LIKE ? AND DELETE_YN = 'Y'";
+		String sql = "SELECT COUNT(*) FROM REVIEW_BOARD WHERE TITLE LIKE ? AND DELETE_YN = 'Y'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -158,7 +157,7 @@ public class AdminFreeBoardDao {
 
 	//내용+모든 카운트
 	public int getCntFreeContentAll(Connection conn, String search) {
-		String sql = "SELECT COUNT(*) FROM FREE_BOARD WHERE CONTENT LIKE ? ";
+		String sql = "SELECT COUNT(*) FROM REVIEW_BOARD WHERE CONTENT LIKE ? ";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -182,7 +181,7 @@ public class AdminFreeBoardDao {
 
 	//내용+완료 카운트
 	public int getCntFreeContentF(Connection conn, String search) {
-		String sql = "SELECT COUNT(*) FROM FREE_BOARD WHERE CONTENT LIKE ? AND DELETE_YN = 'N'";
+		String sql = "SELECT COUNT(*) FROM REVIEW_BOARD WHERE CONTENT LIKE ? AND DELETE_YN = 'N'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -206,7 +205,7 @@ public class AdminFreeBoardDao {
 
 	//내용+취소 카운트
 	public int getCntFreeContentC(Connection conn, String search) {
-		String sql = "SELECT COUNT(*) FROM FREE_BOARD WHERE CONTENT LIKE ? AND DELETE_YN = 'Y'";
+		String sql = "SELECT COUNT(*) FROM REVIEW_BOARD WHERE CONTENT LIKE ? AND DELETE_YN = 'Y'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -230,7 +229,7 @@ public class AdminFreeBoardDao {
 
 	//작성자+모든 카운트
 	public int getCntFreeWriterAll(Connection conn, String search) {
-		String sql = "SELECT COUNT(*) FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE NICK LIKE ? ";
+		String sql = "SELECT COUNT(*) FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE NICK LIKE ? ";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -254,7 +253,7 @@ public class AdminFreeBoardDao {
 
 	//작성자+완료 카운트
 	public int getCntFreeWriterF(Connection conn, String search) {
-		String sql = "SELECT COUNT(*) FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE NICK LIKE ? AND DELETE_YN = 'N'";
+		String sql = "SELECT COUNT(*) FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE NICK LIKE ? AND DELETE_YN = 'N'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -278,7 +277,7 @@ public class AdminFreeBoardDao {
 
 	//작성자+취소 카운트
 	public int getCntFreeWriterC(Connection conn, String search) {
-		String sql = "SELECT COUNT(*) FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE NICK LIKE ? AND DELETE_YN = 'Y'";
+		String sql = "SELECT COUNT(*) FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE NICK LIKE ? AND DELETE_YN = 'Y'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -304,7 +303,7 @@ public class AdminFreeBoardDao {
 	//게시글 번호로 댓글 수 얻기
 	public String getCntCmtByNo(Connection conn, String no) {
 		
-		String sql = "SELECT COUNT(*) FROM FREE_BOARD_CMT WHERE DELETE_YN = 'N' AND FREE_BOARD_NO = ?";
+		String sql = "SELECT COUNT(*) FROM REVIEW_BOARD_CMT WHERE DELETE_YN = 'N' AND REVIEW_BOARD_NO = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String cnt = "";
@@ -328,7 +327,7 @@ public class AdminFreeBoardDao {
 
 	//모든 게시글 리스트 조회
 	public List getFreeAll(Connection conn, PageVo pv) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -382,7 +381,7 @@ public class AdminFreeBoardDao {
 
 	//게시완료 게시글 리스트 조회
 	public List getFreeF(Connection conn, PageVo pv) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE DELETE_YN = 'N' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE DELETE_YN = 'N' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -434,7 +433,7 @@ public class AdminFreeBoardDao {
 	}
 
 	public List getFreeC(Connection conn, PageVo pv) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE DELETE_YN = 'Y' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE DELETE_YN = 'Y' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -487,7 +486,7 @@ public class AdminFreeBoardDao {
 
 	//제목+모든 게시글 조회
 	public List getFreeTitleAll(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.TITLE LIKE ? ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.TITLE LIKE ? ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -541,7 +540,7 @@ public class AdminFreeBoardDao {
 
 	//제목+완료 게시글 조회
 	public List getFreeTitleF(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.TITLE LIKE ? AND DELETE_YN = 'N' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.TITLE LIKE ? AND DELETE_YN = 'N' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -595,7 +594,7 @@ public class AdminFreeBoardDao {
 
 	//제목+취소 게시글 조회
 	public List getFreeTitleC(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.TITLE LIKE ? AND DELETE_YN = 'Y' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.TITLE LIKE ? AND DELETE_YN = 'Y' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -649,7 +648,7 @@ public class AdminFreeBoardDao {
 
 	//내용+모든 게시글 리스트 조회
 	public List getFreeContentAll(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.CONTENT LIKE ? ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.CONTENT LIKE ? ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -703,7 +702,7 @@ public class AdminFreeBoardDao {
 
 	//내용+완료 게시글 리스트 조회
 	public List getFreeContentF(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.CONTENT LIKE ? AND DELETE_YN = 'N' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.CONTENT LIKE ? AND DELETE_YN = 'N' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -757,7 +756,7 @@ public class AdminFreeBoardDao {
 
 	//내용+취소 게시글 조회
 	public List getFreeContentC(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.CONTENT LIKE ? AND DELETE_YN = 'Y' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.CONTENT LIKE ? AND DELETE_YN = 'Y' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -811,7 +810,7 @@ public class AdminFreeBoardDao {
 
 	//작성자+모든 게시글 조회
 	public List getFreeWriterAll(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE M.NICK LIKE ? ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE M.NICK LIKE ? ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -865,7 +864,7 @@ public class AdminFreeBoardDao {
 
 	//작성자+완료 게시글 완료
 	public List getFreeWriterF(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE M.NICK LIKE ? AND DELETE_YN = 'N' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE M.NICK LIKE ? AND DELETE_YN = 'N' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -918,7 +917,7 @@ public class AdminFreeBoardDao {
 	}
 
 	public List getFreeWriterC(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE M.NICK LIKE ? AND DELETE_YN = 'Y' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE M.NICK LIKE ? AND DELETE_YN = 'Y' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -971,7 +970,7 @@ public class AdminFreeBoardDao {
 	}
 
 	public int insertFreeBoard(Connection conn, AdminFreeBoardVo vo) {
-		String sql = "INSERT INTO FREE_BOARD VALUES (SEQ_FREE_BOARD_NO.NEXTVAL,0,?,?,SYSDATE,'N',SYSDATE,0)";
+		String sql = "INSERT INTO REVIEW_BOARD VALUES (SEQ_REVIEW_BOARD_NO.NEXTVAL,0,?,?,SYSDATE,'N',SYSDATE,0)";
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -990,7 +989,7 @@ public class AdminFreeBoardDao {
 
 	//자유게시판 글번호로 상세정보 받아오기
 	public AdminFreeBoardVo selectFreeBoardDetailByNo(Connection conn, String bno) {
-		String sql = "SELECT F.NO, F.TITLE, F.CONTENT ,M.NICK, F.WRITE_DATE, F.MODIFY_DATE, F.VIEWS, F.DELETE_YN FROM FREE_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.NO = ?";
+		String sql = "SELECT F.NO, F.TITLE, F.CONTENT ,M.NICK, F.WRITE_DATE, F.MODIFY_DATE, F.VIEWS, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.NO = ?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -1035,7 +1034,7 @@ public class AdminFreeBoardDao {
 	//자유게시판 글번호로 댓글 리스트 조회
 	public List<AdminFreeBoardCmtVo> selectFreeBoardCmtByNo(Connection conn, String bno, PageVo pv) {
 		//String sql = "SELECT F.NO, M.NICK, F.CMT, F.CMT_DATE, F.DELETE_YN, F.MODIFY_DATE FROM FREE_BOARD_CMT F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.FREE_BOARD_NO = ? ORDER BY CMT_DATE DESC";
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, M.NICK, F.CMT, F.CMT_DATE, F.DELETE_YN, F.MODIFY_DATE FROM FREE_BOARD_CMT F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.FREE_BOARD_NO = ? ORDER BY CMT_DATE DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, M.NICK, F.CMT, F.CMT_DATE, F.DELETE_YN, F.MODIFY_DATE FROM REVIEW_BOARD_CMT F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.REVIEW_BOARD_NO = ? ORDER BY CMT_DATE DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<AdminFreeBoardCmtVo> list = new ArrayList();
@@ -1078,7 +1077,7 @@ public class AdminFreeBoardDao {
 	}
 
 	public int editFreeBoardDetail(Connection conn, AdminFreeBoardVo vo) {
-		String sql = "UPDATE FREE_BOARD SET TITLE = ? , CONTENT = ?, MODIFY_DATE = SYSDATE WHERE NO = ?";
+		String sql = "UPDATE REVIEW_BOARD SET TITLE = ? , CONTENT = ?, MODIFY_DATE = SYSDATE WHERE NO = ?";
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -1098,7 +1097,7 @@ public class AdminFreeBoardDao {
 	}
 
 	public int deleteFreeBoardDetail(Connection conn, String bno) {
-		String sql = "UPDATE FREE_BOARD SET DELETE_YN = 'Y' , MODIFY_DATE = SYSDATE WHERE NO = ?";
+		String sql = "UPDATE REVIEW_BOARD SET DELETE_YN = 'Y' , MODIFY_DATE = SYSDATE WHERE NO = ?";
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -1116,7 +1115,7 @@ public class AdminFreeBoardDao {
 	}
 
 	public int editFreeBoardCmt(Connection conn, AdminFreeBoardCmtVo vo) {
-		String sql = "UPDATE FREE_BOARD_CMT SET CMT = ?, MODIFY_DATE = SYSDATE WHERE NO = ? AND FREE_BOARD_NO = ?";
+		String sql = "UPDATE REVIEW_BOARD_CMT SET CMT = ?, MODIFY_DATE = SYSDATE WHERE NO = ? AND REVIEW_BOARD_NO = ?";
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -1135,7 +1134,7 @@ public class AdminFreeBoardDao {
 	}
 
 	public int deleteFreeBoardCmt(Connection conn, String bno, String cno) {
-		String sql = "UPDATE FREE_BOARD_CMT SET DELETE_YN = 'Y', MODIFY_DATE = SYSDATE WHERE NO = ? AND FREE_BOARD_NO = ?";
+		String sql = "UPDATE REVIEW_BOARD_CMT SET DELETE_YN = 'Y', MODIFY_DATE = SYSDATE WHERE NO = ? AND REVIEW_BOARD_NO = ?";
 	
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -1156,7 +1155,7 @@ public class AdminFreeBoardDao {
 	}
 
 	public int insertFreeBoardCmt(Connection conn, String bno, String cmt) {
-		String sql = "INSERT INTO FREE_BOARD_CMT VALUES(SEQ_FREE_BOARD_NO.NEXTVAL,?,0,?,SYSDATE,'N',SYSDATE)";
+		String sql = "INSERT INTO REVIEW_BOARD_CMT VALUES(SEQ_REVIEW_BOARD_NO.NEXTVAL,?,0,?,SYSDATE,'N',SYSDATE)";
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -1174,7 +1173,7 @@ public class AdminFreeBoardDao {
 	}
 
 	public int getCntFreeCmt(Connection conn, String bno) {
-		String sql = "SELECT COUNT(F.NO) FROM FREE_BOARD_CMT F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.FREE_BOARD_NO = ? ORDER BY CMT_DATE DESC";
+		String sql = "SELECT COUNT(F.NO) FROM REVIEW_BOARD_CMT F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.REVIEW_BOARD_NO = ? ORDER BY CMT_DATE DESC";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int cnt = 0;

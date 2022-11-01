@@ -156,6 +156,17 @@ AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin"); %>
         <!-- <li><a href="<%=root%>/views/admin/admin/list.jsp">관리자</a></li> -->
       </ul>
     </div>
+    <div class="admin-menu-main-counsel">
+      <h1>전문가 상담 관리</h1>
+      <ul>
+        <li>
+          <a
+            href="<%=root%>/admin/counselPay/list?pno=1&search=&searchType=memberInfo&status=all&range="
+            >상담 결제 내역</a
+          >
+        </li>
+      </ul>
+    </div>
     <div class="admin-menu-main-content">
       <h1>컨텐츠 관리</h1>
       <ul>
@@ -163,14 +174,10 @@ AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin"); %>
           <a href="<%=root%>/admin/nyam">혼자서 냠냠</a>
         </li>
         <li>
-          <a href="<%=root%>/admin/outside"
-            >밖에서 뚜벅뚜벅</a
-          >
+          <a href="<%=root%>/admin/outside">밖에서 뚜벅뚜벅</a>
         </li>
         <li>
-          <a href="<%=root%>/admin/inside"
-            >안에서 뒹굴뒹굴</a
-          >
+          <a href="<%=root%>/admin/inside">안에서 뒹굴뒹굴</a>
         </li>
       </ul>
     </div>
@@ -184,7 +191,10 @@ AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin"); %>
           >
         </li>
         <li>
-          <a href="<%=root%>/views/admin/reviewBoard/list.jsp">후기게시판</a>
+          <a
+            href="<%=root%>/admin/reviewBoard/list?pno=1&status=all&searchType=title&search="
+            >후기게시판</a
+          >
         </li>
       </ul>
     </div>
@@ -196,14 +206,7 @@ AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin"); %>
         </li>
       </ul>
     </div> -->
-    <div class="admin-menu-main-counsel">
-      <h1>전문가 상담 관리</h1>
-      <ul>
-        <li>
-          <a href="<%=root%>/admin/counselPay/list">결제 내역</a>
-        </li>
-      </ul>
-    </div>
+
     <div class="admin-menu-main-notice">
       <h1>고객센터 관리</h1>
       <ul>

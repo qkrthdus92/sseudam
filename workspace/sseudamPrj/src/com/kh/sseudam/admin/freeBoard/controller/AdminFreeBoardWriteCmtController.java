@@ -19,6 +19,7 @@ public class AdminFreeBoardWriteCmtController extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		String bno = req.getParameter("bno");
 		String pno = req.getParameter("pno");
+		String dno = req.getParameter("dno");
 		String status = req.getParameter("status");
 		//리다이렉트로 넘겨야하기때문에 인코딩해야함!
 		String search = URLEncoder.encode(req.getParameter("search"), "UTF-8");
@@ -31,7 +32,7 @@ public class AdminFreeBoardWriteCmtController extends HttpServlet{
 		if(result == 1) {
 			resp.setContentType("text/html; charset=utf-8");
 			req.getSession().setAttribute("alertMsg", "자유게시판 댓글 등록 완료");
-			resp.sendRedirect("/sseudam/admin/freeBoard/detail?pno="+pno+"&bno="+bno+"&status="+status+"&search="+search+"&searchType="+searchType);
+			resp.sendRedirect("/sseudam/admin/freeBoard/detail?pno="+pno+"&bno="+bno+"&dno="+dno+"&status="+status+"&search="+search+"&searchType="+searchType);
 		}else {
 			req.setAttribute("msg", "관리자페이지 자유게시판 댓글 등록중 에러발생");
 			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);

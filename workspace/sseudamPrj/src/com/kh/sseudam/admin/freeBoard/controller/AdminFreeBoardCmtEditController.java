@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.sseudam.admin.freeBoard.service.AdminFreeBoardService;
 import com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardCmtVo;
 import com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardVo;
+import com.kh.sseudam.common.PageVo;
+import com.kh.sseudam.common.Paging;
 
 @WebServlet(urlPatterns = "/admin/freeBoard/editCmt")
 public class AdminFreeBoardCmtEditController extends HttpServlet{
@@ -21,6 +23,7 @@ public class AdminFreeBoardCmtEditController extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		String bno = req.getParameter("bno");
 		String pno = req.getParameter("pno");
+		String dno = req.getParameter("dno");
 		String status = req.getParameter("status");
 		String search = req.getParameter("search");
 		String searchType = req.getParameter("searchType");
@@ -32,9 +35,17 @@ public class AdminFreeBoardCmtEditController extends HttpServlet{
 		AdminFreeBoardVo freeBoardVo = new AdminFreeBoardService().selectFreeBoardDetailByNo(bno);
 		
 		List<AdminFreeBoardCmtVo> freeBoardCmtList = null;
+		int currentPage = Integer.parseInt(req.getParameter("dno"));
+		int pageLimit = 5;
+		int boardLimit = 5;
+		int listCount = 0;
+		
 		//자유게시판 글번호에 해당하는 댓글목록 받아오기
 		if(freeBoardVo != null) {
-			freeBoardCmtList = new AdminFreeBoardService().selectFreeBoardCmtByNo(bno);
+			listCount = new AdminFreeBoardService().getCntFreeCmt(bno);
+			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
+			req.setAttribute("pv", pv);
+			freeBoardCmtList = new AdminFreeBoardService().selectFreeBoardCmtByNo(bno, pv);
 		}
 		
 		if(freeBoardCmtList != null) {
@@ -43,9 +54,10 @@ public class AdminFreeBoardCmtEditController extends HttpServlet{
 			req.setAttribute("searchType", searchType);
 			req.setAttribute("status", status);
 			req.setAttribute("bno", bno);
+			req.setAttribute("dno", dno);
 			
 			req.setAttribute("cno", cno);
-			System.out.println("cmt에딧컨트롤러:"+cno);
+	
 			
 			req.setAttribute("freeBoardVo", freeBoardVo);
 			req.setAttribute("freeBoardCmtList", freeBoardCmtList);
@@ -61,6 +73,7 @@ public class AdminFreeBoardCmtEditController extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		String bno = req.getParameter("bno");
 		String pno = req.getParameter("pno");
+		String dno = req.getParameter("dno");
 		String status = req.getParameter("status");
 		String search = req.getParameter("search");
 		String searchType = req.getParameter("searchType");
@@ -81,10 +94,11 @@ public class AdminFreeBoardCmtEditController extends HttpServlet{
 			req.getSession().setAttribute("alertMsg", "자유게시판 댓글 수정 완료");
 			req.getSession().setAttribute("bno2", bno);
 			req.getSession().setAttribute("pno2", pno);
+			req.getSession().setAttribute("dno2", dno);
 			req.getSession().setAttribute("status2", status);
 			req.getSession().setAttribute("search2", search);
 			req.getSession().setAttribute("searchType2", searchType);
-			resp.sendRedirect("/sseudam/admin/freeBoard/detail?pno="+pno+"&bno="+bno+"&search"+search+"&searchType"+searchType+"&status"+status);
+			resp.sendRedirect("/sseudam/admin/freeBoard/detail?pno="+pno+"&bno="+bno+"&dno="+dno+"&search"+search+"&searchType"+searchType+"&status"+status);
 		}else {
 			req.setAttribute("msg", "관리자페이지 자유게시판 댓글 수정 실패!");
 			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);

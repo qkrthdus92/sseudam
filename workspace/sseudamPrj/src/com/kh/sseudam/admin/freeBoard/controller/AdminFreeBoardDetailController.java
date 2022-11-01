@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.sseudam.admin.freeBoard.service.AdminFreeBoardService;
 import com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardCmtVo;
 import com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardVo;
+import com.kh.sseudam.common.PageVo;
+import com.kh.sseudam.common.Paging;
 
 @WebServlet(urlPatterns = "/admin/freeBoard/detail")
 public class AdminFreeBoardDetailController extends HttpServlet{
@@ -24,6 +26,7 @@ public class AdminFreeBoardDetailController extends HttpServlet{
 		String search = req.getParameter("search");
 		String searchType = req.getParameter("searchType");
 		String status = req.getParameter("status");
+		String dno = req.getParameter("dno");
 		
 		//글번호 받아오기
 		String bno = req.getParameter("bno");
@@ -33,18 +36,30 @@ public class AdminFreeBoardDetailController extends HttpServlet{
 		req.setAttribute("searchType", searchType);
 		req.setAttribute("status", status);
 		req.setAttribute("bno", bno);
+		req.setAttribute("dno", dno);
 		
 		//자유게시판 글번호에 해당하는 상세정보 받아오기
 		AdminFreeBoardVo freeBoardVo = new AdminFreeBoardService().selectFreeBoardDetailByNo(bno);
 		
 		List<AdminFreeBoardCmtVo> freeBoardCmtList = null;
+		
+		
+		int currentPage = Integer.parseInt(req.getParameter("dno"));
+		int pageLimit = 5;
+		int boardLimit = 5;
+		int listCount = 0;
+		
 		//자유게시판 글번호에 해당하는 댓글목록 받아오기
 		if(freeBoardVo != null) {
-			freeBoardCmtList = new AdminFreeBoardService().selectFreeBoardCmtByNo(bno);
+			listCount = new AdminFreeBoardService().getCntFreeCmt(bno);
+			PageVo pv = Paging.paging(listCount, currentPage, pageLimit, boardLimit);
+			req.setAttribute("pv", pv);
+			freeBoardCmtList = new AdminFreeBoardService().selectFreeBoardCmtByNo(bno, pv);
 		}
 		
 		
 		if(freeBoardCmtList != null) {
+		
 			req.setAttribute("freeBoardVo", freeBoardVo);
 			req.setAttribute("freeBoardCmtList", freeBoardCmtList);
 			req.getRequestDispatcher("/views/admin/freeBoard/detail.jsp").forward(req, resp);

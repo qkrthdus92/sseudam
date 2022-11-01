@@ -882,7 +882,7 @@ public class AdminProDao {
 	}
 
 	public List<ProCounselListVo> getCounselList(Connection conn, String mno) {
-		String sql = "SELECT P.NO, P.ADVICE_DATE, P.PAY_DATE, M.ID, P.PAY, P.STAR ,CASE WHEN P.ADVICE_DATE >= SYSDATE THEN '미완료' ELSE '완료' END \"상담상태\" FROM PRO_APPOINT P JOIN MEMBER M ON P.MEMBER_NO = M.NO WHERE PRO_NO = ? ORDER BY ADVICE_DATE DESC";
+		String sql = "SELECT P.NO, P.ADVICE_DATE, P.PAY_DATE, M.ID, P.PAY, P.STAR ,CASE WHEN P.ADVICE_DATE >= SYSDATE THEN '대기' ELSE '완료' END \"상담상태\" FROM PRO_APPOINT P JOIN MEMBER M ON P.MEMBER_NO = M.NO WHERE PRO_NO = ? ORDER BY ADVICE_DATE DESC";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<ProCounselListVo> list = new ArrayList();

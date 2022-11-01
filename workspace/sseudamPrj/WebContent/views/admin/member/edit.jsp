@@ -175,35 +175,7 @@ request.getContextPath();%> <% MemberVo vo =
                 }
               </script>
 
-              <!-- <% if(loginMember != null) {%>
-                <script>
-                 $.ajax({
-                    url: "",
-                    type: "",
-                    data: {
-                    },
-                    success: function (x) {
-                    },
-                    error: function () {
-                      alert("통신에러발생~");
-                    },
-                  });
-                </script> 
-              <%}else {%>
-                <script>
-                  $.ajax({
-                     url: "",
-                     type: "",
-                     data: {
-                     },
-                     success: function (x) {
-                     },
-                     error: function () {
-                       alert("통신에러발생~");
-                     },
-                   });
-               </script> 
-              <%}%>    -->
+            
 
               <div>전화번호</div>
               <input
