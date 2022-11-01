@@ -268,6 +268,7 @@ public class AdminHealingDao {
                 + "    ,IMG_PATH = ?\r\n"
                 + "    ,DELETE_YN = ?\r\n"
                 + "    ,WRITE_DATE = ?\r\n"
+                + "    ,MODIFY_DATE = SYSDATE\r\n"
                 + "WHERE\r\n"
                 + "NO = ?";
         
@@ -437,9 +438,6 @@ public class AdminHealingDao {
                 vo.setNo(no);                
                 vo.setcNum(cNum);                                                        
                 vo.setTitle(title);
-                
-                System.out.println(infoA);
-                System.out.println(infoB);
 
                 if(infoA == null) {vo.setInfoA("");}
                 else{vo.setInfoA(infoA);}
@@ -532,6 +530,7 @@ public class AdminHealingDao {
                 + "    ,DELETE_YN = ?\r\n"
                 + "    ,WRITE_DATE = ?\r\n"
                 + "    ,STRESS = ?\r\n"
+                + "    ,MODIFY_DATE = SYSDATE\r\n"
                 + "WHERE\r\n"
                 + "NO = ?";
         
@@ -860,9 +859,16 @@ public class AdminHealingDao {
                 vo.setNo(no);                
                 vo.setcNum(cNum);                                                        
                 vo.setTitle(title);
-                vo.setInfoA(infoA);
-                vo.setInfoB(infoB);               
-                vo.setInfoB(infoC);               
+                
+                if(infoA == null) {vo.setInfoA("");}
+                else{vo.setInfoA(infoA);}
+                
+                if(infoB == null) {vo.setInfoB("");}
+                else{vo.setInfoB(infoB);}               
+                
+                if(infoC == null) {vo.setInfoC("");}
+                else{vo.setInfoC(infoC);}
+                
                 vo.setLink(link);
                 vo.setStress(stress);
                 vo.setImgPath(imgPath);
@@ -897,6 +903,7 @@ public class AdminHealingDao {
                 + "    ,DELETE_YN = ?\r\n"
                 + "    ,WRITE_DATE = ?\r\n"
                 + "    ,STRESS = ?\r\n"
+                + "    ,MODIFY_DATE = SYSDATE\r\n"
                 + "WHERE\r\n"
                 + "NO = ?";
         

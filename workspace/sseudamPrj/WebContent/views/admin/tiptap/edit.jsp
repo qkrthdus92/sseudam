@@ -75,7 +75,7 @@
 	<form method="post" enctype="multipart/form-data">
 		<main class="admin-main">
 			<header class="admin-main-header flex-between">
-				<h1>혼자서 냠냠 - 정보 수정</h1>
+				<h1>뚜벅뚜벅 - 정보 수정</h1>
 				<div class="btn-set">
 					<input class="cancel-btn" type="button" value="취소" onclick="history.back()"> 
 					<input class="save-btn" type="submit" value="저장" onclick="javascript: form.action='';">

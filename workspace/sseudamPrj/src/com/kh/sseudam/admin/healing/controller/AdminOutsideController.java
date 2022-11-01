@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.sseudam.admin.common.AdminVo;
 import com.kh.sseudam.admin.healing.service.AdminHealingService;
@@ -19,6 +20,12 @@ public class AdminOutsideController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        // 세션 가져오기
+        HttpSession s = req.getSession();
+
+        // 로그인 멤버 가져오기
+        AdminVo loginAdmin = (AdminVo)s.getAttribute("loginAdmin");
+        
         //분류값 받기
         String sort = req.getParameter("sort");
         int sNo = 1;
@@ -91,12 +98,7 @@ public class AdminOutsideController extends HttpServlet{
         
         List<HealingVo> list = new AdminHealingService().OutsideList(pv,sNo, tNum, search);    
         
-        //강제 로그인 -> 추후 삭제
-        AdminVo vo = new AdminVo();
-        vo.setId("1");
-        vo.setPwd("1");
-        req.getSession().setAttribute("loginAdmin", vo);
-        
+        s.setAttribute("loginAdmin", loginAdmin);        
                
         req.setAttribute("type", type);
         req.setAttribute("sort", sort);

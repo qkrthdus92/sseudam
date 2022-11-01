@@ -30,11 +30,11 @@ public class AdminNyamAddController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //강제로그인 -> 추후삭제
-        AdminVo vo = new AdminVo();
-        vo.setId("1");
-        vo.setPwd("1");
-        req.getSession().setAttribute("loginAdmin", vo);
+        HttpSession s = req.getSession();
+        
+        AdminVo loginAdmin = (AdminVo)s.getAttribute("loginAdmin");
+        
+        s.setAttribute("loginAdmin", loginAdmin);
         
         req.getRequestDispatcher("/views/admin/yamyam/add.jsp").forward(req, resp);
     }
@@ -42,11 +42,11 @@ public class AdminNyamAddController extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
-        // 세션 가져오기
+     // 세션 가져오기
         HttpSession s = req.getSession();
 
         // 로그인 멤버 가져오기
-        //AdminVo loginMember = (AdminVo)s.getAttribute("loginMember");
+        AdminVo loginAdmin = (AdminVo)s.getAttribute("loginAdmin");
         
         //인코딩
         req.setCharacterEncoding("UTF-8");
@@ -99,6 +99,7 @@ public class AdminNyamAddController extends HttpServlet{
         
         //화면 보여주기
         if(result == 1) {
+            s.setAttribute("loginAdmin", loginAdmin);
             s.setAttribute("alertMsg", "컨텐츠 업로드 성공");
             resp.sendRedirect(root + "/admin/nyam?pno=1&type="+cNum);
         }else {

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.kh.sseudam.admin.common.AdminVo;
 import com.kh.sseudam.admin.healing.service.AdminHealingService;
 import com.kh.sseudam.healing.vo.HealingVo;
 
@@ -29,9 +30,15 @@ public class AdminNyamEditController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        HttpSession s = req.getSession();
+        
+        AdminVo loginAdmin = (AdminVo)s.getAttribute("loginAdmin");
+        
         String no = req.getParameter("no");
         
-        HealingVo vo = new AdminHealingService().NyamDetailSelect(no);
+        HealingVo vo = new AdminHealingService().NyamDetailSelect(no);       
+        
+        s.setAttribute("loginAdmin", loginAdmin);
         
         req.setAttribute("nyamDetailVo", vo);
         req.getRequestDispatcher("/views/admin/yamyam/edit.jsp").forward(req, resp);
@@ -44,7 +51,7 @@ public class AdminNyamEditController extends HttpServlet{
         HttpSession s = req.getSession();
 
         // 로그인 멤버 가져오기
-        //AdminVo loginMember = (AdminVo)s.getAttribute("loginMember");
+        AdminVo loginAdmin = (AdminVo)s.getAttribute("loginAdmin");
         
         //인코딩
         req.setCharacterEncoding("UTF-8");
@@ -113,6 +120,7 @@ public class AdminNyamEditController extends HttpServlet{
         
         if(result == 1) {
             //성공       
+            s.setAttribute("loginAdmin", loginAdmin);
             s.setAttribute("alertMsg", "컨텐츠 수정 성공");
             resp.sendRedirect(root + "/admin/nyam?pno=1&type="+cNum);
         }else {

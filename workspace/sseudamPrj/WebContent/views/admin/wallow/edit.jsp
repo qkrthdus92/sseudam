@@ -37,7 +37,7 @@
 	href="<%=root1%>/resources/css/admin/common/component.css?ver=1" />
 <style>
 .grid-col3 {
-	grid-template-rows: repeat(10, 50px);
+	grid-template-rows: repeat(11, 50px);
 }
 
 .upload-name {
@@ -107,13 +107,13 @@
 						</div>
 						<div></div>
 
-						<div>상세정보1</div>
+						<div>가수, 출연진, 작가 등</div>
 						<div>
 							<input class="upload-name" type="text" name="infoA" value="<%=vo.getInfoA()%>">
 						</div>
 						<div></div>
 
-						<div>상세정보2</div>
+						<div>장르, 출판사 등</div>
 						<div>
 							<input class="upload-name" type="text" name="infoB" value="<%=vo.getInfoB()%>">
 						</div>

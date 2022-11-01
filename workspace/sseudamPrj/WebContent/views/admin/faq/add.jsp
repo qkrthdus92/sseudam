@@ -65,39 +65,40 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
   </head>
   <body>
     <%@ include file="/views/admin/common/menu.jsp"%>
-    <main class="admin-main">
-      <header class="admin-main-header flex-between">
-        <h1>FAQ 작성</h1>
-        <div class="btn-set">
-          <input
-            class="cancel-btn"
-            type="button"
-            value="취소"
-            onclick="history.back()"
-          />
-          <input class="save-btn" type="submit" value="저장" />
-        </div>
-      </header>
-      <section class="admin-main-section">
-        <div class="admin-main-wrapper">
-          <div class="admin-main-board grid-col3">
-            <div>제목</div>
-            <div><input type="text" placeholder="제목을 입력해주세요" /></div>
-            <div>관리자</div>
-          </div>
-          <div class="admin-main-board-detail">
-            <div>
-              <textarea
-                name=""
-                id=""
-                cols="30"
-                rows="10"
-                placeholder="내용을 입력해주세요"
-              ></textarea>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+    <form action="<%=root1%>/admin/faq/add" method="post">
+	    <main class="admin-main">
+	      <header class="admin-main-header flex-between">
+	        <h1>FAQ 작성</h1>
+	        <div class="btn-set">
+	          <input
+	            class="cancel-btn"
+	            type="button"
+	            value="취소"
+	            onclick="history.back()"
+	          />
+	          <input class="save-btn" type="submit" value="저장" />
+	        </div>
+	      </header>
+	      <section class="admin-main-section">
+	        <div class="admin-main-wrapper">
+	          <div class="admin-main-board grid-col3">
+	            <div>제목</div>
+	            <div><input type="text" name="title" placeholder="제목을 입력해주세요" /></div>
+	            <div>관리자</div>
+	          </div>
+	          <div class="admin-main-board-detail">
+	            <div>
+	              <textarea
+	                name="content"
+	                cols="30"
+	                rows="10"
+	                placeholder="내용을 입력해주세요"
+	              ></textarea>
+	            </div>
+	          </div>
+	        </div>
+	      </section>
+	    </main>
+    </form>
   </body>
 </html>
