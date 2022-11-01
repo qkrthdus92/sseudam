@@ -94,7 +94,7 @@
         cursor: pointer;
     }
     
-    #result{
+    #idCheResult{
     	font-size: 13px;
     	margin-bottom: 5px;
     }
@@ -109,13 +109,13 @@
         <h1 align="center" class="join">회원가입</h1>
         <h4 align="center" class="join-guide">이곳은 쓰담쓰담에 함께 하실 분들을 위한 회원가입 페이지 입니다.</h4>
 
-		<form action="/sseudam/join/memberJoin" method="post" name="join">
+		<form action="/sseudam/join/memberJoin" method="post" name="joinForm">
 			<div class="join-area">
 	            <div>아이디</div>
 	            <div>
 	            	<input type="text" id="memberId" class="memberId-input" name="memberId" placeholder="6~14자 이내 영문, 숫자를 포함하여 작성" maxlength="14" required>
 	            	<button type="button" onclick="idCheck();" id="idCheckBtn" class="overlap-check-btn">중복확인</button>
-	            	<div id="result" type="hidden" value=""></div>
+	            	<div id="idCheResult" type="hidden" value=""> </div>
 	            </div>					
 	
 	            <div>비밀번호</div>
@@ -175,12 +175,29 @@
     <script>
 	    
     	function joincheck(){
+    	    
+    		//아이디 중복확인 여부 체크
+            let idCheck = $("#idCheResult").text();
+
+            console.log(idCheck);
+
+            if (idCheck.includes("현재")) {
+          	alert("현재 사용 중인 아이디입니다.");
+              return false;
+            } else if (idCheck.includes("가능한")){
+          	return true;
+            } else{
+          	alert("아이디 중복확인을 해주세요.");
+    	            return false;  
+            }
+    		
+            //회원가입 유효성 검사
     		var getId = document.getElementById("memberId");
     		var getPwd1 = document.getElementById("pwd1");
     		var getPwd2 = document.getElementById("pwd2");
     		var getName = document.getElementById("name");
     		var getNick = document.getElementById("nick");
-    		 		
+    		
     		var id = getId.value;
     		var pwd1 = getPwd1.value;
     		var pwd2 = getPwd2.value;
@@ -190,7 +207,8 @@
     		var checkId = /^[a-zA-Z0-9]{6,14}$/;	//영문+숫자
     		var checkPwd = /^(?=.*[a-zA-Z])(?=.*[#?!@$%^&*-])(?=.*[0-9]).{6,14}$/; //문자 + 특수문자
 			var checkName = /^[가-힣a-zA-Z-Z0-9]+$/;	//한글+영문+숫자
-    		
+
+            
     		if(!checkId.test(id)){
     			alert("아이디는 6~14자 이내로 영문, 숫자를 포함하여 작성해 주세요.")
     			return false;
@@ -215,10 +233,10 @@
     			alert("닉네임은 특수문자를 포함할 수 없습니다.")
     			return false;
     		}
-		
     		
     	}
     </script>
+
     
     <script type="text/javascript">
     	// 아이디 중복 검사
@@ -232,7 +250,7 @@
     				},
     			success : function(x){
     				console.log(x);
-    				$('div#result').text(x);
+    				$('#idCheResult').text(x);
     			},
     			error : function(y){
     				console.log(y);

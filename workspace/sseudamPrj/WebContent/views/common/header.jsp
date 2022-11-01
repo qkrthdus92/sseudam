@@ -95,7 +95,6 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
 
   .main-header-title {
     height: 83px;
-    
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #dfdfdf;
@@ -447,15 +446,15 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	          <div class="login-input">
 	            <div class="login-in" >아이디</div>
 	            <div>
-	            	<input type="text" id="id" name="memberId" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black;">
+	            	<input type="text" id="login-id" name="memberId" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black;">
 	            </div>
 	            <div class="login-pwd">비밀번호</div>
 	            <div>
-	                <input type="password" id="pwd" name="memberPwd" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black;">
+	                <input type="password" id="login-pwd" name="memberPwd" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black;">
 	            </div>
 	          </div>
 	            <div>
-	              <br><a><input type="submit" value="로그인" onclick="return login();" class="login-btn"></a>
+	              <br><a><input type="submit" value="로그인" onclick="login();" class="login-btn"></a>
 	            </div>
 	      </div>
 	      
@@ -490,7 +489,40 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	          </div>
 	          	<div>
 	            <br><button type="button" onclick="idFound();" class="login-btn">아이디 찾기</button>
-	            <div id="result" style="text-align: center; margin-top: 30px;"></div>
+	            <div id="idResult" style="text-align: center; margin-top: 30px;"></div>
+	            </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+  </form> 
+  
+      <!-- 비밀번호 찾기 팝업 -->
+  <form action="/sseudam/findId" method="post">
+	    <div id="find-pwd-popup" class="hide">
+	    <div class="login-popup">
+	      <div class="login-popup-header">
+	        <img src="<%=root%>/resources/img/join/close.png" class="login-popup-btn" onclick="closeFindPwdPopup()">
+	      </div>
+	      <div class="login-popup-middle">
+	          <div class="login-header">비밀번호 찾기</div>
+	          <div class="login-input">
+	            <div>이름</div>
+	            <div>
+	            	<input type="text" id="findPwdUserName" name="findPwdUserName" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
+	            </div>
+	            <div style="margin-top: 10px;">아이디</div>
+	            <div>
+	            	<input type="text" id="findPwdUserId" name="findPwdUserId" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
+	            </div>
+	            <div class="email">이메일</div>
+	            <div>
+	                <input type="email" id="findPwdUserEmail" name="findPwdUserEmail" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
+	            </div>
+	          </div>
+	          	<div>
+	            <br><button type="button" onclick="pwdFound();" class="login-btn">비밀번호 찾기</button>
+	            <div id="pwdResult" style="text-align: center; margin-top: 30px;"></div>
 	            </div>
 	      </div>
 	      
@@ -581,7 +613,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
           <a href=""><i class="fa-solid fa-heart"></i><span>저장</span></a>
         </div>
         <div class="main-header-icon">
-          <a href="<%=root%>/views/mypage/main.jsp"
+          <a href="<%=root%>/views/mypage/promain.jsp"
             ><i class="fa-regular fa-user"></i><span>마이</span></a>
         </div>
       </div>
@@ -631,6 +663,38 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   crossorigin="anonymous"
 ></script>
 
+
+<script type="text/javascript">
+	/* 로그인
+	function login(){
+		$.ajax({
+			url : "/sseudam/login",
+			method : "GET",
+			//async : false,
+			data :
+				{
+					"userId" : $('#login-id').val(),
+					"userPwd" : $('#login-pwd').val()
+				},
+			success : function(result){
+				if(result != null){
+					// length 가 0이면 NULL
+					alert("에이젝스에서 알립니다~ 로그인 성공");
+					
+					//로그인 팝업 닫기
+				    const popup = document.querySelector('#login-popup');
+				    popup.classList.add('hide');
+				    
+				}
+			},
+			error : function(y){
+				alert("error 로그인 실패");
+			}
+		});
+	}*/
+</script>
+
+
 <script type="text/javascript">
 	// 아이디 찾기
 	function idFound(){
@@ -644,7 +708,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 				},
 			success : function(x){
 				console.log(x);
-				$('#result').text(x);
+				$('#idResult').text(x);
 			},
 			error : function(y){
 				alert("아이디 찾기 실패");
@@ -654,8 +718,32 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	}
 </script>
 
+<script type="text/javascript">
+	// 비밀번호 찾기
+	function pwdFound(){
+		$.ajax({
+			url : "/sseudam/findPwd",
+			method : "GET",
+			data :
+				{
+					"userName" : $('#findPwdUserName').val(),
+					"userId" : $('#findPwdUserId').val(),
+					"userEmail" : $('#findPwdUserEmail').val()
+				},
+			success : function(x){
+				console.log(x);
+				$('#pwdResult').text(x);
+			},
+			error : function(y){
+				alert("비밀번호 찾기 실패");
+				console.log(y);
+			}
+		});
+	}
+</script>
+
 <script>
-	//로그인 체크
+	/* 로그인 체크
 	function login(){
 		var getId = document.memberLoginForm.memberId.value;
 		var getPwd = document.memberLoginForm.memberPwd.value;
@@ -672,7 +760,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 			return false;
 		}
 		
-	}
+	}*/
 
     // (1) 로그인 팝업
     function loginPopup(hasFilter) {
@@ -683,7 +771,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	    }
 	    loginpopup.classList.remove('hide');
   	}
-	//로그인 팝업 닫기
+	// (1-1)로그인 팝업 닫기
   	function closeLoginPopup() {
 	    const popup = document.querySelector('#login-popup');
 	    popup.classList.add('hide');
@@ -703,12 +791,33 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	    }
 	    popup.classList.remove('hide');
 	    
+	  }
+  
+  	// (2-1) 아이디 찾기 팝업 닫기
+  	function closeFindIdPopup() {
+	    const popup = document.querySelector('#find-id-popup');
+	    popup.classList.add('hide');
+	  }
+  	
+  	// (3) 비밀번호 찾기 팝업
+  	function pwdFind(hasFilter){
+		//로그인 팝업부터 닫아줘야 함
+	    const closePopup = document.querySelector('#login-popup');
+	    closePopup.classList.add('hide');
+    
+	    //비밀번호 찾기 팝업 ON
+	    const popup = document.querySelector('#find-pwd-popup');
+	    
+	    if (hasFilter) {
+	      popup.classList.add();
+	    }
+	    popup.classList.remove('hide');
 	    
 	  }
   
-  	//아이디 찾기 팝업 닫기
-  	function closeFindIdPopup() {
-	    const popup = document.querySelector('#find-id-popup');
+  	// (3-1) 비밀번호 찾기 팝업 닫기
+  	function closeFindPwdPopup() {
+	    const popup = document.querySelector('#find-pwd-popup');
 	    popup.classList.add('hide');
 	  }
  

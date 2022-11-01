@@ -44,7 +44,7 @@ public class MemberDao {
 	//일반회원 로그인
 	public MemberVo selectOne(Connection conn, MemberVo vo) {
 			
-		String sql = "SELECT NO , ID , PWD , NAME , NICK , PHONE , EMAIL , TEST_SCORE , JOIN_DATE , QUIT_YN , MODIFY_DATE FROM MEMBER WHERE ID = ? AND PWD = ? AND QUIT_YN = 'Y'";
+		String sql = "SELECT NO , ID , PWD , NAME , NICK , PHONE , EMAIL , TEST_SCORE , JOIN_DATE , QUIT_YN , MODIFY_DATE FROM MEMBER WHERE ID = ? AND PWD = ? AND QUIT_YN = 'N'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -127,7 +127,7 @@ public class MemberDao {
 	//아이디 찾기
 	public String findMemberId(Connection conn, MemberVo findvo) {
 		
-		String sql = "SELECT ID FROM MEMBER WHERE NAME = ? AND EMAIL = ? AND QUIT_YN = 'N'";
+		String sql = "SELECT ID FROM MEMBER WHERE NAME = ? AND EMAIL = ? AND QUIT_YN = 'N' UNION SELECT ID FROM PRO_MEMBER WHERE NAME = ? AND EMAIL = ? AND PRO_STATUS = 'J' OR PRO_STATUS = 'W'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -138,6 +138,8 @@ public class MemberDao {
 			
 			pstmt.setString(1, findvo.getName());
 			pstmt.setString(2, findvo.getEmail());
+			pstmt.setString(3, findvo.getName());
+			pstmt.setString(4, findvo.getEmail());
 			
 			rs = pstmt.executeQuery();
 			
@@ -154,6 +156,41 @@ public class MemberDao {
 		
 		return foundId;
 		
+	}
+
+	//비밀번호 찾기
+	public String findMemberPwd(Connection conn, MemberVo findpwdvo) {
+		
+		String sql = "SELECT PWD FROM MEMBER WHERE NAME = ? AND ID = ? AND EMAIL = ? AND QUIT_YN = 'N' UNION SELECT PWD FROM PRO_MEMBER WHERE NAME = ? AND ID = ? AND EMAIL = ? AND PRO_STATUS = 'J' OR PRO_STATUS = 'W'";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String foundPwd = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, findpwdvo.getName());
+			pstmt.setString(2, findpwdvo.getId());
+			pstmt.setString(3, findpwdvo.getEmail());
+			pstmt.setString(4, findpwdvo.getName());
+			pstmt.setString(5, findpwdvo.getId());
+			pstmt.setString(6, findpwdvo.getEmail());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				foundPwd = rs.getString("pwd");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return foundPwd;
 	}
 }
 

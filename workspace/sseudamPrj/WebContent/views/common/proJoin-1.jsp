@@ -122,7 +122,7 @@
 		width: 273px;
 	}
 
-    #result{
+    #cheIdResult{
     	font-size: 13px;
     	margin-bottom: 5px;
     }
@@ -157,7 +157,7 @@
                 <div>
                     <input type="text" id="memberId" name="memberId" placeholder="6~14자 이내 영문, 숫자를 포함하여 작성" maxlength="14" required>
                     <button input type="button" onclick="proIdCheck();" id="idCheckBtn" class="overlap-check-btn">중복확인</button>
-                    <div id="result" type="hidden"></div>
+                    <div id="cheIdResult" type="hidden"></div>
                 </div>
             </div>
 
@@ -228,6 +228,21 @@
     <script>
 	    
     	function joincheck(){
+    		
+    		//아이디 중복확인 여부 체크
+            let idCheck = $("#cheIdResult").text();
+
+            console.log(idCheck);
+
+            if (idCheck.includes("현재")) {
+          	alert("현재 사용 중인 아이디입니다.");
+              return false;
+            } else if (idCheck.includes("가능한")){
+          	return true;
+            } else{
+          	alert("아이디 중복확인을 해주세요.");
+    	            return false;  
+            }
     		
     		var getId = document.getElementById("memberId");
     		var getPwd1 = document.getElementById("pwd1");
@@ -302,7 +317,7 @@
     				},
     			success : function(x){
     				console.log(x);
-    				$('div#result').text(x);
+    				$('#cheIdResult').text(x);
     			},
     			error : function(y){
     				console.log(y);
