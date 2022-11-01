@@ -1,5 +1,7 @@
 package com.kh.sseudam.pro.vo;
 
+import java.sql.Array;
+
 import javax.servlet.http.Part;
 
 public class ProJoinPage2Vo {
@@ -7,15 +9,16 @@ public class ProJoinPage2Vo {
 	
 	private String proMemberNo;
 	private String education;
-	private String certificateName;
-	private String certificateNum;
+	private String[] certificateName;
+	private String[] certificateNum;
 	private String imgPath;
 	
 	public ProJoinPage2Vo() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public ProJoinPage2Vo(String proMemberNo, String education, String certificateName, String certificateNum,
+	public ProJoinPage2Vo(String proMemberNo, String education, String[] certificateName, String[] certificateNum,
 			String imgPath) {
 		super();
 		this.proMemberNo = proMemberNo;
@@ -41,20 +44,20 @@ public class ProJoinPage2Vo {
 		this.education = education;
 	}
 
-	public String getCertificateName() {
+	public String[] getCertificateName() {
 		return certificateName;
 	}
 
-	public void setCertificateName(String certificateName) {
-		this.certificateName = certificateName;
+	public void setCertificateName(String[] cerNameArr) {
+		this.certificateName = cerNameArr;
 	}
 
-	public String getCertificateNum() {
+	public String[] getCertificateNum() {
 		return certificateNum;
 	}
 
-	public void setCertificateNum(String certificateNum) {
-		this.certificateNum = certificateNum;
+	public void setCertificateNum(String[] cerNumArr) {
+		this.certificateNum = cerNumArr;
 	}
 
 	public String getImgPath() {

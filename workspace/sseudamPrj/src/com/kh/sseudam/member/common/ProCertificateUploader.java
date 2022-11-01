@@ -13,7 +13,7 @@ import com.kh.sseudam.pro.vo.ProJoinPage2Vo;
 
 public class ProCertificateUploader {
 
-	public static String uploadFile(Part imgPath, String rootPath) throws IOException {
+	public static ProJoinPage2Vo uploadFile(Part imgPath, String rootPath, String filePath) throws IOException {
 		
 		// 0. 데이터 준비
 		String cerImgName = imgPath.getSubmittedFileName();	//업로드한 파일 이름 구해서 cerImgName에 넣음
@@ -21,7 +21,7 @@ public class ProCertificateUploader {
 		System.out.println(cerImgName);
 		
 		// 1. 파일 객체 준비 (경로+파일명)
-		String filePath = "resources/upload/certificate";
+		//String filePath = "resources/upload/certificate";
 		String path = rootPath + filePath + "/";	//최상단경로
 		File target = new File(path + cerImgName);
 		
@@ -46,7 +46,7 @@ public class ProCertificateUploader {
 		ProJoinPage2Vo vo = new ProJoinPage2Vo();
 		vo.setImgPath(cerImgName);
 		
-		return cerImgName;
+		return vo;
 				
 		
 	}

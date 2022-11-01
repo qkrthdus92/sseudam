@@ -451,6 +451,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	            <div class="login-pwd">비밀번호</div>
 	            <div>
 	                <input type="password" id="login-pwd" name="memberPwd" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black;">
+	                <input type="hidden" name="abc" value="" id="ttt">
 	            </div>
 	          </div>
 	            <div>
@@ -665,37 +666,6 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 
 
 <script type="text/javascript">
-	/* 로그인
-	function login(){
-		$.ajax({
-			url : "/sseudam/login",
-			method : "GET",
-			//async : false,
-			data :
-				{
-					"userId" : $('#login-id').val(),
-					"userPwd" : $('#login-pwd').val()
-				},
-			success : function(result){
-				if(result != null){
-					// length 가 0이면 NULL
-					alert("에이젝스에서 알립니다~ 로그인 성공");
-					
-					//로그인 팝업 닫기
-				    const popup = document.querySelector('#login-popup');
-				    popup.classList.add('hide');
-				    
-				}
-			},
-			error : function(y){
-				alert("error 로그인 실패");
-			}
-		});
-	}*/
-</script>
-
-
-<script type="text/javascript">
 	// 아이디 찾기
 	function idFound(){
 		$.ajax({
@@ -743,7 +713,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 </script>
 
 <script>
-	/* 로그인 체크
+	//로그인 체크
 	function login(){
 		var getId = document.memberLoginForm.memberId.value;
 		var getPwd = document.memberLoginForm.memberPwd.value;
@@ -760,7 +730,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 			return false;
 		}
 		
-	}*/
+	}
 
     // (1) 로그인 팝업
     function loginPopup(hasFilter) {
@@ -821,6 +791,8 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	    popup.classList.add('hide');
 	  }
  
+  	// 현재 있는 페이지 url
+  	document.querySelector('#ttt').value = window.location.href;
   	
 
 </script>

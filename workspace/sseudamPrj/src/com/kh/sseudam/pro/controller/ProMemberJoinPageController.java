@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.kh.sseudam.admin.pro.service.AdminProService;
+import com.kh.sseudam.common.AttachmentVo;
+import com.kh.sseudam.common.FileUploader;
 import com.kh.sseudam.counsel.pro.vo.CertificateVo;
 import com.kh.sseudam.counsel.pro.vo.ProVo;
 import com.kh.sseudam.member.common.ProCertificateUploader;
@@ -39,7 +42,7 @@ public class ProMemberJoinPageController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/views/common/proJoin-1.jsp").forward(req, resp);
-
+		
 	}
 	
 	@Override
@@ -82,29 +85,60 @@ public class ProMemberJoinPageController extends HttpServlet{
 			String email = req.getParameter("email");
 			
 			String education = req.getParameter("education");
-			String certificateName = req.getParameter("certificateName");
-			String certificateNum = req.getParameter("certificateNum");
-			List<Part> partArr = (List<Part>) req.getParts();
 			
-			List<Part> filePart = new ArrayList<>();
+			//전문가 자격 정보 및 파일
+			String[] cerNameArr = req.getParameterValues("certificateName");
+			String[] cerNumArr = req.getParameterValues("certificateNum");
+			List<Part> parts = (List<Part>) req.getParts();
 			
-			for(int i = 0 ; i < partArr.size(); ++i) {
-				String temp = partArr.get(i).getContentType();
-				if(temp.startsWith("image")) {
-					filePart.add(partArr.get(i));
+//			List<Part> filePart = new ArrayList<>();
+			
+//			for(int i = 0; i < partArr.size(); ++i) {
+//				String temp = partArr.get(i).getContentType();	//타입을 꺼냄
+//				if(temp.startsWith("image")) {		//타입이 image라면
+//					filePart.add(partArr.get(i));	//꺼내온 걸 filePart에 추가함
+//				}
+//			}
+			
+			List<ProJoinPage2Vo> list = new ArrayList<ProJoinPage2Vo>();
+			int cerResult = 0;
+			for(int i=0; i<parts.size(); i++) {
+				System.out.println("자격파일1");
+				Part part = parts.get(i);
+				if(!part.getName().equals("f")) continue; //f로 들어온 Part가 아니면 스킵
+				if(part.getSubmittedFileName().equals("")) continue; //업로드 된 파일 이름이 없으면 스킵
+				
+				String rootPath = req.getServletContext().getRealPath("/");
+				
+				ProJoinPage2Vo aVo = null;
+				if(part.getSubmittedFileName().length() > 0) {
+					aVo = ProCertificateUploader.uploadFile(part, rootPath, "resources/upload/certificate");
 				}
-			}
-			
-			
-			//자격증 파일 업로드
-			String rootPath = req.getServletContext().getRealPath("/");
-			
-			String x = "";
-			
-			if(partArr[0].getSubmittedFileName().length() > 0) {
-				x = ProCertificateUploader.uploadFile(partArr[0], rootPath);
+				
+				System.out.println("자격파일2");
+				list.add(aVo);
+
 				
 			}
+			
+			for(int i=0; i<list.size(); i++) {
+				//데이터뭉치기
+				CertificateVo cv = new CertificateVo();		
+				cv.setName(cerNameArr[i]);
+				cv.setNum(cerNumArr[i]);
+				
+				//디비다녀오기
+				cerResult = new ProMemberService().projoinlicense(cv, list.get(i));
+			}
+			
+//			//자격증 파일 업로드
+//			String rootPath = req.getServletContext().getRealPath("/");
+//			
+//			String x = "";
+//			
+//			if(imgPath.getSubmittedFileName().length() > 0) {
+//				x = ProCertificateUploader.uploadFile(imgPath, rootPath);	
+//			}
 			
 			proVo1.setId(memberId);
 			proVo1.setPwd(memberPwd);
@@ -114,11 +148,11 @@ public class ProMemberJoinPageController extends HttpServlet{
 			proVo1.setEmail(email);
 			
 			proVo2.setEducation(education);
-			proVo2.setImgPath(x);
-			proVo2.setCertificateName(certificateName);
-			proVo2.setCertificateNum(certificateNum);
+			//proVo2.setImgPath(x);
+			proVo2.setCertificateName(cerNameArr);
+			proVo2.setCertificateNum(cerNumArr);
 			
-			System.out.println("자격증 첨부파일 x 값 :" + x);	//확인용
+			//System.out.println("자격증 첨부파일 x 값 :" + x);	//확인용
 			System.out.println(proVo1); //확인용
 			System.out.println(proVo2); //확인용
 			
@@ -136,8 +170,8 @@ public class ProMemberJoinPageController extends HttpServlet{
 			String email = req.getParameter("email");
 			
 			String education = req.getParameter("education");
-			String certificateName = req.getParameter("certificateName");
-			String certificateNum = req.getParameter("certificateNum");
+			String[] cerNameArr = req.getParameterValues("certificateName");
+			String[] cerNumArr = req.getParameterValues("certificateNum");
 			String cerImg = req.getParameter("cerImg");
 			Part img = req.getPart("img");
 			String counselType = req.getParameter("counselType");
@@ -162,8 +196,8 @@ public class ProMemberJoinPageController extends HttpServlet{
 			proVo1.setEmail(email);
 			
 			proVo2.setEducation(education);
-			proVo2.setCertificateName(certificateName);
-			proVo2.setCertificateNum(certificateNum);
+			proVo2.setCertificateName(cerNameArr);
+			proVo2.setCertificateNum(cerNumArr);
 			proVo2.setImgPath(cerImg);
 			
 			proVo3.setImg(x);
@@ -181,7 +215,7 @@ public class ProMemberJoinPageController extends HttpServlet{
 			int result2 = 0;
 			
 			if(result == 1) {
-				result2 = new ProMemberService().projoinlicense(proVo2);
+				result2 = new ProMemberService().projoinlicense(null, proVo2);
 				req.getSession().setAttribute("alertMsg", "회원가입 완료");
 				req.getSession().setAttribute("proVo1", proVo1);
 				req.getSession().setAttribute("proVo2", proVo2);

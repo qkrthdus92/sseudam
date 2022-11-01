@@ -307,7 +307,7 @@
 	<script type="text/javascript">
     	// 아이디 중복 검사
     	function proIdCheck(){
-    		
+    		 
     		$.ajax({
     			url : "/sseudam/ProIdCheck",
     			method : "GET",

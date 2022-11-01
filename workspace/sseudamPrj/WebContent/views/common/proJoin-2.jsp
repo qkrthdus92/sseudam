@@ -1,7 +1,11 @@
+<%@page import="com.kh.sseudam.pro.vo.ProJoinPage2Vo"%>
 <%@page import="com.kh.sseudam.pro.vo.ProJoinPage1Vo"%>
 <%@page import="com.kh.sseudam.counsel.pro.vo.ProVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ProJoinPage2Vo ProVo2 = (ProJoinPage2Vo)session.getAttribute("ProJoinPage2Vo");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -74,11 +78,17 @@
     input[type="number"]{
         border: none;
         border-bottom: 1px solid black;
-        font-size: 18px;
+        font-size: 15px;
         margin-top: 10px;
         margin-bottom: 5px;
         width: 350px;
+        height: 20px;
     }
+
+    input::placeholder{
+        font-size: 14px;
+        color:rgba(204, 204, 204, 1);
+    }	
 
     .attached-file-btn{
         color: rgba(253, 121, 0, 1);
@@ -112,6 +122,8 @@
         border: none;
 		cursor: pointer;
         font-size: 15px;
+        text-align: center;
+        margin-left: 30%;
     }
 
 	.license-content{
@@ -161,7 +173,7 @@
             </div>
             
 			<!-- 여기부터 자격증 파일 업로드 -->
-            <div class="join-1nd">
+            <!-- <div class="join-1nd">
                 <div>자격증 이름</div>
                 <div><input type="text" name="certificateName" required></div>
             </div>
@@ -186,76 +198,60 @@
 				      });
 				   </script>
 				   <br>
-       				</div>
-        		          <div class="promember-certificate-file">
-			            	<%for(int i=0; i < voList.size(); i++) {%>
-				              <div><%= voList.get(i).getCertificateName() %></div>
-				              <div><%= voList.get(i).getCertificateNum() %></div>
-				              <div><span> <%= voList.get(i).getImgPath() %></span>
-				               <!-- 파일 업로드 삭제 : <i class='fa-solid fa-square-xmark x-btn' onclick='dbDeleteCer(this);'></i></div> -->
-				            <%}%>
-		          			</div>
-		          <div class="certificate-uplod-list cer-target">
+       				</div> -->
+
+		          <div class="cer-target">
 		          
 		           
+		            
+		            
 		       
 		          </div>
+
 		          <div class="pro-certificate">
 		            <div>
-					   <input type="button" value="추가" onclick="cerAd();" float: right; margin-top: 10px;">
+					   <input type="button" value="추가" onclick="cerAd();" style="float: right;">
 		            </div>
-		          	</div>
+						
+		          </div>
+		          
+		          	
+	            <div class="next">
+	              	<br>
+	                <div><input type="submit" class="next-page" value="다음 페이지 작성"></div>
+	            </div>
 				   
                     </div>
                 </div>
             </div>
-            <div class="license">
-                <div class="license-header">&nbsp;자격증 목록</div>
-                <div class="license-content">
-	                <span><input type="text" name="proName">자격증 이름</span>
-	               	<span><input type="text" name="proNo">자격증 번호</span>
-	               	<span><input type="text" name="proDoc">자격증 서류</span>
-                </div>
-                
-                <script>
-                
-                
-                </script>
-                
-                <!-- 여러 개 받기 -->
- 				
-                
-            </div>
             
-            <div class="next">
-              	<br>
-                <div><input type="submit" class="next-page" value="다음 페이지 작성"></div>
-            </div>
         
 	</form>
     </nav>
-    
-	<script>
+      
+
+     <script>
       function cerAd() {
       
         const cerTarget = document.querySelector('.cer-target');
         const newDiv0 = document.createElement('div');
 
         const newDiv1 = document.createElement('div');
-        newDiv1.innerHTML = "<input type='text' class='cer-edit' name='cerName' placeholder='자격증이름을 입력하세요' />";
+        newDiv1.innerHTML = "<input type='text' class='cer-edit' name='certificateName' placeholder='자격증이름을 입력하세요' />";
         const newDiv2 = document.createElement('div');
-        newDiv2.innerHTML = "<input type='text' class='cer-edit' name='cerNum' placeholder='자격번호를 입력하세요' />";
+        newDiv2.innerHTML = "<input type='text' class='cer-edit' name='certificateNum' placeholder='자격번호를 입력하세요' />";
         const newDiv3 = document.createElement('div');
-        newDiv3.innerHTML = "<input type='file' class='upload-btn' name='f'  multiple/><i class='fa-solid fa-square-xmark x-btn' onclick='deleteCer(this);'></i>";
+        newDiv3.innerHTML = "<input type='file' class='upload-btn' name='imgPath'  multiple/><i class='fa-solid fa-square-xmark x-btn'></i>";
 
         newDiv0.appendChild(newDiv1);
         newDiv0.appendChild(newDiv2);
         newDiv0.appendChild(newDiv3);
 
         cerTarget.appendChild(newDiv0);
+       
 
       }
-	</script>
+    </script>
 
     <%@ include file="/views/common/footer.jsp" %>
 
