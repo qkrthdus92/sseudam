@@ -52,6 +52,8 @@
     #write{ 
         margin-left: 20px;
         margin-right: 20px; 
+        padding-bottom: 20px;
+        margin-bottom: 10px;
         border-bottom: 1px solid #747474;
     }
     #write > *{
@@ -65,6 +67,9 @@
         border: 0px;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
     }
+    .board-photo{
+    	font-size: 0.8rem;
+    }
     a{
         text-decoration: none;
         color: black;
@@ -73,23 +78,26 @@
         margin: auto;   
         width: 100%;
         height: 100%;
-        display: flex;
+        display: grid;
         align-items: center;
         justify-content: center;
         column-gap: 35px;
-        margin-top: 10px;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 2fr 2fr;
 
     }
     .board-list > div{
-        width: 20%;
+        width: 95%;
         height: 95%;
         margin: 10px;
+        margin-top: 30px;
         grid-template-columns: 5fr 5fr 5fr 5fr;
         border-radius: 10px;
         border: 1px solid #454545;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2); 
         }
     .board-list > *{
+        
         width: 20%;
         height: 50%;
         border-top-left-radius: 10px;
@@ -101,6 +109,11 @@
         height: 83%;
         border-radius: 10px;
 
+    }
+     #cmts{
+  	--font-size: 230%;
+      font-weight: 800;
+      color: #26AA82;
     }
     .list-info{
         font-size: 0.8rem;
@@ -154,97 +167,22 @@
        
             <div class="board-list">
             
-            
+                <%for(int i = 0; i < rvoList.size(); ++i){%>
                 <div class="board-photo">
-                    <a href="<%=root%>/board/reviewBoardDetail?bno=<%=rvoList.get(1).getNo() %>&cmtPno=1">
-                        <img src="<%=root%>/resources/img/main/러버덕.jpg"><%=rvoList.get(1).getTitle()%>
+                    <a href="<%=root%>/board/reviewBoardDetail?bno=<%=rvoList.get(i).getNo() %>&cmtPno=1">
+                        <img src="<%=root%>/resources/img/main/러버덕.jpg"><%=rvoList.get(i).getTitle()%>
+                        &nbsp;<span id="cmts">[<%=rvoList.get(i).getCmtCount() %>]</span>
                     </a>
-                    <div class="list-info"><%=rvoList.get(1).getNo()%> | <%=rvoList.get(1).getWriterNo()%> | <%=rvoList.get(1).getWriteDate()%> |&nbsp;
+                    <div class="list-info"><%=rvoList.get(i).getNo()%> | <%=rvoList.get(i).getWriterNo()%> | <%=rvoList.get(i).getWriteDate()%> |&nbsp;
                         <div class="view">
                             <img src="<%=root%>/resources/img/board/View.svg">
-                        </div>&nbsp;<%=rvoList.get(1).getViews()%>
+                        </div>&nbsp;<%=rvoList.get(i).getViews()%>
                     </div>
                 </div>
-                <div class="board-photo">
-                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
-                        <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
-                    </a>
-                    <div class="list-info">no | user08 | 2022-10-17 |
-                        <div class="view">
-                            <img src="<%=root%>/resources/img/board/View.svg">
-                        </div>150
-                    </div>
-                </div>
-                <div class="board-photo">
-                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
-                        <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
-                    </a>
-                    <div class="list-info">no | user08 | 2022-10-17 |
-                        <div class="view">
-                            <img src="<%=root%>/resources/img/board/View.svg">
-                        </div>150
-                    </div>
-                </div>
-                <div class="board-photo">
-                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
-                        <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
-                    </a>
-                    <div class="list-info">no | user08 | 2022-10-17 |
-                        <div class="view">
-                            <img src="<%=root%>/resources/img/board/View.svg">
-                        </div>150
-                    </div>
-                </div>
-           
+                <%}%>
            
             </div>
 
-            <div class="board-list">
-            
-            
-                <div class="board-photo">
-                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
-                        <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
-                    </a>
-                    <div class="list-info">no | user08 | 2022-10-17 |
-                        <div class="view">
-                            <img src="<%=root%>/resources/img/board/View.svg">
-                        </div>150
-                    </div>
-                </div>
-                <div class="board-photo">
-                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
-                        <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
-                    </a>
-                    <div class="list-info">no | user08 | 2022-10-17 |
-                        <div class="view">
-                            <img src="<%=root%>/resources/img/board/View.svg">
-                        </div>150
-                    </div>
-                </div>
-                <div class="board-photo">
-                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
-                        <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
-                    </a>
-                    <div class="list-info">no | user08 | 2022-10-17 |
-                        <div class="view">
-                            <img src="<%=root%>/resources/img/board/View.svg">
-                        </div>150
-                    </div>
-                </div>
-                <div class="board-photo">
-                    <a href="<%=root%>/views/board/reviewBoard/reviewBoardDetail.jsp">
-                        <img src="<%=root%>/resources/img/main/러버덕.jpg">후기게시판 리스트
-                    </a>
-                    <div class="list-info">no | user08 | 2022-10-17 |
-                        <div class="view">
-                            <img src="<%=root%>/resources/img/board/View.svg">
-                        </div>150
-                    </div>
-                </div>
-           
-           
-            </div>
             
             
             

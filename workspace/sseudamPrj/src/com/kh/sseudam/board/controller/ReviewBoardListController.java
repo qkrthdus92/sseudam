@@ -40,8 +40,8 @@ public class ReviewBoardListController extends HttpServlet {
 
 		listCount = new ReviewBoardService().selectCount();
 		currentPage = Integer.parseInt(req.getParameter("pno"));
-		pageLimit = 8; // 10페이지씩 볼수있게 설정하는곳
-		boardLimit = 10; // 한페이지당 10개씩 볼수 있게 설정하는곳
+		pageLimit = 10; // 10페이지씩 볼수있게 설정하는곳
+		boardLimit = 8; // 한페이지당 10개씩 볼수 있게 설정하는곳
 
 		maxPage = (int) Math.ceil((double) listCount / boardLimit);
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;

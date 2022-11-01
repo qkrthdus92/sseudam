@@ -1,5 +1,9 @@
+<%@page import="com.kh.sseudam.board.vo.ReviewBoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	ReviewBoardVo rvo = (ReviewBoardVo) request.getAttribute("rvo");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,25 +90,19 @@ body {
 }
 
 #upload-list {
-	display: grid;
-	grid-template-columns: 10fr 1fr 1fr;
-	width: 75%;
+	display: flex;
+	width: 150%;
 }
 
-#fileName1, #fileName2, #fileName3,
-#fileName4, #fileName5{
+#fileName {
 	width: 100%;
 	border: 0px;
 	background-color: #dfdfdf;
 }
-#delete{
-	width: 100%;
-	border: 0px;
-	background-color: #dfdfdf;
-}
+
 #upload-btn {
 	display: flex;
-	margin-left: 150%;
+	margin-left: 130%;
 	width: 80px;
 	height: 30px;
 	background-color: #dfdfdf;
@@ -147,62 +145,69 @@ body {
 		<div id="title">후기게시판</div>
 		<div id="write-box">
 			<div id="write-title">
-				제목<br>
-				<input type="text" size="130" style="height: 25px"
-							placeholder="제목을 입력하세요." name="title" required>
+				제목<br> <input type="text" size="130" style="height: 25px"
+					placeholder="제목을 입력하세요." required value="<%=rvo.getTitle()%>">
 			</div>
 			<div id="write-content">
 				내용<br>
-				<textarea name="content" cols="132%" rows="30"
-							style="resize: none;" placeholder="내용을 입력하세요." name="content"
-							required></textarea>
+				<textarea name="content" cols="132%" rows="30" style="resize: none;"
+					placeholder="내용을 입력하세요." required><%=rvo.getContent()%>></textarea>
 			</div>
 
 
 			<div id="file-upload">이미지 첨부 (이미지파일 최대 5장)</div>
 			<form action="" method="post" enctype="multipart/form-data">
 				<div class="upload-list">
-					<div id="upload-list">
-						<input type="text" id="fileName1" name="fileName1" required>
-						<button id="delete">삭제</button>
-						<label id="upload-btn">
-							파일선택<input type="file" name="f" style="display: none"
-							onchange="javascript:document.getElementById('fileName1').value = this.value">
-						</label>
+					<div>
+						<div id="upload-list">
+							<input type="text" id="fileName" name="fileName">
+						</div>
+						<div>
+							<label id="upload-btn">파일선택<input type="file"
+								multiple=multiple name="f" style="display: none"
+								onchange="javascript:document.getElementById('fileName').value = this.value"></label>
+						</div>
 					</div>
-
-					<div id="upload-list">
-						<input type="text" id="fileName2" name="fileName2" required>
-						<label id="upload-btn">
-							파일선택<input type="file" name="f" style="display: none"
-							onchange="javascript:document.getElementById('fileName2').value = this.value">
-						</label>
+					<div>
+						<div id="upload-list">
+							<input type="text" id="fileName" name="fileName">
+						</div>
+						<div>
+							<label id="upload-btn">파일선택<input type="file"
+								multiple=multiple name="f" style="display: none"
+								onchange="javascript:document.getElementById('fileName').value = this.value"></label>
+						</div>
 					</div>
-
-					<div id="upload-list">
-						<input type="text" id="fileName3" name="fileName3" required>
-						<label id="upload-btn">
-							파일선택<input type="file" name="f" style="display: none"
-							onchange="javascript:document.getElementById('fileName3').value = this.value">
-						</label>
+					<div>
+						<div id="upload-list">
+							<input type="text" id="fileName" name="fileName">
+						</div>
+						<div>
+							<label id="upload-btn">파일선택<input type="file"
+								multiple=multiple name="f" style="display: none"
+								onchange="javascript:document.getElementById('fileName').value = this.value"></label>
+						</div>
 					</div>
-
-					<div id="upload-list">
-						<input type="text" id="fileName4" name="fileName4" required>
-						<label id="upload-btn">
-							파일선택<input type="file" name="f" style="display: none"
-							onchange="javascript:document.getElementById('fileName4').value = this.value">
-						</label>
+					<div>
+						<div id="upload-list">
+							<input type="text" id="fileName" name="fileName">
+						</div>
+						<div>
+							<label id="upload-btn">파일선택<input type="file"
+								multiple=multiple name="f" style="display: none"
+								onchange="javascript:document.getElementById('fileName').value = this.value"></label>
+						</div>
 					</div>
-
-					<div id="upload-list">
-						<input type="text" id="fileName5" name="fileName5" required>
-						<label id="upload-btn">
-							파일선택<input type="file" name="f" style="display: none"
-							onchange="javascript:document.getElementById('fileName5').value = this.value">
-						</label>
+					<div>
+						<div id="upload-list">
+							<input type="text" id="fileName" name="fileName">
+						</div>
+						<div>
+							<label id="upload-btn">파일선택<input type="file"
+								multiple=multiple name="f" style="display: none"
+								onchange="javascript:document.getElementById('fileName').value = this.value"></label>
+						</div>
 					</div>
-
 				</div>
 
 				<div id="btn">

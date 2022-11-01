@@ -48,7 +48,7 @@ public class ReviewBoardDao {
 	// 후기게시판 게시글 목록 조회
 	public static List<ReviewBoardVo> selectList(Connection conn, PageVo rpv) {
 		//String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM , T.* FROM ( SELECT B.NO ,B.TITLE ,B.VIEWS, B.DELETE_YN, TO_CHAR(B.WRITE_DATE, 'yyyy-mm-dd') AS WRITE_DATE ,M.NICK AS WRITER_NO FROM REVIEW_BOARD B JOIN MEMBER M ON B.WRITER_NO = M.NO WHERE B.DELETE_YN = 'N' ORDER BY B.NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM , T.* FROM ( SELECT B.NO ,B.TITLE ,B.VIEWS, TO_CHAR(B.WRITE_DATE, 'yyyy-mm-dd') AS WRITE_DATE ,M.NICK AS WRITER_NO, I.ORIGIN_NAME, I.CHANGE_NAME, I.FILE_PATH FROM REVIEW_BOARD B JOIN MEMBER M ON B.WRITER_NO = M.NO JOIN REVIEW_BOARD_IMG I ON B.NO = I.REVIEW_BOARD_NO WHERE B.DELETE_YN = 'N' AND I.THUMB_YN = 'Y' ORDER BY B.NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM , T.* FROM ( SELECT B.NO ,B.TITLE ,B.VIEWS, B.DELETE_YN, TO_CHAR(B.WRITE_DATE, 'yyyy-mm-dd') AS WRITE_DATE ,M.NICK AS WRITER_NO, I.FILE_PATH, I.CHANGE_NAME, I.ORIGIN_NAME, I.THUMB_YN FROM REVIEW_BOARD B JOIN MEMBER M ON B.WRITER_NO = M.NO JOIN REVIEW_BOARD_IMG I ON B.NO = I.REVIEW_BOARD_NO WHERE B.DELETE_YN = 'N' ORDER BY B.NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
 		
 		
 		PreparedStatement pstmt = null;
@@ -345,6 +345,31 @@ public class ReviewBoardDao {
 
 		}
 		return result;
+	}
+
+	//후기게시판 게시글 수정
+	public static int edit(Connection conn, ReviewBoardVo rvo) {
+		String sql = "UPDATE REVIEW_BOARD SET TITLE = ?, CONTENT = ?, MODIFY_DATE = SYSDATE WHERE NO = ?";
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, rvo.getTitle());
+			pstmt.setString(2, rvo.getContent());
+			pstmt.setString(3, rvo.getNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+		
 	}
 
 
