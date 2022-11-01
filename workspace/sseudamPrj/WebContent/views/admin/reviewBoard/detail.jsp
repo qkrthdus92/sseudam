@@ -1,5 +1,52 @@
+<%@page import="com.kh.sseudam.common.AttachmentVo"%>
+<%@page import="com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardCmtVo"%>
+<%@page import="java.util.List"%>
+<%@page import="com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardVo"%>
+<%@page import="com.kh.sseudam.common.PageVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
+pageEncoding="UTF-8"%>
+<% 
+	String root1 = request.getContextPath();
+
+	String pno = (String)request.getAttribute("pno");
+	String search = (String)request.getAttribute("search");
+	String searchType = (String)request.getAttribute("searchType");
+	String status = (String)request.getAttribute("status");
+	String bno = (String)request.getAttribute("bno");
+	String dno = (String)request.getAttribute("dno");
+	PageVo pv = (PageVo)request.getAttribute("pv");
+	
+	AdminFreeBoardVo freeBoardVo = (AdminFreeBoardVo)request.getAttribute("freeBoardVo");
+	List<AdminFreeBoardCmtVo> list = (List<AdminFreeBoardCmtVo>)request.getAttribute("freeBoardCmtList");
+	List<AttachmentVo> imgList = (List)request.getAttribute("imgList");
+	
+	String pno2 = (String)session.getAttribute("pno2");
+	String bno2 = (String)session.getAttribute("bno2");
+	String search2 = (String)session.getAttribute("search2");
+	String searchType2 = (String)session.getAttribute("searchType2");
+	String status2 = (String)session.getAttribute("status2");
+	String dno2 = (String)session.getAttribute("dno2");
+	
+	if((pno2 != null) && (bno2 != null) && (search2 != null) && (searchType2 != null) && (status2 != null) && (dno2 != null)) {
+		System.out.println("세션값으로 대체됨!");
+		pno = pno2;
+		search = search2;
+		searchType = searchType2;
+		status = status2;
+		bno = bno2;
+		dno = dno2;
+		
+		session.removeAttribute("pno2");
+		session.removeAttribute("bno2");
+		session.removeAttribute("dno2");
+		session.removeAttribute("search2");
+		session.removeAttribute("searchType2");
+		session.removeAttribute("status2");
+		
+	}
+
+
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,24 +63,11 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/common/component.css?ver=2"
+      href="<%=root1%>/resources/css/admin/common/component.css?ver=3"
     />
     <style>
-      .grid-col8 {
-        display: grid;
-        grid-template-columns: 1fr 10fr 2fr 2fr 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr;
-      }
-
-      .grid-col8 div {
-        border-right: 1px solid var(--border);
-        height: 40px;
-      }
-
-      .admin-main-board-detail {
-        padding: 20px 20px;
-        height: 500px;
-      }
+ 
+     
 
       .reply-header {
         border-top: 1px solid var(--border);
@@ -56,36 +90,9 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
         color: black;
       }
 
-      .reply-detail {
-        display: grid;
-        grid-template-columns: 2fr 6fr 2fr 2fr 1fr 1fr 1fr;
-      }
-
-      .reply-detail div,
-      .admin-reply-form div {
-        height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .reply-detail div {
-        border-bottom: 1px solid var(--border);
-      }
-
-      .reply-detail div:nth-child(-n + 7) {
-        background-color: #dedbdb;
-        justify-content: center;
-      }
-
-      .admin-reply-form {
-        display: grid;
-        grid-template-columns: 1fr 6fr 1fr;
-      }
-
-      .admin-reply-form div:nth-child(2) {
-        justify-content: flex-start;
-      }
+      
+      
+     
     </style>
   </head>
   <body>
@@ -98,37 +105,65 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
             class="cancel-btn"
             type="button"
             value="목록"
-            onclick="history.back()"
+             onclick="location.href='<%=root%>/admin/reviewBoard/list?pno=<%=pno%>&status=<%=status%>&search=<%=search%>&searchType=<%=searchType%>'"
+
           />
           <!-- <input class="save-btn" type="submit" value="저장" /> -->
         </div>
       </header>
       <section class="admin-main-section">
         <div class="admin-main-wrapper">
-          <div class="admin-main-board grid-col8">
-            <div>10</div>
-            <div>여행가고싶다~~</div>
-            <div>한혜원</div>
+             <div class="admin-main-board grid-col8">
+            <div><%= freeBoardVo.getNo() %></div>
+            <div><%= freeBoardVo.getTitle() %></div>
+            <div><%= freeBoardVo.getNick() %></div>
 
-            <div>2022-10-08 12:12:12</div>
-            <div><i class="fa-regular fa-eye"></i><span>100</span></div>
-            <div><i class="fa-solid fa-comment-dots"></i><span>3</span></div>
+            <div><%= freeBoardVo.getEnrollDate() %></div>
+            <div><i class="fa-regular fa-eye margin-right"></i><span><%= freeBoardVo.getView() %></span></div>
+            <div><i class="fa-solid fa-comment-dots margin-right"></i><span><%= freeBoardVo.getCmtCnt() %></span></div>
             <div>
-              <a href="<%=root%>/views/admin/reviewBoard/edit.jsp"
+              <a href="<%=root%>/admin/reviewBoard/edit?bno=<%=bno %>&pno=<%=pno %>&dno=<%=dno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"
                 ><i class="fa-solid fa-pen-to-square"></i
               ></a>
             </div>
             <div>
-              <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+              <i class="fa-solid fa-trash-can cursor" onclick="dbDeleteBoard();"></i>
             </div>
           </div>
+          
+              <script>
+      
+            function dbDeleteBoard() {
+              Swal.fire({
+                title: "후기게시판 게시글 삭제",
+                text: "정말로 삭제 하시겠습니까?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#26aa82",
+                cancelButtonColor: "#f85a2a",
+                confirmButtonText: "삭제",
+                cancelButtonText: "취소"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  location.href='<%=root%>/admin/reviewBoard/delete?bno=<%=bno %>&pno=<%=pno %>&dno=<%=dno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>';
+                }
+              });
+            }
+          </script>
+          
           <div class="admin-main-board-detail">
-            <div>여행가고싶네여</div>
+          
+          <% for(int i=0; i<imgList.size(); i++){ %>
+       
+          <img class="reviewImg" alt="" src="<%=root1%>/resources/upload/afterBoard/<%=imgList.get(i).getChangeName()%>">
+          <%} %>
+            <textarea class="freeBoard-content" name="" id="" cols="30" rows="10" disabled><%= freeBoardVo.getContent() %></textarea>
+            
           </div>
           <div class="reply-header">
             <i class="fa-solid fa-comment-dots"></i>
             <span>댓글</span>
-            <span>3</span>
+            <span><%= freeBoardVo.getCmtCnt() %></span>
           </div>
           <div class="reply-detail">
             <div>작성자</div>
@@ -139,35 +174,92 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
             <div></div>
             <div></div>
 
-            <%for(int i=1; i<=3; i++) {%>
-            <div>hyewon</div>
-            <div>나도 가고싶다~~</div>
-            <div>2022-10-08 12:12:12</div>
-            <div>2022-10-08 12:12:12</div>
+            <%for(int i=0; i<list.size(); i++) {%>
+         
+             
+            <div><%=  list.get(i).getNick()%></div>
+            <% if(list.get(i).getDeleteYn().equals("N")){ %>
+              <div class="flex-start"><%=  list.get(i).getCmt()%></div>
+              <%}else { %>
+                <div class="flex-start light-color"><%=  list.get(i).getCmt()%></div>
+              <%} %>
+            <div><%=  list.get(i).getEnrollDate()%></div>
+            <div><%=  list.get(i).getModifyDate()%></div>
+            <% if(list.get(i).getDeleteYn().equals("N")){ %>
             <div>게시완료</div>
+            <%}else { %>
+            <div>게시취소</div>
+            <%} %>
             <div>
-              <a href="<%=root%>/views/admin/reviewBoard/edit.jsp"
+              <a href="<%=root%>/admin/reviewBoard/editCmt?cno=<%=list.get(i).getNo() %>&bno=<%=bno %>&pno=<%=pno %>&dno=<%=dno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"
                 ><i class="fa-solid fa-pen-to-square"></i
               ></a>
             </div>
             <div>
-              <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+              <i id='<%=list.get(i).getNo() %>' class="fa-solid fa-trash-can cursor" onclick="dbDeleteCmt(this);"></i>
+             <script>
+      
+            function dbDeleteCmt(e) {
+            	var cmtNo = $(e).attr('id');
+            	
+              Swal.fire({
+                title: "후기게시판 댓글 삭제",
+                text: "정말로 삭제 하시겠습니까?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#26aa82",
+                cancelButtonColor: "#f85a2a",
+                confirmButtonText: "삭제",
+                cancelButtonText: "취소"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  location.href='<%=root%>/admin/reviewBoard/deleteCmt?cno='+cmtNo+'&bno=<%=bno %>&pno=<%=pno %>&dno=<%=dno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>';
+                }
+              });
+            }
+          </script>
             </div>
             <%}%>
           </div>
-          <div class="admin-reply-form">
-            <div>관리자</div>
-            <div>
-              <input
-                type="text"
-                placeholder="댓글을 입력해주세요"
-                class="admin-input"
-              />
-            </div>
-            <div>
-              <input type="submit" value="등록" class="small-add-btn" />
-            </div>
+          
+               <!-- 댓글 페이징 -->
+    
+          <div class="page-area">
+            <%if(pv.getStartPage()!=1) {%>
+            <a href="<%=root1%>/admin/reviewBoard/detail?status=<%=status %>&bno=<%=bno %>&pno=<%=pno %>&dno=<%=pv.getStartPage()-1 %>&searchType=<%=searchType %>&search=<%=search %>" class=""><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
+            <%}%>
+	        <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
+	          <a href="<%=root1%>/admin/reviewBoard/detail?status=<%=status %>&bno=<%=bno %>&pno=<%=pno %>&dno=<%=i %>&searchType=<%=searchType %>&search=<%=search %>" class=""><span><%=i %></span></a>
+	        <%}%>
+	        <%if(pv.getEndPage() != pv.getMaxPage()) { %>
+	         <a href="<%=root1%>/admin/reviewBoard/detail?status=<%=status %>&bno=<%=bno %>&pno=<%=pno %>&dno=<%=pv.getEndPage()+1 %>&searchType=<%=searchType %>&search=<%=search %>" class=""><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
+	        <%}%>
+         
           </div>
+          
+          <form action="<%=root1%>/admin/reviewBoard/writeCmt" method="post">
+            <input type="hidden" name="bno" value="<%=bno%>">
+            <input type="hidden" name="pno" value="<%=pno%>">
+            <input type="hidden" name="status" value="<%=status%>">
+            <input type="hidden" name="search" value="<%=search%>">
+            <input type="hidden" name="searchType" value="<%=searchType%>">
+            <input type="hidden" name="dno" value="<%=dno%>">
+            <div class="admin-reply-form">
+              <div>관리자</div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="댓글을 입력해주세요"
+                  class="admin-input"
+                  name="cmt"
+                />
+              </div>
+              <div>
+                <input type="submit" value="등록" class="small-add-btn" />
+              </div>
+            </div>
+
+          </form>
         </div>
       </section>
     </main>

@@ -7,6 +7,7 @@ import com.kh.sseudam.admin.freeBoard.dao.AdminFreeBoardDao;
 import com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardCmtVo;
 import com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardVo;
 import com.kh.sseudam.admin.reviewBoard.dao.AdminReviewBoardDao;
+import com.kh.sseudam.common.AttachmentVo;
 import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.common.PageVo;
 
@@ -257,13 +258,23 @@ public class AdminReviewBoardService {
 		return list;
 	}
 
-	//자유게시판 글 작성
-	public int insertFreeBoard(AdminFreeBoardVo vo) {
+	//<후기게시판 글 작성>
+	public int insertReviewBoard(AdminFreeBoardVo vo, List<AttachmentVo> list) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int result = new AdminReviewBoardDao().insertFreeBoard(conn, vo);
+		//게시글 insert
+		int result = new AdminReviewBoardDao().insertReviewBoard(conn, vo);
 		
-		if(result == 1) {
+		//첨부파일 insert
+		int result2 = 1;
+		if(list != null) {
+			result2 = new AdminReviewBoardDao().insertThumbImg(conn, list.get(0));
+			for(int i=1; i<list.size(); i++) {
+				result2 = new AdminReviewBoardDao().insertImg(conn, list.get(i));
+			}
+		}
+		
+		if(result * result2 == 1) {
 			JDBCTemplate.commit(conn);
 		}else {
 			JDBCTemplate.rollback(conn);
@@ -271,7 +282,7 @@ public class AdminReviewBoardService {
 		
 		JDBCTemplate.close(conn);
 		
-		return result;
+		return result * result2;
 	}
 
 	//자유게시판 글번호로 글 상세조회
@@ -296,12 +307,31 @@ public class AdminReviewBoardService {
 		return list;
 	}
 
-	public int editFreeBoardDetail(AdminFreeBoardVo vo) {
+	public int editFreeBoardDetail(AdminFreeBoardVo vo, List<AttachmentVo> list) {
 		Connection conn = JDBCTemplate.getConnection();
 		
+		//후기게시판 글 수정한거 업데이트
 		int result = new AdminReviewBoardDao().editFreeBoardDetail(conn, vo);
 		
-		if(result == 1) {
+		//추가로 들어온 이미지 insert
+		//첨부파일 insert
+		int result2 = 1;
+		if(list != null) {
+			for(int i=0; i<list.size(); i++) {
+				result2 = new AdminReviewBoardDao().insertImgByNo(conn, vo, list.get(i));
+			}
+		}
+		
+		//썸네일 없는지 체크하기
+		boolean isThumb = new AdminReviewBoardDao().checkThumb(conn, vo.getNo());
+		
+		int result3 = 1;
+		if(isThumb == false) {
+			//해당 글번호에서 가장 작은 이미지 번호에 해당하는 이미지에 썸네일 Y로 업데이트해야함
+			result3 = new AdminReviewBoardDao().updateThumb(conn, vo.getNo());
+		}
+		
+		if(result * result2 * result3== 1) {
 			JDBCTemplate.commit(conn);
 		}else {
 			JDBCTemplate.rollback(conn);
@@ -309,7 +339,8 @@ public class AdminReviewBoardService {
 		
 		JDBCTemplate.close(conn);
 		
-		return result;
+		return result * result2 * result3;
+	
 	}
 
 	public int deleteFreeBoardDetail(String bno) {
@@ -366,6 +397,7 @@ public class AdminReviewBoardService {
 		}else {
 			JDBCTemplate.rollback(conn);
 		}
+		JDBCTemplate.close(conn);
 		return result;
 	}
 
@@ -377,6 +409,31 @@ public class AdminReviewBoardService {
 		JDBCTemplate.close(conn);
 		
 		return cnt;
+	}
+
+	public List selectReviewBoardImgByNo(String bno) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List imgList = new AdminReviewBoardDao().selectReviewBoardImgByNo(conn, bno);
+		JDBCTemplate.close(conn);
+		return imgList;
+	}
+
+	//이미지 삭제
+	public int deleteImg(String img) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new AdminReviewBoardDao().deleteImg(conn, img);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);;
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		
+		return result;
 	}
 
 }

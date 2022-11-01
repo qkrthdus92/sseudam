@@ -101,7 +101,11 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
   <body class="write-reviewBoard-body">
     <%@ include file="/views/admin/common/menu.jsp"%>
     <main class="admin-main">
-      <form action="<%=root1%>/admin/reviewBoard/write" method="post">
+      <form
+        action="<%=root1%>/admin/reviewBoard/write"
+        method="post"
+        enctype="multipart/form-data"
+      >
         <header class="admin-main-header flex-between">
           <h1>후기게시판 작성</h1>
           <div class="btn-set">
@@ -146,11 +150,11 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
               <!-- <span>3</span> -->
             </div>
             <div class="file-upload">
-              <input type="file" value="업로드" class="upload-btn" />
-              <input type="file" value="업로드" class="upload-btn" />
-              <input type="file" value="업로드" class="upload-btn" />
-              <input type="file" value="업로드" class="upload-btn" />
-              <input type="file" value="업로드" class="upload-btn" />
+              <input type="file" value="업로드" class="upload-btn" name="f" />
+              <input type="file" value="업로드" class="upload-btn" name="f" />
+              <input type="file" value="업로드" class="upload-btn" name="f" />
+              <input type="file" value="업로드" class="upload-btn" name="f" />
+              <input type="file" value="업로드" class="upload-btn" name="f" />
             </div>
           </div>
         </section>

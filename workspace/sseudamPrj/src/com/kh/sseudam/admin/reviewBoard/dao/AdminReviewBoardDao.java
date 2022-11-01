@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardCmtVo;
 import com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardVo;
+import com.kh.sseudam.common.AttachmentVo;
 import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.common.PageVo;
 
@@ -327,7 +328,7 @@ public class AdminReviewBoardDao {
 
 	//모든 게시글 리스트 조회
 	public List getFreeAll(Connection conn, PageVo pv) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT I.CHANGE_NAME, F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN REVIEW_BOARD_IMG I ON F.NO = I.REVIEW_BOARD_NO JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE I.THUMB_YN = 'Y' AND STATUS = 'O' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -351,6 +352,7 @@ public class AdminReviewBoardDao {
 				String views = rs.getString("VIEWS");
 				String modifyDate = rs.getString("MODIFY_DATE");
 				String deleteYn = rs.getString("DELETE_YN");
+				String changeName = rs.getString("CHANGE_NAME");
 				
 				String cmtCnt = getCntCmtByNo(conn, no);
 				
@@ -364,6 +366,8 @@ public class AdminReviewBoardDao {
 				vo.setModifyDate(modifyDate);
 				vo.setDeleteYn(deleteYn);
 				vo.setCmtCnt(cmtCnt);
+				vo.setImg(changeName);
+				
 				
 				list.add(vo);
 			
@@ -381,7 +385,7 @@ public class AdminReviewBoardDao {
 
 	//게시완료 게시글 리스트 조회
 	public List getFreeF(Connection conn, PageVo pv) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE DELETE_YN = 'N' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT I.CHANGE_NAME, F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN REVIEW_BOARD_IMG I ON F.NO = I.REVIEW_BOARD_NO JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE DELETE_YN = 'N' AND I.THUMB_YN = 'Y' AND STATUS = 'O' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -406,6 +410,7 @@ public class AdminReviewBoardDao {
 				String modifyDate = rs.getString("MODIFY_DATE");
 				String deleteYn = rs.getString("DELETE_YN");
 				
+				
 				String cmtCnt = getCntCmtByNo(conn, no);
 				
 				AdminFreeBoardVo vo = new AdminFreeBoardVo();
@@ -418,6 +423,8 @@ public class AdminReviewBoardDao {
 				vo.setModifyDate(modifyDate);
 				vo.setDeleteYn(deleteYn);
 				vo.setCmtCnt(cmtCnt);
+				String changeName = rs.getString("CHANGE_NAME");
+				vo.setImg(changeName);
 				
 				list.add(vo);
 			
@@ -433,7 +440,7 @@ public class AdminReviewBoardDao {
 	}
 
 	public List getFreeC(Connection conn, PageVo pv) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE DELETE_YN = 'Y' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT I.CHANGE_NAME, F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN REVIEW_BOARD_IMG I ON F.NO = I.REVIEW_BOARD_NO JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE DELETE_YN = 'Y' AND I.THUMB_YN = 'Y' AND STATUS = 'O' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -459,6 +466,7 @@ public class AdminReviewBoardDao {
 				String deleteYn = rs.getString("DELETE_YN");
 				
 				String cmtCnt = getCntCmtByNo(conn, no);
+			
 				
 				AdminFreeBoardVo vo = new AdminFreeBoardVo();
 				vo.setNo(no);
@@ -470,7 +478,8 @@ public class AdminReviewBoardDao {
 				vo.setModifyDate(modifyDate);
 				vo.setDeleteYn(deleteYn);
 				vo.setCmtCnt(cmtCnt);
-				
+				String changeName = rs.getString("CHANGE_NAME");
+				vo.setImg(changeName);
 				list.add(vo);
 			
 			}
@@ -486,7 +495,7 @@ public class AdminReviewBoardDao {
 
 	//제목+모든 게시글 조회
 	public List getFreeTitleAll(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.TITLE LIKE ? ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT I.CHANGE_NAME, F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN REVIEW_BOARD_IMG I ON F.NO = I.REVIEW_BOARD_NO JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.TITLE LIKE ? AND I.THUMB_YN = 'Y' AND STATUS = 'O' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -513,6 +522,7 @@ public class AdminReviewBoardDao {
 				String deleteYn = rs.getString("DELETE_YN");
 				
 				String cmtCnt = getCntCmtByNo(conn, no);
+			
 				
 				AdminFreeBoardVo vo = new AdminFreeBoardVo();
 				vo.setNo(no);
@@ -524,7 +534,8 @@ public class AdminReviewBoardDao {
 				vo.setModifyDate(modifyDate);
 				vo.setDeleteYn(deleteYn);
 				vo.setCmtCnt(cmtCnt);
-				
+				String changeName = rs.getString("CHANGE_NAME");
+				vo.setImg(changeName);
 				list.add(vo);
 			
 			}
@@ -540,7 +551,7 @@ public class AdminReviewBoardDao {
 
 	//제목+완료 게시글 조회
 	public List getFreeTitleF(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.TITLE LIKE ? AND DELETE_YN = 'N' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT I.CHANGE_NAME, F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN REVIEW_BOARD_IMG I ON F.NO = I.REVIEW_BOARD_NO JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.TITLE LIKE ? AND I.THUMB_YN = 'Y' AND STATUS = 'O' AND DELETE_YN = 'N' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -568,6 +579,7 @@ public class AdminReviewBoardDao {
 				
 				String cmtCnt = getCntCmtByNo(conn, no);
 				
+				
 				AdminFreeBoardVo vo = new AdminFreeBoardVo();
 				vo.setNo(no);
 				vo.setTitle(title);
@@ -578,7 +590,8 @@ public class AdminReviewBoardDao {
 				vo.setModifyDate(modifyDate);
 				vo.setDeleteYn(deleteYn);
 				vo.setCmtCnt(cmtCnt);
-				
+				String changeName = rs.getString("CHANGE_NAME");
+				vo.setImg(changeName);
 				list.add(vo);
 			
 			}
@@ -594,7 +607,7 @@ public class AdminReviewBoardDao {
 
 	//제목+취소 게시글 조회
 	public List getFreeTitleC(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.TITLE LIKE ? AND DELETE_YN = 'Y' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT I.CHANGE_NAME, F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN REVIEW_BOARD_IMG I ON F.NO = I.REVIEW_BOARD_NO JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.TITLE LIKE ? AND I.THUMB_YN = 'Y'AND STATUS = 'O' AND DELETE_YN = 'Y' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -622,6 +635,7 @@ public class AdminReviewBoardDao {
 				
 				String cmtCnt = getCntCmtByNo(conn, no);
 				
+				
 				AdminFreeBoardVo vo = new AdminFreeBoardVo();
 				vo.setNo(no);
 				vo.setTitle(title);
@@ -632,7 +646,8 @@ public class AdminReviewBoardDao {
 				vo.setModifyDate(modifyDate);
 				vo.setDeleteYn(deleteYn);
 				vo.setCmtCnt(cmtCnt);
-				
+				String changeName = rs.getString("CHANGE_NAME");
+				vo.setImg(changeName);
 				list.add(vo);
 			
 			}
@@ -648,7 +663,7 @@ public class AdminReviewBoardDao {
 
 	//내용+모든 게시글 리스트 조회
 	public List getFreeContentAll(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.CONTENT LIKE ? ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT I.CHANGE_NAME, F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN REVIEW_BOARD_IMG I ON F.NO = I.REVIEW_BOARD_NO JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.CONTENT LIKE ? AND I.THUMB_YN = 'Y'AND STATUS = 'O' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -674,6 +689,7 @@ public class AdminReviewBoardDao {
 				String modifyDate = rs.getString("MODIFY_DATE");
 				String deleteYn = rs.getString("DELETE_YN");
 				
+				
 				String cmtCnt = getCntCmtByNo(conn, no);
 				
 				AdminFreeBoardVo vo = new AdminFreeBoardVo();
@@ -686,7 +702,8 @@ public class AdminReviewBoardDao {
 				vo.setModifyDate(modifyDate);
 				vo.setDeleteYn(deleteYn);
 				vo.setCmtCnt(cmtCnt);
-				
+				String changeName = rs.getString("CHANGE_NAME");
+				vo.setImg(changeName);
 				list.add(vo);
 			
 			}
@@ -702,7 +719,7 @@ public class AdminReviewBoardDao {
 
 	//내용+완료 게시글 리스트 조회
 	public List getFreeContentF(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.CONTENT LIKE ? AND DELETE_YN = 'N' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT I.CHANGE_NAME, F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN REVIEW_BOARD_IMG I ON F.NO = I.REVIEW_BOARD_NO JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.CONTENT LIKE ? AND I.THUMB_YN = 'Y' AND STATUS = 'O' AND DELETE_YN = 'N' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -727,6 +744,7 @@ public class AdminReviewBoardDao {
 				String views = rs.getString("VIEWS");
 				String modifyDate = rs.getString("MODIFY_DATE");
 				String deleteYn = rs.getString("DELETE_YN");
+		
 				
 				String cmtCnt = getCntCmtByNo(conn, no);
 				
@@ -740,7 +758,8 @@ public class AdminReviewBoardDao {
 				vo.setModifyDate(modifyDate);
 				vo.setDeleteYn(deleteYn);
 				vo.setCmtCnt(cmtCnt);
-				
+				String changeName = rs.getString("CHANGE_NAME");
+				vo.setImg(changeName);
 				list.add(vo);
 			
 			}
@@ -756,7 +775,7 @@ public class AdminReviewBoardDao {
 
 	//내용+취소 게시글 조회
 	public List getFreeContentC(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.CONTENT LIKE ? AND DELETE_YN = 'Y' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT I.CHANGE_NAME, F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN REVIEW_BOARD_IMG I ON F.NO = I.REVIEW_BOARD_NO JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE F.CONTENT LIKE ? AND I.THUMB_YN = 'Y'AND STATUS = 'O' AND DELETE_YN = 'Y' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -782,6 +801,7 @@ public class AdminReviewBoardDao {
 				String modifyDate = rs.getString("MODIFY_DATE");
 				String deleteYn = rs.getString("DELETE_YN");
 				
+				
 				String cmtCnt = getCntCmtByNo(conn, no);
 				
 				AdminFreeBoardVo vo = new AdminFreeBoardVo();
@@ -794,7 +814,8 @@ public class AdminReviewBoardDao {
 				vo.setModifyDate(modifyDate);
 				vo.setDeleteYn(deleteYn);
 				vo.setCmtCnt(cmtCnt);
-				
+				String changeName = rs.getString("CHANGE_NAME");
+				vo.setImg(changeName);
 				list.add(vo);
 			
 			}
@@ -810,7 +831,7 @@ public class AdminReviewBoardDao {
 
 	//작성자+모든 게시글 조회
 	public List getFreeWriterAll(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE M.NICK LIKE ? ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT I.CHANGE_NAME, F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN REVIEW_BOARD_IMG I ON F.NO = I.REVIEW_BOARD_NO JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE M.NICK LIKE ? AND I.THUMB_YN = 'Y'AND STATUS = 'O' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -836,6 +857,7 @@ public class AdminReviewBoardDao {
 				String modifyDate = rs.getString("MODIFY_DATE");
 				String deleteYn = rs.getString("DELETE_YN");
 				
+				
 				String cmtCnt = getCntCmtByNo(conn, no);
 				
 				AdminFreeBoardVo vo = new AdminFreeBoardVo();
@@ -848,6 +870,8 @@ public class AdminReviewBoardDao {
 				vo.setModifyDate(modifyDate);
 				vo.setDeleteYn(deleteYn);
 				vo.setCmtCnt(cmtCnt);
+				String changeName = rs.getString("CHANGE_NAME");
+				vo.setImg(changeName);
 				
 				list.add(vo);
 			
@@ -864,7 +888,7 @@ public class AdminReviewBoardDao {
 
 	//작성자+완료 게시글 완료
 	public List getFreeWriterF(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE M.NICK LIKE ? AND DELETE_YN = 'N' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT I.CHANGE_NAME, F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN REVIEW_BOARD_IMG I ON F.NO = I.REVIEW_BOARD_NO JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE M.NICK LIKE ? AND DELETE_YN = 'N' AND I.THUMB_YN = 'Y'AND STATUS = 'O' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -902,7 +926,8 @@ public class AdminReviewBoardDao {
 				vo.setModifyDate(modifyDate);
 				vo.setDeleteYn(deleteYn);
 				vo.setCmtCnt(cmtCnt);
-				
+				String changeName = rs.getString("CHANGE_NAME");
+				vo.setImg(changeName);
 				list.add(vo);
 			
 			}
@@ -917,7 +942,7 @@ public class AdminReviewBoardDao {
 	}
 
 	public List getFreeWriterC(Connection conn, PageVo pv, String search) {
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE M.NICK LIKE ? AND DELETE_YN = 'Y' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT I.CHANGE_NAME, F.NO, F.TITLE,F.CONTENT, M.NICK, F.WRITE_DATE, F.VIEWS, F.MODIFY_DATE, F.DELETE_YN FROM REVIEW_BOARD F JOIN REVIEW_BOARD_IMG I ON F.NO = I.REVIEW_BOARD_NO JOIN MEMBER M ON F.WRITER_NO = M.NO WHERE M.NICK LIKE ? AND DELETE_YN = 'Y' AND I.THUMB_YN = 'Y'AND STATUS = 'O' ORDER BY F.NO DESC) T ) WHERE RNUM BETWEEN ? AND ?	";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -955,7 +980,8 @@ public class AdminReviewBoardDao {
 				vo.setModifyDate(modifyDate);
 				vo.setDeleteYn(deleteYn);
 				vo.setCmtCnt(cmtCnt);
-				
+				String changeName = rs.getString("CHANGE_NAME");
+				vo.setImg(changeName);
 				list.add(vo);
 			
 			}
@@ -969,7 +995,7 @@ public class AdminReviewBoardDao {
 		return list;
 	}
 
-	public int insertFreeBoard(Connection conn, AdminFreeBoardVo vo) {
+	public int insertReviewBoard(Connection conn, AdminFreeBoardVo vo) {
 		String sql = "INSERT INTO REVIEW_BOARD VALUES (SEQ_REVIEW_BOARD_NO.NEXTVAL,0,?,?,SYSDATE,'N',SYSDATE,0)";
 		
 		PreparedStatement pstmt = null;
@@ -1192,6 +1218,164 @@ public class AdminReviewBoardDao {
 			JDBCTemplate.close(rs);
 		}
 		return cnt;
+	}
+
+	//후기게시판 이미지 첨부
+	public int insertImg(Connection conn, AttachmentVo attachmentVo) {
+		String sql = "INSERT INTO REVIEW_BOARD_IMG VALUES (SEQ_REVIEW_BOARD_IMG_NO.NEXTVAL,(SELECT NO FROM REVIEW_BOARD ORDER BY NO DESC OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY) ,?,?,?,SYSDATE,'N','O')";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, attachmentVo.getOriginName());
+			pstmt.setString(2, attachmentVo.getChangeName());
+			pstmt.setString(3, attachmentVo.getFilePath());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertThumbImg(Connection conn, AttachmentVo attachmentVo) {
+		String sql = "INSERT INTO REVIEW_BOARD_IMG VALUES (SEQ_REVIEW_BOARD_IMG_NO.NEXTVAL,(SELECT NO FROM REVIEW_BOARD ORDER BY NO DESC OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY) ,?,?,?,SYSDATE,'Y','O')";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, attachmentVo.getOriginName());
+			pstmt.setString(2, attachmentVo.getChangeName());
+			pstmt.setString(3, attachmentVo.getFilePath());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public List selectReviewBoardImgByNo(Connection conn, String bno) {
+		String sql = "SELECT ORIGIN_NAME, CHANGE_NAME\r\n"
+				+ "FROM REVIEW_BOARD_IMG\r\n"
+				+ "WHERE STATUS='O' AND REVIEW_BOARD_NO = ?\r\n"
+				+ "ORDER BY IMG_NO";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		List<AttachmentVo> imgList = new ArrayList();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bno);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String img = rs.getString("CHANGE_NAME");
+				String img2 = rs.getString("ORIGIN_NAME");
+				
+				AttachmentVo ivo = new AttachmentVo();
+				ivo.setChangeName(img);
+				ivo.setOriginName(img2);
+				
+				imgList.add(ivo);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rs);
+		}
+		
+		return imgList;
+	}
+
+	public int deleteImg(Connection conn, String img) {
+		System.out.println(img);
+		String sql = "UPDATE REVIEW_BOARD_IMG SET STATUS = 'X' WHERE CHANGE_NAME = ?";
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, img);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	//후기게시판 글 번호로 이미지 insert
+	public int insertImgByNo(Connection conn, AdminFreeBoardVo vo, AttachmentVo attachmentVo) {
+		String sql = "INSERT INTO REVIEW_BOARD_IMG VALUES (SEQ_REVIEW_BOARD_IMG_NO.NEXTVAL,? ,?,?,?,SYSDATE,'N','O')";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getNo());
+			pstmt.setString(2, attachmentVo.getOriginName());
+			pstmt.setString(3, attachmentVo.getChangeName());
+			pstmt.setString(4, attachmentVo.getFilePath());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public boolean checkThumb(Connection conn, String no) {
+		String sql = "SELECT *\r\n"
+				+ "FROM REVIEW_BOARD_IMG\r\n"
+				+ "WHERE REVIEW_BOARD_NO = ? AND STATUS = 'O' AND THUMB_YN = 'Y'";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		boolean isThumb = false;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, no);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				isThumb = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rs);
+		}
+		return isThumb;
+	}
+
+	public int updateThumb(Connection conn, String no) {
+		String sql = "UPDATE REVIEW_BOARD_IMG SET THUMB_YN = 'Y' WHERE IMG_NO = (SELECT IMG_NO\r\n"
+				+ "FROM REVIEW_BOARD_IMG\r\n"
+				+ "WHERE REVIEW_BOARD_NO = ? AND STATUS = 'O' ORDER BY IMG_NO OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY)";
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
 }
