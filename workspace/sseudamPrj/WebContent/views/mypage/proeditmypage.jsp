@@ -108,7 +108,7 @@
 	<div class="main">
         <h1 align="center">정보수정</h1>
 
-		<form action="/sseudam/mypage/promypage" method="post" onsubmit="return check();">
+		<form action="/sseudam/mypage/promypage" method="post" enctype="multipart/form-data" onsubmit="return check();">
 	        <div class="join-area">
 	
 	            <div>비밀번호</div>
@@ -136,11 +136,12 @@
 	                <input type="text" name="introduce">
 	            </div>
 	            
-    	        <div>프로필 사진 변경</div>
+	            <div>프로필 수정</div>
 	            <div>
-	                <input type="file" name="f">
+	                <input type="file" name="img">
 	            </div>
-	
+	            
+	            
 	            <div>
 	                <br><input type="submit" value="수정하기" class="btn">
 	            </div>

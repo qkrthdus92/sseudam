@@ -65,6 +65,7 @@
     border-radius: 30px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     margin-left: 30px;
+     margin-top: 5px;
 }
 #dom{
     box-sizing: border-box;
@@ -233,7 +234,7 @@
 	<div id="wrap">
     <div id="main">
         <div id="boardinfo">
-            <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
+            <div><img id="profile" src="/sseudam/resources/img/counsel/<%=proLoginMember.getImg() %>" alt="프로필사진"></div>
             <div id="hm1">총 결제내역</div>
             <div id="hm"><%=MypageProreserList.size() %>건</div>
             <div id="hm1"></div>

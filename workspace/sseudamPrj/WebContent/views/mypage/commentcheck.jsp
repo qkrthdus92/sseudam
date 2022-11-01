@@ -1,3 +1,5 @@
+<%@page import="com.kh.sseudam.board.vo.ReviewBoardVo"%>
+<%@page import="com.kh.sseudam.board.vo.FreeBoardVo"%>
 <%@page import="com.kh.sseudam.common.PageVo"%>
 <%@page import="com.kh.sseudam.mypage.board.vo.MypageCommentVo2"%>
 <%@page import="com.kh.sseudam.mypage.board.vo.MypageBoardVo"%>
@@ -7,6 +9,8 @@
     pageEncoding="UTF-8"%>
         
 <%
+	//FreeBoardVo vo1 = (FreeBoardVo)request.getAttribute("vo");
+	//ReviewBoardVo vo2 = (ReviewBoardVo)request.getAttribute("vo");
 	List<MypageCommentVo> MypageCommentList = (List<MypageCommentVo>)request.getAttribute("MypageCommentList");	
 	List<MypageCommentVo2> MypageCommentList2 = (List<MypageCommentVo2>)request.getAttribute("MypageCommentList2");	
 	PageVo pv = (PageVo)request.getAttribute("pv");
@@ -187,7 +191,7 @@
 			    <div id="editlist">
 			        <div><input type="checkbox" id="cb1"></div>
 			        <div><%= MypageCommentList.get(i).getNo()%></div>
-			        <div><%= MypageCommentList.get(i).getCmt()%></div>
+			        <div <%-- onclick="location.href='<%=root%>/board/freeBoardDetail?bno=<%=FreeBoardVo.getNo() %>&cmtPno=1'" --%>><%= MypageCommentList.get(i).getCmt()%></div>
 			        <div><%= MypageCommentList.get(i).getType()%></div>
 			        <div><%= MypageCommentList.get(i).getModify_date()%></div>
 			    </div>

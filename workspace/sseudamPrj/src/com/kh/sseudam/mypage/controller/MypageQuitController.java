@@ -1,6 +1,7 @@
 package com.kh.sseudam.mypage.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +32,15 @@ public class MypageQuitController extends HttpServlet{
 		
 		if(result ==1) {
 			s.invalidate();
-			resp.sendRedirect("/sseudam");
+			resp.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = resp.getWriter();
+
+			out.println("<script language='javascript'>");
+			out.println("alert('탈퇴완료')");
+			out.println("</script>");
+
+			out.flush();
+			resp.sendRedirect("/sseudam/main");
 		}
 		
 		

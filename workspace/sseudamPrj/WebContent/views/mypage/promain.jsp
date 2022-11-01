@@ -1,9 +1,10 @@
 <%@page import="com.kh.sseudam.mypage.board.vo.MypageFinreserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%
+<%--  <%
 	int updatestar = (int)request.getAttribute("updatestar");	
-%> --%>
+	int result = (int)request.getAttribute("result");
+%>  --%>
 
 <!DOCTYPE html>
 <html>
@@ -197,6 +198,9 @@
 		font-size: 20px;
 		margin-top: 80px;
 	}
+	#profile_img{
+		margin-left: 300px;
+	}
 
 </style>
 </head>
@@ -207,10 +211,10 @@
         <div id="left">
             <div id="leftftop">
                 <div><h1 align="center">마이페이지</h1></div>
-                <div><img id="profile" src="../../resources/img/mypage/프로필.png" alt="프로필사진"></div>
-                <div><h2 align="center"><%-- <%= proLoginMember.getName() %> --%></h2></div>
-                <div><h3 align="center">나의 별점 <label id="starupdate"></label> 점</h3></div>
-                <div id="ment"><%-- <%= proLoginMember.getId() %> --%>님 좋은 하루되세요.</div>
+                <div><img id="profile" src="/sseudam/resources/img/counsel/<%=proLoginMember.getImg() %>" alt="프로필사진"></div>
+                <div><h2 align="center"> <%= proLoginMember.getName() %></h2></div>
+                <div><h3 align="center">나의 별점 <label id="starupdate"></label>4.5 점</h3></div>
+                <div id="ment"> <%= proLoginMember.getId() %>님 좋은 하루되세요.</div>
             </div>
             <div id="leftbot">
                 <table>
