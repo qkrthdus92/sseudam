@@ -170,7 +170,7 @@
                 <%for(int i = 0; i < rvoList.size(); ++i){%>
                 <div class="board-photo">
                     <a href="<%=root%>/board/reviewBoardDetail?bno=<%=rvoList.get(i).getNo() %>&cmtPno=1">
-                        <img src="<%=root%>/resources/img/main/러버덕.jpg"><%=rvoList.get(i).getTitle()%>
+                        <img src="<%=root%>/<%= rvoList.get(i).getFilePath() %>/<%=rvoList.get(i).getChangeName()%>"><%=rvoList.get(i).getTitle()%>
                         &nbsp;<span id="cmts">[<%=rvoList.get(i).getCmtCount() %>]</span>
                     </a>
                     <div class="list-info"><%=rvoList.get(i).getNo()%> | <%=rvoList.get(i).getWriterNo()%> | <%=rvoList.get(i).getWriteDate()%> |&nbsp;
