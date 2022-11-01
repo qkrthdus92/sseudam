@@ -162,11 +162,6 @@ div {
 /* 후기게시판 디테일 제목 8개칼럼 */
 /* 메뉴 글자색 수정*/
 
-.admin-menu-main-board li:last-child a {
-  color: var(--adminMenuHover);
-  font-size: 17px;
-}
-
 /* 메인 보드 그리드 수정 */
 
 .admin-main-board {
