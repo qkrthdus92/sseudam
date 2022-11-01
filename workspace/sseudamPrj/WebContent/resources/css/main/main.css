@@ -440,6 +440,10 @@ transform: scale(1.1);
     font-size: 15px;
     line-height: 18px;
     text-align: center;
+    
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 }
 .counseling-box-img{
     position: relative;

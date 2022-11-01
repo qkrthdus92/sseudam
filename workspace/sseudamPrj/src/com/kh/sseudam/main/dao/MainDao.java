@@ -12,23 +12,26 @@ import com.kh.sseudam.main.vo.MainVo;
 
 public class MainDao {
 
-    public List<MainVo> SelectBestReview(Connection conn) {
-        String sql = "SELECT * FROM \r\n"
-                + "( \r\n"
-                + "    SELECT \r\n"
-                + "        ROWNUM AS RNUM      \r\n"
-                + "        ,T.* FROM( \r\n"
-                + "            SELECT \r\n"
-                + "                NO\r\n"
-                + "                ,TITLE\r\n"
-                + "                ,CHANGE_NAME\r\n"
-                + "                ,FILE_PATH\r\n"
-                + "            FROM REVIEW_BOARD\r\n"
-                + "            JOIN REVIEW_BOARD_IMG ON NO = REVIEW_BOARD_NO\r\n"
-                + "            WHERE DELETE_YN = 'N'          \r\n"
-                + "            ORDER BY WRITE_DATE DESC\r\n"
-                + "            ) T\r\n"
-                + "    )   \r\n"
+    public List<MainVo> SelectRecentReview(Connection conn) {
+        String sql = "SELECT * FROM\r\n"
+                + "(\r\n"
+                + "SELECT\r\n"
+                + "ROWNUM AS RNUM \r\n"
+                + ",T.* FROM(\r\n"
+                + "        SELECT\r\n"
+                + "        NO\r\n"
+                + "        ,TITLE\r\n"
+                + "        ,CHANGE_NAME\r\n"
+                + "        ,FILE_PATH\r\n"
+                + "        ,WRITE_DATE\r\n"
+                + "        ,ROW_NUMBER() OVER(PARTITION BY TITLE ORDER BY WRITER_NO) AS RN\r\n"
+                + "        FROM REVIEW_BOARD\r\n"
+                + "        JOIN REVIEW_BOARD_IMG ON NO = REVIEW_BOARD_NO\r\n"
+                + "        WHERE DELETE_YN = 'N'\r\n"
+                + "        ORDER BY WRITE_DATE DESC    \r\n"
+                + "        ) T\r\n"
+                + "        WHERE RN = 1\r\n"
+                + ")\r\n"
                 + "WHERE RNUM BETWEEN 1 AND 10";
         
         PreparedStatement pstmt = null;

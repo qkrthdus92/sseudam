@@ -35,32 +35,40 @@ pageEncoding="UTF-8"%>
     <style>
       .grid-col7 {
         display: grid;
-        grid-template-columns: 1fr 10fr 2fr 2fr 2fr 2fr 1fr;
+        grid-template-columns: 1fr 10fr 2fr 3fr 3fr 2fr 2fr;
         grid-template-rows: 2fr;
       }
 
       .grid-col7 div {
         border-right: 1px solid var(--border);
+        padding-right:20px;
+        padding-left:20px;
         height: 40px;
       }
 
       .admin-main-board-detail {
         padding: 20px 20px;
-        height: 500px;
+        height: 300px;
       }
        input {
-        border: none;
         margin:0;
         width: 100%;
         font-size: 15px;
-        text-align:center;
+        text-align:center;        
+        display: inline-block;
+		border: 1px solid #dddddd;
+		color: #1B1A17;
         
       }
 
       textarea {
-        border: none;
+      	
+      	display: inline-block;
+		border: 1px solid #dddddd;
+		color: #1B1A17;
+        border: 1px solid #dddddd;
         width: 100%;
-        height: 50%;
+        height: 250px;
         
       }
 
