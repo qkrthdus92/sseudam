@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import com.kh.sseudam.counsel.pro.vo.ProVo;
-import com.kh.sseudam.member.common.ProCertificateUploader;
-import com.kh.sseudam.member.vo.MemberVo;
 import com.kh.sseudam.mypage.service.MypageEditService;
 import com.kh.sseudam.pro.vo.ProMemberJoinVo;
 
@@ -46,44 +43,46 @@ public class ProMypageEditController extends HttpServlet {
 		
 		//프로멤버 데이터 꺼내기
 		String memberPwd1 = req.getParameter("memberPwd1");
-		String Name = req.getParameter("Name");
 		String memberPhone = req.getParameter("memberPhone");
 		String memberEmail = req.getParameter("memberEmail");
 		String introduce = req.getParameter("introduce");
-		String imgpath = req.getParameter("img");
+		Part img = req.getPart("img");
+		
+		System.out.println(img);//확인용//넘어옴
 		
 		ProMemberJoinVo proLoginMember = (ProMemberJoinVo)session.getAttribute("proLoginMember");
 		String no = proLoginMember.getNo();
-		String id = proLoginMember.getId();
 		String pwd = proLoginMember.getPwd();
-		Part img = req.getPart("img");
+		String id = proLoginMember.getId();
 		
-		//자격증 파일 업로드
+		
+		//-----------파일업로드 시작--------------------------
 		String rootPath = req.getServletContext().getRealPath("/");
-		
+		System.out.println(rootPath);
 		String x = "";
 		
 		if(img.getSubmittedFileName().length() > 0) {
 			x = ReProfileUploader.uploadFile(img, rootPath);	
 		}
+		//-----------파일업로드 끝--------------------------
 		
 		ProMemberJoinVo vo = new ProMemberJoinVo();
 		vo.setPwd(memberPwd1);
-		vo.setName(Name);
 		vo.setPhone(memberPhone);
 		vo.setEmail(memberEmail);
 		vo.setIntroduce(introduce);
 		vo.setImg(x);
 		vo.setNo(no);
-		vo.setId(id);
 		vo.setPwd(pwd);
+		vo.setId(id);
 
+		System.out.println(vo);
 		
-		ProMemberJoinVo updatedMember = new MypageEditService().proedit(vo);
+		ProMemberJoinVo proupdatedMember = new MypageEditService().proedit(vo);
 		
-		if(updatedMember != null) {
-			// updatedMember = new MypageEditService().proedit(vo);
-			 req.getSession().setAttribute("loginMember", updatedMember);
+		
+		if(proupdatedMember != null) {
+			 req.getSession().setAttribute("proLoginMember", proupdatedMember);
 			 resp.sendRedirect("/sseudam/views/mypage/promain.jsp");
 		}else {
 			

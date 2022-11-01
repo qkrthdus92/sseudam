@@ -256,9 +256,9 @@
                     <div id="proname">
                         <span>전문가 <br> <%= MypageReserList.get(i).getName()%></span> 
                     </div>             
-                    <div id="bor-top"><label>에약일시</label></div>
+                    <div id="bor-top"><label>예약일시</label></div>
                     <div id="noborder"><label><%= MypageReserList.get(i).getAdvice_date()%></label></div>
-                    <div id="bor-top"><label>에약번호</label></div>
+                    <div id="bor-top"><label>예약번호</label></div>
                     <div id="noborder"><label><%= MypageReserList.get(i).getNo()%></label></div>
                 </div>
             </div>
