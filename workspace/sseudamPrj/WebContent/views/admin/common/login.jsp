@@ -106,7 +106,11 @@ pageEncoding="UTF-8"%>
           </div>
           <div class="admin-login-pwd">
             <div class="admin-input-label center">PW</div>
-            <input type="text" placeholder="비밀번호를 입력하세요" name="pwd" />
+            <input
+              type="password"
+              placeholder="비밀번호를 입력하세요"
+              name="pwd"
+            />
           </div>
         </section>
         <section class="admin-login-submit">

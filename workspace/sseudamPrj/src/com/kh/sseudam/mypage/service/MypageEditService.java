@@ -49,6 +49,7 @@ public class MypageEditService {
 			JDBCTemplate.rollback(conn);
 		}
 		
+		
 		JDBCTemplate.close(conn);
 		return updatedMember;
 		
@@ -88,23 +89,20 @@ public class MypageEditService {
 	
 	}
 
-	//프로필 사진 첨부
-	public int profileUpload(ProMemberJoinVo vo) {
-	
-		Connection conn = JDBCTemplate.getConnection();
-		
-		
-		int result = MypageEditDao.imgUpdate(conn,vo);
-		
-		if(result == 1) {
-			JDBCTemplate.commit(conn);
-		}else {
-			JDBCTemplate.rollback(conn);
-		}
-		
-		JDBCTemplate.close(conn);
-		
-		return result;
-	}
+	/*
+	 * //프로필 사진 첨부 public int profileUpload(ProMemberJoinVo vo) {
+	 * 
+	 * Connection conn = JDBCTemplate.getConnection();
+	 * 
+	 * 
+	 * int result = MypageEditDao.imgUpdate(conn,vo);
+	 * 
+	 * if(result == 1) { JDBCTemplate.commit(conn); }else {
+	 * JDBCTemplate.rollback(conn); }
+	 * 
+	 * JDBCTemplate.close(conn);
+	 * 
+	 * return result; }
+	 */
 	
 }//class

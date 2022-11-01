@@ -108,37 +108,32 @@
 	<div class="main">
         <h1 align="center">정보수정</h1>
 
-		<form action="/sseudam/mypage/promypage" method="post" enctype="multipart/form-data" onsubmit="return check();">
+		<form action="/sseudam/mypage/proeditmypage" method="post" enctype="multipart/form-data" onsubmit="return check();">
 	        <div class="join-area">
 	
 	            <div>비밀번호</div>
 	            <div>
-	                <input type="password" name="memberPwd1" placeholder="6~14자 이내로 영문, 숫자, 특수문자를 조합하여 작성">
-	            </div>
-	
-	            <div>닉네임</div>
-	            <div>
-	                <input type="text" name="Name" placeholder="6~14자 이내로 작성(특수문자 불가능)">
+	                <input type="password" name="memberPwd1"  value="<%=proLoginMember.getPwd() %>" placeholder="6~14자 이내로 영문, 숫자, 특수문자를 조합하여 작성">
 	            </div>
 	
 	            <div>연락처</div>
 	            <div>
-	                <input type="tel" name="phone" placeholder="예) 01012345678">
+	                <input type="tel" name="memberPhone" value="<%=proLoginMember.getPhone()%>" placeholder="예) 01012345678">
 	            </div>
 	
 	            <div>이메일</div>
 	            <div>
-	                <input type="email" name="email">
+	                <input type="email" name="memberEmail" value="<%=proLoginMember.getEmail()%>">
 	            </div>
 	            
 	            <div>소개글</div>
 	            <div>
-	                <input type="text" name="introduce">
+	                <input type="text" name="introduce" value="<%=proLoginMember.getIntroduce()%>">
 	            </div>
 	            
 	            <div>프로필 수정</div>
 	            <div>
-	                <input type="file" name="img">
+	                <input type="file" name="img" value="<%=proLoginMember.getImg() %>">
 	            </div>
 	            
 	            

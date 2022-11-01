@@ -156,7 +156,7 @@
 						</div>
 						<div></div>
 						
-						<div><input class="save-btn" type="submit" value="삭제" onclick="javascript: form.action='<%=root1%>/admin/outside/delete';"></div>
+						<div><input class="save-btn" type="submit" value="데이터 삭제" onclick="javascript: form.action='<%=root1%>/admin/outside/delete';"></div>
 						<div></div>
 						<div></div>
 					</div>

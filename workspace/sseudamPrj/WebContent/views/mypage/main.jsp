@@ -357,13 +357,15 @@
 					<div  ><img id="popup-logo" src="../../resources/img/header/logo.png" alt=""></div>
 					<div class="head-title">&nbsp;&nbsp;&nbsp;&nbsp;프로필 수정을 위해 <br> 비밀번호를 입력해주세요.</div>
 				</div>
-				<div class="popup-body">
-					<label id="popup-text"> 비밀번호 :</label>
-					<input id="popup-text" type="password">
-				</div>
+				<form action="/sseudam/mypage/edit" onsubmit="return check();">
+					<div class="popup-body">
+						<label id="popup-text"> 비밀번호 :</label>
+						<input id="popup-text" type="password" name="memberPwd1">
+					</div>
+				</form>
 				<div class="popup-foot">
 					<!-- 프로필수정페이지로이동 -->
-					<button class="pop-btn" id="confirm" onclick="location.href='/sseudam/mypage/edit'" >확인</button> 
+					<input type="submit" class="pop-btn" id="confirm"   type="submit" value="확인">
 					<button class="pop-btn" id="close" onclick="closePopup()" >창 닫기</button>
 				</div>
 		  </div>
@@ -392,6 +394,21 @@
 
 </script>
 
+<script type="text/javascript">
+//비번 일치여부 체크
+const pwd1 = document.querySelector("input[name=memberPwd1]");
+const pwd2 = '<%= loginMember.getPwd()%>';
+
+function check(){
+	if(pwd1.value.length > 0 && pwd1.value == pwd2.value){
+		return true;
+	}else{
+		alert('패스워드가 일치하지 않습니다.');
+		return false;
+	}
+}	
+
+</script>
 
 
 

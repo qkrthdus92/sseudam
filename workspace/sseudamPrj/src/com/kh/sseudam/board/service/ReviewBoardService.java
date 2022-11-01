@@ -14,8 +14,8 @@ import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.common.PageVo;
 
 public class ReviewBoardService {
-	
-	//후기게시판 게시글 갯수 조회
+
+	// 후기게시판 게시글 갯수 조회
 	public int selectCount() {
 		Connection conn = JDBCTemplate.getConnection();
 
@@ -25,8 +25,8 @@ public class ReviewBoardService {
 
 		return result;
 	}
-	
-	//후기게시판 댓글 갯수 조회
+
+	// 후기게시판 댓글 갯수 조회
 	public int selectCountCmt(String bno) {
 		Connection conn = JDBCTemplate.getConnection();
 
@@ -47,10 +47,10 @@ public class ReviewBoardService {
 
 		return x;
 	}
-	
-	//댓글 삭제를 위한 리스트 조회
-	
-	//후기게시판 댓글 조회
+
+	// 댓글 삭제를 위한 리스트 조회
+
+	// 후기게시판 댓글 조회
 	public List<ReviewBoardCmtVo> selectCmt(PageVo cmtPv, String bno, String cmtNo) {
 		Connection conn = JDBCTemplate.getConnection();
 
@@ -60,71 +60,64 @@ public class ReviewBoardService {
 
 		return x;
 	}
-	
-	//후기게시판 게시글 상세조회
+
+	// 후기게시판 게시글 상세조회
 	public ReviewBoardVo detail(String bno) {
-		
+
 		Connection conn = JDBCTemplate.getConnection();
-		ReviewBoardVo rvo = null;
 		
 		int result = ReviewBoardDao.increaseViews(conn, bno);
-		if(result == 1) {
+		
+		ReviewBoardVo rvo = null;
+		if (result == 1) {
 			JDBCTemplate.commit(conn);
-			rvo = ReviewBoardDao.detail(conn, bno);	
+			rvo = ReviewBoardDao.detail(conn, bno);
 		}
 		JDBCTemplate.close(conn);
-		
+
 		return rvo;
 	}
 
-	//후기게시판 게시글 작성
-	public static int write(ReviewBoardVo vo, ReviewBoardImgVo imgVo) {
+	// 후기게시판 게시글 작성
+	public static int write(ReviewBoardVo rvo, List<ReviewBoardImgVo> imgList) {
 		Connection conn = JDBCTemplate.getConnection();
-		//게시글 작성
-		int result = ReviewBoardDao.write(conn, vo);
-		
-		//첨부파일 insert
+		// 게시글 작성
+		int result = ReviewBoardDao.write(conn, rvo);
+
+		// 첨부파일 insert
 		int result2 = 1;
-		if(imgVo != null) {
-			result = ReviewBoardDao.insertImg(conn, imgVo);
+		if (imgList != null) {
+			result2 = new ReviewBoardDao().insertThumbImg(conn, imgList.get(0));
+			for (int i = 1; i < imgList.size(); i++) {
+				result2 = new ReviewBoardDao().insertImg(conn, imgList.get(i));
+			}
 		}
-		
-		if(result * result2 == 1) {
+
+		if (result * result2 == 1) {
 			JDBCTemplate.commit(conn);
-		}else {
+		} else {
 			JDBCTemplate.rollback(conn);
 		}
-		
+
 		JDBCTemplate.close(conn);
-		
+
 		return result * result2;
 	}
 
-	//후기게시판 게시글 수정
+	// 후기게시판 게시글 수정
 	public int edit(ReviewBoardVo rvo) {
 		Connection conn = JDBCTemplate.getConnection();
-		
+
 		int result = ReviewBoardDao.edit(conn, rvo);
-		
-		if(result == 1) {
+
+		if (result == 1) {
 			JDBCTemplate.commit(conn);
-		}else {
+		} else {
 			JDBCTemplate.rollback(conn);
 		}
-		return result;	
+		return result;
 	}
 
-
-
-
-
-
-
-	
-	
-	
-	
-	
 	/*
 	 * //후기게시판 썸네일 조회 public ReviewBoardImgVo selectThumb(String bno) { Connection
 	 * conn = JDBCTemplate.getConnection();
@@ -136,11 +129,6 @@ public class ReviewBoardService {
 	 * return imgVo; }
 	 */
 
-	//후기게시판 게시글 작성
-
-	
-	
-
-
+	// 후기게시판 게시글 작성
 
 }

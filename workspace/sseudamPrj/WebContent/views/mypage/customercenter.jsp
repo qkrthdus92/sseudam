@@ -1,10 +1,16 @@
+<%@page import="com.kh.sseudam.faq.vo.FAQVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	List<FAQVo> list = (List<FAQVo>)request.getAttribute("FAQList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>고객센터</title>
 <style>
     #wrap{
         position: relative;
@@ -12,7 +18,7 @@
     }
     #main{
         width: 1200px;
-        height: 851px;
+        height: auto;
         left: 350px;
         top: 169px;
         margin: auto;
@@ -20,6 +26,7 @@
         border: 1px solid #DFDFDF;
     }
     #cstop{
+    	position:relative;
         width: 100%;
         height: 170px;
         background-color: #8ED1B1;
@@ -37,6 +44,7 @@
         color: #FFFFFF;
     }
     #csqnatop{
+    	position:relative;
         font-size: 30px;
         width: 100%;
         height: 60px;
@@ -45,14 +53,15 @@
         font-weight: bold;
     }
     #csqnabody{
+    	position:relative;
         width: 1100px;
-        height: 500px;
+        height: auto;
         border-top: 1px solid lightgrey;
         border-bottom: 1px solid lightgrey;
         margin-left: 50px;
+        padding-bottom : 50px;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
     }
     #csqnacontent{
         width: 300px;
@@ -86,6 +95,7 @@
     }
     
     #csmainbot{
+    	position:relative;
         height: 80px;
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -128,50 +138,25 @@
             </div>
             <div id="csqnatop">자주 묻는 질문</div>
             <div id="csqnabody">
-                <div id="csqnacontent">
+            
+            	<%for(int i = 0;i<list.size();i++){ %>
+            	
+            	<div id="csqnacontent">
                     <div id="csqna1">Q.</div>
-                    <div id="csqna3">좋아요 확인은 어디서 하죠?</div>
+                    <div id="csqna3"><%=list.get(i).getTitle() %></div>
                     <div  id="csqna1">A.</div>
-                    <div  id="csqna2">로그인 후 마이페이지 > 좋아요 확인에서 하실 수 있습니다.</div>
+                    <div  id="csqna2"><%=list.get(i).getContent() %></div>
                 </div>
-                <div id="csqnacontent">
-                    <div id="csqna1">Q.</div>
-                    <div id="csqna3">상담 금액 책정 기준이 뭔가요?</div>
-                    <div  id="csqna1">A.</div>
-                    <div  id="csqna2">전문 상담가의 자격증 갯수와 &nbsp;등급에 따라 차등 책정됩니다.</div>
-                </div>
-                <div id="csqnacontent">
-                    <div id="csqna1">Q.</div>
-                    <div id="csqna3">개인정보 수정은 <br> 어떻게 하나요?</div>
-                    <div  id="csqna1">A.</div>
-                    <div  id="csqna2">로그인 후 마이페이지 > 내프로필 수정해서 할 수 있습니다.</div>
-                </div>
-                <div id="csqnacontent">
-                    <div id="csqna1">Q.</div>
-                    <div id="csqna3">컨텐츠의 선정기준은 뭔가요?</div>
-                    <div  id="csqna1">A.</div>
-                    <div  id="csqna2">다수의 데이터를 바탕으로 선정되며 광고는 포함되지 않습니다.</div>
-                </div>
-                 <div id="csqnacontent">
-                    <div id="csqna1">Q.</div>
-                    <div id="csqna3">전문가 수익 조회는 <br>어떻게 하나요?</div>
-                    <div  id="csqna1">A.</div>
-                    <div  id="csqna2">전문가 아이디로 로그인 후 예약조회 > 수익조회 페이지에서 조회 가능합니다.</div>
-                </div>
-                 <div id="csqnacontent">
-                    <div id="csqna1">Q.</div>
-                    <div id="csqna3">상담 후 별점을 남길 수 있나요?</div>
-                    <div  id="csqna1">A.</div>
-                    <div  id="csqna2">마이페이지 예약조회>상담완료된예약 에서 별점주기 버튼으로 별점 남기기가 가능합니다.</div>
-                </div>
+            
+            	<%} %>
             </div>
             <div id="csmainbot">
                 <div id="csmainbot_left">더 궁금한 점이 있으신가요?</div>
                 <div id="csmainbot_right">
                     <div>contact</div>
                     <div></div>
-                    <div id="temp"><img id="csimg" src="../../resources/img/mypage/메일.png" alt=""><span id="csmainbot_right_text">sseudam@naver.com</span></div>
-                    <div id="temp"><img id="csimg" src="../../resources/img/mypage/카톡.png" alt=""><span id="csmainbot_right_text">ID: sseudam</span></div>
+                    <div id="temp"><img id="csimg" src="<%=root %>/resources/img/mypage/메일.png" alt=""><span id="csmainbot_right_text">sseudam@naver.com</span></div>
+                    <div id="temp"><img id="csimg" src="<%=root %>/resources/img/mypage/카톡.png" alt=""><span id="csmainbot_right_text">ID: sseudam</span></div>
                 </div>
             </div>
         </div>

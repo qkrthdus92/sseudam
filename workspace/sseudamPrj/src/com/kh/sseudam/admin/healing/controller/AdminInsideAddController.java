@@ -65,6 +65,8 @@ public class AdminInsideAddController extends HttpServlet{
         
         //파일정보 디비에 저장
         String rootPath = req.getServletContext().getRealPath("/");
+        System.out.println(rootPath);
+        System.out.println(req.getServletContext());
         String path = rootPath +"resources/upload/inside/"; //최상단경로
         if(f.getSubmittedFileName().length() > 0) {
             

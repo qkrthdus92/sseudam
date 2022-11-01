@@ -27,7 +27,7 @@ pageEncoding="UTF-8"%>
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/common/component.css"
+      href="<%=root1%>/resources/css/admin/common/component.css?ver=1"
     />
     <link
       rel="stylesheet"
@@ -58,7 +58,7 @@ pageEncoding="UTF-8"%>
         ></h1>
       </header>
       <section class="admin-main-section">
-         <form action="<%=root1%>/admin/freeBoard/list" method="get" class="admin-freeBoard-form">
+         <form action="<%=root1%>/admin/reviewBoard/list" method="get" class="admin-freeBoard-form">
         <div class="admin-main-section-top">
         <input type="hidden" name="pno" value="1">
           <div class="search-area">
@@ -155,7 +155,7 @@ pageEncoding="UTF-8"%>
 
             <%for(int i=0; i<freeBoardList.size(); i++) {%>
             <div><%=freeBoardList.get(i).getNo() %></div>
-            <div><img alt="" src=""></div>
+            <div><img alt="" src="<%=root1%>/resources/upload/afterBoard/<%=freeBoardList.get(i).getImg() %>"></div>
             <div>
               <a href="<%=root%>/admin/reviewBoard/detail?dno=1&bno=<%=freeBoardList.get(i).getNo() %>&pno=<%=pno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"
                 ><%=freeBoardList.get(i).getTitle() %></a

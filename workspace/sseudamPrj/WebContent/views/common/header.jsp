@@ -428,7 +428,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
         </div>
       </div>
       <div>
-        <a href="<%=root%>/views/mypage/customercenter.jsp">고객센터</a>
+        <a href="<%=root%>/faq">고객센터</a>
         <div class="main-header-nav-color"></div>
       </div>
     </div>

@@ -9,6 +9,7 @@
 	PageVo pv = (PageVo)request.getAttribute("pv");
 	PageVo cmtPv = (PageVo)request.getAttribute("cmtPv");
 	List<ReviewBoardCmtVo> cmtVo = (List<ReviewBoardCmtVo>)request.getAttribute("cmtVo");
+	List<ReviewBoardVo> rvoList = (List<ReviewBoardVo>)request.getAttribute("rvoList");
 %> 
 <!DOCTYPE html>
 <html>
@@ -193,6 +194,12 @@
             </div>
                 <div>
                     <img src="<%=root%>/resources/img/main/러버덕.jpg"> <!--rvo.이미지 받아오는곳 -->
+                    <img width="100px" height="100px" src="<%=root%>/resources/upload/afterBoard/<%= rvo.getChangeName() %>" alt="">
+                    <%-- <%for(int i = 0; i < rvoList.size(); ++i){%>
+                    <img width="100px" height="100px" src="<%= root %>/<%= rvoList.get(i).getFilePath() %>/<%= rvoList.get(i).getChangeName() %>" alt="">
+                    <%} %> --%>
+                    
+                    
           		  <div class="board-content"> <%= rvo.getContent() %> </div>  
             	</div>
             

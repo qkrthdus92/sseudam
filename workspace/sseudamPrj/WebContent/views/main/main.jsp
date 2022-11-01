@@ -5,6 +5,14 @@
 <%
 	List<MainVo> reVo = (List<MainVo>)request.getAttribute("reVo");
 	List<MainVo> proVo = (List<MainVo>)request.getAttribute("proVo");
+	
+	int num = (int)(Math.random()*3)+1;
+	String healingName = "";
+	
+	if(num == 1){healingName = "nyam";}
+	else if(num == 2){healingName = "inside";}
+	else{healingName = "outside";}
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,23 +35,34 @@
             <div class="head-slider-in">
                 <div class="ment1">지금 당장 힐링이 필요해</div>
                 <div class="ment2">힐링하러 가기</div>
-                <div class="justGo" onclick="location.href ='<%=root%>/healing/nyam'" style="cursor:pointer;">바로가기 ></div>
+                <div class="justGo" onclick="location.href ='<%=root%>/healing/<%=healingName %>'" style="cursor:pointer;">바로가기 ></div>
                 <div class="head-slider-img"><img src="<%=root%>/resources/img/main/자연.png"></div>
             </div>
         </div>
+        
+        	
+        
+        
         <div class="head-slider hs1">
             <div class="head-slider-in">
                 <div class="ment1">지금 내 상태가 궁금하다면</div>
                 <div class="ment2">스트레스 테스트하기</div>
-                <div class="justGo" onclick="location.href ='<%=root%>/stress/stressTest'" style="cursor:pointer;">바로가기 ></div>
+                <%
+					if(loginMember != null){
+					%>
+					<div class="justGo" onclick="location.href ='<%=root%>/stress/stressTest'" style="cursor:pointer;">바로가기 ></div>
+					<%}else{ %>
+					<div class="justGo" onclick="loginPopup(true)" style="cursor:pointer;">바로가기 ></div>
+				<%} %>                               
                 <div class="head-slider-img"><img src="<%=root%>/resources/img/main/물음표.png"></div>
+                              
             </div>
         </div>
         <div class="head-slider hs4">
             <div class="head-slider-in">
                 <div class="ment1">다른 사람들이 궁금하다면</div>
                 <div class="ment2">게시판 보러가기</div>
-                <div class="justGo" onclick="location.href ='<%=root%>/board/freeBoardList'" style="cursor:pointer;">바로가기 ></div>
+                <div class="justGo" onclick="location.href ='<%=root%>/board/reviewBoardList?pno=1'" style="cursor:pointer;">바로가기 ></div>
                 <div class="head-slider-img"><img src="<%=root%>/resources/img/main/게시판.png"></div>
             </div>
         </div>
@@ -59,7 +78,7 @@
             <div class="head-slider-in">
                 <div class="ment1">필요하신게 있으신가요?</div>
                 <div class="ment2">고객센터에 물어보세요</div>
-                <div class="justGo" onclick="location.href ='<%=root%>/healing/nyam'" style="cursor:pointer;">바로가기 ></div>
+                <div class="justGo" onclick="location.href ='<%=root%>/faq'" style="cursor:pointer;">바로가기 ></div>
                 <div class="head-slider-img"><img src="<%=root%>/resources/img/main/큐와에이.png"></div>
             </div>
         </div>
@@ -99,62 +118,18 @@
         </article>
         <article>
             <div class="little-menu">후기게시판</div>
-            <a href="<%=root%>">
+            <a href="<%=root%>/board/reviewBoardList?pno=1">
             	<div class="the-more">더 보기</div>
             </a>
-            <div class="slider-review">
+            <div class="slider-review">          
             
-            
-           		<%-- <%for(int i = 0;i<reVo.size();i++){ %>
-	            	<div class="slider-box"  OnClick="location.href ='<%=root%>/'" style="cursor:pointer;">
-	                    <div class="review-img"><img src="<%=root%>/resources/upload/afterBoard/<%=reVo.get(i).getImgName()%>"></div>
+           		<%for(int i = 0;i<reVo.size();i++){ %>
+	            	<div class="slider-box"  onclick="location.href ='<%=root%>/board/reviewBoardDetail?bno=<%=reVo.get(i).getNo() %>&cmtPno=1'" style="cursor:pointer;">
+	                    <div class="review-img"><img src="<%=root%>/<%=reVo.get(i).getImgPath()%>/<%=reVo.get(i).getImgName()%>"></div>
 	                    <div class="review-content"><%=reVo.get(i).getTitle() %></div>
 	                </div>            	
-            	<%} %> --%>
-            	
-            	
-                <div class="slider-box">
-                    <div class="review-img"><img src="<%=root%>/resources/img/main/샘플1.jpg"></div>
-                    <div class="review-content">너와 함께한 시간</div>
-                </div>
-                <div class="slider-box">
-                    <div class="review-img"><img src="<%=root%>/resources/img/main/샘플2.jpg"></div>
-                    <div class="review-content">모든 날이 눈부셨다</div>
-                </div>
-                <div class="slider-box">
-                    <div class="review-img"><img src="<%=root%>/resources/img/main/샘플3.jpg"></div>
-                    <div class="review-content">날이 좋아서</div>
-                </div>
-                <div class="slider-box">
-                    <div class="review-img"><img src="<%=root%>/resources/img/main/샘플4.jpg"></div>
-                    <div class="review-content">날이 좋지 않아서</div>
-                </div>
-                <div class="slider-box">
-                    <div class="review-img"><img src="<%=root%>/resources/img/main/샘플5.jpg"></div>
-                    <div class="review-content">날이 적당해서</div>
-                </div>
-                <div class="slider-box">
-                    <div class="review-img"><img src="<%=root%>/resources/img/main/샘플6.jpg"></div>
-                    <div class="review-content">모든 날이 좋았다</div>
-                </div>                
-                <div class="slider-box">
-                    <div class="review-img"><img src="<%=root%>/resources/img/main/샘플7.jpg"></div>
-                    <div class="review-content">심장이</div>
-                </div>
-                <div class="slider-box">
-                    <div class="review-img"><img src="<%=root%>/resources/img/main/샘플8.jpg"></div>
-                    <div class="review-content">하늘에서 땅까지 아찔한</div>
-                </div>
-                <div class="slider-box">
-                    <div class="review-img"><img src="<%=root%>/resources/img/main/샘플9.jpg"></div>
-                    <div class="review-content">진자운동을 계속하였다</div>
-                </div>
-                <div class="slider-box">
-                    <div class="review-img"><img src="<%=root%>/resources/img/main/샘플10.jpg"></div>
-                    <div class="review-content">첫사랑이었다</div>
-                </div>
-                
-            </div>
+            	<%} %>
+               
             </div>
         </article>
         <article>

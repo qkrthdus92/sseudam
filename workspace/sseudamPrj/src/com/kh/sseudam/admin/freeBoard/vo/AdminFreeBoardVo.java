@@ -9,9 +9,9 @@ public class AdminFreeBoardVo {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
+
 	public AdminFreeBoardVo(String no, String title, String nick, String enrollDate, String view, String cmtCnt,
-			String modifyDate, String deleteYn, String content) {
+			String modifyDate, String deleteYn, String content, String img) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -22,8 +22,8 @@ public class AdminFreeBoardVo {
 		this.modifyDate = modifyDate;
 		this.deleteYn = deleteYn;
 		this.content = content;
+		this.img = img;
 	}
-
 
 	private String no;
 	private String title;
@@ -34,6 +34,19 @@ public class AdminFreeBoardVo {
 	private String modifyDate;
 	private String deleteYn;
 	private String content;
+	private String img;
+	
+	
+	public String getImg() {
+		return img;
+	}
+
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+
 	public String getNo() {
 		return no;
 	}
@@ -88,12 +101,15 @@ public class AdminFreeBoardVo {
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+
 	@Override
 	public String toString() {
 		return "AdminFreeBoardVo [no=" + no + ", title=" + title + ", nick=" + nick + ", enrollDate=" + enrollDate
 				+ ", view=" + view + ", cmtCnt=" + cmtCnt + ", modifyDate=" + modifyDate + ", deleteYn=" + deleteYn
-				+ ", content=" + content + "]";
+				+ ", content=" + content + ", img=" + img + "]";
 	}
+	
 	
 	
 	

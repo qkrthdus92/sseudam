@@ -127,6 +127,13 @@ div {
 }
 
 /* 조회 버튼 */
+.margin-right {
+  margin-right: 5px;
+}
+
+.cursor {
+  cursor: pointer;
+}
 
 .main-select-btn select {
   width: 120px;
@@ -148,6 +155,52 @@ div {
   align-items: center;
   border-bottom: 1px solid var(--border);
   font-size: 14px;
+}
+
+/* 후기게시판 리스트 칼럼 */
+
+/* 후기게시판 디테일 제목 8개칼럼 */
+/* 메뉴 글자색 수정*/
+
+.admin-menu-main-board li:last-child a {
+  color: var(--adminMenuHover);
+  font-size: 17px;
+}
+
+/* 메인 보드 그리드 수정 */
+
+.admin-main-board {
+  display: grid;
+  grid-template-columns: 0.7fr 0.7fr 5fr 1fr 2fr 1fr 1fr 2fr 1fr;
+  grid-template-rows: repeat(11, 50px);
+}
+
+/* 조회 버튼 수정 */
+
+.main-select-btn select {
+  width: 130px;
+}
+
+/* 썸네일 크기 */
+
+.admin-main-board img {
+  width: 45px;
+  height: 45px;
+}
+
+.total-num-info span:last-child::after {
+  content: "개";
+}
+
+.grid-col8 {
+  display: grid;
+  grid-template-columns: 0.7fr 10fr 1.5fr 2fr 0.7fr 0.7fr 0.7fr 0.7fr;
+  grid-template-rows: 1fr;
+}
+
+.grid-col8 div {
+  border-right: 1px solid var(--border);
+  height: 40px;
 }
 
 /* 2개 칼럼 */
@@ -395,8 +448,7 @@ input[type="radio"] {
 
 .freeBoard-content {
   padding: 10px 10px;
-  width: 100%;
-
+  width: 90%;
   resize: none;
   border: none;
   background-color: white;
@@ -412,6 +464,7 @@ input[type="radio"] {
 .admin-main-board-detail {
   padding: 20px 40px 20px 20px;
   height: 500px;
+  overflow: auto;
 }
 
 .flex-start {
@@ -428,4 +481,46 @@ input[type="radio"] {
 
 .light-color {
   color: rgb(175, 168, 168);
+}
+
+textarea {
+  display: block;
+}
+
+.reviewImg {
+  width: 250px;
+  height: 300px;
+}
+
+/* 게시판 댓글 */
+
+.reply-detail {
+  display: grid;
+  grid-template-columns: 1fr 6fr 1.5fr 1.5fr 0.8fr 0.5fr 0.5fr;
+}
+
+.reply-detail div,
+.admin-reply-form div {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reply-detail div {
+  border-bottom: 1px solid var(--border);
+}
+
+.reply-detail div:nth-child(-n + 7) {
+  background-color: #dedbdb;
+  justify-content: center;
+}
+
+.admin-reply-form {
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr;
+}
+
+.admin-reply-form div:nth-child(2) {
+  justify-content: flex-start;
 }
