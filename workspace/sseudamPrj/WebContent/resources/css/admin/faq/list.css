@@ -11,8 +11,8 @@
 
 .admin-main-board {
   display: grid;
-  grid-template-columns: 1fr 5fr 1fr 2fr 1fr 2fr 1fr;
-  grid-template-rows: repeat(11, 50px);
+  grid-template-columns: 1fr 5fr 1fr 2fr 2fr 1fr 1fr;
+  grid-template-rows: repeat(12, 50px);
 }
 
 /* 조회 버튼 수정 */
@@ -23,4 +23,41 @@
 
 .total-num-info span:last-child::after {
   content: "개";
+}
+
+.page {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	height:100%;
+	gap: 20px;
+	grid-column: span 7;
+	border-color:transparent;
+}
+
+.other-pages {
+	font-family: 'Nanum Gothic', sans-serif;
+	font-size:18px;
+	color: #6F6F6F;
+}
+
+.other-pages:hover {
+	font-weight: 600;
+	font-color: black;
+}
+
+.current-page {
+	font-size:18px;
+	pointer-events: none;
+	text-decoration: none;
+	font-family: 'Nanum Gothic', sans-serif;
+	font-weight: 600;
+	color: black;
+	cursor: default;
+}
+
+.current-page:visited {
+	color: black;
 }

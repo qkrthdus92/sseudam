@@ -29,6 +29,10 @@
 	if(type.equals("&type=8")){typeName = "문화";}
 	else if(type.equals("&type=9")){typeName = "산책";}
 	else{typeName = "운동";}
+	
+	String sortName = "모든 게시글 조회";
+	if(sort.equals("&sort=2")){sortName = "게시 완료 조회";}
+	else if(sort.equals("&sort=3")){sortName = "게시 취소 조회";}
 
 %>
 <html>
@@ -54,7 +58,7 @@
     <main class="admin-main">
       <header class="admin-main-header">
         <select name="" id="" onchange="window.open(value,'_self');">
-          <option value="">
+          <option style="display:none;">
             <%=typeName %>페이지
           </option>
           <option value="<%=root%>/admin/outside?pno=1&type=8">
@@ -95,7 +99,7 @@
             </div>
             <div class="main-select-btn">
               <select name="" id=""  onchange="window.open(value,'_self');">
-                <option value="">게시글 조회</option>
+                <option style="display:none;"><%=sortName %></option>
                 <option value="<%=root%>/admin/outside?pno=1<%=type %>&sort=1">모든 게시글 조회</option>
                 <option value="<%=root%>/admin/outside?pno=1<%=type %>&sort=2">게시 완료 조회</option>
                 <option value="<%=root%>/admin/outside?pno=1<%=type %>&sort=3">게시 취소 조회</option>

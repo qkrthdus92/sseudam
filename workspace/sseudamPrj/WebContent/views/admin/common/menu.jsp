@@ -208,7 +208,7 @@ AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin"); %>
       <h1>고객센터 관리</h1>
       <ul>
         <li>
-          <a href="<%=root%>/views/admin/faq/list.jsp">자주 묻는 질문 (FAQ)</a>
+          <a href="<%=root%>/admin/faq">자주 묻는 질문 (FAQ)</a>
         </li>
       </ul>
     </div>

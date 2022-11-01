@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.kh.sseudam.admin.common.AdminVo;
 import com.kh.sseudam.admin.healing.service.AdminHealingService;
 import com.kh.sseudam.healing.vo.HealingVo;
 
@@ -28,23 +29,28 @@ public class AdminInsideEditController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
+        HttpSession s = req.getSession();
+        
+        AdminVo loginAdmin = (AdminVo)s.getAttribute("loginAdmin");        
 
         String no = req.getParameter("no");
         
         HealingVo vo = new AdminHealingService().InsideDetailSelect(no);
         
         req.setAttribute("insideDetailVo", vo);
+        s.setAttribute("loginAdmin", loginAdmin);
         req.getRequestDispatcher("/views/admin/wallow/edit.jsp").forward(req, resp);
     }
     
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        // 세션 가져오기
+     // 세션 가져오기
         HttpSession s = req.getSession();
 
         // 로그인 멤버 가져오기
-        //AdminVo loginMember = (AdminVo)s.getAttribute("loginMember");
+        AdminVo loginAdmin = (AdminVo)s.getAttribute("loginAdmin");
         
         //인코딩
         req.setCharacterEncoding("UTF-8");
@@ -115,6 +121,7 @@ public class AdminInsideEditController extends HttpServlet {
         
         if(result == 1) {
             //성공        
+            s.setAttribute("loginAdmin", loginAdmin);
             s.setAttribute("alertMsg", "컨텐츠 수정 성공");
             resp.sendRedirect(root + "/admin/inside?pno=1&type="+cNum);
         }else {

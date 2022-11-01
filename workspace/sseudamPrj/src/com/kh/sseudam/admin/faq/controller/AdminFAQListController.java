@@ -1,4 +1,4 @@
-package com.kh.sseudam.admin.healing.controller;
+package com.kh.sseudam.admin.faq.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,43 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.sseudam.admin.common.AdminVo;
-import com.kh.sseudam.admin.healing.service.AdminHealingService;
+import com.kh.sseudam.admin.faq.service.AdminFAQService;
 import com.kh.sseudam.common.PageVo;
-import com.kh.sseudam.healing.vo.HealingVo;
+import com.kh.sseudam.faq.vo.FAQVo;
 
-@WebServlet(urlPatterns = "/admin/nyam")
-public class AdminNyamController extends HttpServlet{
+@WebServlet(urlPatterns = "/admin/faq")
+public class AdminFAQListController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        
         // 세션 가져오기
         HttpSession s = req.getSession();
 
         // 로그인 멤버 가져오기
         AdminVo loginAdmin = (AdminVo)s.getAttribute("loginAdmin");
-        
-        //분류값 받기
-        String sort = req.getParameter("sort");
-        int sNo = 1;
-        
-        if(sort == null) {
-            sort = "&sort=" + sNo; 
-        }else {
-            sNo = Integer.parseInt(sort);
-            sort = "&sort=" + sNo;
-        }
-        
-        //type 값
-        String type = req.getParameter("type");
-        int tNum = 1;
-              
-        if(type == null) {
-            type = "&type=" + tNum; 
-        }else {
-            tNum = Integer.parseInt(type);
-            type = "&type=" + tNum;
-        }
         
         //search 값
         String search = req.getParameter("search");
@@ -66,8 +44,8 @@ public class AdminNyamController extends HttpServlet{
         int endPage;
 
         //페이지 번호 받기 + null 처리
-        listCount = new AdminHealingService().NyamCount(sNo, tNum, search);
-        
+        listCount = new AdminFAQService().FAQCount(search);
+
         String pno = req.getParameter("pno");
         if(pno == null) {
             currentPage = 1;
@@ -76,7 +54,7 @@ public class AdminNyamController extends HttpServlet{
         }
         
         pageLimit = 10;
-        boardLimit = 5;
+        boardLimit = 10;
 
         maxPage = (int) Math.ceil((double) listCount / boardLimit);
         startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
@@ -95,17 +73,15 @@ public class AdminNyamController extends HttpServlet{
         pv.setBoardLimit(boardLimit);
         pv.setMaxPage(maxPage);
         pv.setStartPage(startPage);
-        pv.setEndPage(endPage);               
+        pv.setEndPage(endPage);        
         
-        List<HealingVo> list = new AdminHealingService().NyamList(pv,sNo, tNum, search);    
+        List<FAQVo> list = new AdminFAQService().FAQList(pv, search);    
+
         
-        s.setAttribute("loginAdmin", loginAdmin);    
-        
-        req.setAttribute("type", type);
-        req.setAttribute("sort", sort);
+        s.setAttribute("loginAdmin", loginAdmin);               
         req.setAttribute("pv", pv);
-        req.setAttribute("nyamList", list);
-        req.getRequestDispatcher("/views/admin/yamyam/list.jsp").forward(req, resp);
- 
+        req.setAttribute("faqList", list);
+        req.getRequestDispatcher("/views/admin/faq/list.jsp").forward(req, resp);
+    
     }
 }
