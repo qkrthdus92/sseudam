@@ -15,7 +15,7 @@ public class MainService {
         
         Connection conn = JDBCTemplate.getConnection();
         
-        List<MainVo> list = dao.SelectBestReview(conn);
+        List<MainVo> list = dao.SelectRecentReview(conn);
         
         JDBCTemplate.close(conn);
         

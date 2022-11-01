@@ -61,7 +61,7 @@ public class MemberLoginController extends HttpServlet{
 			HttpSession s = req.getSession();
 			s.setAttribute("alertMsg", "로그인 성공");
 			s.setAttribute("loginMember", loginMember);
-			resp.sendRedirect("/sseudam/main");
+			resp.sendRedirect("/sseudam");
 			
 		}else {
 			req.getSession().setAttribute("alertMsg", "3. 일치하는 회원정보가 없습니다.");

@@ -80,7 +80,7 @@
         <div class="admin-main-section-top">
           <div class="admin-search">
           	<form action="">
-	          	<input type="hidden" name="pno" value="<%=pageNo%>"/>
+	          	<input type="hidden" name="pno" value="1"/>
 				<input type="hidden" name="type" value="<%=tNo%>"/>
 	            <input type="text" name="search" placeholder="내용을 입력해주세요" />
 	            <input type="submit" id="btnSubmit" style="display:none;" />
