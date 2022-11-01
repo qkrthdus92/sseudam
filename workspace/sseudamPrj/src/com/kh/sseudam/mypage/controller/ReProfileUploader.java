@@ -22,7 +22,7 @@ public class ReProfileUploader {
 		System.out.println(imgName);
 		
 		// 1. 파일 객체 준비 (경로+파일명)
-		String filePath = "resources/upload/profile";
+		String filePath = "resources/upload/pro";
 		String path = rootPath + filePath + "/";	//최상단경로
 		File target = new File(path + imgName);
 		

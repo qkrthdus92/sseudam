@@ -211,7 +211,7 @@
         <div id="left">
             <div id="leftftop">
                 <div><h1 align="center">마이페이지</h1></div>
-                <div><img id="profile" src="/sseudam/resources/img/counsel/<%=proLoginMember.getImg() %>" alt="프로필사진"></div>
+                <div><img id="profile" src="/sseudam/resources/upload/pro/<%=proLoginMember.getImg() %>" alt="프로필사진"></div>
                 <div><h2 align="center"> <%= proLoginMember.getName() %></h2></div>
                 <div><h3 align="center">나의 별점 <label id="starupdate"></label>4.5 점</h3></div>
                 <div id="ment"> <%= proLoginMember.getId() %>님 좋은 하루되세요.</div>
@@ -253,13 +253,10 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <th id="rightbot"><img  id ="icon" src="../../resources/img/mypage/닉네임.png" alt="회원">&nbsp;&nbsp;소개글</th>
+                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/닉네임.png" alt="회원">&nbsp;&nbsp;소개글</th>
                     <td></td>
                 </tr>
-                <tr>
-                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/결제.png" alt="결제">&nbsp;&nbsp;계좌번호</th>
-                    <td></td>
-                </tr>
+                
             </table>
         </div>
         <div id="right4">

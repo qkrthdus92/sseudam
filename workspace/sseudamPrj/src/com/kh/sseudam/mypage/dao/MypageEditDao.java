@@ -88,7 +88,6 @@ public class MypageEditDao {
 				loginMember.setModifyDate(modifyDate);
 				loginMember.setQuitYn(quityn);
 				
-				System.out.println(loginMember);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -104,21 +103,22 @@ public class MypageEditDao {
 	//프로회원 정보수정
 	public int proUpdateOneByNo(Connection conn, ProMemberJoinVo vo) {
 		
+		System.out.println("dao로 넘어옴"); //출력됨
+		
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String sql = "UPDATE MEMBER SET PWD = ? , NAME = ? , PHONE = ? , EMAIL = ? INTRODUCE = ? IMG=?  WHERE NO = ?";
+		String sql = "UPDATE PRO_MEMBER SET PWD =? , PHONE = ? , EMAIL = ?, INTRODUCE = ?, IMG=?  WHERE NO = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, vo.getPwd());
-			pstmt.setString(2, vo.getName());
-			pstmt.setString(3, vo.getPhone());
-			pstmt.setString(4, vo.getEmail());
-			pstmt.setString(5, vo.getIntroduce());
-			pstmt.setString(6, vo.getImg());
-			pstmt.setString(7, vo.getNo());
+			pstmt.setString(2, vo.getPhone());
+			pstmt.setString(3, vo.getEmail());
+			pstmt.setString(4, vo.getIntroduce());
+			pstmt.setString(5, vo.getImg());
+			pstmt.setString(6, vo.getNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -127,7 +127,7 @@ public class MypageEditDao {
 		} finally {
 			JDBCTemplate.close(pstmt);
 		}
-		
+		System.out.println(result);//출력됨 1
 		return result;
 		
 	}
@@ -148,6 +148,7 @@ public class MypageEditDao {
 			pstmt.setString(2, vo.getPwd());
 			
 			rs = pstmt.executeQuery();
+			
 			if(rs.next()) {
 				String no = rs.getString("NO");
 				String counsel_type_no = rs.getString("COUNSEL_TYPE_NO");
@@ -183,6 +184,8 @@ public class MypageEditDao {
 				loginMember.setJoinDate(joindate);
 				loginMember.setIntroduce(introduce);
 				loginMember.setModifyDate(modifyDate);
+				
+				System.out.println(loginMember);
 		}
 	} catch (SQLException e) {
 		e.printStackTrace();
@@ -249,29 +252,25 @@ public class MypageEditDao {
 		return result;
 	}
 
-	public static int imgUpdate(Connection conn,ProMemberJoinVo vo) {
-		
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String sql="UPDATE PRO_MEMBER SET IMG ='?' WHERE NO =?";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, vo.getImg());
-			pstmt.setString(2, vo.getNo());
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return result;
-		
-	}
+	/*
+	 * public static int imgUpdate(Connection conn,ProMemberJoinVo vo) {
+	 * 
+	 * PreparedStatement pstmt = null; int result = 0;
+	 * 
+	 * String sql="UPDATE PRO_MEMBER SET IMG ='?' WHERE NO =?"; try { pstmt =
+	 * conn.prepareStatement(sql);
+	 * 
+	 * pstmt.setString(1, vo.getImg()); pstmt.setString(2, vo.getNo());
+	 * 
+	 * result = pstmt.executeUpdate();
+	 * 
+	 * } catch (SQLException e) { e.printStackTrace(); } finally {
+	 * JDBCTemplate.close(pstmt); }
+	 * 
+	 * return result;
+	 * 
+	 * }
+	 */
 
 
 	

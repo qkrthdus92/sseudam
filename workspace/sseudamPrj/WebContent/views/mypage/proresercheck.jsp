@@ -234,7 +234,7 @@
 	<div id="wrap">
     <div id="main">
         <div id="boardinfo">
-            <div><img id="profile" src="/sseudam/resources/img/counsel/<%=proLoginMember.getImg() %>" alt="프로필사진"></div>
+            <div><img id="profile" src="/sseudam/resources/upload/pro/<%=proLoginMember.getImg() %>"alt="프로필사진"></div>
             <div id="hm1">총 결제내역</div>
             <div id="hm"><%=MypageProreserList.size() %>건</div>
             <div id="hm1"></div>
