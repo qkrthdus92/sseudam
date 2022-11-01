@@ -1,3 +1,4 @@
+<%@page import="com.kh.sseudam.common.PageVo"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardCmtVo"%>
 <%@page import="com.kh.sseudam.admin.freeBoard.vo.AdminFreeBoardVo"%>
@@ -12,6 +13,8 @@ pageEncoding="UTF-8"%>
 	String searchType = (String)request.getAttribute("searchType");
 	String status = (String)request.getAttribute("status");
 	String bno = (String)request.getAttribute("bno");
+	String dno = (String)request.getAttribute("dno");
+	PageVo pv = (PageVo)request.getAttribute("pv");
 	
 	AdminFreeBoardVo freeBoardVo = (AdminFreeBoardVo)request.getAttribute("freeBoardVo");
 	List<AdminFreeBoardCmtVo> list = (List<AdminFreeBoardCmtVo>)request.getAttribute("freeBoardCmtList");
@@ -21,17 +24,20 @@ pageEncoding="UTF-8"%>
 	String search2 = (String)session.getAttribute("search2");
 	String searchType2 = (String)session.getAttribute("searchType2");
 	String status2 = (String)session.getAttribute("status2");
+	String dno2 = (String)session.getAttribute("dno2");
 	
-	if((pno2 != null) && (bno2 != null) && (search2 != null) && (searchType2 != null) && (status2 != null)) {
+	if((pno2 != null) && (bno2 != null) && (search2 != null) && (searchType2 != null) && (status2 != null) && (dno2 != null)) {
 		System.out.println("세션값으로 대체됨!");
 		pno = pno2;
 		search = search2;
 		searchType = searchType2;
 		status = status2;
 		bno = bno2;
+		dno = dno2;
 		
 		session.removeAttribute("pno2");
 		session.removeAttribute("bno2");
+		session.removeAttribute("dno2");
 		session.removeAttribute("search2");
 		session.removeAttribute("searchType2");
 		session.removeAttribute("status2");
@@ -139,6 +145,10 @@ pageEncoding="UTF-8"%>
         line-height: 25px;
         font-family: "Noto Sans KR", sans-serif;;
       }
+
+      .cursor {
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -168,14 +178,33 @@ pageEncoding="UTF-8"%>
             <div><i class="fa-regular fa-eye"></i><span><%= freeBoardVo.getView() %></span></div>
             <div><i class="fa-solid fa-comment-dots"></i><span><%= freeBoardVo.getCmtCnt() %></span></div>
             <div>
-              <a href="<%=root%>/admin/freeBoard/edit?bno=<%=bno %>&pno=<%=pno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"
+              <a href="<%=root%>/admin/freeBoard/edit?bno=<%=bno %>&pno=<%=pno %>&dno=<%=dno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"
                 ><i class="fa-solid fa-pen-to-square"></i
               ></a>
             </div>
             <div>
-              <a href="<%=root%>/admin/freeBoard/delete?bno=<%=bno %>&pno=<%=pno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"><i class="fa-solid fa-trash-can"></i></a>
+              <i class="fa-solid fa-trash-can cursor" onclick="dbDeleteBoard();"></i>
             </div>
           </div>
+          <script>
+      
+            function dbDeleteBoard() {
+              Swal.fire({
+                title: "자유게시판 게시글 삭제",
+                text: "정말로 삭제 하시겠습니까?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#26aa82",
+                cancelButtonColor: "#f85a2a",
+                confirmButtonText: "삭제",
+                cancelButtonText: "취소"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  location.href='<%=root%>/admin/freeBoard/delete?bno=<%=bno %>&pno=<%=pno %>&dno=<%=dno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>';
+                }
+              });
+            }
+          </script>
           <div class="admin-main-board-detail">
             <textarea class="freeBoard-content" name="" id="" cols="30" rows="10" disabled><%= freeBoardVo.getContent() %></textarea>
             
@@ -195,6 +224,8 @@ pageEncoding="UTF-8"%>
             <div></div>
 
             <%for(int i=0; i<list.size(); i++) {%>
+         
+             
             <div><%=  list.get(i).getNick()%></div>
             <% if(list.get(i).getDeleteYn().equals("N")){ %>
               <div class="flex-start"><%=  list.get(i).getCmt()%></div>
@@ -209,21 +240,59 @@ pageEncoding="UTF-8"%>
             <div>게시취소</div>
             <%} %>
             <div>
-              <a href="<%=root%>/admin/freeBoard/editCmt?cno=<%=list.get(i).getNo() %>&bno=<%=bno %>&pno=<%=pno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"
+              <a href="<%=root%>/admin/freeBoard/editCmt?cno=<%=list.get(i).getNo() %>&bno=<%=bno %>&pno=<%=pno %>&dno=<%=dno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"
                 ><i class="fa-solid fa-pen-to-square"></i
               ></a>
             </div>
             <div>
-              <a href="<%=root%>/admin/freeBoard/deleteCmt?cno=<%=list.get(i).getNo() %>&bno=<%=bno %>&pno=<%=pno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"><i class="fa-solid fa-trash-can"></i></a>
+              <i id='<%=list.get(i).getNo() %>' class="fa-solid fa-trash-can cursor" onclick="dbDeleteCmt(this);"></i>
+             <script>
+      
+            function dbDeleteCmt(e) {
+            	var cmtNo = $(e).attr('id');
+            	
+              Swal.fire({
+                title: "자유게시판 댓글 삭제",
+                text: "정말로 삭제 하시겠습니까?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#26aa82",
+                cancelButtonColor: "#f85a2a",
+                confirmButtonText: "삭제",
+                cancelButtonText: "취소"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  location.href='<%=root%>/admin/freeBoard/deleteCmt?cno='+cmtNo+'&bno=<%=bno %>&pno=<%=pno %>&dno=<%=dno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>';
+                }
+              });
+            }
+          </script>
             </div>
             <%}%>
+            
           </div>
+          <!-- 댓글 페이징 -->
+    
+          <div class="page-area">
+            <%if(pv.getStartPage()!=1) {%>
+            <a href="<%=root1%>/admin/freeBoard/detail?status=<%=status %>&bno=<%=bno %>&pno=<%=pno %>&dno=<%=pv.getStartPage()-1 %>&searchType=<%=searchType %>&search=<%=search %>" class=""><i class="fa-solid fa-angles-left counsel-paging-left"></i></a>
+            <%}%>
+	        <%for(int i=pv.getStartPage(); i<=pv.getEndPage(); i++) {%>
+	          <a href="<%=root1%>/admin/freeBoard/detail?status=<%=status %>&bno=<%=bno %>&pno=<%=pno %>&dno=<%=i %>&searchType=<%=searchType %>&search=<%=search %>" class=""><span><%=i %></span></a>
+	        <%}%>
+	        <%if(pv.getEndPage() != pv.getMaxPage()) { %>
+	         <a href="<%=root1%>/admin/freeBoard/detail?status=<%=status %>&bno=<%=bno %>&pno=<%=pno %>&dno=<%=pv.getEndPage()+1 %>&searchType=<%=searchType %>&search=<%=search %>" class=""><i class="fa-solid fa-angles-right counsel-paging-right"></i></a>
+	        <%}%>
+         
+          </div>
+       
           <form action="<%=root1%>/admin/freeBoard/writeCmt" method="post">
             <input type="hidden" name="bno" value="<%=bno%>">
             <input type="hidden" name="pno" value="<%=pno%>">
             <input type="hidden" name="status" value="<%=status%>">
             <input type="hidden" name="search" value="<%=search%>">
             <input type="hidden" name="searchType" value="<%=searchType%>">
+            <input type="hidden" name="dno" value="<%=dno%>">
             <div class="admin-reply-form">
               <div>관리자</div>
               <div>

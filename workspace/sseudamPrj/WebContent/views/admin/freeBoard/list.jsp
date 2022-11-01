@@ -160,7 +160,7 @@ pageEncoding="UTF-8"%>
             <%for(int i=0; i<freeBoardList.size(); i++) {%>
             <div><%=freeBoardList.get(i).getNo() %></div>
             <div>
-              <a href="<%=root%>/admin/freeBoard/detail?bno=<%=freeBoardList.get(i).getNo() %>&pno=<%=pno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"
+              <a href="<%=root%>/admin/freeBoard/detail?dno=1&bno=<%=freeBoardList.get(i).getNo() %>&pno=<%=pno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"
                 ><%=freeBoardList.get(i).getTitle() %></a
               >
             </div>
