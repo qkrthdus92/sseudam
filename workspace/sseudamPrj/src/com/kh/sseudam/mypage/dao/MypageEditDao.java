@@ -107,7 +107,7 @@ public class MypageEditDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String sql = "UPDATE MEMBER SET PWD = ? , NAME = ? , PHONE = ? , EMAIL = ? INTRODUCE = ?  WHERE NO = ?";
+		String sql = "UPDATE MEMBER SET PWD = ? , NAME = ? , PHONE = ? , EMAIL = ? INTRODUCE = ? IMG=?  WHERE NO = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -116,8 +116,9 @@ public class MypageEditDao {
 			pstmt.setString(2, vo.getName());
 			pstmt.setString(3, vo.getPhone());
 			pstmt.setString(4, vo.getEmail());
-			pstmt.setString(6, vo.getIntroduce());
-			pstmt.setString(5, vo.getNo());
+			pstmt.setString(5, vo.getIntroduce());
+			pstmt.setString(6, vo.getImg());
+			pstmt.setString(7, vo.getNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -224,7 +225,7 @@ public class MypageEditDao {
 		return result;
 		
 	}
-
+//일반회원 탈퇴
 	public int quit(Connection conn, String no) {
 		
 		PreparedStatement pstmt = null;
@@ -246,6 +247,30 @@ public class MypageEditDao {
 		}
 		
 		return result;
+	}
+
+	public static int imgUpdate(Connection conn,ProMemberJoinVo vo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql="UPDATE PRO_MEMBER SET IMG ='?' WHERE NO =?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getImg());
+			pstmt.setString(2, vo.getNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+		
 	}
 
 

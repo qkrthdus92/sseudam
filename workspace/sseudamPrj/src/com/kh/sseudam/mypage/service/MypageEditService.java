@@ -8,6 +8,7 @@ import com.kh.sseudam.member.dao.MemberDao;
 import com.kh.sseudam.member.vo.MemberVo;
 import com.kh.sseudam.mypage.board.vo.MypageFinreserVo;
 import com.kh.sseudam.mypage.dao.MypageEditDao;
+import com.kh.sseudam.pro.dao.ProDao;
 import com.kh.sseudam.pro.vo.ProMemberJoinVo;
 
 public class MypageEditService {
@@ -85,6 +86,25 @@ public class MypageEditService {
 		return result;
 	
 	
+	}
+
+	//프로필 사진 첨부
+	public int profileUpload(ProMemberJoinVo vo) {
+	
+		Connection conn = JDBCTemplate.getConnection();
+		
+		
+		int result = MypageEditDao.imgUpdate(conn,vo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
 	}
 	
 }//class

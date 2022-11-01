@@ -67,6 +67,7 @@
     height: 70px;
     border-radius: 30px;
     border: 1px solid rgba(0, 0, 0, 0.3);
+    margin-top: 5px;
     margin-left: 30px;
 }
 #dom{
@@ -314,7 +315,7 @@
 	<div id="wrap">
     <div id="main">
         <div id="boardinfo">
-            <div><img id="profile" src="/sseudam/resources/img/mypage/프로필.png" alt="프로필사진"></div>
+            <div><img id="profile" src="/sseudam/resources/img/counsel/<%=proLoginMember.getImg() %>" alt="프로필사진"></div>
             <div id="hm1">총 결제내역</div>
             <div id="hm"><%=MypageProMoneyList.size() %>건</div>
             <div id="hm1"></div>
@@ -340,8 +341,8 @@
         </div>
 
         <div id="moneyinfo">
-                <div id="moneyinfotext">아이디의 총 수익 ▼</div>
-                <div id="moneyinfotext0">아이디님의 출금 가능 금액 ▼</div>
+                <div id="moneyinfotext"> <%= proLoginMember.getId() %>의 총 수익 ▼</div>
+                <div id="moneyinfotext0"> <%= proLoginMember.getId() %>님의 출금 가능 금액 ▼</div>
                 <div></div>
                 <div id="moneyinfotext2"><%=MypageProPaySum.get(0).getPay_sum()%>원</div>
                 <div id="moneyinfotext3">300000원</div>
@@ -446,7 +447,7 @@
  function withdraw(){
 	 location.reload();
 	 alert("출금완료!");
-	 $('#withdraw2').text('0원');
+	 $('#moneyinfotext3').innertext('0원');
 	 
  };
 
