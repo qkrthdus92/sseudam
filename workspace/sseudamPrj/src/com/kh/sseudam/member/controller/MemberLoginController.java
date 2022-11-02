@@ -44,24 +44,28 @@ public class MemberLoginController extends HttpServlet{
 		vo.setId(memberId);
 		vo.setPwd(memberPwd);
 		
+//		MemberVo pvo = new MemberVo();
+//		pvo.setId(memberId);
+//		pvo.setPwd(memberPwd);
+		
 		System.out.println("뭉친 값 :" + vo);
 		
 		//디비
 		MemberVo loginMember = new MemberService().login(vo);
-		ProMemberJoinVo proLoginMember = null;
+		ProMemberJoinVo proLoginMember = new ProMemberService().prologin(vo);
 		ProMemberJoinVo proVo = new ProMemberJoinVo();
 		
 		System.out.println("디비 다녀온 후 loginMember :" + loginMember);
 		System.out.println("디비 다녀온 후 proVO :" + proVo);
 		
-		if(loginMember == null) {
-			proLoginMember = new ProMemberService().prologin(vo);
-		}else if(proLoginMember != null) {
-			HttpSession s = req.getSession();
-			s.setAttribute("alertMsg", "로그인 성공");
-			s.setAttribute("proLoginMember", proLoginMember);
-			resp.sendRedirect(nextUrl);
-		}
+//		if(loginMember == null) {
+//			
+//		}else if(proLoginMember != null){
+//			HttpSession s = req.getSession();
+//			s.setAttribute("alertMsg", "로그인 성공");
+//			s.setAttribute("proLoginMember", proLoginMember);
+//			resp.sendRedirect(nextUrl);
+//		}
 		
 		if(loginMember == null && proLoginMember == null) {
 			req.getSession().setAttribute("alertMsg", "일치하는 회원정보가 없습니다.");
@@ -76,6 +80,17 @@ public class MemberLoginController extends HttpServlet{
 			resp.sendRedirect(nextUrl);
 			
 		}else if(proLoginMember == null){
+			req.getSession().setAttribute("alertMsg", "일치하는 회원정보가 없습니다.");
+		}
+		
+		//화면선택
+		if(proLoginMember != null) {
+			HttpSession s = req.getSession();
+			s.setAttribute("alertMsg", "로그인 성공");
+			s.setAttribute("proLoginMember", proLoginMember);
+			resp.sendRedirect(nextUrl);
+			
+		}else if(loginMember == null){
 			req.getSession().setAttribute("alertMsg", "일치하는 회원정보가 없습니다.");
 		}
 		
