@@ -22,6 +22,7 @@ pageEncoding="UTF-8"%>
   <head>
     <meta charset="UTF-8" />
     <title>쓰담쓰담 관리자 | FAQ | 목록</title>
+    <link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
     <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"

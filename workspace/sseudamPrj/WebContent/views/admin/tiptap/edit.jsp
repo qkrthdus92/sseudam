@@ -26,6 +26,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>쓰담쓰담 관리자 | 뚜벅뚜벅 | 수정</title>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
 <link rel="stylesheet"
 	href="<%=root1%>/resources/css/common/variables.css?ver=2" />

@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sseudam</title>
-
+<title>쓰담쓰담</title>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" /> 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Exo+2:900");
 h1 {
