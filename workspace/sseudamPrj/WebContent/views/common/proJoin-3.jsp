@@ -7,8 +7,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>쓰담쓰담 회원가입</title>
+<title>전문가 회원가입 :: 쓰담쓰담</title>
 <style>
 
     body{
@@ -24,6 +25,7 @@
         display: flex;
         flex-direction: column;
         margin: auto;
+        font-family: 'S-CoreDream-3Light';
     }
 
     h1{
@@ -77,12 +79,12 @@
 
     .profile{
         width: 473px;
-        height: 377px;
+        height: 385px;
         border: 1px solid black;
         border-radius: 15px;
         margin: auto;
         display: grid;
-        grid-template-rows: 1fr 4fr 7fr;;
+        grid-template-rows: 1fr 4fr 7fr;
         grid-template-columns: 2.5fr 7.5fr;
     }
     
@@ -128,10 +130,10 @@
 
     #profile-button-right-province{
         margin-left: 5px;
+        margin-top: 13px
     }
 
     #profile-button-right-province > label{
-    
         font-size: 13px;
         margin-left: 10px;
     }
@@ -154,6 +156,7 @@
         font-size: 18px;
         margin-top: 10px;
         cursor: pointer;
+        font-family: 'S-CoreDream-3Light';
     }
 
     #introduce{
@@ -236,7 +239,7 @@
                 </div>
                 <div id="profile-button-left">소개</div>
                 <div id="profile-button-right">
-                    <div id="profile-button-right-province"><br>상담 분야<br>
+                    <div id="profile-button-right-province">상담 분야<br>
                         <label>청소년
                             <input type="checkbox" name="counselType" value="1">
                         </label>

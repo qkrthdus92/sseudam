@@ -263,6 +263,12 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
 }
 
 /* 로그인, 아이디 찾기 팝업 */
+#login-popup > .login-popup > .login-popup-middle > div,
+#find-id-popup > .login-popup-middle > div,
+#find-pwd-popup > .login-popup > login-popup-middle > div{
+	font-family: "S-CoreDream-3Light";
+}
+
 
 #login-popup.hide,
 #find-id-popup.hide,
@@ -473,12 +479,12 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	            </div>
 	          </div>
 	            <div>
-	              <br><a><input type="submit" value="로그인" onclick="return login();" class="login-btn"></a>
+	              <br><a><input type="submit" value="로그인" onclick="return login();" class="login-btn" style="font-family: 'S-CoreDream-3Light';"></a>
 	            </div>
 	      </div>
 	      
-	      <div class="login-popup-button">
-	        <div><a href='<%=root%>/views/common/join.jsp'>회원가입</a></div>
+	      <div class="login-popup-button" style="font-family: 'S-CoreDream-3Light';">
+	        <div><a href='<%=root%>/views/common/join.jsp' >회원가입</a></div>
 	        <div><a onclick="return idFind()">아이디 찾기</a></div>
 	        <div><a onclick="return pwdFind()">비밀번호 찾기</a></div>
 	      </div>
@@ -495,19 +501,19 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	        <img src="<%=root%>/resources/img/join/close.png" class="login-popup-btn" onclick="closeFindIdPopup()">
 	      </div>
 	      <div class="login-popup-middle">
-	          <div class="login-header">아이디 찾기</div>
+	          <div class="login-header" style="font-family: 'S-CoreDream-3Light';">아이디 찾기</div>
 	          <div class="login-input">
-	            <div>이름</div>
+	            <div style="font-family: 'S-CoreDream-3Light';">이름</div>
 	            <div>
 	            	<input type="text" id="memberName" name="memberName" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
 	            </div>
-	            <div class="email">이메일</div>
+	            <div class="email" style="font-family: 'S-CoreDream-3Light';">이메일</div>
 	            <div>
 	                <input type="email" id="memberEmail" name="memberEmail" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
 	            </div>
 	          </div>
 	          	<div>
-	            <br><button type="button" onclick="idFound();" class="login-btn">아이디 찾기</button>
+	            <br><button type="button" onclick="idFound();" class="login-btn" style="font-family: 'S-CoreDream-3Light';">아이디 찾기</button>
 	            <div id="idResult" style="text-align: center; margin-top: 30px;"></div>
 	            </div>
 	      </div>
@@ -524,23 +530,23 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	        <img src="<%=root%>/resources/img/join/close.png" class="login-popup-btn" onclick="closeFindPwdPopup()">
 	      </div>
 	      <div class="login-popup-middle">
-	          <div class="login-header">비밀번호 찾기</div>
+	          <div class="login-header" style="font-family: 'S-CoreDream-3Light';">비밀번호 찾기</div>
 	          <div class="login-input">
-	            <div>이름</div>
+	            <div style="font-family: 'S-CoreDream-3Light';">이름</div>
 	            <div>
-	            	<input type="text" id="findPwdUserName" name="findPwdUserName" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
+	            	<input type="text" id="findPwdUserName" name="findPwdUserName" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required ">
 	            </div>
-	            <div style="margin-top: 10px;">아이디</div>
+	            <div style="margin-top: 10px; font-family: 'S-CoreDream-3Light';">아이디</div>
 	            <div>
 	            	<input type="text" id="findPwdUserId" name="findPwdUserId" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
 	            </div>
-	            <div class="email">이메일</div>
+	            <div class="email" style="font-family: 'S-CoreDream-3Light';">이메일</div>
 	            <div>
 	                <input type="email" id="findPwdUserEmail" name="findPwdUserEmail" style="width: 75%; font-size: 18px; border: none; border-bottom: 1px solid black; required">
 	            </div>
 	          </div>
 	          	<div>
-	            <br><button type="button" onclick="pwdFound();" class="login-btn">비밀번호 찾기</button>
+	            <br><button type="button" onclick="pwdFound();" class="login-btn" style="font-family: 'S-CoreDream-3Light';">비밀번호 찾기</button>
 	            <div id="pwdResult" style="text-align: center; margin-top: 30px;"></div>
 	            </div>
 	      </div>
