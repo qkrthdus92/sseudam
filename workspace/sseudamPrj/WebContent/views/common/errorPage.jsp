@@ -25,7 +25,7 @@
 
 	#error-content{
 		width: 1088px;
-		height: 855px;
+		height: 755px;
 		background-color: white;
 		margin: auto;
 		display: flex;
