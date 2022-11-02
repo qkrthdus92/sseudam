@@ -8,19 +8,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.sseudam.board.service.FreeBoardService;
 import com.kh.sseudam.board.service.ReviewBoardService;
 import com.kh.sseudam.board.vo.FreeBoardCmtVo;
 import com.kh.sseudam.board.vo.FreeBoardVo;
 import com.kh.sseudam.board.vo.ReviewBoardCmtVo;
+import com.kh.sseudam.board.vo.ReviewBoardImgVo;
 import com.kh.sseudam.board.vo.ReviewBoardVo;
 import com.kh.sseudam.common.AttachmentVo;
 import com.kh.sseudam.common.PageVo;
-@WebServlet(urlPatterns = "/board/reviewBoardDetail")
-public class ReviewBoardDetailController extends HttpServlet{
+import com.kh.sseudam.member.vo.MemberVo;
 
-	//후기게시판 상세조회
+@WebServlet(urlPatterns = "/board/reviewBoardDetail")
+public class ReviewBoardDetailController extends HttpServlet {
+
+	// 후기게시판 상세조회
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -30,6 +34,11 @@ public class ReviewBoardDetailController extends HttpServlet{
 		// 데이터 꺼내기
 		String bno = req.getParameter("bno");
 		String cmtNo = req.getParameter("cmtNo");
+
+		// 디비다녀오기 (+업로드파일도 같이 담아서)
+		ReviewBoardVo rvo = new ReviewBoardService().detail(bno); // 게시글 내용 가져오기
+		List<ReviewBoardImgVo> imgList = new ReviewBoardService().selectAttachment(bno); // 게시글 사진들 리스트 가져오기
+		List<ReviewBoardCmtVo> cmtVo = null; // 댓글 리스트 가져오기
 
 ///////////////////////댓글 페이징처리/////////////////////
 		int listCount;
@@ -43,7 +52,6 @@ public class ReviewBoardDetailController extends HttpServlet{
 
 		// 댓글 갯수 조회
 		listCount = new ReviewBoardService().selectCountCmt(bno);
-
 
 		currentPage = Integer.parseInt(req.getParameter("cmtPno"));
 		pageLimit = 5; // 5페이지씩 볼수있게 설정하는곳
@@ -66,20 +74,57 @@ public class ReviewBoardDetailController extends HttpServlet{
 		cmtPv.setEndPage(endPage);
 /////////////////////댓글 페이징처리/////////////////////
 
-		// 디비다녀오기
-		List<ReviewBoardCmtVo> cmtVo = null;
-
 		// 댓글 내용 가져오기
 		cmtVo = new ReviewBoardService().selectCmt(cmtPv, bno, cmtNo);
-		req.setAttribute("cmtVo", cmtVo);
 
-		// 게시글 내용 가져오기
-		ReviewBoardVo rvo = new ReviewBoardService().detail(bno);
+		req.setAttribute("cmtVo", cmtVo);
 		req.setAttribute("rvo", rvo);
+		req.setAttribute("imgList", imgList);
 		req.setAttribute("cmtPv", cmtPv);
 
 		// 화면선택
 		req.getRequestDispatcher("/views/board/reviewBoard/reviewBoardDetail.jsp").forward(req, resp);
+	}
+
+	// 댓글 등록
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 인코딩
+		req.setCharacterEncoding("UTF-8");
+
+		// 로그인멤버 가져오기
+		HttpSession s = req.getSession();
+		MemberVo loginMember = (MemberVo) s.getAttribute("loginMember");
+
+		if (req.getSession().getAttribute("loginMember") == null) {
+			req.setAttribute("msg", "로그인 후 이용해주세요.");
+			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
+			return;
+		}
+
+		// 데이터 꺼내기
+		String bno = req.getParameter("bno");
+		String cmtContent = req.getParameter("cmtContent");
+
+		// 데이터 뭉치기
+		ReviewBoardCmtVo cmtVo = new ReviewBoardCmtVo();
+		cmtVo.setReviewBoardNo(bno);
+		cmtVo.setWriterNo(loginMember.getNo());
+		cmtVo.setCmt(cmtContent);
+
+		// 디비 다녀오기
+		int result = ReviewBoardService.writeCmt(cmtVo);
+
+		// 화면선택
+		if (result == 1) {
+			// 게시글 작성 성공 => 알람 + 게시글 목록 1번페이지로 이동
+			s.setAttribute("alertMsg", "댓글 등록이 완료되었습니다.");
+			resp.sendRedirect("/sseudam/board/reviewBoardDetail?bno=" + bno + "&cmtPno=1");
+		} else {
+			req.setAttribute("msg", "댓글 등록 실패.");
+			req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);
+		}
+
 	}
 
 }

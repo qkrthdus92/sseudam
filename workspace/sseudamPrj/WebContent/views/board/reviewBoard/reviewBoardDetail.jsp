@@ -1,3 +1,4 @@
+<%@page import="com.kh.sseudam.board.vo.ReviewBoardImgVo"%>
 <%@page import="com.kh.sseudam.board.vo.ReviewBoardCmtVo"%>
 <%@page import="java.util.List"%>
 <%@page import="com.kh.sseudam.common.PageVo"%>
@@ -6,10 +7,9 @@
     pageEncoding="UTF-8"%>
 <%
  	ReviewBoardVo rvo = (ReviewBoardVo)request.getAttribute("rvo");
-	PageVo pv = (PageVo)request.getAttribute("pv");
+	List<ReviewBoardImgVo> imgList = (List<ReviewBoardImgVo>)request.getAttribute("imgList");
 	PageVo cmtPv = (PageVo)request.getAttribute("cmtPv");
 	List<ReviewBoardCmtVo> cmtVo = (List<ReviewBoardCmtVo>)request.getAttribute("cmtVo");
-	List<ReviewBoardVo> rvoList = (List<ReviewBoardVo>)request.getAttribute("rvoList");
 %> 
 <!DOCTYPE html>
 <html>
@@ -193,11 +193,9 @@
                 <div><a href="/sseudam/board/reviewBoardDelete?no=<%= rvo.getNo()%>">삭제하기</a></div>
             </div>
                 <div>
-                    <img src="<%=root%>/resources/img/main/러버덕.jpg"> <!--rvo.이미지 받아오는곳 -->
-                    <img width="100px" height="100px" src="<%=root%>/resources/upload/afterBoard/<%= rvo.getChangeName() %>" alt="">
-                    <%-- <%for(int i = 0; i < rvoList.size(); ++i){%>
-                    <img width="100px" height="100px" src="<%= root %>/<%= rvoList.get(i).getFilePath() %>/<%= rvoList.get(i).getChangeName() %>" alt="">
-                    <%} %> --%>
+                   <%for(int i = 0; i < imgList.size(); ++i){%>
+                    <div><img src="<%= root %>/resources/upload/afterBoard/<%= imgList.get(i).getChangeName() %>"></div>
+                    <%} %>
                     
                     
           		  <div class="board-content"> <%= rvo.getContent() %> </div>  
@@ -220,8 +218,6 @@
                     <br>
                     <div id="cmt-content"><div id="cmt-cmt"><%=cmtVo.get(i).getCmt()%></div>
                     <form id="cmt-edit">
-                    <div><a href="/sseudam/board/reviewBoardDetail?bno=<%=rvo.getNo()%>&cmtNo=<%= cmtVo.get(i).getNo()%>">수정하기</a></div>
-                    <div>&nbsp;|&nbsp;</div>
                     <div><a href="/sseudam/board/reviewBoardCmtDelete?bno=<%=rvo.getNo()%>&cmtNo=<%= cmtVo.get(i).getNo()%>&cmtPno=1">삭제하기</a></div> </form>                    
                     </div>
 

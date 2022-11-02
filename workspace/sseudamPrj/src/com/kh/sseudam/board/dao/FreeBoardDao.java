@@ -297,6 +297,7 @@ public class FreeBoardDao {
 	
 	//댓글 작성
 	public static int writeCmt(Connection conn, FreeBoardCmtVo cmtVo) {
+		
 		String sql = "INSERT INTO FREE_BOARD_CMT (NO, FREE_BOARD_NO, WRITER_NO, CMT) VALUES (SEQ_FREE_BOARD_CMT_NO.NEXTVAL, ?,  ?, ?)";
 
 		PreparedStatement pstmt = null;
@@ -322,6 +323,7 @@ public class FreeBoardDao {
 
 	// 자유게시판 게시글 삭제
 	public static int delete(Connection conn, String no) {
+		
 		String sql = "UPDATE FREE_BOARD SET DELETE_YN = 'Y' WHERE NO = ?";
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -345,6 +347,7 @@ public class FreeBoardDao {
 	
 	// 댓글 삭제
 	public static int cmtDelete(Connection conn, String cmtNo) {
+		
 		String sql = "UPDATE FREE_BOARD_CMT SET DELETE_YN = 'Y' WHERE NO = ?";
 		PreparedStatement pstmt = null;
 		int result = 0;

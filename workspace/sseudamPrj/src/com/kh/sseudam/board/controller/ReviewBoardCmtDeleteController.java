@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.sseudam.board.service.FreeBoardService;
-import com.kh.sseudam.board.vo.FreeBoardCmtVo;
-import com.kh.sseudam.board.vo.FreeBoardVo;
+import com.kh.sseudam.board.service.ReviewBoardService;
+import com.kh.sseudam.board.vo.ReviewBoardCmtVo;
+import com.kh.sseudam.board.vo.ReviewBoardVo;
 import com.kh.sseudam.common.PageVo;
 import com.kh.sseudam.member.vo.MemberVo;
 
-@WebServlet(urlPatterns = "/board/freeBoardCmtDelete")
-public class FreeBoardCmtDeleteController extends HttpServlet {
+@WebServlet(urlPatterns = "/board/reviewBoardCmtDelete")
+public class ReviewBoardCmtDeleteController extends HttpServlet {
 
 	// 댓글 삭제
 	@Override
@@ -25,11 +25,12 @@ public class FreeBoardCmtDeleteController extends HttpServlet {
 		// 데이터 꺼내기
 		String bno = req.getParameter("bno");
 		String cmtNo = req.getParameter("cmtNo");
-	
+		System.out.println("게시글 번호 : " + bno);/////////////////////
+		System.out.println("댓글 번호 : " + cmtNo);///////////////////////
 		
 		
 		// 디비 다녀오기
-		FreeBoardCmtVo cmtVo = new FreeBoardService().cmtList(cmtNo);
+		ReviewBoardCmtVo cmtVo = new ReviewBoardService().cmtList(cmtNo);
 		//삭제하려는 댓글번호 가지고 작성자번호, 작성자닉네임 가져와서 객체로 만듬
 		
 		// 댓글 작성자 여부 확인
@@ -46,11 +47,11 @@ public class FreeBoardCmtDeleteController extends HttpServlet {
 		System.out.println("로그인멤버 닉네임 : " + loginMember.getNick());////////////
 		System.out.println("댓글작성자 닉네임 : " + cmtVo.getWriterNo());////////////////
 		if (isWriter) {
-			int result = new FreeBoardService().cmtDelete(cmtNo);
+			int result = new ReviewBoardService().cmtDelete(cmtNo);
 			// 화면선택
 			if (result == 1) {
 				req.getSession().setAttribute("alertMsg", "댓글이 삭제되었습니다.");
-				resp.sendRedirect("/sseudam/board/freeBoardDetail?bno="+bno+"&cmtPno=1");
+				resp.sendRedirect("/sseudam/board/reviewBoardDetail?bno="+bno+"&cmtPno=1");
 			}else {
 				req.setAttribute("msg", "댓글 삭제 실패.");
 				req.getRequestDispatcher("/views/common/errorPage.jsp").forward(req, resp);

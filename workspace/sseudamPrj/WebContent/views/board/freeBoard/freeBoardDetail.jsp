@@ -211,8 +211,6 @@
                     <br>
                     <div id="cmt-content"><div id="cmt-cmt"><%=cmtVo.get(i).getCmt()%></div>
                     <form id="cmt-edit">
-                    <div><a href="/sseudam/board/freeBoardDetail?bno=<%=vo.getNo()%>&cmtNo=<%= cmtVo.get(i).getNo()%>">수정하기</a></div>
-                    <div>&nbsp;|&nbsp;</div>
                     <div><a href="/sseudam/board/freeBoardCmtDelete?bno=<%=vo.getNo()%>&cmtNo=<%= cmtVo.get(i).getNo()%>&cmtPno=1">삭제하기</a></div> </form>                    
                     </div>
 

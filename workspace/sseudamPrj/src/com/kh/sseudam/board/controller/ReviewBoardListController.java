@@ -36,8 +36,6 @@ public class ReviewBoardListController extends HttpServlet {
 
 		// 게시글 갯수 조회
 
-		System.out.println("피에노" + req.getParameter("pno"));
-
 		listCount = new ReviewBoardService().selectCount();
 		currentPage = Integer.parseInt(req.getParameter("pno"));
 		pageLimit = 10; // 10페이지씩 볼수있게 설정하는곳

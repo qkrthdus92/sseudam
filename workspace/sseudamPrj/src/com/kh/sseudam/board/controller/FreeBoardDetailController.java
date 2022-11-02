@@ -30,6 +30,8 @@ public class FreeBoardDetailController extends HttpServlet {
 		String bno = req.getParameter("bno");
 		String cmtNo = req.getParameter("cmtNo");
 
+		// 디비다녀오기
+		List<FreeBoardCmtVo> cmtVo = null;
 ///////////////////////댓글 페이징처리/////////////////////
 		int listCount;
 		int currentPage;
@@ -43,7 +45,6 @@ public class FreeBoardDetailController extends HttpServlet {
 		// 댓글 갯수 조회
 		listCount = new FreeBoardService().selectCountCmt(bno);
 
-		System.out.println("디테일컨틀러 cmtPno : "+req.getParameter("cmtPno"));///////////
 		currentPage = Integer.parseInt(req.getParameter("cmtPno"));
 		pageLimit = 5; // 5페이지씩 볼수있게 설정하는곳
 		boardLimit = 5; // 한페이지당 10개씩 볼수 있게 설정하는곳
@@ -65,8 +66,7 @@ public class FreeBoardDetailController extends HttpServlet {
 		cmtPv.setEndPage(endPage);
 /////////////////////댓글 페이징처리/////////////////////
 
-		// 디비다녀오기
-		List<FreeBoardCmtVo> cmtVo = null;
+
 
 		// 댓글 내용 가져오기
 		cmtVo = new FreeBoardService().selectCmt(cmtPv, bno, cmtNo);
