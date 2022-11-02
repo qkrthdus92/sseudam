@@ -127,7 +127,7 @@ public class MemberDao {
 	//아이디 찾기
 	public String findMemberId(Connection conn, MemberVo findvo) {
 		
-		String sql = "SELECT ID FROM MEMBER WHERE NAME = ? AND EMAIL = ? AND QUIT_YN = 'N' UNION SELECT ID FROM PRO_MEMBER WHERE NAME = ? AND EMAIL = ? AND PRO_STATUS = 'J' OR PRO_STATUS = 'W'";
+		String sql = "SELECT ID FROM MEMBER WHERE NAME = ? AND EMAIL = ? AND QUIT_YN = 'N' UNION SELECT ID FROM PRO_MEMBER WHERE NAME = ? AND EMAIL = ? AND PRO_STATUS != 'Q'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -161,7 +161,7 @@ public class MemberDao {
 	//비밀번호 찾기
 	public String findMemberPwd(Connection conn, MemberVo findpwdvo) {
 		
-		String sql = "SELECT PWD FROM MEMBER WHERE NAME = ? AND ID = ? AND EMAIL = ? AND QUIT_YN = 'N' UNION SELECT PWD FROM PRO_MEMBER WHERE NAME = ? AND ID = ? AND EMAIL = ? AND PRO_STATUS = 'J' OR PRO_STATUS = 'W'";
+		String sql = "SELECT PWD FROM MEMBER WHERE NAME = ? AND ID = ? AND EMAIL = ? AND QUIT_YN = 'N' UNION SELECT PWD FROM PRO_MEMBER WHERE NAME = ? AND ID = ? AND EMAIL = ? AND PRO_STATUS != 'Q'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

@@ -455,14 +455,14 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 	            </div>
 	          </div>
 	            <div>
-	              <br><a><input type="submit" value="로그인" onclick="login();" class="login-btn"></a>
+	              <br><a><input type="submit" value="로그인" onclick="return login();" class="login-btn"></a>
 	            </div>
 	      </div>
 	      
 	      <div class="login-popup-button">
 	        <div><a href='<%=root%>/views/common/join.jsp'>회원가입</a></div>
-	        <div><a onclick="idFind()">아이디 찾기</a></div>
-	        <div><a onclick="pwdFind()">비밀번호 찾기</a></div>
+	        <div><a onclick="return idFind()">아이디 찾기</a></div>
+	        <div><a onclick="return pwdFind()">비밀번호 찾기</a></div>
 	      </div>
 	      
 	    </div>
@@ -470,7 +470,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   </form>
   
     <!-- 아이디 찾기 팝업 -->
-  <form action="/sseudam/findId" method="post">
+  <form action="/sseudam/findId" name="idFindForm" method="post">
 	    <div id="find-id-popup" class="hide">
 	    <div class="login-popup">
 	      <div class="login-popup-header">
@@ -499,7 +499,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   </form> 
   
       <!-- 비밀번호 찾기 팝업 -->
-  <form action="/sseudam/findId" method="post">
+  <form action="/sseudam/findId" name="pwdFindForm" method="post">
 	    <div id="find-pwd-popup" class="hide">
 	    <div class="login-popup">
 	      <div class="login-popup-header">
@@ -614,7 +614,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
           <a href=""><i class="fa-solid fa-heart"></i><span>저장</span></a>
         </div>
         <div class="main-header-icon">
-          <a href="<%=root%>/views/mypage/promain.jsp"
+          <a href="<%=root%>/mypage/starupdate"
             ><i class="fa-regular fa-user"></i><span>마이</span></a>
         </div>
       </div>
@@ -668,6 +668,21 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 <script type="text/javascript">
 	// 아이디 찾기
 	function idFound(){
+		var getName = document.idFindForm.memberName.value;
+		var getEmail = document.idFindForm.memberEmail.value;
+		
+		if(getName == ""){
+			alert("이름을 입력해 주세요")
+			document.idFindForm.memberName.focus();
+			return false;
+		}
+		
+		if(getEmail == ""){
+			alert("이메일을 입력해 주세요")
+			document.idFindForm.memberEmail.focus();
+			return false;
+		}
+		
 		$.ajax({
 			url : "/sseudam/findId",
 			method : "GET",
@@ -686,11 +701,34 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 			}
 		});
 	}
+
 </script>
 
 <script type="text/javascript">
 	// 비밀번호 찾기
 	function pwdFound(){
+		var getName = document.pwdFindForm.findPwdUserName.value;
+		var getId = document.pwdFindForm.findPwdUserId.value;
+		var getEamil = document.pwdFindForm.findPwdUserEmail.value;
+		
+		if(getName == ""){
+			alert("이름을 입력해 주세요")
+			document.pwdFindForm.findPwdUserName.focus();
+			return false;
+		}
+		
+		if(getId == ""){
+			alert("아이디를 입력해 주세요")
+			document.pwdFindForm.findPwdUserId.focus();
+			return false;
+		}
+		
+		if(getEamil == ""){
+			alert("이메일을 입력해 주세요")
+			document.pwdFindForm.findPwdUserEmail.focus();
+			return false;
+		}
+		
 		$.ajax({
 			url : "/sseudam/findPwd",
 			method : "GET",
@@ -710,6 +748,7 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 			}
 		});
 	}
+	
 </script>
 
 <script>
