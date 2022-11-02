@@ -30,7 +30,6 @@ body {
 }
 
 #main {
-	border-top: 1px solid #dfdfdf;
 	width: 1200px;
 	height: 850px;
 	margin: auto;
@@ -73,6 +72,8 @@ body {
 	background-color: rgba(151, 210, 153, 0.7);
 	border: 0px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+	cursor : pointer;
+	margin-right: 15px;
 }
 
 #no-btn {
@@ -81,6 +82,8 @@ body {
 	background-color: #a0a0a0;
 	border: 0px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+	cursor : pointer;
+	margin-left: 15px;
 }
 
 #footer {

@@ -32,9 +32,7 @@ body {
 
 #main {
 	position: relative;
-	border-top: 1px solid #dfdfdf;
 	width: 1200px;
-	--height: 850px;
 	margin: auto;
 }
 
@@ -51,7 +49,6 @@ body {
 
 #write-box {
 	width: 90%;
-	--height: 85%;
 	background-color: #F5F5F5;
 	display: grid;
 	grid-template-rows: 1fr 3fr 0.5fr 2fr;
@@ -74,10 +71,9 @@ body {
 }
 
 .upload-list {
-	margin-left: 50px;
+	margin-left: 55px;
 	grid-template-rows: repeat(3, 1fr);
 	width: 100%;
-	--height: 100%;
 }
 
 .upload-list>div {
@@ -90,7 +86,7 @@ body {
 #upload-list {
 	display: grid;
 	grid-template-columns: 10fr 1fr 1fr;
-	width: 75%;
+	width: 80%;
 }
 
 #fileName1, #fileName2, #fileName3, #fileName4, #fileName5 {

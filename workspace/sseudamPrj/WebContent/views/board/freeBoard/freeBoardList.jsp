@@ -34,7 +34,6 @@
         height: 170px;
     }
     #main{
-        border-top: 1px solid #dfdfdf;
         width: 1200px;
         height: 850px;
         display: grid;
@@ -159,15 +158,18 @@
 
         <div id="page">
                   
-        	<a href="/sseudam/board/freeBoardList?pno=<%=pv.getStartPage()-1%>">< </a>	        		
+          <%if(pv.getStartPage() != 1){%>  
+        	<a href="/sseudam/board/freeBoardList?pno=<%=pv.getStartPage()-1%>">< </a>	
+        	<%}%>	        		
         	
         <%
         	for(int i = pv.getStartPage(); i <= pv.getEndPage(); ++i){%>
         		<a id="current" href="/sseudam/board/freeBoardList?pno=<%=i%>"><%=i%></a>
         <%}%>
         
+         <%if(pv.getEndPage() != pv.getMaxPage()){%>
         	<a href="/sseudam/board/freeBoardList?pno=<%=pv.getEndPage()+1%>"> ></a>	        		
-
+			<%}%>  
         </div>
             <%-- <div id="search">
                 <div>

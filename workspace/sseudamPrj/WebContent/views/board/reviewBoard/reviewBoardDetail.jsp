@@ -37,7 +37,6 @@
         height: 170px;
     }
     #main{
-        border-top: 1px solid #dfdfdf;
         width: 1200px;
         --height: 1500px;
         display: grid;
@@ -90,6 +89,7 @@
         width: 1160px;
         --height: 650px;
         white-space: pre-wrap;
+        padding-bottom: 200px;
         
     }
 
@@ -168,10 +168,14 @@
         margin: auto;
     }
     #page{
-    text-align: center;
+	margin-top: 10px;
+	margin-left: 10px;
     width : 150px;
-    height : 20px;
-    
+    height : 20px;    
+    }
+    #host{
+    color: #26AA82;
+    font-weight: 800; 
     }
     #footer{
         width: 100vw;
@@ -223,24 +227,45 @@
                 <%for(int i = 0; i < cmtVo.size(); i++){%> <!-- 댓글부분 5개씩 페이지 넘겨서 보여주게 하기 -->
                 <div id="cmt">
                     <div id="cmt-info">
-                        <div id="cmt-id"><%=cmtVo.get(i).getWriterNo()%></div>
+                        <div id="cmt-id">
+                        
+                        <%if ((cmtVo.get(i).getWriterNo()).equals(rvo.getWriterNo())){%>
+                        <%= cmtVo.get(i).getWriterNo()%>&nbsp;&nbsp;<a id="host">작성자</a>
+                       <%}else{%>
+                    	   <div><%= cmtVo.get(i).getWriterNo()%></div>
+                        <%}%>
+                        
+                        
+                        </div>
                         <div id="cmt-date"><%=cmtVo.get(i).getModifyDate()%></div>
                     </div>
                     <br>
                     <div id="cmt-content"><div id="cmt-cmt"><%=cmtVo.get(i).getCmt()%></div>
                     <form id="cmt-edit">
-                    <div><a href="/sseudam/board/reviewBoardCmtDelete?bno=<%=rvo.getNo()%>&cmtNo=<%= cmtVo.get(i).getNo()%>&cmtPno=1">삭제하기</a></div> </form>                    
+                    
+                    <%if ((cmtVo.get(i).getWriterNo()).equals(loginMember.getNick())){%>
+                    <div><a href="/sseudam/board/reviewBoardCmtDelete?bno=<%=rvo.getNo()%>&cmtNo=<%= cmtVo.get(i).getNo()%>&cmtPno=1">삭제하기</a></div> 
+                    <%}%>
+                    
+                    </form>                    
                     </div>
 
                 </div>
                 <%}%>
                 
          <div id="page">
-        		<a href="/sseudam/board/reviewBoardDetail?bno=<%=rvo.getNo()%>&cmtPno=<%=cmtPv.getStartPage()-1%>"> < </a>	        		
+         
+         <%if(cmtPv.getStartPage() != 1){%>
+        		<a href="/sseudam/board/reviewBoardDetail?bno=<%=rvo.getNo()%>&cmtPno=<%=cmtPv.getStartPage()-1%>"> < </a>
+        		<%}%>
+        			        		
        		 <%for(int i = cmtPv.getStartPage(); i <= cmtPv.getEndPage(); ++i){%>
         		<a href="/sseudam/board/reviewBoardDetail?bno=<%=rvo.getNo()%>&cmtPno=<%=i%>"><%=i%></a>
        		 <%}%>       
-        		<a href="/sseudam/board/reviewBoardDetail?bno=<%=rvo.getNo()%>&cmtPno=<%=cmtPv.getEndPage()+1%>"> > </a>	        		  	      
+       		 
+       		  <%if(cmtPv.getEndPage() != cmtPv.getMaxPage()){%>
+        		<a href="/sseudam/board/reviewBoardDetail?bno=<%=rvo.getNo()%>&cmtPno=<%=cmtPv.getEndPage()+1%>"> > </a>
+        		<%}%>         		  	      
         </div>
                 <div id="cmt-write">
                     <form action="/sseudam/board/reviewBoardDetail?bno=<%=rvo.getNo()%>&cmtPno=1" method="post">

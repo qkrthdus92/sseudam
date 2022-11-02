@@ -34,7 +34,6 @@ body {
 }
 
 #main {
-	border-top: 1px solid #dfdfdf;
 	width: 1200px;
 	height: 850px;
 	margin: auto;
@@ -69,7 +68,6 @@ body {
 
 #btn {
 	margin: auto;
-	cursor : pointer;
 	
 }
 
@@ -80,6 +78,7 @@ body {
 	border: 0px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
 	cursor : pointer;
+	margin-right: 15px;
 }
 
 #no-btn {
@@ -89,6 +88,7 @@ body {
 	border: 0px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
 	cursor : pointer;
+	margin-left: 15px;
 }
 
 #footer {

@@ -35,7 +35,6 @@
 	}
 	
 	#main {
-		border-top: 1px solid #dfdfdf;
 		width: 1200px;
 		height: 1400px;
 		display: grid;
