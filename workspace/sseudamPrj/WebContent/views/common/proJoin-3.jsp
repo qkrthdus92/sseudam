@@ -202,6 +202,8 @@
 		<input type="hidden" name="certificateName" value="<%= proVo2.getCertificateName() %>">
 		<input type="hidden" name="certificateNum" value="<%= proVo2.getCertificateNum() %>">
 		<input type="hidden" name="cerImg" value="<%= proVo2.getImgPath() %>">
+		
+		
 	
         <div class="join-area">
 

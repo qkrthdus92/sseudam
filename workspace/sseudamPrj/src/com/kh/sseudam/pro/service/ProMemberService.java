@@ -2,6 +2,7 @@ package com.kh.sseudam.pro.service;
 
 import java.sql.Connection;
 
+import com.kh.sseudam.common.AttachmentVo;
 import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.counsel.pro.vo.CertificateVo;
 import com.kh.sseudam.counsel.pro.vo.ProVo;
@@ -34,12 +35,12 @@ public class ProMemberService {
 		return result;
 	}
 	//자격증 첨부파일
-	public int projoinlicense(CertificateVo cv, ProJoinPage2Vo proVo2) {
+	public int projoinlicense(CertificateVo cv, AttachmentVo attachmentVo) {
 
 		Connection conn = JDBCTemplate.getConnection();
 		
 		ProDao prodao = new ProDao();
-		int result = prodao.projoinlicense(conn, cv, proVo2);
+		int result = prodao.projoinlicense(conn, cv, attachmentVo);
 		
 		if(result == 1) {
 			JDBCTemplate.commit(conn);
@@ -86,5 +87,6 @@ public class ProMemberService {
 		JDBCTemplate.close(conn);
 		return isProIdDup;
 	}
+	 
 	
 }

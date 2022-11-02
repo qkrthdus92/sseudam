@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ProJoinPage2Vo ProVo2 = (ProJoinPage2Vo)session.getAttribute("ProJoinPage2Vo");
+		ProJoinPage2Vo ProVo2 = (ProJoinPage2Vo)session.getAttribute("ProJoinPage2Vo");
 %>
 
 <!DOCTYPE html>
@@ -171,34 +171,6 @@
                 <div>최종학력</div>
                 <div><input type="text" name="education" placeholder="예) ㅇㅇㅇ대학교 석사" required></div>
             </div>
-            
-			<!-- 여기부터 자격증 파일 업로드 -->
-            <!-- <div class="join-1nd">
-                <div>자격증 이름</div>
-                <div><input type="text" name="certificateName" required></div>
-            </div>
-            <div calss="join-2nd">
-                <div>자격증 번호</div>
-                <div><input type="text" name="certificateNum" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required></div>
-            </div>
-            <div class="join-3nd">
-                <div>
-                    증빙서류
-                    <input type="file" id="cerFile" class="attached-file-btn" name="imgPath" value="첨부파일">
-                </div>
-                <div>
-                    <div>
-                    <input type="text" id="cer-file-upload-name" name="attached-file-name">
-					<script type="text/javascript">
-				      var jq = jQuery.noConflict();
-				      
-				      jq("#cerFile").on('change', function() {
-				         var fileName = jq("#cerFile").val();
-				         jq("#cer-file-upload-name").val(fileName);
-				      });
-				   </script>
-				   <br>
-       				</div> -->
 
 		          <div class="cer-target">
 		          
@@ -228,7 +200,6 @@
         
 	</form>
     </nav>
-      
 
      <script>
       function cerAd() {
@@ -241,7 +212,7 @@
         const newDiv2 = document.createElement('div');
         newDiv2.innerHTML = "<input type='text' class='cer-edit' name='certificateNum' placeholder='자격번호를 입력하세요' />";
         const newDiv3 = document.createElement('div');
-        newDiv3.innerHTML = "<input type='file' class='upload-btn' name='imgPath'  multiple/><i class='fa-solid fa-square-xmark x-btn'></i>";
+        newDiv3.innerHTML = "<input type='file' class='upload-btn' name='imgPath'  multiple/>";
 
         newDiv0.appendChild(newDiv1);
         newDiv0.appendChild(newDiv2);

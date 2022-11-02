@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.kh.sseudam.common.AttachmentVo;
 import com.kh.sseudam.common.JDBCTemplate;
 import com.kh.sseudam.counsel.pro.vo.CertificateVo;
 import com.kh.sseudam.counsel.pro.vo.ProVo;
@@ -22,7 +23,7 @@ public class ProDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String sql = "INSERT INTO PRO_MEMBER (NO, ID, NAME, PWD, GENDER, PHONE, EMAIL, EDUCATION, COUNSEL_TYPE_NO, IMG) VALUES ( SEQ_PRO_MEMBER_NO.NEXTVAL, ? , ? , ? , ? , ? , ? , ? , ? ,?)";
+		String sql = "INSERT INTO PRO_MEMBER (NO, ID, NAME, PWD, GENDER, PHONE, EMAIL, EDUCATION, COUNSEL_TYPE_NO, IMG, INTRODUCE) VALUES ( SEQ_PRO_MEMBER_NO.NEXTVAL, ? , ? , ? , ? , ? , ? , ? , ? ,?, ?)";
 		
 		try {
 			//전문가 정보
@@ -38,6 +39,7 @@ public class ProDao {
 			pstmt.setString(8, proVo3.getCounselType());
 			//프로필 사진 파일 업로드
 			pstmt.setString(9, proVo3.getImg());
+			pstmt.setString(10, proVo3.getIntroduce());
 			
 			result = pstmt.executeUpdate();
 
@@ -52,7 +54,7 @@ public class ProDao {
 	}
 	
 	//전문가 자격정보 + 자격증 첨부파일
-	public int projoinlicense(Connection conn, CertificateVo cv, ProJoinPage2Vo proVo2) {
+	public int projoinlicense(Connection conn, CertificateVo cv, AttachmentVo aVo) {
 		String prosql = "INSERT INTO CERTIFICATE (NO , PRO_MEMBER_NO , CERTIFICATE_NAME , CERTIFICATE_NUM , IMG_PATH) VALUES ( SEQ_CERTIFICATE_NO.NEXTVAL , (SELECT NO FROM PRO_MEMBER ORDER BY NO DESC OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY) , ? , ? , ? )";
 
 		PreparedStatement pstmt = null;
@@ -65,7 +67,7 @@ public class ProDao {
 			pstmt.setString(1, cv.getName());
 			pstmt.setString(2, cv.getNum());
 			//전문가 자격증 파일 업로드
-			pstmt.setString(3, proVo2.getImgPath());
+			pstmt.setString(3, aVo.getChangeName());
 			
 			result = pstmt.executeUpdate();
 			
@@ -179,6 +181,7 @@ public class ProDao {
 		
 		return isProIdDup;
 	}
+
 
 	
 }
