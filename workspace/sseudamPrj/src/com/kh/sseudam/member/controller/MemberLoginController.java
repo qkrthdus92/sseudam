@@ -56,13 +56,16 @@ public class MemberLoginController extends HttpServlet{
 		
 		if(loginMember == null) {
 			proLoginMember = new ProMemberService().prologin(vo);
-		}else {
-			req.getSession().setAttribute("alertMsg", "로그인 성공");
+		}else if(proLoginMember != null) {
+			HttpSession s = req.getSession();
+			s.setAttribute("alertMsg", "로그인 성공");
+			s.setAttribute("proLoginMember", proLoginMember);
+			resp.sendRedirect(nextUrl);
 		}
 		
 		if(loginMember == null && proLoginMember == null) {
-			req.getSession().setAttribute("alertMsg", "2. 일치하는 회원정보가 없습니다.");
-			//resp.sendRedirect(nextUrl);
+			req.getSession().setAttribute("alertMsg", "일치하는 회원정보가 없습니다.");
+			resp.sendRedirect(nextUrl);
 		}
 		
 		//화면선택
@@ -70,20 +73,10 @@ public class MemberLoginController extends HttpServlet{
 			HttpSession s = req.getSession();
 			s.setAttribute("alertMsg", "로그인 성공");
 			s.setAttribute("loginMember", loginMember);
-			
-		}else {
-			req.getSession().setAttribute("alertMsg", "3. 일치하는 회원정보가 없습니다.");
-		}
-		
-		if(proLoginMember != null) {
-			HttpSession s = req.getSession();
-			s.setAttribute("alertMsg", "로그인 성공");
-			s.setAttribute("proLoginMember", proLoginMember);
 			resp.sendRedirect(nextUrl);
 			
-		}else {
-			req.getSession().setAttribute("alertMsg", "로그인 성공");
-			resp.sendRedirect(nextUrl);
+		}else if(proLoginMember == null){
+			req.getSession().setAttribute("alertMsg", "일치하는 회원정보가 없습니다.");
 		}
 		
 	}
