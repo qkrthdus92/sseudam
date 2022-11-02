@@ -100,25 +100,23 @@ public class MypageEditService {
 	
 	}
 
-	//전문가회원 탈퇴
-	public int proquit(String no) {
-		
-		Connection conn = JDBCTemplate.getConnection();
-		
-		int result= new MypageEditDao().proquit(conn, no);
-		
-		if(result ==1) {
-			JDBCTemplate.commit(conn);
-		}else {
-			JDBCTemplate.rollback(conn);
-		}
-		
-		JDBCTemplate.close(conn);
-		
-		return result;
-	
-		
-	}
+	/*
+	 * //전문가회원 탈퇴 public int proquit(String no) {
+	 * 
+	 * Connection conn = JDBCTemplate.getConnection();
+	 * 
+	 * int result= new MypageEditDao().proquit(conn, no);
+	 * 
+	 * if(result ==1) { JDBCTemplate.commit(conn); }else {
+	 * JDBCTemplate.rollback(conn); }
+	 * 
+	 * JDBCTemplate.close(conn);
+	 * 
+	 * return result;
+	 * 
+	 * 
+	 * }
+	 */
 
 	/*
 	 * //프로필 사진 첨부 public int profileUpload(ProMemberJoinVo vo) {
