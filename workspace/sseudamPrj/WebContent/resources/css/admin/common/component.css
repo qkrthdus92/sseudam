@@ -519,3 +519,33 @@ textarea {
 .admin-reply-form div:nth-child(2) {
   justify-content: flex-start;
 }
+
+.upload-name {
+  display: inline-block;
+  height: 30px;
+  padding: 0 10px;
+  vertical-align: middle;
+  border: 1px solid #dddddd;
+  width: 300px;
+  color: #1b1a17;
+  margin-right: 10px;
+}
+
+.label-btn {
+  display: flex;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  background-color: #999999;
+  cursor: pointer;
+  height: 30px;
+  width: 80px;
+}
+
+.border-none {
+  border: none;
+}
+
+.padding-left0 {
+  padding-left: 0px !important;
+}

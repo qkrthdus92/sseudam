@@ -31,6 +31,18 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
       rel="stylesheet"
       href="<%=root1%>/resources/css/admin/common/component.css?ver=4"
     />
+    <style>
+      .admin-menu-main-user li:first-child a {
+        color: var(--adminMenuHover);
+        font-size: 17px;
+      }
+      .admin-main-board {
+        display: grid;
+        grid-template-columns: 0.7fr 1fr 1fr 1fr 1.2fr 1.2fr 1fr 1fr 0.7fr;
+        grid-template-rows: repeat(11, 50px);
+      }
+
+    </style>
   </head>
   <body>
     <%@ include file="/views/admin/common/menu.jsp"%>

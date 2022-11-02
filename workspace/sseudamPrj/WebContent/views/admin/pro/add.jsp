@@ -19,8 +19,14 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath(); String pno =
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/common/component.css?ver=1"
+      href="<%=root1%>/resources/css/admin/common/component.css?ver=2"
     />
+    <style>
+      .grid-col3 {
+        grid-template-columns: 1fr 1fr 6fr;
+        grid-template-rows: repeat(11, 50px);
+      }
+    </style>
   </head>
   <body>
     <%@ include file="/views/admin/common/menu.jsp"%>
@@ -51,11 +57,12 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath(); String pno =
           <div class="admin-main-wrapper">
             <div class="admin-main-board grid-col3">
               <div>이름</div>
+
               <div>
                 <input
                   type="text"
                   placeholder="이름을 입력해주세요"
-                  class="admin-input"
+                  class="upload-name"
                   name="name"
                 />
               </div>
@@ -65,16 +72,16 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath(); String pno =
                 <input
                   type="text"
                   placeholder="아이디를 입력해주세요"
-                  class="admin-input"
+                  class="upload-name"
                   name="id"
                   id="targetId"
                 />
               </div>
-              <div>
+              <div class="padding-left0">
                 <input
                   type="button"
                   value="중복확인"
-                  class="check-btn"
+                  class="label-btn border-none"
                   onclick="checkDupId();"
                 />
                 <div id="printDupId"></div>
@@ -95,7 +102,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath(); String pno =
                 <input
                   type="text"
                   placeholder="이메일을 입력해주세요"
-                  class="admin-input"
+                  class="upload-name"
                   name="email"
                 />
               </div>
@@ -105,7 +112,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath(); String pno =
                 <input
                   type="text"
                   placeholder="비밀번호를 입력해주세요"
-                  class="admin-input"
+                  class="upload-name"
                   name="pwd"
                 />
               </div>
@@ -115,7 +122,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath(); String pno =
                 <input
                   type="text"
                   placeholder="전화번호를 입력해주세요"
-                  class="admin-input"
+                  class="upload-name"
                   name="phone"
                 />
               </div>
@@ -134,7 +141,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath(); String pno =
                 <input
                   type="text"
                   placeholder="최종학력을 입력해주세요"
-                  class="admin-input"
+                  class="upload-name"
                   name="education"
                 />
               </div>
@@ -147,7 +154,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath(); String pno =
                 <input
                   type="text"
                   name="introduce"
-                  class="admin-input-select"
+                  class="upload-name"
                   placeholder="소개글을 입력해주세요"
                 />
               </div>

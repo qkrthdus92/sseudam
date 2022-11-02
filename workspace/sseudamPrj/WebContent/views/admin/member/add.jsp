@@ -19,8 +19,17 @@ pno = (String)request.getAttribute("pno"); String quitYn =
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/common/component.css?ver=1"
+      href="<%=root1%>/resources/css/admin/common/component.css?ver=2"
     />
+    <style>
+      .grid-col3 {
+        grid-template-columns: 0.2fr 0.4fr 1fr;
+      }
+
+      .padding-left0 {
+        padding-left: 0px !important;
+      }
+    </style>
   </head>
   <body>
     <%@ include file="/views/admin/common/menu.jsp"%>
@@ -61,26 +70,30 @@ pno = (String)request.getAttribute("pno"); String quitYn =
           <div class="admin-main-wrapper">
             <div class="admin-main-board grid-col3">
               <div>이름</div>
-              <input
-                type="text"
-                placeholder="이름을 입력해주세요"
-                class="input-edit"
-                name="name"
-              />
+              <div>
+                <input
+                  type="text"
+                  placeholder="이름을 입력해주세요"
+                  class="upload-name"
+                  name="name"
+                />
+              </div>
               <div></div>
               <div>아이디</div>
-              <input
-                type="text"
-                placeholder="아이디를 입력해주세요"
-                class="input-edit"
-                name="id"
-                id="targetId"
-              />
               <div>
+                <input
+                  type="text"
+                  placeholder="아이디를 입력해주세요"
+                  class="upload-name"
+                  name="id"
+                  id="targetId"
+                />
+              </div>
+              <div class="padding-left0">
                 <input
                   type="button"
                   value="중복확인"
-                  class="check-btn"
+                  class="label-btn border-none"
                   onclick="checkDupId();"
                 />
                 <div id="printDupId"></div>
@@ -106,36 +119,72 @@ pno = (String)request.getAttribute("pno"); String quitYn =
                 }
               </script>
               <div>닉네임</div>
-              <input
-                type="text"
-                placeholder="닉네임을 입력해주세요"
-                class="input-edit"
-                name="nick"
-              />
-              <div></div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="닉네임을 입력해주세요"
+                  class="upload-name"
+                  name="nick"
+                  id="targetNick"
+                />
+              </div>
+              <div class="padding-left0">
+                <input
+                  type="button"
+                  value="중복확인"
+                  class="label-btn border-none"
+                  onclick="checkDupNick();"
+                />
+                <div id="printDupNick"></div>
+              </div>
+              <script>
+                let nick = document.querySelector("#targetNick").value;
+
+                function checkDupNick() {
+                  $.ajax({
+                    url: "<%=root1%>/admin/addMember/checkDupNick",
+                    type: "get",
+                    data: {
+                      nick: $("#targetNick").val(),
+                    },
+                    success: function (x) {
+                      $("#printDupNick").html(x);
+                    },
+                    error: function () {
+                      alert("통신에러발생~");
+                    },
+                  });
+                }
+              </script>
               <div>이메일</div>
-              <input
-                type="text"
-                placeholder="이메일을 입력해주세요"
-                class="input-edit"
-                name="email"
-              />
+              <div>
+                <input
+                  type="text"
+                  placeholder="이메일을 입력해주세요"
+                  class="upload-name"
+                  name="email"
+                />
+              </div>
               <div></div>
               <div>비밀번호</div>
-              <input
-                type="text"
-                placeholder="비밀번호를 입력해주세요"
-                class="input-edit"
-                name="pwd"
-              />
+              <div>
+                <input
+                  type="text"
+                  placeholder="비밀번호를 입력해주세요"
+                  class="upload-name"
+                  name="pwd"
+                />
+              </div>
               <div></div>
               <div>전화번호</div>
-              <input
-                type="text"
-                placeholder="전화번호를 입력해주세요"
-                class="input-edit"
-                name="phone"
-              />
+              <div>
+                <input
+                  type="text"
+                  placeholder="전화번호를 입력해주세요"
+                  class="upload-name"
+                  name="phone"
+                />
+              </div>
               <div></div>
             </div>
           </div>

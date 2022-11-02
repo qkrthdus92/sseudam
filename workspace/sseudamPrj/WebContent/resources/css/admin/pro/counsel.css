@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   padding-left: 20px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .pro-counsel-info ul {
@@ -39,7 +39,7 @@
 
 .admin-info-title i {
   margin-right: 10px;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .counsel-profit::after {
@@ -67,6 +67,7 @@
   margin-bottom: 30px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  font-size: 15px;
 }
 
 .admin-pro-certificate div {

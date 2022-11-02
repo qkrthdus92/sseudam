@@ -90,6 +90,10 @@ pageEncoding="UTF-8"%>
         color: white;
         font-size: 17px;
       }
+
+      .cursor {
+        cursor: pointer;
+      }
     </style>
   </head>
   <body class="admin-login-body center">
@@ -114,7 +118,7 @@ pageEncoding="UTF-8"%>
           </div>
         </section>
         <section class="admin-login-submit">
-          <input type="submit" value="Log In" class="admin-login-btn" />
+          <input type="submit" value="Log In" class="admin-login-btn cursor" />
         </section>
       </main>
     </form>

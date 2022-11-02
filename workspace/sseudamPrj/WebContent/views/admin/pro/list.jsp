@@ -31,6 +31,18 @@ List<ProVo>
           rel="stylesheet"
           href="<%=root1%>/resources/css/admin/pro/list.css?ver=4"
         />
+        <style>
+          .admin-main-board {
+            display: grid;
+            grid-template-columns: 1fr 0.7fr 1fr 1fr 2fr 1fr 2fr 3fr 1fr 1fr 0.9fr 1fr;
+            grid-template-rows: repeat(11, 50px);
+          }
+
+          .admin-main-board div {
+            text-align: center;
+            line-height: 20px;
+          }
+        </style>
       </head>
       <body>
         <%@ include file="/views/admin/common/menu.jsp"%>

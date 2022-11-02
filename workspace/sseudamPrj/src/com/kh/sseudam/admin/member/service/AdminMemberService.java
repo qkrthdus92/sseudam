@@ -129,14 +129,24 @@ public class AdminMemberService {
 		return result;
 	}
 
+	//아이디 중복확인
 	public boolean checkDup(String id) {
 		Connection conn = JDBCTemplate.getConnection();
+		boolean result = false;
 		
-		boolean isIdDup = new AdminMemberDao().checkDup(conn, id);
+		//사용자 아이디와 중복확인
+		boolean isIdDupWithMem = new AdminMemberDao().checkDup(conn, id);
+		
+		//전문가 아이디와 중복확인
+		boolean isIdDupWithPro = new AdminMemberDao().checkDupIdWithPro(conn, id);
 		
 		JDBCTemplate.close(conn);
 		
-		return isIdDup;
+		if(isIdDupWithMem || isIdDupWithPro) {
+			result = true;
+		}
+		
+		return result;
 	}
 
 	public boolean checkNotChange(String no, String id) {
