@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입 :: 쓰담쓰담</title>
 
 <style>
 	body{
@@ -30,9 +31,14 @@
 		margin-left: 5%;
 	}
 
+	#btn1:hover,
+	#btn2:hover{
+		opacity:0.7;
+	}
+
 	.button{
 		background-color: white;
-		border: 1px solid black;
+		border: 1px solid rgba(128, 124, 124, 1);
 		color: black;
 		font-size: 25px;
 		font-weight: bold;
@@ -41,12 +47,19 @@
 		border-radius: 15px;
 		box-shadow: 0 5px 3px rgb(199, 198, 198);
 		cursor: pointer;
+		font-family: "S-CoreDream-3Light";
 	}
 
 	.btn{
 		text-align: center;
 		margin-top: 22%;
 	}
+	
+	.btn{
+		text-align: center;
+		margin-top: 22%;
+	}
+		
 </style>
 </head>
 <body>

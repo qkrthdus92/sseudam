@@ -7,8 +7,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>쓰담쓰담 에러페이지</title>
+<title>에러페이지 :: 쓰담쓰담</title>
 <style>
 	body{
 		padding: 0;
@@ -17,25 +18,39 @@
 	}
 
 	h1{
-		padding-top: 100%;
-		padding-bottom: 50%;
+		margin-bottom: 90%;
+		font-family: "S-CoreDream-3Light";
+		color: rgba(128, 124, 124, 1);
 	}
 
 	#error-content{
 		width: 1088px;
 		height: 855px;
-		border: 1px solid white;
 		background-color: white;
 		margin: auto;
 		display: flex;
-    	flex-direction: column;
-    	align-items: flex-start;
+		flex-direction: column;
 		align-items: center;
 	}
 
+	#error-content > .error-page{
+		text-align: center;
+		margin: auto;
+	}
+
 	.error-img{
-		width: 200px;
-		height: 200px;
+		width: 850px;
+		height: 600px;
+	}
+	
+	.back-page{
+		font-family: "S-CoreDream-3Light";
+        color: gray;
+        border: none;
+		cursor: pointer;
+        font-size: 20px;
+		font-weight: bold;
+		margin-bottom: 230px;
 	}
 </style>
 </head>
@@ -43,8 +58,8 @@
 	<%@ include file="/views/common/header.jsp" %>
 	
 	<div id="error-content">
-		<div><h1>"<%= msg %>"</h1></div>
-		<div><img class="error-img" src="<%=root1%>/resources/img/error/error.png"></div>
+		<div class="error-page"><img class="error-img" src="<%=root1%>/resources/img/error/error404.gif"></div>
+		<div class="back-page" onclick="history.back();">이전 페이지로 이동</div>
 	</div>
 	
 	<%@ include file="/views/common/footer.jsp" %>

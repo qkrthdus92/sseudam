@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>쓰담쓰담 회원가입</title>
+<title>전문가 회원가입 :: 쓰담쓰담</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
 
@@ -21,6 +22,7 @@
         display: flex;
         flex-direction: column;
         margin: auto;
+        font-family: 'S-CoreDream-3Light';
     }
 
     h1{
@@ -74,7 +76,7 @@
     input[type="email"]{
         border: none;
         border-bottom: 1px solid black;
-        font-size: 18px;
+        font-size: 16px;
         margin-top: 10px;
         margin-bottom: 5px;
         width: 350px;
@@ -108,6 +110,7 @@
         width: 75px;
         height: 25px;
         cursor: pointer;
+        font-family: 'S-CoreDream-3Light';
     }
 
     .next-page{
@@ -116,6 +119,7 @@
         border: none;
 		cursor: pointer;
         font-size: 15px;
+        font-family: 'S-CoreDream-3Light';
     }
 
 	#memberId{

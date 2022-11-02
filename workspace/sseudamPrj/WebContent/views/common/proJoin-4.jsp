@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>쓰담쓰담 회원가입</title>
+<title>전문가 회원가입 :: 쓰담쓰담</title>
 <style>
 
     body{
@@ -20,6 +21,7 @@
         display: flex;
         flex-direction: column;
         margin: auto;
+        font-family: "S-CoreDream-3Light";
     }
 
     h1{
@@ -88,7 +90,7 @@
     .join-wait > img{
         width: 180px;
         height: 180px;
-        margin-top: 55px;
+        margin-top: 15%;
     }
 
     .join-wait-comment{

@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>(일반) 회원가입</title>
+<title>회원가입 :: 쓰담쓰담</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
     body{
@@ -19,6 +20,7 @@
 		border: 1px solid white;
 		background-color: white;
 		margin: auto;
+		font-family: 'S-CoreDream-3Light';
 	}
 
     .join-area{
@@ -76,6 +78,7 @@
         margin-left: 23%;
         font-size: 18px;
         cursor: pointer;
+        font-family: 'S-CoreDream-3Light';
     }
 
     input::placeholder{
@@ -92,6 +95,7 @@
         width: 75px;
         height: 25px;
         cursor: pointer;
+        font-family: 'S-CoreDream-3Light';
     }
     
     #idCheResult{

@@ -10,8 +10,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>쓰담쓰담 회원가입</title>
+<title>전문가 회원가입 :: 쓰담쓰담</title>
 <style>
 
     body{
@@ -27,6 +28,7 @@
         display: flex;
         flex-direction: column;
         margin: auto;
+        font-family: 'S-CoreDream-3Light';
     }
 
     h1{
@@ -66,6 +68,16 @@
         justify-content: center;
         align-items: center;
     }
+
+    .join-top > input::placeholder{
+        font-size: 13px;
+        color:rgba(204, 204, 204, 1);
+    }
+    
+   .join-top > div > input[type="text"]{
+        font-size: 16px;
+        margin-left: 15px;
+   }
     
     img{
         width: 60px;
@@ -74,47 +86,69 @@
     
     input:focus {outline: none;}
 
-    input[type="text"],
-    input[type="number"]{
+	.cer-upload{
+		margin-top: 20px;
+		margin-right: 37%;
+	}
+
+    .education{
         border: none;
         border-bottom: 1px solid black;
         font-size: 15px;
         margin-top: 10px;
         margin-bottom: 5px;
-        width: 350px;
+        width: 200px;
         height: 20px;
     }
-
-    input::placeholder{
-        font-size: 14px;
-        color:rgba(204, 204, 204, 1);
-    }	
-
-    .attached-file-btn{
-        color: rgba(253, 121, 0, 1);
-        border: 1px solid white;
+	
+	.join-middle > .join-middle-list{
+		width: 550px;
+		height: 25px;
+        display: grid;
+        grid-template-columns: 1.2fr 1.5fr 1.1fr;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 2px;
+        margin-left: 20px;
         font-size: 13px;
-        width: 73px;
-        height: 25px;
-    }
-
-    .license{
-        display: flex;
-        border: 1px solid black;
-        width: 350px;
-        height: 220px;
-        border-radius: 5px;
-        flex-direction: column;
-        margin-top: 20px;
-        font-size: 12px;
-    }
-
-    .license-header{
-        border-radius: 5px 5px 0px 0px;
-        border-bottom: 1px solid black;
+        border-radius: 13px 13px 0px 0px;
         background-color: rgba(217, 217, 217, 1);
-        grid-column: 1 / -1;
+	}
+	
+    .join-middle > .join-middle-list > div{
+        margin-top: 3px;
+        font-weight: bold;
     }
+
+    .join-middle > .cer-upload{
+        padding-left: 28px;
+        font-size: 14px;
+        color: gray;
+    }
+
+	.cer-edit > div{
+		width: 520px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 0.8fr;
+        text-align: center;
+        border-bottom: 1px solid rgba(217, 217, 217, 1);
+	}
+	
+	.cer-edit > div > div > input[type="text"]
+	{
+		border: none;
+        text-align: center;
+        font-size: 13px;
+        padding: 7px;
+	}
+	
+	.cer-edit > div > div > input[type="file"]{
+		padding: 3px;
+	}
+	
+	.plus-btn{
+		margin-top: 10px;
+	}
 
     .next-page{
         color: rgba(253, 121, 0, 1);
@@ -123,15 +157,9 @@
 		cursor: pointer;
         font-size: 15px;
         text-align: center;
-        margin-left: 30%;
+        font-family: 'S-CoreDream-3Light';
     }
-
-	.license-content{
-	    display: grid;
-  		grid-template-columns: 1fr 1fr 1fr;
-  		text-align: center;
-	}
-
+    
 </style>
 </head>
 <body>
@@ -167,27 +195,38 @@
                 <img src="<%=root%>/resources/img/join/단계체크.png">
             </div>
 
-            <div class="join-0nd">
-                <div>최종학력</div>
-                <div><input type="text" name="education" placeholder="예) ㅇㅇㅇ대학교 석사" required></div>
+            <div class="join-top">
+                <div>최종학력<input type="text" class="education" name="education" placeholder="예) ㅇㅇㅇ대학교 석사" required></div>
             </div>
+            
+            <div class="join-middle">
+                <div class="cer-upload">* 이곳에서 자격증을 등록해주세요.</div>
+                <div class="join-middle-list">
+                    <div>자격증 이름</div>
+                    <div>자격증 번호</div>
+                    <div>증빙서류</div>
+                </div>
+            </div>
+			
+			<div class="cer-edit">
+				<div>
+					<div><input type='text' class='cer-edit' name='certificateName' placeholder='자격증 이름을 입력하세요' /></div>
+					<div><input type='text' class='cer-edit' name='certificateNum' placeholder='자격번호를 입력하세요' /></div>
+					<div><input type='file' class='upload-btn' name='imgPath' multiple/></div>
+				</div>
+			</div>
+			
+	          <div class="cer-edit cer-target">
+	          
+	           
+	            
+	            
+	       
+	          </div>
 
-		          <div class="cer-target">
-		          
-		           
-		            
-		            
-		       
-		          </div>
 
-		          <div class="pro-certificate">
-		            <div>
-					   <input type="button" value="추가" onclick="cerAd();" style="float: right;">
-		            </div>
-						
-		          </div>
+			<input type="button" class="plus-btn" value="추가" onclick="cerAd();">
 		          
-		          	
 	            <div class="next">
 	              	<br>
 	                <div><input type="submit" class="next-page" value="다음 페이지 작성"></div>
@@ -208,11 +247,11 @@
         const newDiv0 = document.createElement('div');
 
         const newDiv1 = document.createElement('div');
-        newDiv1.innerHTML = "<input type='text' class='cer-edit' name='certificateName' placeholder='자격증이름을 입력하세요' />";
+        newDiv1.innerHTML = "<input type='text' class='cer-edit' name='certificateName' placeholder='자격증 이름을 입력하세요' />";
         const newDiv2 = document.createElement('div');
         newDiv2.innerHTML = "<input type='text' class='cer-edit' name='certificateNum' placeholder='자격번호를 입력하세요' />";
         const newDiv3 = document.createElement('div');
-        newDiv3.innerHTML = "<input type='file' class='upload-btn' name='imgPath'  multiple/>";
+        newDiv3.innerHTML = "<input type='file' class='upload-btn' name='imgPath' multiple/>";
 
         newDiv0.appendChild(newDiv1);
         newDiv0.appendChild(newDiv2);
