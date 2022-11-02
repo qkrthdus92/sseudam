@@ -33,7 +33,7 @@ pageEncoding="UTF-8"%>
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/common/component.css?ver=5"
+      href="<%=root1%>/resources/css/admin/common/component.css?ver=6"
     />
     <style>
       .grid-col8 {
@@ -47,7 +47,7 @@ pageEncoding="UTF-8"%>
         height: 40px;
       }
 
-     
+    
 
       .reply-header {
         border-top: 1px solid var(--border);
@@ -92,6 +92,10 @@ pageEncoding="UTF-8"%>
         justify-content: center;
       }
 
+      .freeBoard-content  {
+        width: 98%;
+      }
+
       .admin-reply-form {
         display: grid;
         grid-template-columns: 1fr 6fr 1fr;
@@ -100,6 +104,23 @@ pageEncoding="UTF-8"%>
       .admin-reply-form div:nth-child(2) {
         justify-content: flex-start;
       }
+
+      .admin-main-board-detail {
+        /* padding: 20px 0px 20px 20px; */
+        padding: 0px 0px 20px 0px !important;
+        height: 500px;
+        /* overflow-y: auto; */
+      }
+
+      .admin-main-board {
+        display: grid;
+        grid-template-columns: 0.7fr 10fr 1.5fr 2fr 0.7fr 0.7fr 0.7fr 0.7fr;
+   
+      }
+      .admin-menu-main-board li:first-child a {
+          color: var(--adminMenuHover);
+          font-size: 17px;
+        }
     </style>
   </head>
   <body>
@@ -133,8 +154,8 @@ pageEncoding="UTF-8"%>
               <div><%= freeBoardVo.getNick() %></div>
   
               <div><%= freeBoardVo.getEnrollDate() %></div>
-              <div><i class="fa-regular fa-eye"></i><span><%= freeBoardVo.getView() %></span></div>
-              <div><i class="fa-solid fa-comment-dots"></i><span><%= freeBoardVo.getCmtCnt() %></span></div>
+              <div><i class="fa-regular fa-eye margin-right"></i><span><%= freeBoardVo.getView() %></span></div>
+              <div><i class="fa-solid fa-comment-dots margin-right"></i><span><%= freeBoardVo.getCmtCnt() %></span></div>
               <div>
                 <i class="fa-solid fa-pen-to-square icon-block"></i
                 >

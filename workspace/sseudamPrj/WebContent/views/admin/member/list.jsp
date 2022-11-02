@@ -29,7 +29,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/common/component.css?ver=4"
+      href="<%=root1%>/resources/css/admin/common/component.css?ver=5"
     />
     <style>
       .admin-menu-main-user li:first-child a {

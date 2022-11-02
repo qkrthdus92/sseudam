@@ -28,6 +28,11 @@ request.getContextPath();%> <% MemberVo vo =
         grid-template-columns: 1fr 1fr 6fr;
         grid-template-rows: repeat(11, 50px);
       }
+
+      .admin-menu-main-user li:first-child a {
+        color: var(--adminMenuHover);
+        font-size: 17px;
+      }
     </style>
   </head>
   <body>

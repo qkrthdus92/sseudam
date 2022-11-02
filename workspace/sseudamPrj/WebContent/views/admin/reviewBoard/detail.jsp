@@ -90,8 +90,30 @@ pageEncoding="UTF-8"%>
         color: black;
       }
 
-      
-      
+      .admin-main-board-detail {
+        padding-left: 20px !important;
+        padding-top: 20px !important;
+        padding-right: 0px !important;
+       
+        height: 100%;
+        overflow-y: auto;
+      }
+      .freeBoard-content2 {
+        width: 99%;
+        height: 400px;
+        resize: none;
+        border: none;
+        background-color: white;
+        font-size: 15px;
+        line-height: 25px;
+        font-family: "Noto Sans KR", sans-serif;
+        /* overflow: auto; */
+      }
+      .admin-menu-main-board li:last-child a {
+        color: var(--adminMenuHover);
+        font-size: 17px;
+      }
+
      
     </style>
   </head>
@@ -157,7 +179,7 @@ pageEncoding="UTF-8"%>
        
           <img class="reviewImg" alt="" src="<%=root1%>/resources/upload/afterBoard/<%=imgList.get(i).getChangeName()%>">
           <%} %>
-            <textarea class="freeBoard-content" name="" id="" cols="30" rows="10" disabled><%= freeBoardVo.getContent() %></textarea>
+            <textarea class="freeBoard-content2" name="" id="" cols="30" rows="10" disabled><%= freeBoardVo.getContent() %></textarea>
             
           </div>
           <div class="reply-header">

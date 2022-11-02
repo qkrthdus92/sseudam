@@ -58,7 +58,7 @@ pageEncoding="UTF-8"%>
 
         .admin-main-board {
           display: grid;
-          grid-template-columns: 1fr 5fr 1fr 1.5fr 1fr 1fr 1.5fr 1fr;
+          grid-template-columns: 1fr 5fr 1fr 1.5fr 0.7fr 0.7fr 1.5fr 1fr;
           grid-template-rows: repeat(11, 50px);
         }
 
