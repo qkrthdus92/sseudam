@@ -156,7 +156,9 @@
 						</div>
 						<div></div>
 						
-						<div><input class="save-btn" type="submit" value="데이터 삭제" onclick="javascript: form.action='<%=root1%>/admin/outside/delete';"></div>
+						<div>
+							<input type="button" value="데이터 삭제" class="save-btn" onclick="del(this.form, '<%=root1 %>');">
+						</div>
 						<div></div>
 						<div></div>
 					</div>
@@ -173,6 +175,18 @@
 			jq(".file-upload-name").val(fileName);
 		});
 	</script>
+	
+	<script>
+    	function del(f,r){
+    		 if (confirm("삭제하시겠습니까?") == true){  
+   			 	f.action= r+'/admin/outside/delete';
+   				f.submit();
+    		 }else{
+    		     return false;
+    		 }
+    	}   	
+    	
+    </script>
 
 
 </body>

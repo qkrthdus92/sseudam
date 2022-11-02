@@ -33,44 +33,45 @@ pageEncoding="UTF-8"%>
       href="<%=root1%>/resources/css/admin/common/component.css?ver=3"
     />
     <style>
-      .grid-col7 {
-        display: grid;
-        grid-template-columns: 1fr 10fr 2fr 3fr 3fr 2fr 2fr;
-        grid-template-rows: 2fr;
-      }
-
-      .grid-col7 div {
-        border-right: 1px solid var(--border);
-        padding-right:20px;
-        padding-left:20px;
-        height: 40px;
-      }
+      .grid-col3 {
+			grid-template-rows: repeat(9, 50px);
+		}
 
       .admin-main-board-detail {
         padding: 20px 20px;
         height: 300px;
       }
-       input {
-        margin:0;
-        width: 100%;
-        font-size: 15px;
-        text-align:center;        
-        display: inline-block;
-		border: 1px solid #dddddd;
-		color: #1B1A17;
-        
-      }
+.upload-name {
+	display: inline-block;
+	height: 30px;
+	padding: 0 10px;
+	vertical-align: middle;
+	border: 1px solid #dddddd;
+	width: 300px;
+	color: #1B1A17;
+	margin-right: 10px;
+}
+.upload-content-head{
+	grid-row: span 3;
+}
+.upload-content{
+	grid-column:span 2;
+	grid-row: span 3;
+	
 
-      textarea {
-      	
-      	display: inline-block;
-		border: 1px solid #dddddd;
-		color: #1B1A17;
-        border: 1px solid #dddddd;
-        width: 100%;
-        height: 250px;
-        
-      }
+}
+.upload-content>input{
+	width:300px;
+	height:130px;	
+	display: inline-block;
+	padding: 0 10px;
+	vertical-align: middle;
+	border: 1px solid #dddddd;
+	color: #1B1A17;
+	margin-right: 10px;
+}
+
+
 
       #delete-yn-check>input{
       	width: 30px
@@ -98,75 +99,81 @@ pageEncoding="UTF-8"%>
 	      </header>
 	      <section class="admin-main-section">
 	        <div class="admin-main-wrapper">
-	          <div class="admin-main-board grid-col7">
+	          <div class="admin-main-board grid-col3">
 	            <div>번호</div>
-	            <div>질문</div>
-	            <div>관리자</div>
-	            <div>등록일자</div>
-	            <div>최종수정일자</div>
-	            <div>게시여부</div>
-	            <div>데이터 삭제</div>
-	            
 	            <div>
 	            	<input class="upload-name" type="text" name="no" value="<%=vo.getNo()%>" readonly>
 	            </div>
+	            <div></div>
+	            
+	            <div>질문</div>
 	            <div>
 	            	<input class="upload-name" type="text" name="title" value="<%=vo.getTitle()%>" required>
 	            </div>
+	            <div></div>
+	            
+	            <div>관리자</div>
 	            <div>
 	            	<input class="upload-name" type="text" name="adminId" value="<%=vo.getAdminId()%>" required>
 	            </div>
+	            <div></div>
+	            
+	            <div>등록일자</div>
 	            <div>
 	            	<input class="upload-name" type="text" name="writeDate" value="<%=vo.getWriteDate()%>" readonly>
 	            </div>
-	            <div>
-	            	<input class="upload-name" type="text"value="<%=vo.getModifyDate()%>" readonly>
-	            </div>
+	            <div></div>
+	            
+	            <div>게시여부</div>
 	            <div id="delete-yn-check">
 					<input type="radio" name="deleteYn" value="N" <%=checkN%> ><label>O</label>  
 					<input type="radio" name="deleteYn" value="Y" <%=checkY%> ><label>X</label> 
 				</div>
-	            <div>
-	            	<%-- <input type="submit" id="btnSubmit" onclick="javascript: form.action='<%=root1 %>/admin/faq/delete';" style="display:none;" /> --%>
-	            	<input type="button" id="btnSubmit" onclick="del(this.form,<%=root1 %>)" style="display:none;" />
-					<label for="btnSubmit"><i style="cursor:pointer;" class="fa-solid fa-trash-can icon-block"></i></label>
-	            </div>
-	          </div>
-	          <div class="admin-main-board-detail">
-	            <div>
-	            	<textarea name="content"><%=vo.getContent()%></textarea>
-	            </div>
+				<div></div>
+				
+				<div class="upload-content-head">내용</div>
+				<div class="upload-content">
+					<input type="text" name="content" value="<%=vo.getContent()%>" required>
+	            </div>	            
+				
+	            <div><input type="button" value="데이터 삭제" class="save-btn" onclick="del(this.form, '<%=root1 %>');"></div>	            
+	            <div></div>
+	            <div></div>
 	          </div>
 	        </div>
 	      </section>
 	    </main>
     </form>
     
-    <script type="text/javascript">
-    	const btn = document.querySelector('#btnSubmit');
-    	console.log(btn);
-    	btn.addEventListener('submit',del(
-       		 if (confirm("삭제하시겠습니까?") == true){  
-				return true;
-       		 }else{
-       		     return false;
-       		 }
-    			
-    	));
-    	
-    	
-    	
-    	function del(f,r){
-    		alert(f,r);
-    		console.log(f);
-    		console.log(r);
+    <script>
+    
+/*     	function del(f,r){
     		 if (confirm("삭제하시겠습니까?") == true){  
-   			 	f.action= '/admin/faq/delete';
+   			 	f.action= r+'/admin/faq/delete';
    				f.submit();
     		 }else{
     		     return false;
     		 }
     	}
+    	 */
+    	function del(f,r) {
+            Swal.fire({
+              text: "정말로 삭제 하시겠습니까?",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#26aa82",
+              cancelButtonColor: "#f85a2a",
+              confirmButtonText: "삭제",
+              cancelButtonText: "취소"
+            }).then((result) => {
+              if (result.isConfirmed) {
+            	  f.action= r+'/admin/faq/delete';
+     				f.submit();
+              }
+            });
+          }
+    	
+    	
     </script>
   </body>
 </html>
