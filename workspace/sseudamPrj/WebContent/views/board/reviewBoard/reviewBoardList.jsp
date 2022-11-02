@@ -24,7 +24,6 @@
     }
     #wrap > *{
         width: 100vw;
-        --height: 1200px;
         box-sizing: border-box;
         background-color: #FFFFFF;     
     }
@@ -33,11 +32,8 @@
         height: 170px;
     }
     #main{
-        border-top: 1px solid #dfdfdf;
         width: 1200px;
-        height: 1000px;
         display: grid;
-        --grid-template-rows: 1fr 0.8fr 4fr 4fr 2fr 1fr;
         margin: 0 auto;
         padding: 20px;
         align-content: center;
@@ -74,14 +70,10 @@
         color: black;
     }
     .board-list{
-        --margin: auto;   
-        --width: 100%;
-        --height: 100%;
         display: grid;
         align-items: center;
         justify-content: center;
         column-gap: 10px;
-        
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr;
 
@@ -96,8 +88,7 @@
         border: 1px solid #454545;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2); 
         }
-    .board-list > *{
-        
+    .board-list > *{  
         width: 20%;
         height: 50%;
         border-top-left-radius: 10px;
@@ -108,10 +99,8 @@
         width: 100%;
         height: 80%;
         border-radius: 10px;
-
     }
      #cmts{
-  	--font-size: 230%;
       font-weight: 800;
       color: #26AA82;
     }
@@ -119,6 +108,7 @@
         font-size: 0.8rem;
         display: flex;
         margin: auto;
+        margin-top: 10px;
     }
     .view{
         width: 10%;
@@ -129,7 +119,9 @@
         border-top: 1px solid #454545;
         margin-top: 20px;
         text-align: center;
-        padding-top: 15px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        font-size: 1.2rem;
     }
     #search{
         margin: auto;
@@ -170,8 +162,8 @@
                 <%for(int i = 0; i < rvoList.size(); ++i){%>
                 <div class="board-photo">
                     <a href="<%=root%>/board/reviewBoardDetail?bno=<%=rvoList.get(i).getNo() %>&cmtPno=1">
-                        <img src="<%=root%>/<%= rvoList.get(i).getFilePath() %>/<%=rvoList.get(i).getChangeName()%>"><%=rvoList.get(i).getTitle()%>
-                        &nbsp;<span id="cmts">[<%=rvoList.get(i).getCmtCount() %>]</span>
+                        <img src="<%=root%>/<%= rvoList.get(i).getFilePath() %>/<%=rvoList.get(i).getChangeName()%>">
+                        <%=rvoList.get(i).getTitle()%> &nbsp;<span id="cmts">[<%=rvoList.get(i).getCmtCount() %>]</span>
                     </a>
                     <div class="list-info"><%=rvoList.get(i).getNo()%> | <%=rvoList.get(i).getWriterNo()%> | <%=rvoList.get(i).getWriteDate()%> |&nbsp;
                         <div class="view">
@@ -196,14 +188,18 @@
             
         <div id="page">
                   
-        	<a href="/sseudam/board/reviewBoardList?pno=<%=rpv.getStartPage()-1%>">< </a>	        		
+          <%if(rpv.getStartPage() != 1){%>       
+        	<a href="/sseudam/board/reviewBoardList?pno=<%=rpv.getStartPage()-1%>">< </a>
+        	<%}%>	        		
         	
         <%
         	for(int i = rpv.getStartPage(); i <= rpv.getEndPage(); ++i){%>
         		<a id="current" href="/sseudam/board/reviewBoardList?pno=<%=i%>"><%=i%></a>
         <%}%>
         
-        	<a href="/sseudam/board/reviewBoardList?pno=<%=rpv.getEndPage()+1%>"> ></a>	        		
+         <%if(rpv.getEndPage() != rpv.getMaxPage()){%>
+        	<a href="/sseudam/board/reviewBoardList?pno=<%=rpv.getEndPage()+1%>"> ></a>	  
+        	<%}%>      		
 
         </div>
         
