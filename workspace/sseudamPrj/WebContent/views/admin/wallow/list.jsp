@@ -60,7 +60,7 @@
       <header class="admin-main-header">
         <select name="" id="" onchange="window.open(value,'_self');">
           <option style="display:none;">
-            <%=typeName %>페이지
+            안에서 뒹굴뒹굴 - <%=typeName %>
           </option>
           <option value="<%=root%>/admin/inside?pno=1&type=4">
             안에서 뒹굴뒹굴 - 음악

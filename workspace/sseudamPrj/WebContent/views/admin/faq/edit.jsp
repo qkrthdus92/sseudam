@@ -127,7 +127,8 @@ pageEncoding="UTF-8"%>
 					<input type="radio" name="deleteYn" value="Y" <%=checkY%> ><label>X</label> 
 				</div>
 	            <div>
-	            	<input type="submit" id="btnSubmit" onclick="javascript: form.action='<%=root1%>/admin/faq/delete';" style="display:none;" />
+	            	<%-- <input type="submit" id="btnSubmit" onclick="javascript: form.action='<%=root1 %>/admin/faq/delete';" style="display:none;" /> --%>
+	            	<input type="button" id="btnSubmit" onclick="del(this.form,<%=root1 %>)" style="display:none;" />
 					<label for="btnSubmit"><i style="cursor:pointer;" class="fa-solid fa-trash-can icon-block"></i></label>
 	            </div>
 	          </div>
@@ -140,5 +141,32 @@ pageEncoding="UTF-8"%>
 	      </section>
 	    </main>
     </form>
+    
+    <script type="text/javascript">
+    	const btn = document.querySelector('#btnSubmit');
+    	console.log(btn);
+    	btn.addEventListener('submit',del(
+       		 if (confirm("삭제하시겠습니까?") == true){  
+				return true;
+       		 }else{
+       		     return false;
+       		 }
+    			
+    	));
+    	
+    	
+    	
+    	function del(f,r){
+    		alert(f,r);
+    		console.log(f);
+    		console.log(r);
+    		 if (confirm("삭제하시겠습니까?") == true){  
+   			 	f.action= '/admin/faq/delete';
+   				f.submit();
+    		 }else{
+    		     return false;
+    		 }
+    	}
+    </script>
   </body>
 </html>

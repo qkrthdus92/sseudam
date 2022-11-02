@@ -77,20 +77,31 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
     width: 1200px;
     /* height: 100%; */
   }
+  
+  .main-header-top-bg{
+  	height: 30px;
+  	background-color: #f5f5f5;
+  	display:flex;
+  	justify-content: center;
+  	border-bottom: 1px solid #dfdfdf;
+  }
 
   .main-header-top {
-    height: 30px;
-    background-color: #f5f5f5;
+  	margin:auto;
+  	width:1200px;        
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    flex-direction: row;
+    padding-left: 30px;
 
-    border-bottom: 1px solid #dfdfdf;
+
     font-size: 13px;
     font-weight: 600;
   }
 
   .main-header-top > .main-wrapper > span:last-child {
     margin-left: 10px;
+    margin-right: 10px;
   }
 
   .main-header-title {
@@ -105,7 +116,10 @@ pageEncoding="UTF-8"%> <% String root = request.getContextPath();%>
     justify-content: flex-end;
     align-items: center;
   }
-
+	
+	.main-header-top > .main-wrapper-right{
+    justify-content: flex-start;
+	}
   .main-header-title > .main-wrapper {
     display: flex;
     justify-content: center;
@@ -366,17 +380,21 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
 
 <%if(loginMember == null && proLoginMember == null){%>
 <!-- 로그인 OFF -->
-  <div class="main-header-top">
-    <div class="main-wrapper">
-      <span><a href="<%=root%>/sseudam/join">회원가입</a></span>
-      <span><button class="popup-btn" onclick="loginPopup(true)">로그인</button></span>
-      <span><a href="<%=root%>/aboutUs">회사소개</a></span>
+  <div class="main-header-top-bg">
+  	<div class="main-header-top">
+	  	<div class="main-wrapper main-wrapper-right">
+	  		<span><a href="<%=root%>/aboutUs">회사소개</a></span>
+	  	</div>
+	    <div class="main-wrapper">
+	      <span><a href="<%=root%>/sseudam/join">회원가입</a></span>
+	      <span><a href="javascript:void(0);" onclick="loginPopup(true)">로그인</a></span>
+	    </div>
     </div>
   </div>
   <div class="main-header-title">
     <div class="main-wrapper main-header-title-wrapper">
       <div class="main-header-logo">
-        <a href="<%=root%>/sseudam/main"
+        <a href="<%=root%>/main"
           ><img src="<%= root %>/resources/img/header/logo.png" alt=""/></a>
       </div>
       <div class="main-header-icons">
@@ -532,17 +550,21 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
   </form> 
 
   <%}else if(loginMember != null){%>
+  <div class="main-header-top-bg">
     <div class="main-header-top">
-    <div class="main-wrapper">
-      <span><div class="login-success"><a href="<%=root%>/views/mypage/main.jsp"><%= loginMember.getName() %></a> 님, 환영합니다.</div></span>
-      <span><div><a href="<%= root %>/member/logout">로그아웃</a></div></span>
-      <span><a href="<%=root%>/aboutUs">회사소개</a></span>
-    </div>
+	    <div class="main-wrapper main-wrapper-right">
+	  		<span><a href="<%=root%>/aboutUs">회사소개</a></span>
+	  	</div>
+	    <div class="main-wrapper">
+	      <span><div class="login-success"><a href="<%=root%>/views/mypage/main.jsp"><%= loginMember.getName() %></a> 님, 환영합니다.</div></span>
+	      <span><div><a href="<%= root %>/member/logout">로그아웃</a></div></span>
+	    </div>
+  </div>
   </div>
   <div class="main-header-title">
     <div class="main-wrapper main-header-title-wrapper">
       <div class="main-header-logo">
-        <a href="<%=root%>/sseudam/main"
+        <a href="<%=root%>/main"
           ><img src="<%= root %>/resources/img/header/logo.png" alt=""
         /></a>
       </div>
@@ -588,19 +610,23 @@ input:focus {outline: none;} /* 클릭 시 입력창 테두리 진해짐 off */
         </div>
       </div>
       <div>
-        <a href="<%=root%>/views/mypage/customercenter.jsp">고객센터</a>
+        <a href="<%=root%>/faq">자주묻는 질문</a>
         <div class="main-header-nav-color"></div>
       </div>
     </div>
   </div>
   
   <%}else{%>
+  <div class="main-header-top-bg">
       <div class="main-header-top">
-    <div class="main-wrapper">
-      <span><div class="login-success"><a href="<%=root%>/views/mypage/main.jsp"><%= proLoginMember.getName() %></a> 님, 환영합니다.</div></span>
-      <span><div><a href="<%= root %>/member/logout">로그아웃</a></div></span>
-      <span><a href="<%=root%>/aboutUs">회사소개</a></span>
-    </div>
+      	<div class="main-wrapper main-wrapper-right">
+	  		<span><a href="<%=root%>/aboutUs">회사소개</a></span>
+	  	</div>     
+	    <div class="main-wrapper">
+	      <span><div class="login-success"><a href="<%=root%>/views/mypage/main.jsp"><%= proLoginMember.getName() %></a> 님, 환영합니다.</div></span>
+	      <span><div><a href="<%= root %>/member/logout">로그아웃</a></div></span>
+	    </div>
+  </div>
   </div>
   <div class="main-header-title">
     <div class="main-wrapper main-header-title-wrapper">

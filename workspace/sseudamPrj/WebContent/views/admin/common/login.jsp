@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Insert title here</title>
+    <title>쓰담쓰담 관리자</title>
     <style>
       html {
         background-color: rgb(50, 50, 50);
