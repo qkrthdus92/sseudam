@@ -87,11 +87,13 @@
         font-size: 16px;
         margin-top: 20px;
         border-bottom: 1px solid lightgray;
+        padding-right:20px;
     }
     #csqna3{
         font-size: 16px;
         margin-top: 30px;
         border-bottom: 1px solid lightgray;
+        padding-right:20px;
     }
     
     #csmainbot{

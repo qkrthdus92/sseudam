@@ -59,7 +59,7 @@
       <header class="admin-main-header">
         <select name="" id="" onchange="window.open(value,'_self');">
           <option style="display:none;">
-            <%=typeName %>페이지
+            밖에서 뚜벅뚜벅 - <%=typeName %>
           </option>
           <option value="<%=root%>/admin/outside?pno=1&type=8">
             밖에서 뚜벅뚜벅 - 문화

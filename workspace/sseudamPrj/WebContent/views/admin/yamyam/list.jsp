@@ -59,7 +59,7 @@
       <header class="admin-main-header">
         <select name="" id="" onchange="window.open(value,'_self');">
           <option style="display:none;">
-            <%=typeName %>페이지
+            혼자서냠냠 - <%=typeName %>
           </option>
           <option value="<%=root%>/admin/nyam?pno=1&type=1">
             혼자서냠냠 - 혼밥
