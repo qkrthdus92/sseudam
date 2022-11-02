@@ -213,7 +213,11 @@
                 <div><h1 align="center">마이페이지</h1></div>
                 <div><img id="profile" src="/sseudam/resources/upload/pro/<%=proLoginMember.getImg() %>" alt="프로필사진"></div>
                 <div><h2 align="center"> <%= proLoginMember.getName() %></h2></div>
-                <div><h3 align="center">나의 별점 <label id="starupdate"></label><%=updatestar%> 점</h3></div>
+                <%if(updatestar != null){%>
+                	<div><h3 align="center">나의 별점 <label id="starupdate"></label><%=updatestar%> 점</h3></div>
+                <%}else{%>
+                	<div><h3 align="center">나의 별점 <label id="starupdate"></label>4.5 점</h3></div>
+                <%}%>
                 <div id="ment"> <%= proLoginMember.getId() %>님 좋은 하루되세요.</div>
             </div>
             <div id="leftbot">
@@ -237,23 +241,23 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <th id="rightbot"><img  id ="icon" src="../../resources/img/mypage/전화.png" alt="전화기">&nbsp;&nbsp;전화번호</th>
+                    <th id="rightbot"><img  id ="icon" src="/sseudam/resources/img/mypage/전화.png" alt="전화기">&nbsp;&nbsp;전화번호</th>
                     <td></td>
                 </tr>
                 <tr>
-                    <th id="rightbot"><img  id ="icon" src="../../resources/img/mypage/닉네임.png" alt="닉네임">&nbsp;&nbsp;닉네임</th>
+                    <th id="rightbot"><img  id ="icon" src="/sseudam/resources/img/mypage/닉네임.png" alt="닉네임">&nbsp;&nbsp;닉네임</th>
                     <td></td>
                 </tr>
                 <tr>
-                    <th id="rightbot"><img  id ="icon" src="../../resources/img/mypage/메일.png" alt="이메일">&nbsp;&nbsp;이메일</th>
+                    <th id="rightbot"><img  id ="icon" src="/sseudam/resources/img/mypage/메일.png" alt="이메일">&nbsp;&nbsp;이메일</th>
                     <td></td>
                 </tr>
                 <tr>
-                    <th id="rightbot"><img  id ="icon" src="../../resources/img/mypage/비밀번호.png" alt="비밀번호">&nbsp;&nbsp;비밀번호</th>
+                    <th id="rightbot"><img  id ="icon" src="/sseudam/resources/img/mypage/비밀번호.png" alt="비밀번호">&nbsp;&nbsp;비밀번호</th>
                     <td></td>
                 </tr>
                 <tr>
-                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/닉네임.png" alt="회원">&nbsp;&nbsp;소개글</th>
+                    <th id="rightbot1"><img  id ="icon" src="/sseudam/resources/img/mypage/닉네임.png" alt="회원">&nbsp;&nbsp;소개글</th>
                     <td></td>
                 </tr>
                 
@@ -266,11 +270,11 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <th id="rightbot"><img  id ="icon" src="../../resources/img/mypage/예약.png" alt="상담예약">&nbsp;&nbsp;상담예약내역</th>
+                    <th id="rightbot"><img  id ="icon" src="/sseudam/resources/img/mypage/예약.png" alt="상담예약">&nbsp;&nbsp;상담예약내역</th>
                     <td></td>
                 </tr>
                 <tr>
-                    <th id="rightbot1"><img  id ="icon" src="../../resources/img/mypage/수익.png" alt="결제2">&nbsp;&nbsp;수익조회 <button id="editbnt" onclick="location.href='/sseudam/mypage/proresercheck?pno=1'">조회</button></th>
+                    <th id="rightbot1"><img  id ="icon" src="/sseudam/resources/img/mypage/수익.png" alt="결제2">&nbsp;&nbsp;수익조회 <button id="editbnt" onclick="location.href='/sseudam/mypage/proresercheck?pno=1'">조회</button></th>
                     <td></td>
                 </tr>
             </table>
@@ -280,7 +284,7 @@
     <div id="popup" class="hide">
         <div class="content">
               <div class="popup-head">
-                  <div  ><img id="popup-logo" src="../../resources/img/header/logo.png" alt=""></div>
+                  <div  ><img id="popup-logo" src="/sseudam/resources/img/header/logo.png" alt=""></div>
                   <div class="head-title">&nbsp;&nbsp;&nbsp;&nbsp;프로필 수정을 위해 <br> 비밀번호를 입력해주세요.</div>
               </div>
               <div class="popup-body">

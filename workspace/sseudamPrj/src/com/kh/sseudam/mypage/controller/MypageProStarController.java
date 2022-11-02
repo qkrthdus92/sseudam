@@ -26,7 +26,7 @@ public class MypageProStarController extends HttpServlet {
 		
 		ProMemberJoinVo proLoginMember = (ProMemberJoinVo)s.getAttribute("proLoginMember"); // proLoginMember
 		
-		String num = proLoginMember.getNo();// 널값으로 뜨면서 오류
+		String num = proLoginMember.getNo();
 
 		System.out.println(num);  //확인용
 		
