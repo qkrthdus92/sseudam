@@ -13,8 +13,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>내가 쓴 게시글 조회 :: 쓰담쓰담</title>
 </head>
 <style>
     #wrap{
@@ -172,8 +173,7 @@
                 <div id="dominfo2" onclick="location.href='/sseudam/mypage/commentcheck?pno=1';">내가 쓴 댓글</div>
             </div>
 		    <div id="editbar">
-		        <input type="checkbox" name="chk" id="chkAll"><label for="chkAll" >전체선택</label></input>
-		        <button id="delete">삭제</button>
+		       
 		    </div>
 		    <div id="edittop">
 		        <div></div>
@@ -218,7 +218,7 @@
 		</div>
 	</div>
 <%@ include file="/views/common/footer.jsp" %>	
-<script>
+<!-- <script>//체크박스 전체 선택
     const chkAll=document.querySelector('#chkAll')
     chkAll.addEventListener("change",() => {
         const chkList = document.getElementsByName("chk");
@@ -227,6 +227,6 @@
         }
     });
 
-</script>
+</script> -->
 </body>
 </html>

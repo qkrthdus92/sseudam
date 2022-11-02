@@ -18,8 +18,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>내가 쓴 댓글 조회 :: 쓰담쓰담</title>
 </head>
 <style>
     #wrap{
@@ -180,8 +181,7 @@
                 <div id="dominfo2"">내가 쓴 댓글</div>
             </div>
 		    <div id="editbar">
-		        <button id="allselect" ><img id="checkbox" src="/sseudam/resources/img/mypage/체크.png" alt="체크"> 전체선택</button>
-		        <button id="delete">삭제</button>
+		      
 		    </div>
 		    <div id="edittop">
 		        <div></div>

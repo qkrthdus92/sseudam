@@ -11,8 +11,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>완료된 상담 조회 :: 쓰담쓰담</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
 
