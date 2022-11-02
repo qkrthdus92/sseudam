@@ -4,8 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>후기게시판 글쓰기 :: 쓰담쓰담</title>
 </head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <body>
 <style>
 body {
@@ -19,7 +20,7 @@ body {
 
 #wrap>* {
 	width: 100vw;
-	height: 1500px;
+	--height: 1800px;
 	box-sizing: border-box;
 	background-color: #FFFFFF;
 }
@@ -30,9 +31,10 @@ body {
 }
 
 #main {
+	position: relative;
 	border-top: 1px solid #dfdfdf;
 	width: 1200px;
-	height: 1150px;
+	--height: 850px;
 	margin: auto;
 }
 
@@ -49,11 +51,12 @@ body {
 
 #write-box {
 	width: 90%;
-	height: 85%;
+	--height: 85%;
 	background-color: #F5F5F5;
 	display: grid;
-	grid-template-rows: 1fr 3fr 0.5fr 2fr 1fr;
+	grid-template-rows: 1fr 3fr 0.5fr 2fr;
 	margin: 0 auto;
+	margin-bottom: 20px;
 	align-content: center;
 	padding: 20px;
 }
@@ -72,17 +75,16 @@ body {
 
 .upload-list {
 	margin-left: 50px;
-	grid-template-rows: repeat(5, 1fr);
+	grid-template-rows: repeat(3, 1fr);
 	width: 100%;
-	height: 100%;
+	--height: 100%;
 }
 
 .upload-list>div {
-	width: 80%;
-	border: 0.5px solid #ffffff;
-	height: 20%;
+	width: 50%;
+	border: 1px solid #ffffff;
+	height: 15%;
 	background-color: #dfdfdf;
-	display: flex;
 }
 
 #upload-list {
@@ -92,30 +94,27 @@ body {
 }
 
 #fileName1, #fileName2, #fileName3, #fileName4, #fileName5 {
-	width: 100%;
 	border: 0px;
 	background-color: #dfdfdf;
-}
-
-#delete {
-	width: 100%;
-	border: 0px;
-	background-color: #dfdfdf;
+	padding: 10px;
 }
 
 #upload-btn {
-	display: flex;
-	margin-left: 150%;
+	margin-left: 215%;
+	margin-top: 7px;
 	width: 80px;
 	height: 30px;
 	background-color: #dfdfdf;
 	border: 0px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+	cursor : pointer;
+	--padding-left: 10px;
 }
 
 #btn {
 	margin-top: 30px;
 	margin-left: 40%;
+	cursor : pointer;
 }
 
 #ok-btn {
@@ -124,6 +123,7 @@ body {
 	background-color: rgba(151, 210, 153, 0.7);
 	border: 0px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+	cursor : pointer;
 }
 
 #no-btn {
@@ -132,6 +132,7 @@ body {
 	background-color: #a0a0a0;
 	border: 0px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+	cursor : pointer;
 }
 
 #footer {

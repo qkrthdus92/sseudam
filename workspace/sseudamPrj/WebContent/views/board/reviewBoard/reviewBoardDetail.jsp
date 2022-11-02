@@ -14,8 +14,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>후기게시판 상세보기 :: 쓰담쓰담</title>
 <style>
      body {
         padding: 0;
@@ -26,7 +27,7 @@
     }
     #wrap > *{
         width: 100vw;
-        height: 2000px;
+        --height: 2000px;
         box-sizing: border-box;
         background-color: #FFFFFF;
         
@@ -38,9 +39,9 @@
     #main{
         border-top: 1px solid #dfdfdf;
         width: 1200px;
-        height: 1500px;
+        --height: 1500px;
         display: grid;
-        grid-template-rows: 1fr 0.5fr 0.5fr 5fr 0.5fr 5fr 1fr;
+        --grid-template-rows: 1fr 0.5fr 0.5fr 5fr 0.5fr 5fr 1fr;
         margin: 0 auto;
         align-content: center;
     }
@@ -75,21 +76,27 @@
     #board-edit{
         display: flex;
         justify-content: right;
+         margin-top: 5px;
         margin-right: 20px;
     }
     a{
         text-decoration: none;
         color: black;
     }
-    #board-content{
+    .board-content > *{
         margin-left: 20px;
         margin-right: 20px;
-        padding: 20px;
+        padding: 50px;
         width: 1160px;
-        height: 650px;
+        --height: 650px;
         white-space: pre-wrap;
-        border-bottom: 1px solid #747474;
+        
     }
+
+    #board-content{
+    border-bottom: 1px solid #747474;
+    }
+    
     #cmt-cnt{
         margin-top: 30px;
         margin-left: 50px;
@@ -127,7 +134,7 @@
         display: flex;
     }
     #cmt-cmt{
-    	width: 85%;
+    	width: 92%;
     	margin-bottom: 10px;
     }
     #cmt-edit{
@@ -140,12 +147,13 @@
        display: flex;
     }
     #cmt-btn{
-        margin-left: 20px;
+ 		margin-left: 20px;
         width: 80px;
         height: 80px;
         background-color: rgba(151, 210, 153, 0.7);
         border: 0px;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+        cursor : pointer;
     }
     #list-btn{
         width: 70px;
@@ -153,14 +161,17 @@
         background-color: rgba(151, 210, 153, 0.7);
         border: 0px;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+        cursor : pointer;
     }
     #list-btn-div{
+        height : 70px;
         margin: auto;
     }
     #page{
     text-align: center;
     width : 150px;
     height : 20px;
+    
     }
     #footer{
         width: 100vw;
@@ -192,13 +203,13 @@
                 <div>&nbsp;|&nbsp;</div>
                 <div><a href="/sseudam/board/reviewBoardDelete?no=<%= rvo.getNo()%>">삭제하기</a></div>
             </div>
-                <div>
+                <div class="board-content">
                    <%for(int i = 0; i < imgList.size(); ++i){%>
                     <div><img src="<%= root %>/resources/upload/afterBoard/<%= imgList.get(i).getChangeName() %>"></div>
                     <%} %>
                     
                     
-          		  <div class="board-content"> <%= rvo.getContent() %> </div>  
+          		  <div id="board-content"> <%= rvo.getContent() %> </div>  
             	</div>
             
             

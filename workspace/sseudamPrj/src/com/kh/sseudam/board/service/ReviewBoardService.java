@@ -129,23 +129,35 @@ public class ReviewBoardService {
 		int result = ReviewBoardDao.edit(conn, rvo);
 
 		// 첨부파일 insert
-		System.out.println("이미지리스트 : " + imgNoList);
+		System.out.println("이미지no리스트 : " + imgNoList);
+		System.out.println("이미지리스트 : " + imgList);
 		int result2 = 1;
-		if (imgNoList != null) {
-			result2 = new ReviewBoardDao().editThumbImg(conn, imgList.get(0) , imgNoList.get(0));
-			System.out.println("썸네일 : "+result2);
-			for (int i = 1; i < imgList.size(); i++) {
-				System.out.println("i : " + i);
-				result2 = new ReviewBoardDao().editImg(conn, imgList.get(i), imgNoList.get(i));
-				System.out.println("반복문 : "+result2);
+		if(imgList.size() != 0) {
+			if (imgNoList != null) {
+				result2 = new ReviewBoardDao().editThumbImg(conn, imgList.get(0) , imgNoList.get(0));
+				System.out.println("썸네일 : "+result2);
+				for (int i = 1; i < imgList.size(); i++) {
+					System.out.println("i : " + i);
+					result2 = new ReviewBoardDao().editImg(conn, imgList.get(i), imgNoList.get(i));
+					System.out.println("반복문 : "+result2);
+				}
 			}
+			
+			if (result * result2 == 1) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+			
+		}else {
+			if (result==1) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+			
 		}
-
-		if (result * result2 == 1) {
-			JDBCTemplate.commit(conn);
-		} else {
-			JDBCTemplate.rollback(conn);
-		}
+		
 
 		JDBCTemplate.close(conn);
 

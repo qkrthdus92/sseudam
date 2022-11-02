@@ -9,8 +9,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>스트레스 테스트 결과 :: 쓰담쓰담</title>
 <style>
 	body {
 		padding: 0;
@@ -134,6 +135,7 @@
 		background-color: rgba(151, 210, 153, 0.7);
 		border: 0px;
 		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+		cursor : pointer;
 	}
 	
 	#footer {

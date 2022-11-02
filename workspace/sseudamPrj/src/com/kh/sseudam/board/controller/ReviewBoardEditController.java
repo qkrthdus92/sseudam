@@ -73,6 +73,8 @@ public class ReviewBoardEditController extends HttpServlet{
 		String no = req.getParameter("no");
 		List<Part> parts = (List<Part>)req.getParts();
 		
+		System.out.println("사진들 : "+ parts);
+		
 		//데이터 뭉치기
 		ReviewBoardVo rvo = new ReviewBoardVo();
 		rvo.setTitle(title);
