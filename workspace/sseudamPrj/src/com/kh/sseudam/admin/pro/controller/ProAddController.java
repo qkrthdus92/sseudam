@@ -50,25 +50,23 @@ public class ProAddController extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		
 		
-		System.out.println("add post들어옴!");
+		
 		//수정 후 리다이렉트할 페이지 정보
 		String pno = req.getParameter("pno");
 		String status = req.getParameter("status");
 		String search = req.getParameter("search");
 		
-		System.out.println("t"+pno);
-		System.out.println("t"+status);
-		System.out.println("t"+search);
+
 		
-		String name = req.getParameter("name");
-		String id = req.getParameter("id");
+		String name = req.getParameter("name").trim();
+		String id = req.getParameter("id").trim();
 		String counselType = req.getParameter("counselType");
-		String email = req.getParameter("email");
-		String pwd = req.getParameter("pwd");
+		String email = req.getParameter("email").trim();
+		String pwd = req.getParameter("pwd").trim();
 		String gender = req.getParameter("gender");
-		String education = req.getParameter("education");
-		String phone = req.getParameter("phone");
-		String introduce = req.getParameter("introduce");
+		String education = req.getParameter("education").trim();
+		String phone = req.getParameter("phone").trim();
+		String introduce = req.getParameter("introduce").trim();
 		Part f = req.getPart("f");
 		
 		AttachmentVo aVo = null;

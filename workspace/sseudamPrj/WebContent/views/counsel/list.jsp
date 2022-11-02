@@ -29,7 +29,7 @@ pageEncoding="UTF-8"%>
       rel="stylesheet"
       href="<%=root1%>/resources/css/common/variables.css"
     />
-    <script src="<%=root1%>/resources/js/counsel/list.js?ver=4"></script>
+    <script src="<%=root1%>/resources/js/counsel/list.js?ver=5"></script>
   </head>
   <body>
     <%@ include file="/views/common/header.jsp" %>
@@ -143,7 +143,7 @@ pageEncoding="UTF-8"%>
                 <div class="counsel-pro-level counsel-type-box">
                   <span>상담사 등급<i class="fa-solid fa-circle-info counsel-pro-level-info"></i>
                   <div class="counsel-pro-level-info-detail hidden">
-                    <div><span>마스터</span>: 1급자격증 보유, 평점 4.5 이상, 후기 10개 이상</div>
+                    <div><span>마스터</span>: 1급자격증  보유, 평점 4.5 이상, 후기 10개 이상</div>
                     <div><span>전 문</span>: 1급자격증을 보유했거나 평점 4.5 이상, 후기 10개 이상</div>
                     <div><span>일 반</span>: 상담심리 관련 학사 졸업 이상</div>
                   </div>
@@ -265,7 +265,7 @@ pageEncoding="UTF-8"%>
                 </div>
               </div>
               <div class="counsel-choice">
-                <input type="submit" value="조회" />
+                <input type="submit" value="조회" class="cursor"/>
               </div>
             </form>
             

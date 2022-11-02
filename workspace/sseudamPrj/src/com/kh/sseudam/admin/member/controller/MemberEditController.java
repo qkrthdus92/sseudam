@@ -38,12 +38,12 @@ public class MemberEditController extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		//데이터 꺼내기
 		String no = req.getParameter("mno");
-		String name = req.getParameter("name");
-		String id = req.getParameter("id");
-		String pwd = req.getParameter("pwd");
-		String nick = req.getParameter("nick");
-		String phone = req.getParameter("phone");
-		String email = req.getParameter("email");
+		String name = req.getParameter("name").trim();
+		String id = req.getParameter("id").trim();
+		String pwd = req.getParameter("pwd").trim();
+		String nick = req.getParameter("nick").trim();
+		String phone = req.getParameter("phone").trim();
+		String email = req.getParameter("email").trim();
 		int test = Integer.parseInt(req.getParameter("test"));
 		String pno = req.getParameter("pno");
 		String quitYn = req.getParameter("quitYn");

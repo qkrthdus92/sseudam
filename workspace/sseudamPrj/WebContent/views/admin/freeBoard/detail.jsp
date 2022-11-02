@@ -66,9 +66,13 @@ pageEncoding="UTF-8"%>
       href="<%=root1%>/resources/css/admin/common/component.css?ver=3"
     />
     <style>
+        .admin-menu-main-board li:first-child a {
+          color: var(--adminMenuHover);
+          font-size: 17px;
+        }
       .grid-col8 {
         display: grid;
-        grid-template-columns: 1fr 10fr 2fr 2fr 1fr 1fr 1fr 1fr;
+        /* grid-template-columns: 1fr 10fr 2fr 2fr 1fr 1fr 1fr 1fr; */
         grid-template-rows: 1fr;
       }
 
@@ -105,8 +109,8 @@ pageEncoding="UTF-8"%>
 
       .reply-detail {
         display: grid;
-        grid-template-columns: 2fr 6fr 2fr 2fr 1fr 1fr 1fr;
-        font-size: 15px;
+        /* grid-template-columns: 2fr 6fr 2fr 2fr 1fr 1fr 1fr; */
+        font-size: 14px;
       }
 
       .reply-detail div,
@@ -135,15 +139,27 @@ pageEncoding="UTF-8"%>
         justify-content: flex-start;
       }
 
-      .freeBoard-content {
-        width: 100%;
+      /* .freeBoard-content {
+        width: 550px;
         height: 100%;
         resize: none;
         border: none;
         background-color: white;
         font-size: 15px;
         line-height: 25px;
-        font-family: "Noto Sans KR", sans-serif;;
+        font-family: "Noto Sans KR", sans-serif;
+        /* overflow: hidden; */
+
+      } */
+
+      .admin-main-board {
+        display: grid;
+        grid-template-columns: 0.7fr 10fr 1.5fr 2fr 0.7fr 0.7fr 0.7fr 0.7fr;
+   
+      }
+
+      .admin-main-board-detail {
+        padding: 0px 20px 20px 0px !important;
       }
 
       .cursor {
@@ -175,8 +191,8 @@ pageEncoding="UTF-8"%>
             <div><%= freeBoardVo.getNick() %></div>
 
             <div><%= freeBoardVo.getEnrollDate() %></div>
-            <div><i class="fa-regular fa-eye"></i><span><%= freeBoardVo.getView() %></span></div>
-            <div><i class="fa-solid fa-comment-dots"></i><span><%= freeBoardVo.getCmtCnt() %></span></div>
+            <div><i class="fa-regular fa-eye margin-right"></i><span><%= freeBoardVo.getView() %></span></div>
+            <div><i class="fa-solid fa-comment-dots margin-right"></i><span><%= freeBoardVo.getCmtCnt() %></span></div>
             <div>
               <a href="<%=root%>/admin/freeBoard/edit?bno=<%=bno %>&pno=<%=pno %>&dno=<%=dno %>&status=<%=status %>&search=<%=search %>&searchType=<%=searchType %>"
                 ><i class="fa-solid fa-pen-to-square"></i

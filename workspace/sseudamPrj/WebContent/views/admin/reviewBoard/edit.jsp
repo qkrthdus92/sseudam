@@ -37,7 +37,11 @@ pageEncoding="UTF-8"%>
       href="<%=root1%>/resources/css/admin/common/component.css?ver=2"
     />
     <style>
-      
+      .admin-menu-main-board li:last-child a {
+        color: var(--adminMenuHover);
+        font-size: 17px;
+      }
+
 
       .grid-col8 div {
         border-right: 1px solid var(--border);
@@ -45,7 +49,7 @@ pageEncoding="UTF-8"%>
       }
 
       .admin-main-board-detail {
-  
+        padding-right: 0px !important;
    
         border-bottom: 1px solid var(--border);
       }
@@ -106,6 +110,24 @@ pageEncoding="UTF-8"%>
       .margin-bottom10 {
         margin-bottom: 10px;
       }
+
+      .admin-main-board-detail {
+        padding-left: 20px !important;
+        padding-top: 20px !important;
+        height: 100%;
+        overflow-y: auto;
+      }
+      .freeBoard-content2 {
+        width: 99%;
+        height: 100% !important;
+        resize: none;
+        border: none;
+        background-color: white;
+        font-size: 15px;
+        line-height: 25px;
+        font-family: "Noto Sans KR", sans-serif;
+        /* overflow: auto; */
+      }
     </style>
   </head>
   <body>
@@ -154,7 +176,7 @@ pageEncoding="UTF-8"%>
        
           <img class="reviewImg" alt="" src="<%=root1%>/resources/upload/afterBoard/<%=imgList.get(i).getChangeName()%>">
           <%} %>
-              <textarea class="freeBoard-content freeBoard-content-edit" spellcheck="false" name="content" id="" cols="30" rows="17"><%= freeBoardVo.getContent() %></textarea>
+              <textarea class="freeBoard-content2 freeBoard-content-edit" spellcheck="false" name="content" id="" cols="30" rows="17"><%= freeBoardVo.getContent() %></textarea>
             
             </div>
              <div class="reply-header border-none">

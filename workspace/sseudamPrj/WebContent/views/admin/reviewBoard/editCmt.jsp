@@ -109,6 +109,22 @@
       .admin-reply-form div:nth-child(2) {
         justify-content: flex-start;
       }
+
+      .admin-main-board {
+        display: grid;
+        grid-template-columns: 0.7fr 10fr 1.5fr 2fr 0.7fr 0.7fr 0.7fr 0.7fr;
+   
+      }
+
+      .admin-main-board-detail {
+        height: 100% !important;
+      }
+
+      .admin-menu-main-board li:last-child a {
+        color: var(--adminMenuHover);
+        font-size: 17px;
+      }
+
     </style>
 </head>
 <body>
@@ -143,8 +159,8 @@
               <div><%= freeBoardVo.getNick() %></div>
   
               <div><%= freeBoardVo.getEnrollDate() %></div>
-              <div><i class="fa-regular fa-eye"></i><span><%= freeBoardVo.getView() %></span></div>
-              <div><i class="fa-solid fa-comment-dots"></i><span><%= freeBoardVo.getCmtCnt() %></span></div>
+              <div><i class="fa-regular fa-eye margin-right"></i><span><%= freeBoardVo.getView() %></span></div>
+              <div><i class="fa-solid fa-comment-dots margin-right"></i><span><%= freeBoardVo.getCmtCnt() %></span></div>
               <div>
                 <i class="fa-solid fa-pen-to-square icon-block"></i
                 >

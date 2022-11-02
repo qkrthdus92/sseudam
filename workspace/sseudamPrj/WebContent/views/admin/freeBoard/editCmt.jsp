@@ -103,6 +103,22 @@ pageEncoding="UTF-8"%>
       .admin-reply-form div:nth-child(2) {
         justify-content: flex-start;
       }
+
+      .admin-main-board {
+        display: grid;
+        grid-template-columns: 0.7fr 10fr 1.5fr 2fr 0.7fr 0.7fr 0.7fr 0.7fr;
+   
+      }
+
+      .admin-main-board-detail {
+        padding: 20px 0px 20px 20px;
+        height: 500px;
+        /* overflow-y: auto; */
+      }
+      .admin-menu-main-board li:first-child a {
+          color: var(--adminMenuHover);
+          font-size: 17px;
+        }
     </style>
   </head>
   <body>
@@ -137,8 +153,8 @@ pageEncoding="UTF-8"%>
               <div><%= freeBoardVo.getNick() %></div>
   
               <div><%= freeBoardVo.getEnrollDate() %></div>
-              <div><i class="fa-regular fa-eye"></i><span><%= freeBoardVo.getView() %></span></div>
-              <div><i class="fa-solid fa-comment-dots"></i><span><%= freeBoardVo.getCmtCnt() %></span></div>
+              <div><i class="fa-regular fa-eye margin-right"></i><span><%= freeBoardVo.getView() %></span></div>
+              <div><i class="fa-solid fa-comment-dots margin-right"></i><span><%= freeBoardVo.getCmtCnt() %></span></div>
               <div>
                 <i class="fa-solid fa-pen-to-square icon-block"></i
                 >
@@ -148,7 +164,7 @@ pageEncoding="UTF-8"%>
               </div>
             </div>
             <div class="admin-main-board-detail">
-              <textarea class="freeBoard-content freeBoard-content-edit" spellcheck="false" name="content" id="" cols="30" rows="17" disabled><%= freeBoardVo.getContent() %></textarea>
+              <textarea readonly class="freeBoard-content freeBoard-content-edit" spellcheck="false" name="content" id="" cols="30" rows="17" disabled><%= freeBoardVo.getContent() %></textarea>
             </div>
             <div class="reply-header">
               <i class="fa-solid fa-comment-dots"></i>

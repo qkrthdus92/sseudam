@@ -67,18 +67,18 @@ public class ProEditController extends HttpServlet{
 		
 		//전문가 개인정보
 		String mno = req.getParameter("mno");
-		String name = req.getParameter("name");
+		String name = req.getParameter("name").trim();
 		String gender = req.getParameter("gender");
-		String id = req.getParameter("id");
-		String pwd = req.getParameter("pwd");
+		String id = req.getParameter("id").trim();
+		String pwd = req.getParameter("pwd").trim();
 		String counselType = req.getParameter("counselType");
-		String email = req.getParameter("email");
-		String phone = req.getParameter("phone");
-		String education = req.getParameter("education");
-		String price = req.getParameter("price");
+		String email = req.getParameter("email").trim();
+		String phone = req.getParameter("phone").trim();
+		String education = req.getParameter("education").trim();
+		String price = req.getParameter("price").trim();
 		String image = req.getParameter("img");
 		Part img = req.getPart("img");
-		String introduce = req.getParameter("introduce");
+		String introduce = req.getParameter("introduce").trim();
 		
 		String originNameImg = img.getSubmittedFileName();
 		

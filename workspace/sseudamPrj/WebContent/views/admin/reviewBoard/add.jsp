@@ -96,6 +96,10 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
       .file-upload input {
         margin-bottom: 5px;
       }
+      .admin-menu-main-board li:last-child a {
+        color: var(--adminMenuHover);
+        font-size: 17px;
+      }
     </style>
   </head>
   <body class="write-reviewBoard-body">

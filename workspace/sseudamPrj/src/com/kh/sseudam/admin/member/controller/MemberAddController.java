@@ -22,12 +22,12 @@ public class MemberAddController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		String name = req.getParameter("name");
-		String id = req.getParameter("id");
-		String nick = req.getParameter("nick");
-		String email = req.getParameter("email");
-		String pwd = req.getParameter("pwd");
-		String phone = req.getParameter("phone");
+		String name = req.getParameter("name").trim();
+		String id = req.getParameter("id").trim();
+		String nick = req.getParameter("nick").trim();
+		String email = req.getParameter("email").trim();
+		String pwd = req.getParameter("pwd").trim();
+		String phone = req.getParameter("phone").trim();
 		
 		MemberVo vo = new MemberVo();
 		vo.setName(name);

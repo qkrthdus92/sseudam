@@ -29,6 +29,11 @@ pno = (String)request.getAttribute("pno"); String quitYn =
       .padding-left0 {
         padding-left: 0px !important;
       }
+
+      .admin-menu-main-user li:first-child a {
+        color: var(--adminMenuHover);
+        font-size: 17px;
+      }
     </style>
   </head>
   <body>
@@ -54,13 +59,16 @@ pno = (String)request.getAttribute("pno"); String quitYn =
           <script>
             function checkId() {
               let checkId = $("#printDupId").text();
-
+              let checkNick = $("#printDupNick").text();
               console.log(checkId);
-
-              if (checkId.includes("현재") || checkId.includes("사용가능한")) {
+              console.log(checkNick);
+              if (
+                (checkId.includes("현재") || checkId.includes("사용가능한")) &&
+                (checkNick.includes("현재") || checkNick.includes("사용가능한"))
+              ) {
                 return true;
               } else {
-                Swal.fire("아이디 중복체크해주세요!");
+                Swal.fire("아이디/닉네임 중복체크해주세요!");
                 return false;
               }
             }
