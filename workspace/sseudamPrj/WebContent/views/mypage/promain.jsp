@@ -9,8 +9,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>전문가회원 마이페이지 메인 :: 쓰담쓰담</title>
 <style>
     #wrap{
 		position: relative;

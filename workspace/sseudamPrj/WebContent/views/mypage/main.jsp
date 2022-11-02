@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>일반회원 마이페이지 메인 :: 쓰담쓰담</title>
 <style>
     #wrap{
 		position: relative;
@@ -394,7 +395,7 @@
 
 </script>
 
-<script type="text/javascript">
+<%-- <script type="text/javascript">
 //비번 일치여부 체크
 const pwd1 = document.querySelector("input[name=memberPwd1]");
 const pwd2 = '<%= loginMember.getPwd()%>';
@@ -408,7 +409,7 @@ function check(){
 	}
 }	
 
-</script>
+</script> --%>
 
 
 

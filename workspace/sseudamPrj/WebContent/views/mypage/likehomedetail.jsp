@@ -10,8 +10,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>안에서뒹굴뒹굴 좋아요 취소 :: 쓰담쓰담</title>
 </head>
 <style>
 

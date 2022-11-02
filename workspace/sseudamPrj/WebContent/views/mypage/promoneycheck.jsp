@@ -12,8 +12,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>전문가 수익 조회 :: 쓰담쓰담</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
 
@@ -341,12 +342,12 @@
         </div>
 
         <div id="moneyinfo">
-                <div id="moneyinfotext"> <%= proLoginMember.getId() %>의 총 수익 ▼</div>
-                <div id="moneyinfotext0"> <%= proLoginMember.getId() %>님의 출금 가능 금액 ▼</div>
+                <div id="moneyinfotext"> <%= proLoginMember.getId() %>님의 총 수익 ▼</div>
+                <div id="moneyinfotext0"></div>
                 <div></div>
                 <div id="moneyinfotext2"><%=MypageProPaySum.get(0).getPay_sum()%>원</div>
-                <div id="moneyinfotext3">300000원</div>
-                <div id="moneyinfotext4" onclick="showPopup(true)" >출금하기 > </div>
+               <%--  <div id="moneyinfotext3"><%=MypageProPaySum.get(0).getPay_sum()%>원</div>
+                <div id="moneyinfotext4" onclick="showPopup(true)" >출금하기 > </div> --%>
         </div>
 
         <div id="moneylist">
@@ -448,7 +449,16 @@
      location.reload();
 	 alert("출금완료!");
 	  $('#moneyinfotext3',opener.document).val('0원');
+	  
+	  
 	/*  $('#moneyinfotext3').innertext('0원');  */
+	
+	    // 자식창에서 부모창으로 값 전달 
+	    /* $("#hid_YN", opener.document).val("Y");
+	    $(opener.document).find("#hid_YN").val("Y");
+	    opener.document.getElementById("hid_YN").value="Y";
+	    parent.$("#hid_YN").val("Y");
+	    */
 	 
  };
 
