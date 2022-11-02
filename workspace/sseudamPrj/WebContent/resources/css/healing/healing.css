@@ -306,7 +306,7 @@ article {
 
 .other-pages:hover {
 	font-weight: 900;
-	font-color: black;
+	color: black;
 }
 
 .current-page {

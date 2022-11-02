@@ -21,7 +21,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>관리자 FAQ</title>
+    <title>쓰담쓰담 관리자 | FAQ | 목록</title>
     <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"
@@ -89,29 +89,35 @@ pageEncoding="UTF-8"%>
 	              </a>
 	            </div>
             <%}%>
-            
-            <div class="page-area">
-				<%if(pv.getStartPage() != 1){ %>	        
-		        	<a href="<%=root%>/admin/faq?pno=<%=pv.getStartPage() - 1 %>">
-		        		<i class="fa-solid fa-angles-left counsel-paging-left"></i>
-		        	</a>        
-	        	<%} %>  
-				<%for(int j = pv.getStartPage(); j<=pv.getEndPage() ;j++){%>
-					<%if(pageNo == j){%>	
-		            	<a class="current-page" >
-	            	<%}else{ %>
-	            		<a href="<%=root%>/admin/faq?pno=<%=j%>">
-	            	<%}%><span><%=j %></span>
-	            	
-	            	</a>
-		           				 		
-		        <%} %>
-				<%if(pv.getEndPage() != pv.getMaxPage()){ %>	        
-		        	<a href="<%=root%>/admin/faq?pno=<%=pv.getEndPage() + 1 %>">
+
+          <div class="page">
+			<%if(pv.getStartPage() != 1){ %>	        
+				<div>
+			        	<a class="other-pages" href="<%=root%>/admin/faq?pno=<%=pv.getStartPage() - 1 %>">
+			        		<i class="fa-solid fa-angles-left counsel-paging-left"></i>
+			        	</a>        
+				</div>
+        	<%} %>  
+			<% 
+				for(int j = pv.getStartPage(); j<=pv.getEndPage() ;j++){
+			%>
+				<div>
+						<%if(pageNo == j){%>	
+			            	<a class="current-page" >
+		            	<%}else{ %>
+		            		<a href="<%=root%>/admin/faq?pno=<%=j%>" class="other-pages" >
+		            	<%}%> <%=j %>
+	           				</a> 
+				</div>			
+	        <%} %>
+			<%if(pv.getEndPage() != pv.getMaxPage()){ %>	        
+				<div>
+		        	<a class="other-pages" href="<%=root%>/admin/faq?pno=<%=pv.getEndPage() + 1 %>">
 		        		<i class="fa-solid fa-angles-right counsel-paging-right"></i>
 		        	</a>        
-	        	<%} %>
-          </div>
+	        	</div>
+        	<%} %>
+        	</div>
         </div>
       </section>
     </main>

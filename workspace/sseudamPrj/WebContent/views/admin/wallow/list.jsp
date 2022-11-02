@@ -39,7 +39,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>뒹굴 관리자</title>
+    <title>쓰담쓰담 관리자 | 뒹굴뒹굴 | 목록</title>
     <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"

@@ -18,7 +18,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>FAQ 수정</title>
+    <title>쓰담쓰담 관리자 | FAQ | 수정</title>
     <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"

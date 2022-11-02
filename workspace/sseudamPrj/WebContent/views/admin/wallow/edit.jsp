@@ -27,12 +27,12 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>뒹굴 수정</title>
+<title>쓰담쓰담 관리자 | 뒹굴뒹굴 | 수정</title>
 <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
 <link rel="stylesheet"
 	href="<%=root1%>/resources/css/common/variables.css?ver=2" />
 <link rel="stylesheet"
-	href="<%=root1%>/resources/css/admin/yamyam/bob/list.css?ver=2" />
+	href="<%=root1%>/resources/css/admin/wallow/list.css?ver=2" />
 <link rel="stylesheet"
 	href="<%=root1%>/resources/css/admin/common/component.css?ver=1" />
 <style>
@@ -77,7 +77,7 @@
 	<form method="post" enctype="multipart/form-data">
 		<main class="admin-main">
 			<header class="admin-main-header flex-between">
-				<h1>안에서 뒹굴뒹굴 - 정보수정</h1>
+				<h1>뒹굴뒹굴 - 수정</h1>
 				<div class="btn-set">
 					<input class="cancel-btn" type="button" value="취소" onclick="history.back()"> 
 					<input class="save-btn" type="submit" value="저장" onclick="javascript: form.action='';">

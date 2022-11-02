@@ -20,7 +20,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>쓰담쓰담 메인</title>   	
+    <title>쓰담쓰담</title>  
+     <link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" /> 	
     
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
@@ -139,19 +140,21 @@
             </a>
             <div class="slider-counseling">      
             	
-<%--             	<%
+             	<%
             		for(int i = 0;i<proVo.size();i++){ 
             			int s = Integer.parseInt(proVo.get(i).getStar());
-            	%>
-	           		<div class="slider-box">
-	                    <div class="counseling-box-img"><img src="<%=root%>/resources/upload/pro/<%=proVo.get(i).getImgName()%>"></div>
-	                    <div class="counseling-box-content"><%=proVo.get(i).getType()%> 전문가</div>
-	                    <div class="counseling-box-name"><%=proVo.get(i).getName()%></div>
-	                    <div class="counseling-box-star">
-	                    	평점 : <%for(int j = 0 ;j<s ;j++){%>★<%}%>	                    	
-	                    </div>
-	                </div>
-            	<%} %> --%>
+            	%>	
+            		<a href="<%=root%>/counsel/detail?bno=<%=proVo.get(i).getNo()%>">
+		           		<div class="slider-box">	           			
+		                    <div class="counseling-box-img"><img src="<%=root%>/resources/upload/pro/<%=proVo.get(i).getImgName()%>"></div>
+		                    <div class="counseling-box-content"><%=proVo.get(i).getType()%> 전문가</div>
+		                    <div class="counseling-box-name"><%=proVo.get(i).getName()%></div>
+		                    <div class="counseling-box-star">
+		                    	평점 : <%for(int j = 0 ;j<s ;j++){%>★<%}%>	                    	
+		                    </div>	                    
+		                </div>
+	                </a>
+            	<%} %>
               
                 <div class="slider-box">
                     <div class="counseling-box-img"><img src="<%=root%>/resources/img/main/심원용.jpg"></div>

@@ -25,12 +25,12 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>냠냠 수정</title>
+<title>쓰담쓰담 관리자 | 뚜벅뚜벅 | 수정</title>
 <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
 <link rel="stylesheet"
 	href="<%=root1%>/resources/css/common/variables.css?ver=2" />
 <link rel="stylesheet"
-	href="<%=root1%>/resources/css/admin/yamyam/bob/list.css?ver=2" />
+	href="<%=root1%>/resources/css/admin/tiptap/list.css?ver=2" />
 <link rel="stylesheet"
 	href="<%=root1%>/resources/css/admin/common/component.css?ver=1" />
 <style>
