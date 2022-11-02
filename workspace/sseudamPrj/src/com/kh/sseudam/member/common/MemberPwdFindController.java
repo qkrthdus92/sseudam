@@ -20,7 +20,7 @@ public class MemberPwdFindController extends HttpServlet{
 		resp.setContentType("text/html; charset=UTF-8");
 		
 		String memberName = req.getParameter("userName");
-		String memberId = req.getParameter("memberId");
+		String memberId = req.getParameter("userId");
 		String memberEmail = req.getParameter("userEmail");
 		
 		System.out.println("클라한테 받은 이름 :" + memberName);
@@ -29,15 +29,17 @@ public class MemberPwdFindController extends HttpServlet{
 		
 		MemberVo findpwdvo = new MemberVo();
 		findpwdvo.setName(memberName);
-		findpwdvo.setName(memberId);
+		findpwdvo.setId(memberId);
 		findpwdvo.setEmail(memberEmail);
+		
+		System.out.println("findpwdvo :" + findpwdvo);
 		
 		String foundPwd = new MemberService().findMemberPwd(findpwdvo);
 		
 		if(foundPwd != null) {
 			resp.getWriter().write(memberName + " 님의 비밀번호는 " + foundPwd + " 입니다.");
 		}else{
-			resp.getWriter().write("입력하신 정보와 일치하는 아이디가 없습니다.");
+			resp.getWriter().write("입력하신 정보와 일치하는 비밀번호가 없습니다.");
 		}
 	
 	}

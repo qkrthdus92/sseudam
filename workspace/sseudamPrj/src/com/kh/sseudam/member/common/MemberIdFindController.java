@@ -29,6 +29,8 @@ public class MemberIdFindController extends HttpServlet{
 		findvo.setName(memberName);
 		findvo.setEmail(memberEmail);
 		
+		System.out.println("findvo :" + findvo);
+		
 		String foundId = new MemberService().findMemberId(findvo);
 		
 		if(foundId != null) {

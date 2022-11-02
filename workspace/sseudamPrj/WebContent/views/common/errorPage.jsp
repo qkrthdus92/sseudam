@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% String msg = (String)request.getAttribute("msg"); %>    
+<%
+	String msg = (String)request.getAttribute("msg");
+	String root1 = request.getContextPath();
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,21 +16,24 @@
 		background-color: rgba(245, 245, 245, 1);
 	}
 
+	h1{
+		padding-top: 100%;
+		padding-bottom: 50%;
+	}
+
 	#error-content{
 		width: 1088px;
 		height: 855px;
 		border: 1px solid white;
 		background-color: white;
 		margin: auto;
-		align-content: center;
 		display: flex;
     	flex-direction: column;
-    	align-items: center;
-      	justify-content: center;
+    	align-items: flex-start;
+		align-items: center;
 	}
 
 	.error-img{
-		border: 1px solid red;
 		width: 200px;
 		height: 200px;
 	}
@@ -38,7 +44,7 @@
 	
 	<div id="error-content">
 		<div><h1>"<%= msg %>"</h1></div>
-		<div><img class="error-img" src="<%=root%>/resources/img/error/errorpage.png"></div>
+		<div><img class="error-img" src="<%=root1%>/resources/img/error/error.png"></div>
 	</div>
 	
 	<%@ include file="/views/common/footer.jsp" %>

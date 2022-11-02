@@ -62,7 +62,7 @@ public class MemberLoginController extends HttpServlet{
 		
 		if(loginMember == null && proLoginMember == null) {
 			req.getSession().setAttribute("alertMsg", "2. 일치하는 회원정보가 없습니다.");
-			resp.sendRedirect(nextUrl);
+			//resp.sendRedirect(nextUrl);
 		}
 		
 		//화면선택
