@@ -199,13 +199,14 @@ public class MypageEditDao {
 	}
 
 	//전문가 별점 평균 조회
-	public static int proUpdateStar(Connection conn, String num) {
+	public static String proUpdateStar(Connection conn, String num) {
+		System.out.println("dao 넘어옴");
 		
-		String sql="SELECT AVG (STAR) FROM PRO_APPOINT WHERE PRO_NO=?";
+		String sql="SELECT AVG(STAR) AS STAR FROM PRO_APPOINT WHERE PRO_NO=?";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int result = 0;
+		String result = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -215,7 +216,7 @@ public class MypageEditDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				result = rs.getInt("STAR");
+				result = rs.getString("STAR");
 			}
 			
 		} catch (SQLException e) {
@@ -224,6 +225,8 @@ public class MypageEditDao {
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(pstmt);
 		}
+		
+		System.out.println(result);//확인용
 		
 		return result;
 		

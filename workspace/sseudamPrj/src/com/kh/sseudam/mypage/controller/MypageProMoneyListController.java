@@ -60,8 +60,8 @@ public class MypageProMoneyListController extends HttpServlet{
 		  pv.setStartPage(startPage);
 		  pv.setEndPage(endPage);
 	      
-		  List<MypageProMoneyListVo> MypageProMoneyList = new MypageProMoneyListService().selectList(pv,"2");
-		  List<MypageProMoneyListVo> MypageProPaySum = new MypageProMoneyListService().paysum("2");
+		  List<MypageProMoneyListVo> MypageProMoneyList = new MypageProMoneyListService().selectList(pv,num);
+		  List<MypageProMoneyListVo> MypageProPaySum = new MypageProMoneyListService().paysum(num);
 
 		req.setAttribute("pv", pv);
 		req.setAttribute("MypageProMoneyList", MypageProMoneyList);

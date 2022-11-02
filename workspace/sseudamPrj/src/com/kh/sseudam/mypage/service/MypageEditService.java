@@ -56,13 +56,24 @@ public class MypageEditService {
 	}
 
 	//별점 평균 조회
-	public int updatestar(String num) {
+	public String updatestar(String num) {
+		
+		System.out.println("service넘어옴");
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int result = new MypageEditDao().proUpdateStar(conn, num);
+		String result = new MypageEditDao().proUpdateStar(conn, num);
+		
+		System.out.println(result);//확인용
+		
+		if(result != null) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
 		
 		JDBCTemplate.close(conn);
+		
 		
 		return result;
 		

@@ -362,12 +362,12 @@
 						<label id="popup-text"> 비밀번호 :</label>
 						<input id="popup-text" type="password" name="memberPwd1">
 					</div>
+					<div class="popup-foot">
+						<!-- 프로필수정페이지로이동 -->
+						<input type="submit" class="pop-btn" id="confirm"   type="submit" value="확인">
+						<button class="pop-btn" id="close" onclick="closePopup()" >창 닫기</button>
+					</div>
 				</form>
-				<div class="popup-foot">
-					<!-- 프로필수정페이지로이동 -->
-					<input type="submit" class="pop-btn" id="confirm"   type="submit" value="확인">
-					<button class="pop-btn" id="close" onclick="closePopup()" >창 닫기</button>
-				</div>
 		  </div>
 		</div>
 
