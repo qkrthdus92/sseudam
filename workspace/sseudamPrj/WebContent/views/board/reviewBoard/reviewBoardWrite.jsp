@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<style>
+<style>
 body {
 	padding: 0;
 	margin: 0;
@@ -148,8 +148,8 @@ body {
 		<div id="main">
 			<div id="title">후기게시판</div>
 			<div id="write-box">
-				<div id="write-title">
 
+				<div id="write-title">
 					제목<br> <input type="text" size="130" style="height: 25px"
 						placeholder="제목을 입력하세요." name="title" required>
 				</div>

@@ -75,20 +75,21 @@
         color: black;
     }
     .board-list{
-        margin: auto;   
+        --margin: auto;   
         width: 100%;
         height: 100%;
         display: grid;
         align-items: center;
         justify-content: center;
-        column-gap: 35px;
+        column-gap: 10px;
+        
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 2fr 2fr;
+        grid-template-rows: 1fr 1fr;
 
     }
     .board-list > div{
         width: 95%;
-        height: 95%;
+        height: 80%;
         margin: 10px;
         margin-top: 30px;
         grid-template-columns: 5fr 5fr 5fr 5fr;
@@ -106,7 +107,7 @@
     }
     img{
         width: 100%;
-        height: 83%;
+        height: 80%;
         border-radius: 10px;
 
     }
@@ -155,7 +156,7 @@
         </div>
         <div id="main">
             <div id="title">후기게시판</div>
-            <div id="write"><button id="write-btn" onclick="loginPopup(true)">글쓰기</button></div>
+            <span id="write"><button id="write-btn" onclick="loginPopup(true)">글쓰기</button></span>
             <%if(loginMember!=null){ %>
             <script>
               const wirteBtn = document.querySelector('#write-btn');

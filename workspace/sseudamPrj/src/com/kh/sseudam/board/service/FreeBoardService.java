@@ -118,6 +118,7 @@ public class FreeBoardService {
 
 	// 자유게시판 게시글 삭제
 	public int delete(String no) {
+		
 		Connection conn = JDBCTemplate.getConnection();
 
 		int result = FreeBoardDao.delete(conn, no);
@@ -135,6 +136,7 @@ public class FreeBoardService {
 	
 	//댓글 삭제
 	public int cmtDelete(String cmtNo) {
+	
 		Connection conn = JDBCTemplate.getConnection();
 
 		int result = FreeBoardDao.cmtDelete(conn, cmtNo);

@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kh.sseudam.board.vo.FreeBoardCmtVo;
-import com.kh.sseudam.board.vo.FreeBoardVo;
+import com.kh.sseudam.board.vo.ReviewBoardCmtVo;
+import com.kh.sseudam.board.vo.ReviewBoardVo;
 import com.kh.sseudam.board.vo.ReviewBoardCmtVo;
 import com.kh.sseudam.board.vo.ReviewBoardImgVo;
 import com.kh.sseudam.board.vo.ReviewBoardVo;
@@ -227,7 +227,7 @@ public class ReviewBoardDao {
 	// 후기게시판 댓글조회
 	public static List<ReviewBoardCmtVo> selectCmt(Connection conn, PageVo cmtPv, String bno) {
 
-		String sql = "SELECT C.NO, C.REVIEW_BOARD_NO, C.CMT , TO_CHAR(C.CMT_DATE, 'yyyy-mm-dd') AS CMT_DATE, TO_CHAR(C.MODIFY_DATE, 'yyyy-mm-dd') AS MODIFY_DATE, C.DELETE_YN, M.NICK AS WRITER_NO FROM REVIEW_BOARD_CMT C JOIN MEMBER M ON C.WRITER_NO = M.NO WHERE C.REVIEW_BOARD_NO = ? AND C.DELETE_YN = 'N'";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM , T.* FROM (SELECT C.NO, C.REVIEW_BOARD_NO, C.CMT, M.NICK AS WRITER_NO, TO_CHAR(C.MODIFY_DATE, 'yyyy-mm-dd') AS MODIFY_DATE,C.DELETE_YN FROM REVIEW_BOARD_CMT C JOIN MEMBER M ON C.WRITER_NO = M.NO WHERE DELETE_YN = 'N' AND REVIEW_BOARD_NO = ? ORDER BY NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -392,7 +392,219 @@ public class ReviewBoardDao {
 		}
 
 		return result;
+	}
+	
+
+	// 후기게시판 게시글 상세조회 (업로드파일)
+	public static List<ReviewBoardImgVo> selectAttachment(Connection conn, String bno) {
+
+String sql = "SELECT * FROM REVIEW_BOARD_IMG WHERE STATUS = 'O' AND REVIEW_BOARD_NO = ?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<ReviewBoardImgVo> imgList = new ArrayList<ReviewBoardImgVo>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, bno);
+		
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String imgNo = rs.getString("IMG_NO");
+				String reviewBoardNo = rs.getString("REVIEW_BOARD_NO");
+				String originName = rs.getString("ORIGIN_NAME");
+				String changeName = rs.getString("CHANGE_NAME");
+				String filePath = rs.getString("FILE_PATH");
+				String enrollDate = rs.getString("ENROLL_DATE");
+				String thumbYn = rs.getString("THUMB_YN");
+				String status = rs.getString("STATUS");
+				
+				ReviewBoardImgVo imgVo = new ReviewBoardImgVo();
+				imgVo.setImgNo(imgNo);;
+				imgVo.setReviewBoardNo(reviewBoardNo);
+				imgVo.setOriginName(originName);
+				imgVo.setChangeName(changeName);
+				imgVo.setFilePath(filePath);
+				imgVo.setEnrollDate(enrollDate);
+				imgVo.setThumbYn(thumbYn);
+				imgVo.setStatus(status);
+				imgList.add(imgVo);
+			}
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return imgList;
+	}
+
+	//썸네일 수정
+	public int editThumbImg(Connection conn, ReviewBoardImgVo imgVo) {
+		String sql = "UPDATE REVIEW_BOARD_IMG SET ORIGIN_NAME=?, CHANGE_NAME=? ,FILE_PATH=?, THUMB_YN='Y' WHERE IMG_NO=?;";
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, imgVo.getOriginName());
+			pstmt.setString(2, imgVo.getChangeName());
+			pstmt.setString(3, imgVo.getFilePath());
+			pstmt.setString(4, imgVo.getImgNo());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int editImg(Connection conn, ReviewBoardImgVo imgVo) {
+
+		String sql = "UPDATE REVIEW_BOARD_IMG SET ORIGIN_NAME=?, CHANGE_NAME=? ,FILE_PATH=?, THUMB_YN='N' WHERE IMG_NO=?;";
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, imgVo.getOriginName());
+			pstmt.setString(2, imgVo.getChangeName());
+			pstmt.setString(3, imgVo.getFilePath());
+			pstmt.setString(4, imgVo.getImgNo());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
 
 	}
+
+	//후기게시판 댓글 작성
+	public static int writeCmt(Connection conn, ReviewBoardCmtVo cmtVo) {
+
+		String sql = "INSERT INTO REVIEW_BOARD_CMT (NO, REVIEW_BOARD_NO, WRITER_NO, CMT) VALUES (SEQ_REVIEW_BOARD_CMT_NO.NEXTVAL, ?,  ?, ?)";
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, cmtVo.getReviewBoardNo());
+			pstmt.setString(2, cmtVo.getWriterNo());
+			pstmt.setString(3, cmtVo.getCmt());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
+	//댓글 삭제를 위한 리스트 조회
+	public static ReviewBoardCmtVo cmtList(Connection conn, String cmtNo) {
+		
+		String sql = "SELECT C.NO, M.NICK AS WRITER_NO FROM REVIEW_BOARD_CMT C JOIN MEMBER M ON C.WRITER_NO = M.NO WHERE C.NO=?";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ReviewBoardCmtVo cmtVo = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, cmtNo);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String no = rs.getString("NO");
+				String writerNo = rs.getString("WRITER_NO");
+
+				cmtVo = new ReviewBoardCmtVo();
+				cmtVo.setNo(no);
+				cmtVo.setWriterNo(writerNo);
+				
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		return cmtVo;
+	}
+
+	// 댓글 삭제
+	public static int cmtDelete(Connection conn, String cmtNo) {
+
+		String sql = "UPDATE REVIEW_BOARD_CMT SET DELETE_YN = 'Y' WHERE NO = ?";
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, cmtNo);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+		
+	}
+
+	public static int delete(Connection conn, String no) {
+
+		String sql = "UPDATE REVIEW_BOARD SET DELETE_YN = 'Y' WHERE NO = ?";
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, no);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
+	
+	
 
 }

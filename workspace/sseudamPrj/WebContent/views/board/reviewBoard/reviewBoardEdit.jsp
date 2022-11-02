@@ -1,8 +1,11 @@
+<%@page import="com.kh.sseudam.board.vo.ReviewBoardImgVo"%>
+<%@page import="java.util.List"%>
 <%@page import="com.kh.sseudam.board.vo.ReviewBoardVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	ReviewBoardVo rvo = (ReviewBoardVo) request.getAttribute("rvo");
+ReviewBoardVo rvo = (ReviewBoardVo) request.getAttribute("rvo");
+List<ReviewBoardImgVo> imgList = (List<ReviewBoardImgVo>) request.getAttribute("imgList");
 %>
 <!DOCTYPE html>
 <html>
@@ -90,11 +93,18 @@ body {
 }
 
 #upload-list {
-	display: flex;
-	width: 150%;
+	display: grid;
+	grid-template-columns: 10fr 1fr 1fr;
+	width: 75%;
 }
 
-#fileName {
+#fileName1, #fileName2, #fileName3, #fileName4, #fileName5 {
+	width: 100%;
+	border: 0px;
+	background-color: #dfdfdf;
+}
+
+#delete {
 	width: 100%;
 	border: 0px;
 	background-color: #dfdfdf;
@@ -102,7 +112,7 @@ body {
 
 #upload-btn {
 	display: flex;
-	margin-left: 130%;
+	margin-left: 150%;
 	width: 80px;
 	height: 30px;
 	background-color: #dfdfdf;
@@ -141,83 +151,83 @@ body {
 	<div id="header">
 		<%@ include file="/views/common/header.jsp"%>
 	</div>
-	<div id="main">
-		<div id="title">후기게시판</div>
-		<div id="write-box">
-			<div id="write-title">
-				제목<br> <input type="text" size="130" style="height: 25px"
-					placeholder="제목을 입력하세요." required value="<%=rvo.getTitle()%>">
-			</div>
-			<div id="write-content">
-				내용<br>
-				<textarea name="content" cols="132%" rows="30" style="resize: none;"
-					placeholder="내용을 입력하세요." required><%=rvo.getContent()%>></textarea>
-			</div>
+	<form action="" method="post" enctype="multipart/form-data">
+		<div id="main">
+			<div id="title">후기게시판</div>
+			<div id="write-box">
 
-
-			<div id="file-upload">이미지 첨부 (이미지파일 최대 5장)</div>
-			<form action="" method="post" enctype="multipart/form-data">
-				<div class="upload-list">
-					<div>
-						<div id="upload-list">
-							<input type="text" id="fileName" name="fileName">
-						</div>
-						<div>
-							<label id="upload-btn">파일선택<input type="file"
-								multiple=multiple name="f" style="display: none"
-								onchange="javascript:document.getElementById('fileName').value = this.value"></label>
-						</div>
-					</div>
-					<div>
-						<div id="upload-list">
-							<input type="text" id="fileName" name="fileName">
-						</div>
-						<div>
-							<label id="upload-btn">파일선택<input type="file"
-								multiple=multiple name="f" style="display: none"
-								onchange="javascript:document.getElementById('fileName').value = this.value"></label>
-						</div>
-					</div>
-					<div>
-						<div id="upload-list">
-							<input type="text" id="fileName" name="fileName">
-						</div>
-						<div>
-							<label id="upload-btn">파일선택<input type="file"
-								multiple=multiple name="f" style="display: none"
-								onchange="javascript:document.getElementById('fileName').value = this.value"></label>
-						</div>
-					</div>
-					<div>
-						<div id="upload-list">
-							<input type="text" id="fileName" name="fileName">
-						</div>
-						<div>
-							<label id="upload-btn">파일선택<input type="file"
-								multiple=multiple name="f" style="display: none"
-								onchange="javascript:document.getElementById('fileName').value = this.value"></label>
-						</div>
-					</div>
-					<div>
-						<div id="upload-list">
-							<input type="text" id="fileName" name="fileName">
-						</div>
-						<div>
-							<label id="upload-btn">파일선택<input type="file"
-								multiple=multiple name="f" style="display: none"
-								onchange="javascript:document.getElementById('fileName').value = this.value"></label>
-						</div>
-					</div>
+				<div id="write-title">
+					제목<br> <input type="text" size="130" style="height: 25px"
+						placeholder="제목을 입력하세요." required value="<%=rvo.getTitle()%>">
 				</div>
+				<div id="write-content">
+					내용<br>
+					<textarea name="content" cols="132%" rows="30"
+						style="resize: none;" placeholder="내용을 입력하세요." required><%=rvo.getContent()%></textarea>
+				</div>
+
+
+				<div id="file-upload">이미지 첨부 (이미지파일 최대 5장)</div>
+
+
+				<div class="upload-list">
+
+ 					<%for(int i = 0; i < imgList.size(); ++i) {%>
+						<div id="upload-list">
+							<input type="text" value="<%=imgList.get(i).getChangeName()%>" id='fileName<%=i%>'/>
+							<!-- <button id="delete">삭제</button> -->
+							<label id="upload-btn"> 파일선택<input type="file" name="f" style="display: none"
+									onchange="javascript:document.getElementById('fileName<%=i%>').value = this.value">
+							</label>
+						</div>
+						
+					<%}%>
+<%-- 						<div id="upload-list">
+							<input type="text" value="<%=imgList.get(0).getChangeName()%>" id='fileName<%=0%>'/>
+							<!-- <button id="delete">삭제</button> -->
+							<label id="upload-btn"> 파일선택<input type="file" name="f" style="display: none"
+									onchange="javascript:document.getElementById('fileName<%=0%>').value = this.value">
+							</label>
+						</div>
+						<div id="upload-list">
+							<input type="text" value="<%=imgList.get(1).getChangeName()%>" id='fileName<%=1%>'/>
+							<!-- <button id="delete">삭제</button> -->
+							<label id="upload-btn"> 파일선택<input type="file" name="f" style="display: none"
+									onchange="javascript:document.getElementById('fileName<%=1%>').value = this.value">
+							</label>
+						</div>
+						<div id="upload-list">
+							<input type="text" value="<%=imgList.get(2).getChangeName()%>" id='fileName<%=2%>'/>
+							<!-- <button id="delete">삭제</button> -->
+							<label id="upload-btn"> 파일선택<input type="file" name="f" style="display: none"
+									onchange="javascript:document.getElementById('fileName<%=2%>').value = this.value">
+							</label>
+						</div>
+						<div id="upload-list">
+							<input type="text" value="<%=imgList.get(3).getChangeName()%>" id='fileName<%=3%>'/>
+							<!-- <button id="delete">삭제</button> -->
+							<label id="upload-btn"> 파일선택<input type="file" name="f" style="display: none"
+									onchange="javascript:document.getElementById('fileName<%=3%>').value = this.value">
+							</label>
+						</div>
+						<div id="upload-list">
+							<input type="text" value="<%=imgList.get(4).getChangeName()%>" id='fileName<%=4%>'/>
+							<!-- <button id="delete">삭제</button> -->
+							<label id="upload-btn"> 파일선택<input type="file" name="f" style="display: none"
+									onchange="javascript:document.getElementById('fileName<%=4%>').value = this.value">
+							</label>
+						</div> --%>
+				</div>
+
+			</div>
 
 				<div id="btn">
 					<input type="submit" value="등록" id="ok-btn"> &nbsp;&nbsp;
 					<button id="no-btn" onclick="history.back()">취소</button>
 				</div>
-			</form>
+			</div>
 		</div>
-
-	</div>
+	</form>
 	<div id="footer">
 		<%@ include file="/views/common/footer.jsp"%>
 	</div>
