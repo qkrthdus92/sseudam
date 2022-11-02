@@ -81,7 +81,7 @@ public class ReviewBoardEditController extends HttpServlet{
 		
 		List<ReviewBoardImgVo> imgList = new ArrayList<ReviewBoardImgVo>();
 		
-		int imgResult = 0;
+		//int imgResult = 0;
 		
 		
 		// -----------파일업로드 start-----------------
