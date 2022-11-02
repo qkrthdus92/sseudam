@@ -36,6 +36,25 @@ request.getContextPath();%>
         grid-template-columns: 1fr 1fr 6fr;
         grid-template-rows: repeat(15, 50px);
       }
+
+      .grid-col4 {
+        grid-template-columns: 1fr 1fr 1fr 1fr !important;
+      }
+
+      .cer-size {
+        width: 40px;
+        height: 40px;
+      }
+
+      .cer-big-size {
+        position: absolute;
+        top: 20%;
+        left: 30%;
+        width: 500px;
+        height: 700px;
+        box-shadow : rgba(0,0,0,0.8) 0 0 0 9999px;
+        z-index: 100;
+      }
     </style>
   </head>
   <body>
@@ -233,14 +252,16 @@ request.getContextPath();%>
           <input type="button" value="회원탈퇴" class="delete-btn" onclick="quit();"/>
         </div>
         <div class="admin-main-wrapper admin-cer-wrapper">
-          <div class="admin-add-certificate ">
-            <div class="black border-left">자격증이름</div>
+          <div class="admin-add-certificate grid-col4">
+            <div class="black border-left">자격증 미리보기</div>
+            <div class="black ">자격증이름</div>
             <div class="black">자격번호</div>
             <div class="black border-right">자격증첨부파일</div>
 
           </div>
-          <div class="admin-add-certificate">
+          <div class="admin-add-certificate grid-col4">
             <%for(int i=0; i<voList.size(); i++) {%>
+              <div ><img src="<%=root1%>/resources/upload/certificate/<%=voList.get(i).getImg()%>" alt="" class="cer-size" onclick='imgClick(this);'></div>
               <div><%= voList.get(i).getName() %></div>
               <div><%= voList.get(i).getNum() %></div>
               <div><span> <%= voList.get(i).getImg() %></span>
@@ -443,6 +464,21 @@ request.getContextPath();%>
         }
 
       }
+    </script>
+    <script>
+    
+      function imgClick(x) {
+        const num = x;
+        num.classList.add('cer-big-size');
+      }
+
+      const body = document.querySelector('body');
+      body.addEventListener('click', function(e) {
+        const info = document.querySelector('.cer-big-size');
+        if(!e.target.className.includes('cer-big-size') ) {
+          info.classList.remove('cer-big-size');
+        }
+      })
     </script>
   </body>
 </html>
