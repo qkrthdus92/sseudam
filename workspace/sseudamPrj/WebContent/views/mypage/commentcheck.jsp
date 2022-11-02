@@ -159,6 +159,9 @@
 	border: 1px solid #bcbcbc;
 	cursor: pointer; 
 }
+#comlocation{
+ cursor: pointer; 
+}
 </style>
 <body>
 	<%@ include file="/views/common/header.jsp" %>	
@@ -191,7 +194,7 @@
 			    <div id="editlist">
 			        <div><input type="checkbox" id="cb1"></div>
 			        <div><%= MypageCommentList.get(i).getNo()%></div>
-			        <div <%-- onclick="location.href='<%=root%>/board/freeBoardDetail?bno=<%=FreeBoardVo.getNo() %>&cmtPno=1'" --%>><%= MypageCommentList.get(i).getCmt()%></div>
+			        <div  id="comlocation" onclick="location.href='<%=root%>/board/freeBoardDetail?bno=<%=MypageCommentList.get(i).getFree_board_no() %>&cmtPno=1'"><%= MypageCommentList.get(i).getCmt()%></div>
 			        <div><%= MypageCommentList.get(i).getType()%></div>
 			        <div><%= MypageCommentList.get(i).getModify_date()%></div>
 			    </div>
@@ -200,7 +203,7 @@
 			    <div id="editlist">
 			        <div><input type="checkbox" id="cb1"></div>
 			        <div><%= MypageCommentList2.get(i).getNo()%></div>
-			        <div><%= MypageCommentList2.get(i).getCmt()%></div>
+			        <div onclick="location.href='<%=root%>/board/reviewBoardDetail?bno=<%=MypageCommentList.get(i).getReview_board_no() %>&cmtPno=1'"><%= MypageCommentList2.get(i).getCmt()%></div>
 			        <div><%= MypageCommentList2.get(i).getType()%></div>
 			        <div><%= MypageCommentList2.get(i).getModify_date()%></div>
 			    </div>

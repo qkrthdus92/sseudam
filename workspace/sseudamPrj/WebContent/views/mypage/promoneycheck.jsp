@@ -445,9 +445,10 @@
  <script type="text/javascript">
  
  function withdraw(){
-	 location.reload();
+     location.reload();
 	 alert("출금완료!");
-	 $('#moneyinfotext3').innertext('0원');
+	  $('#moneyinfotext3',opener.document).val('0원');
+	/*  $('#moneyinfotext3').innertext('0원');  */
 	 
  };
 

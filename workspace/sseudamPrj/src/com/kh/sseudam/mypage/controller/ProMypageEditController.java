@@ -27,6 +27,18 @@ public class ProMypageEditController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession s = req.getSession();
 		ProMemberJoinVo proLoginMember = (ProMemberJoinVo)s.getAttribute("proLoginMember");
+		
+		/*
+		 * String num = proLoginMember.getNo(); System.out.println(num); //확인용
+		 * 
+		 * String updatestar =new MypageEditService().updatestar(num);
+		 * 
+		 * System.out.println(updatestar); //확인용
+		 * 
+		 * req.setAttribute("updatestar", updatestar);
+		 * req.getRequestDispatcher("/views/mypage/promain.jsp").forward(req, resp);
+		 */
+		
 		if(proLoginMember != null) {
 			req.getRequestDispatcher("/views/mypage/proeditmypage.jsp").forward(req, resp);
 		}else {

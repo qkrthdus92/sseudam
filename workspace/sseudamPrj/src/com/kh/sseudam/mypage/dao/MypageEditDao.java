@@ -103,7 +103,7 @@ public class MypageEditDao {
 	//프로회원 정보수정
 	public int proUpdateOneByNo(Connection conn, ProMemberJoinVo vo) {
 		
-		System.out.println("dao로 넘어옴"); //출력됨
+		System.out.println("전문가 마이페이지 수정dao로 넘어옴"); //출력됨
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -200,7 +200,7 @@ public class MypageEditDao {
 
 	//전문가 별점 평균 조회
 	public static String proUpdateStar(Connection conn, String num) {
-		System.out.println("dao 넘어옴");
+		System.out.println("평균 별점 조회 dao 넘어옴");
 		
 		String sql="SELECT AVG(STAR) AS STAR FROM PRO_APPOINT WHERE PRO_NO=?";
 		
