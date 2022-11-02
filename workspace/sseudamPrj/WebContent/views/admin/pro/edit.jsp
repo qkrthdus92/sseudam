@@ -1,6 +1,7 @@
 <%@page import="com.kh.sseudam.counsel.pro.vo.CertificateVo"%>
 <%@page import="java.util.List"%>
-<%@page import="com.kh.sseudam.counsel.pro.vo.ProVo"%> <%@ page language="java"
+<%@page import="com.kh.sseudam.counsel.pro.vo.ProVo"%>
+<%@ page language="java"
 contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <% String root1 =
 request.getContextPath();%> 
 

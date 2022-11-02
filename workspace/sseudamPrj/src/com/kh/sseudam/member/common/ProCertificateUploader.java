@@ -34,6 +34,7 @@ public class ProCertificateUploader {
 		byte[] buf = new byte[1024];
 		
 		int size = 0;
+		
 		while((size = bis.read(buf)) != -1){
 			bos.write(buf, 0, size);
 		  //bos.write(byte 크기, 몇 개 건너 뛸 건지, 내보낼 크기)
@@ -45,6 +46,7 @@ public class ProCertificateUploader {
 		
 		ProJoinPage2Vo vo = new ProJoinPage2Vo();
 		vo.setImgPath(cerImgName);
+		vo.setImgPath(filePath);
 		
 		return vo;
 				
