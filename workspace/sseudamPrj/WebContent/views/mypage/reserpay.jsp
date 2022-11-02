@@ -264,10 +264,7 @@
         </div>
         <div id="editbar">
         	<div id="datechoice">
-	            <input id="date" type="date" value="2022-10-12">
-	            <span>~</span>
-	            <input id="date" type="date" value="2022-10-12">
-                <button> 조회</button>
+	           
         	</div>
         </div>
 

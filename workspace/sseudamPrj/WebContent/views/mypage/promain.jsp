@@ -48,8 +48,6 @@
         width: 348px;
         height: 57px;
         border: 1px solid #87C57D;
-        background-color: #C8FFDE ;
-        color: #1EA811;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -219,7 +217,7 @@
                 <%}else{%>
                 	<div><h3 align="center">나의 별점 <label id="starupdate"></label>4.5 점</h3></div>
                 <%}%>
-                <div id="ment"> <%= proLoginMember.getId() %>님 좋은 하루되세요.</div>
+                <div id="ment">"<%= proLoginMember.getIntroduce() %>"</div>
             </div>
             <div id="leftbot">
                 <table>

@@ -1,7 +1,6 @@
 package com.kh.sseudam.mypage.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,9 +11,10 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.sseudam.member.vo.MemberVo;
 import com.kh.sseudam.mypage.service.MypageEditService;
+import com.kh.sseudam.pro.vo.ProMemberJoinVo;
 
-@WebServlet(urlPatterns = "/mypage/quit")
-public class MypageQuitController extends HttpServlet{
+@WebServlet(urlPatterns = "/mypage/proquit")
+public class MypageProQuitController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,13 +22,10 @@ public class MypageQuitController extends HttpServlet{
 		HttpSession s = req.getSession();
 		
 		//데이터꺼내기
-		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
-		String no = loginMember.getNo();
+		ProMemberJoinVo proLoginMember = (ProMemberJoinVo)s.getAttribute("proLoginMember");
+		String no = proLoginMember.getNo();
 		
-		//데이터뭉치기
-		
-		//디비가녀오기
-		int result = new MypageEditService().quit(no);
+		int result = new MypageEditService().proquit(no);
 		
 		if(result ==1) {
 			s.invalidate();
@@ -37,7 +34,7 @@ public class MypageQuitController extends HttpServlet{
 			resp.sendRedirect("/sseudam/main");
 		}
 		
-		
-	
 	}
+	
+	
 }
