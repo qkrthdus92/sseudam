@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자유게시판 글쓰기 :: 쓰담쓰담</title>
 <style>
 body {
 	padding: 0;

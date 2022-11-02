@@ -11,8 +11,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자유게시판 :: 쓰담쓰담</title>
 <style>
     body {
         padding: 0;
@@ -46,7 +47,7 @@
     }
     #title{
         grid-column: span 5;
-        margin-top: 20px;
+        margin-top: 10px;
         margin-left: 20px;
         font-size: 230%;
         font-weight: 800;
@@ -68,6 +69,7 @@
         background-color: rgba(151, 210, 153, 0.7);
         border: 0px;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+        cursor : pointer;
     }
     .board-top{
         text-align: center;
@@ -97,6 +99,7 @@
         color: #26AA82;
     }
     #page{
+        grid-row: span 2;
         grid-column: span 5;
         margin: auto;
         text-align: center;
@@ -166,7 +169,7 @@
         	<a href="/sseudam/board/freeBoardList?pno=<%=pv.getEndPage()+1%>"> ></a>	        		
 
         </div>
-            <div id="search">
+            <%-- <div id="search">
                 <div>
                 <form method="post" action="/sseudam/board/freeBoardSearch" onsubmit="">
                     <select name="search">
@@ -179,7 +182,7 @@
                 <div id="search-icon"><img src="<%=root%>/resources/img/board/Vector.svg" onclick="submit"></div>
   
                 </form>
-            </div>
+            </div> --%>
         </div>
         <div id="footer">
             <%@ include file="/views/common/footer.jsp" %>
