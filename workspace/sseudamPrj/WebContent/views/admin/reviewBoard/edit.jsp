@@ -22,7 +22,8 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Insert title here</title>
+    <title>쓰담쓰담 관리자 | 후기게시판 | 수정</title>
+    <link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
     <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"
@@ -253,7 +254,7 @@ pageEncoding="UTF-8"%>
         const num2 = document.querySelectorAll('.file-target input').length;
         
         if((num1+num2) == 1) {
-          alert('이미지 첨부는 필수입니다');
+          Swal.fire('이미지 첨부는 필수입니다');
           e.preventDefault();
         }
 
@@ -284,7 +285,7 @@ pageEncoding="UTF-8"%>
         const originCnt = document.querySelector('.admin-origin-img').childElementCount;
         const targetCnt = document.querySelector('.file-target').childElementCount;
         if((originCnt+targetCnt)==5) {
-          alert('이미지 첨부는 5장까지만 가능합니다');
+          Swal.fire('이미지 첨부는 5장까지만 가능합니다');
           e.preventDefault();
         }
       
@@ -329,7 +330,7 @@ pageEncoding="UTF-8"%>
           }
 
           if(cnt == 0) {
-            alert('이미지 첨부는 필수입니다');
+            Swal.fire('이미지 첨부는 필수입니다');
             event.preventDefault();
        
           }

@@ -4,7 +4,8 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Insert title here</title>
+    <title>쓰담쓰담 관리자 | 후기게시판 | 추가</title>
+    <link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
     <link
       rel="stylesheet"
       href="<%=root1%>/resources/css/common/reset.css?ver=1"
@@ -109,6 +110,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
         action="<%=root1%>/admin/reviewBoard/write"
         method="post"
         enctype="multipart/form-data"
+        id="review-board-add-form"
       >
         <header class="admin-main-header flex-between">
           <h1>후기게시판 작성</h1>
@@ -164,5 +166,24 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
         </section>
       </form>
     </main>
+    <script>
+      const form = document.querySelector("#review-board-add-form");
+      form.addEventListener("submit", addReviewForm);
+      function addReviewForm(e) {
+        const fileArr = document.querySelectorAll("input[name=f]");
+        console.log("스크립트 들어옴");
+        let fileCnt = 0;
+        for (let i = 0; i < fileArr.length; i++) {
+          if (fileArr[i].value != "") {
+            fileCnt = fileCnt + 1;
+          }
+        }
+        console.log(fileCnt);
+        if (fileCnt == 0) {
+          Swal.fire("이미지 첨부는 필수입니다");
+          e.preventDefault();
+        }
+      }
+    </script>
   </body>
 </html>

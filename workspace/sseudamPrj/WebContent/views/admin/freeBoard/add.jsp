@@ -9,7 +9,8 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath(); String pno =
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Insert title here</title>
+    <title>쓰담쓰담 관리자 | 자유게시판 | 글쓰기</title>
+    <link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
     <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"

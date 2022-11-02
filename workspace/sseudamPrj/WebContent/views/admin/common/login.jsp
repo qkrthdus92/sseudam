@@ -4,7 +4,8 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>쓰담쓰담 관리자</title>
+    <title>쓰담쓰담 관리자 | 로그인</title>
+    <link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
     <style>
       html {
         background-color: rgb(50, 50, 50);
