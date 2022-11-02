@@ -15,7 +15,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>냠냠</title>
+<title>혼자서냠냠 :: 쓰담쓰담</title>
+<link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" /> 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

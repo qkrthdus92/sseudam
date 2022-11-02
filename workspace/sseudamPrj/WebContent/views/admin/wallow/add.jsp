@@ -4,7 +4,8 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>뒹굴뒹굴 추가</title>
+    <title>쓰담쓰담 관리자 | 뒹굴뒹굴 | 추가</title>
+    <link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
     <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"
@@ -60,7 +61,7 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
     <form action="" method="post" enctype="multipart/form-data">
     <main class="admin-main">   
       <header class="admin-main-header flex-between">
-        <h1>안에서 뒹굴뒹굴 추가</h1>
+        <h1>뒹굴뒹굴 - 추가</h1>
         <div class="btn-set">
           <input
             class="cancel-btn"

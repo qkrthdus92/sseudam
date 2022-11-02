@@ -38,7 +38,8 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>뚜벅 관리자</title>
+    <title>쓰담쓰담 관리자 | 뚜벅뚜벅 | 목록</title>
+    <link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
     <link rel="stylesheet" href="<%=root1%>/resources/css/common/reset.css" />
     <link
       rel="stylesheet"
@@ -164,6 +165,7 @@
 		        	<a class="other-pages" href="<%=root%>/admin/outside?pno=<%=pv.getEndPage() + 1 %><%=sort%><%=type%>">></a>        
 	        	</div>
         	<%} %>
+        	</div>
 		</section>
     </main>
   </body>
