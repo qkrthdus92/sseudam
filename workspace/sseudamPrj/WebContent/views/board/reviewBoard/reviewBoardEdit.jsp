@@ -157,7 +157,7 @@ body {
 			<div id="write-box">
 
 				<div id="write-title">
-					제목<br> <input type="text" size="130" style="height: 25px"
+					제목<br> <input type="text" name="title" size="130" style="height: 25px"
 						placeholder="제목을 입력하세요." required value="<%=rvo.getTitle()%>">
 				</div>
 				<div id="write-content">

@@ -49,7 +49,6 @@ public class ReviewBoardService {
 		return x;
 	}
 
-	// 댓글 삭제를 위한 리스트 조회
 
 	// 후기게시판 댓글 조회
 	public List<ReviewBoardCmtVo> selectCmt(PageVo cmtPv, String bno, String cmtNo) {
@@ -121,15 +120,24 @@ public class ReviewBoardService {
 	// 후기게시판 게시글 수정
 	public static int edit(ReviewBoardVo rvo, List<ReviewBoardImgVo> imgList) {
 		Connection conn = JDBCTemplate.getConnection();
+		
+		//게시글 번호들 조회
+		
+		//게시글 번호로 조회하기
+		List<Integer> imgNoList = new ReviewBoardDao().selectImgNo(conn, rvo.getNo());
 		// 게시글 작성
 		int result = ReviewBoardDao.edit(conn, rvo);
 
 		// 첨부파일 insert
+		System.out.println("이미지리스트 : " + imgNoList);
 		int result2 = 1;
-		if (imgList != null) {
-			result2 = new ReviewBoardDao().editThumbImg(conn, imgList.get(0));
+		if (imgNoList != null) {
+			result2 = new ReviewBoardDao().editThumbImg(conn, imgList.get(0) , imgNoList.get(0));
+			System.out.println("썸네일 : "+result2);
 			for (int i = 1; i < imgList.size(); i++) {
-				result2 = new ReviewBoardDao().editImg(conn, imgList.get(i));
+				System.out.println("i : " + i);
+				result2 = new ReviewBoardDao().editImg(conn, imgList.get(i), imgNoList.get(i));
+				System.out.println("반복문 : "+result2);
 			}
 		}
 
@@ -141,8 +149,10 @@ public class ReviewBoardService {
 
 		JDBCTemplate.close(conn);
 
+		System.out.println("리절트1 : " + result);
+		System.out.println("리절트2 : " + result2);
 		return result * result2;
-
+		
 	}
 
 	//후기게시판 댓글 작성
