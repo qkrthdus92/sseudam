@@ -6,8 +6,8 @@ request.getContextPath();%> <%ProVo vo = (ProVo)request.getAttribute("vo"); %>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>쓰담쓰담 - 내 상황에 딱 맞는 전문 심리상담사 찾기</title>
-
+    <title>상담 결제 :: 쓰담쓰담</title>
+    <link rel="shortcut icon" href="/sseudam/resources/img/header/logo2.png" />
     <link
       rel="stylesheet"
       href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
