@@ -21,7 +21,7 @@ request.getContextPath();%> <% MemberVo vo =
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/common/component.css?ver=5"
+      href="<%=root1%>/resources/css/admin/common/component.css?ver=6"
     />
     <style>
       .grid-col3 {
@@ -80,28 +80,32 @@ request.getContextPath();%> <% MemberVo vo =
               <div></div>
 
               <div>이름</div>
-              <input
-                type="text"
-                value="<%= vo.getName() %>"
-                class="input-edit"
-                name="name"
-              />
+              <div>
+                <input
+                  type="text"
+                  value="<%= vo.getName() %>"
+                  class="upload-name"
+                  name="name"
+                />
+              </div>
               <div></div>
 
               <div>아이디</div>
-              <input
-                type="text"
-                value="<%= vo.getId() %>"
-                class="input-edit"
-                name="id"
-                id="targetId"
-              />
-
               <div>
+                <input
+                  type="text"
+                  value="<%= vo.getId() %>"
+                  class="upload-name"
+                  name="id"
+                  id="targetId"
+                />
+              </div>
+
+              <div class="padding-left0">
                 <input
                   type="button"
                   value="중복확인"
-                  class="check-btn"
+                  class="label-btn border-none"
                   onclick="checkDupId();"
                 />
                 <div id="printDupId"></div>
@@ -111,7 +115,7 @@ request.getContextPath();%> <% MemberVo vo =
                 let id = document.querySelector("#targetId").value;
                 console.log(id);
                 function checkDupId() {
-                	console.log('여기여기');
+
                   $.ajax({
                     url: "<%=root1%>/admin/checkDup",
                     type: "get",
@@ -129,26 +133,30 @@ request.getContextPath();%> <% MemberVo vo =
                 }
               </script>
               <div>비밀번호</div>
-              <input
-                type="text"
-                value="<%= vo.getPwd() %>"
-                class="input-edit"
-                name="pwd"
-              />
+              <div>
+                <input
+                  type="text"
+                  value="<%= vo.getPwd() %>"
+                  class="upload-name"
+                  name="pwd"
+                />
+              </div>
               <div></div>
               <div>닉네임</div>
-              <input
-                type="text"
-                value="<%= vo.getNick() %>"
-                class="input-edit"
-                name="nick"
-                id="targetNick"
-              />
               <div>
+                <input
+                  type="text"
+                  value="<%= vo.getNick() %>"
+                  class="upload-name"
+                  name="nick"
+                  id="targetNick"
+                />
+              </div>
+              <div class="padding-left0">
                 <input
                   type="button"
                   value="중복확인"
-                  class="check-btn"
+                  class="label-btn border-none"
                   onclick="checkDupNick();"
                 />
                 <div id="printDupNick"></div>
@@ -175,31 +183,35 @@ request.getContextPath();%> <% MemberVo vo =
                 }
               </script>
 
-            
-
               <div>전화번호</div>
-              <input
-                type="text"
-                value="<%= vo.getPhone() %>"
-                class="input-edit"
-                name="phone"
-              />
+              <div>
+                <input
+                  type="text"
+                  value="<%= vo.getPhone() %>"
+                  class="upload-name"
+                  name="phone"
+                />
+              </div>
               <div></div>
               <div>이메일</div>
-              <input
-                type="text"
-                value="<%= vo.getEmail() %>"
-                class="input-edit"
-                name="email"
-              />
+              <div>
+                <input
+                  type="text"
+                  value="<%= vo.getEmail() %>"
+                  class="upload-name"
+                  name="email"
+                />
+              </div>
               <div></div>
               <div>테스트점수</div>
-              <input
-                type="text"
-                value="<%= vo.getTestScore() %>"
-                class="input-edit"
-                name="test"
-              />
+              <div>
+                <input
+                  type="text"
+                  value="<%= vo.getTestScore() %>"
+                  class="upload-name"
+                  name="test"
+                />
+              </div>
               <div></div>
               <div>가입일</div>
               <div><%= vo.getJoinDate()%></div>

@@ -2,17 +2,6 @@
 
 /* 메뉴 글자색 수정*/
 
-.admin-menu-main-user li:first-child a {
-  color: var(--adminMenuHover);
-  font-size: 17px;
-}
-
-.admin-main-board {
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  grid-template-rows: repeat(11, 50px);
-}
-
 /* .admin-main-board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

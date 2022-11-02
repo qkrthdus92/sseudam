@@ -258,7 +258,7 @@ public class AdminProService {
 	public int insertCerOne(CertificateVo cv, AttachmentVo aVo) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		int result = new AdminProDao().insertCerOne(conn, cv, aVo);
+		int result = new AdminProDao().insertCerOne2(conn, cv, aVo);
 		
 		if(result == 0) {
 			JDBCTemplate.rollback(conn);

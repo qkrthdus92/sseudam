@@ -48,6 +48,29 @@ pageEncoding="UTF-8"%>
         cursor: pointer;
         font-size: 15px;
       }
+
+      .admin-menu-main-board li:first-child a {
+          color: var(--adminMenuHover);
+          font-size: 17px;
+        }
+
+        /* 메인 보드 그리드 수정 */
+
+        .admin-main-board {
+          display: grid;
+          grid-template-columns: 1fr 5fr 1fr 1.5fr 1fr 1fr 1.5fr 1fr;
+          grid-template-rows: repeat(11, 50px);
+        }
+
+        /* 조회 버튼 수정 */
+
+        .main-select-btn select {
+          width: 130px;
+        }
+
+        .total-num-info span:last-child::after {
+          content: "개";
+        }
     </style>
   </head>
   <body>

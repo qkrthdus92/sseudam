@@ -77,6 +77,10 @@ pageEncoding="UTF-8"%>
         font-size: 14px;
       }
 
+      .counselPay-col {
+        grid-template-columns: 0.9fr 1.5fr 1.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      }
+
     </style>
   </head>
   <body>
@@ -236,7 +240,7 @@ pageEncoding="UTF-8"%>
                 );
               });
             </script>
-            <div class="admin-main-board">
+            <div class="admin-main-board counselPay-col">
               <div>번호</div>
               <div>결제날짜</div>
               <div>상담날짜</div>

@@ -756,6 +756,28 @@ public class AdminProDao {
 		}
 		return result;
 	}
+	
+	public int insertCerOne2(Connection conn, CertificateVo cv, AttachmentVo aVo) {
+		String sql = "INSERT INTO CERTIFICATE VALUES(SEQ_CERTIFICATE_NO.NEXTVAL,(SELECT NO FROM PRO_MEMBER ORDER BY NO DESC OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY),?,?,?)";
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, cv.getName());
+			pstmt.setString(2, cv.getNum());
+			pstmt.setString(3, aVo.getChangeName());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 
 	public int deleteCer(Connection conn, String img) {
 		String sql = "DELETE FROM CERTIFICATE WHERE IMG_PATH = ?";

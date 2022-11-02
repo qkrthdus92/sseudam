@@ -30,7 +30,8 @@ request.getContextPath();%>
       href="<%=root1%>/resources/css/admin/common/component.css?ver=6"
     />
     <style>
-      .grid-col3 {
+       .grid-col3 {
+        grid-template-columns: 1fr 1fr 6fr;
         grid-template-rows: repeat(15, 50px);
       }
     </style>
@@ -62,12 +63,15 @@ request.getContextPath();%>
             <div><%= vo.getNo() %></div>
             <div></div>
             <div>이름</div>
-            <input
-                type="text"
-                value="<%= vo.getName() %>"
-                class="input-edit"
-                name="name"
-              />
+            <div>
+              <input
+                  type="text"
+                  value="<%= vo.getName() %>"
+                  class="upload-name"
+                  name="name"
+                />
+
+            </div>
             <div></div>
             <div>성별</div>
               <div>
@@ -80,24 +84,30 @@ request.getContextPath();%>
               </div>
             <div></div>
             <div>아이디</div>
-            <input
-                type="text"
-                value="<%= vo.getId() %>"
-                class="input-edit"
-                name="id"
-                id="targetId"
-              />
             <div>
-              <input type="button" value="중복확인" class="check-btn" onclick="checkDupId();"/>
+              <input
+                  type="text"
+                  value="<%= vo.getId() %>"
+                  class="upload-name"
+                  name="id"
+                  id="targetId"
+                />
+
+            </div>
+            <div class="padding-left0">
+              <input type="button" value="중복확인" class="label-btn border-none" onclick="checkDupId();"/>
               <div id="printDupId"></div>
             </div>
             <div>비밀번호</div>
-            <input
-            type="text"
-            value="<%= vo.getPwd() %>"
-            class="input-edit"
-            name="pwd"
-          />
+            <div>
+              <input
+              type="text"
+              value="<%= vo.getPwd() %>"
+              class="upload-name"
+              name="pwd"
+            />
+
+            </div>
             <div></div>
             <div>상담분야</div>
           
@@ -113,44 +123,59 @@ request.getContextPath();%>
             
             <div></div>
             <div>이메일</div>
-            <input
-            type="text"
-            value="<%= vo.getEmail() %>"
-            class="input-edit"
-            name="email"
-          />
+            <div>
+              <input
+              type="text"
+              value="<%= vo.getEmail() %>"
+              class="upload-name"
+              name="email"
+            />
+
+            </div>
             <div></div>
             <div>전화번호</div>
-            <input
-            type="text"
-            value="<%= vo.getPhone() %>"
-            class="input-edit"
-            name="phone"
-          />
+            <div>
+              <input
+              type="text"
+              value="<%= vo.getPhone() %>"
+              class="upload-name"
+              name="phone"
+            />
+
+            </div>
             <div></div>
             <div>최종학력</div>
-            <input
-            type="text"
-            value="<%= vo.getEducation() %>"
-            class="input-edit"
-            name="education"
-          />
+            <div>
+
+              <input
+              type="text"
+              value="<%= vo.getEducation() %>"
+              class="upload-name"
+              name="education"
+            />
+            </div>
             <div></div>
             <div>상담금액</div>
             <%if(vo.getPrice()!=null){%>
-            <input
-            type="text"
-            value="<%= vo.getPrice() %>"
-            class="input-edit"
-            name="price"
-          />
+              <div>
+                <input
+                type="text"
+                value="<%= vo.getPrice() %>"
+                class="upload-name"
+                name="price"
+              />
+
+              </div>
           <%}else { %>
-            <input
-            type="text"
-            value="미정"
-            class="input-edit"
-            name="price"
-          />
+            <div>
+
+              <input
+              type="text"
+              value="미정"
+              class="upload-name"
+              name="price"
+            />
+            </div>
             <%}%>
             <div></div>
             <div>프로필사진</div>
@@ -162,14 +187,17 @@ request.getContextPath();%>
               />
               <input type="text" disabled value="<%=vo.getImg()%>" class="input-edit">
             </div>
-            <div><input type="file" name="img" class="upload-btn" /></div>
+            <div  class="padding-left0"><input type="file" name="img" class="upload-btn" /></div>
             <div>소개글</div>
-            <input
-            type="text"
-            value="<%= vo.getIntroduce() %>"
-            class="input-edit"
-            name="introduce"
-          />
+            <div>
+              <input
+              type="text"
+              value="<%= vo.getIntroduce() %>"
+              class="upload-name"
+              name="introduce"
+            />
+
+            </div>
             <div></div>
             <div>계정상태</div>
             <%if(vo.getProStatus().equals("J")) {%>
@@ -182,8 +210,8 @@ request.getContextPath();%>
            
 
             <%if(vo.getProStatus().equals("W")) {%>  
-            <div>
-              <input type="button" value="전문가승인" class="check-btn" onclick="proOk();"/>
+            <div  class="padding-left0">
+              <input type="button" value="전문가승인" class="label-btn border-none" onclick="proOk();"/>
             </div>
             <%}else if(vo.getProStatus().equals("J")) {%>
               <div>

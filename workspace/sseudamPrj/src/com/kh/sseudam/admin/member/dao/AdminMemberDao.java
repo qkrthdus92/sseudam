@@ -536,4 +536,28 @@ public class AdminMemberDao {
 		return result;
 	}
 
+	public boolean checkDupIdWithPro(Connection conn, String id) {
+		String sql = "SELECT * FROM PRO_MEMBER WHERE ID = ?  AND PRO_STATUS != 'Q'";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean isIdDup = false;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				isIdDup = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rs);
+		}
+		
+		return isIdDup;
+	}
+
 }

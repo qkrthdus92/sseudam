@@ -24,13 +24,19 @@ pageEncoding="UTF-8"%> <% String root1 = request.getContextPath();%>
     />
     <link
       rel="stylesheet"
-      href="<%=root1%>/resources/css/admin/pro/counsel.css?ver=4"
+      href="<%=root1%>/resources/css/admin/pro/counsel.css?ver=5"
     />
 
     <link
       rel="stylesheet"
       href="<%=root1%>/resources/css/admin/common/component.css?ver=2"
     />
+    <style>
+      .pro-counsel-detail-list {
+        grid-template-columns: 0.8fr 1.5fr 1.5fr 1fr 1fr 0.6fr 1fr;
+        margin-top: 0px;
+      }
+    </style>
   </head>
   <body>
     <%@ include file="/views/admin/common/menu.jsp"%>
