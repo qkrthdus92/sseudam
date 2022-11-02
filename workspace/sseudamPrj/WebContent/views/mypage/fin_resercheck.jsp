@@ -368,7 +368,7 @@
         <%for(int i = 0 ; i < MypageFinreserList.size(); ++i){%>
             <div id="pro-box-all">
                 <div id="pro-box"> 
-                    <span><img id="profil2" src="/sseudam/resources/img/counsel/<%=MypageFinreserList.get(i).getImg() %>" alt=""></span> 
+                    <span><img id="profil2" src="<%=root %>/resources/upload/pro/<%=MypageFinreserList.get(i).getImg() %>" alt=""></span> 
                     <div id="proname">
                         <span>전문가 <br> <%= MypageFinreserList.get(i).getName()%></span> 
                     </div>             

@@ -24,13 +24,17 @@ public class MypageProStarController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession s = req.getSession();
 		
-		ProMemberJoinVo ProloginMember = (ProMemberJoinVo)s.getAttribute("ProloginMember");
+		ProMemberJoinVo proLoginMember = (ProMemberJoinVo)s.getAttribute("proLoginMember"); // proLoginMember
 		
-		String num = ProloginMember.getNo();
-		
-		int updatestar = new MypageEditService().updatestar(num);
+		String num = proLoginMember.getNo();// 널값으로 뜨면서 오류
 
-		System.out.println(updatestar);
+		System.out.println(num);  //확인용
+		
+		String updatestar =new MypageEditService().updatestar(num);
+		
+		
+		
+		System.out.println(updatestar); //확인용
 		
 		req.setAttribute("updatestar", updatestar);
 		req.getRequestDispatcher("/views/mypage/promain.jsp").forward(req, resp);

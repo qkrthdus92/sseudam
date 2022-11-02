@@ -37,7 +37,7 @@ public class MypageProreserController extends HttpServlet {
 		int startPage;			//페이징바 시작 페이지
 		int endPage;			//페이징바 종료 페이지
 		
-		listCount = new MypageProreserService().selectCount(num);//회원번호 임의지정
+		listCount = new MypageProreserService().selectCount(num);
 		currentPage = Integer.parseInt(req.getParameter("pno")) ;
 		pageLimit = 5;   //임의로 정함
 		boardLimit = 10; //임의로 정함
@@ -62,7 +62,7 @@ public class MypageProreserController extends HttpServlet {
 		  pv.setEndPage(endPage);
 	      
 		
-		List<MypageProreserVo> MypageProreserList = new MypageProreserService().selectList(pv,"2");
+		List<MypageProreserVo> MypageProreserList = new MypageProreserService().selectList(pv,num);
 
 		req.setAttribute("pv", pv);
 		req.setAttribute("MypageProreserList", MypageProreserList);
