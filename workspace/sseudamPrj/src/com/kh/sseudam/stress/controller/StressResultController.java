@@ -33,7 +33,7 @@ public class StressResultController extends HttpServlet {
 		MemberVo loginMember = (MemberVo) s.getAttribute("loginMember");
 		System.out.println(loginMember);
 
-		// 데이터 꺼내기 (테스트 점수 계산)
+		// 각 문항별 스트레스 테스트 점수 가져오기
 		int score1 = Integer.parseInt(req.getParameter("test1"));
 		int score2 = Integer.parseInt(req.getParameter("test2"));
 		int score3 = Integer.parseInt(req.getParameter("test3"));
@@ -48,15 +48,18 @@ public class StressResultController extends HttpServlet {
 		int score12 = Integer.parseInt(req.getParameter("test12"));
 		int score13 = Integer.parseInt(req.getParameter("test13"));
 
+		// 점수 합계 계산
 		int testScore = score1 + score2 + score3 + score4 + score5 + score6 + score7 + score8 + score9 + score10
 				+ score11 + score12 + score13;
 
-		// 데이터 뭉치기
+		// 점수에 맞는 추천컨텐츠 리스트 가져오기
 		List<StressVo> suggestList = new StressService().suggestContent(testScore);
 		req.setAttribute("suggestList", suggestList);
-		
+
+		// 점수 결과를 회원 정보에 저장
 		loginMember.setTestScore(testScore);
 		int result = new StressService().myScore(loginMember);
+		
 		if (result == 1) {
 			req.getRequestDispatcher("/views/stress/stressResult.jsp").forward(req, resp);
 		} else {
