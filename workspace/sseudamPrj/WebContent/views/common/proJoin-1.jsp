@@ -220,7 +220,7 @@
             </div>
             <div class="next">
                 <br>
-                <div><input type="submit" onclick="return joincheck();" class="next-page" value="다음 페이지 작성"></div>
+                <div><input type="submit" onclick="return projoincheck();" class="next-page" value="다음 페이지 작성"></div>
             </div>
             
         </div>
@@ -231,22 +231,7 @@
     
     <script>
 	    
-    	function joincheck(){
-    		
-    		//아이디 중복확인 여부 체크
-            let idCheck = $("#cheIdResult").text();
-
-            console.log(idCheck);
-
-            if (idCheck.includes("현재")) {
-          	alert("현재 사용 중인 아이디입니다.");
-              return false;
-            } else if (idCheck.includes("가능한")){
-          	return true;
-            } else{
-          	alert("아이디 중복확인을 해주세요.");
-    	            return false;  
-            }
+    	function projoincheck(){
     		
     		var getId = document.getElementById("memberId");
     		var getPwd1 = document.getElementById("pwd1");
@@ -290,6 +275,21 @@
     			alert("닉네임은 한글과 영문으로 입력해 주세요.")
     			return false;
     		}
+    		
+    		//아이디 중복확인 여부 체크
+            let idCheck = $("#cheIdResult").text();
+
+            console.log(idCheck);
+
+            if (idCheck.includes("현재")) {
+          	alert("현재 사용 중인 아이디입니다.");
+              return false;
+            } else if (idCheck.includes("가능한")){
+          	  return true;
+            } else{
+          	alert("아이디 중복확인을 해주세요.");
+    	      return false;  
+            }
 		
     	}
 	

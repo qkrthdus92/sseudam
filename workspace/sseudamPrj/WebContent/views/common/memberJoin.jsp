@@ -179,21 +179,6 @@
     <script>
 	    
     	function joincheck(){
-    	    
-    		//아이디 중복확인 여부 체크
-            let idCheck = $("#idCheResult").text();
-
-            console.log(idCheck);
-
-            if (idCheck.includes("현재")) {
-          	alert("현재 사용 중인 아이디입니다.");
-              return false;
-            } else if (idCheck.includes("가능한")){
-          	return true;
-            } else{
-          	alert("아이디 중복확인을 해주세요.");
-    	            return false;  
-            }
     		
             //회원가입 유효성 검사
     		var getId = document.getElementById("memberId");
@@ -237,6 +222,21 @@
     			alert("닉네임은 특수문자를 포함할 수 없습니다.")
     			return false;
     		}
+    		
+    		//아이디 중복확인 여부 체크
+            let idCheck = $("#idCheResult").text();
+
+            console.log(idCheck);
+
+            if (idCheck.includes("현재")) {
+          	alert("현재 사용 중인 아이디입니다.");
+              return false;
+            } else if (idCheck.includes("가능한")){
+          	  return true;
+            } else{
+          	alert("아이디 중복확인을 해주세요.");
+    	      return false;  
+            }
     		
     	}
     </script>
