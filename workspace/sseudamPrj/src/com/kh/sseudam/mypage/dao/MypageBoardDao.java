@@ -15,6 +15,7 @@ public class MypageBoardDao {
 
 	public static List<MypageBoardVo> selectList(String num, Connection conn, PageVo pv) {
 		
+		/* 게시판 두개 통합 조회 */
 		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM(SELECT NO, WRITER_NO, TITLE, CONTENT, WRITE_DATE, DELETE_YN, MODIFY_DATE, VIEWS, '자유게시판' \"게시판\" FROM FREE_BOARD WHERE WRITER_NO =? UNION SELECT NO, WRITER_NO, TITLE, CONTENT, WRITE_DATE, DELETE_YN, MODIFY_DATE, VIEWS, '후기게시판' \"게시판\" FROM REVIEW_BOARD WHERE WRITER_NO =? ORDER BY WRITE_DATE DESC)T ) WHERE RNUM BETWEEN ? AND ?";
 		
 		PreparedStatement pstmt = null;

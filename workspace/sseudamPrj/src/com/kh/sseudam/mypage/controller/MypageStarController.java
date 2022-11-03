@@ -23,6 +23,7 @@ public class MypageStarController extends HttpServlet{
 		
 		MemberVo loginMember = (MemberVo)s.getAttribute("loginMember");
 		
+		//별점이랑 회원번호 받아오기
 		String num = loginMember.getNo();
 		String star =req.getParameter("value");
 		String a_no =req.getParameter("no");
