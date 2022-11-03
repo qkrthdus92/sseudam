@@ -182,7 +182,7 @@
 		        <div>게시판</div>
 		        <div>작성일</div>
 		    </div>
-		    
+		   <!--  자유게시판 후기게시판 타입 각각 따로 불러오기  -->
 	     	<%for(int i = 0 ; i < MypageBoardList.size(); ++i){%>
 			    <div id="editlist">
 			        <div><input type="checkbox" id="chk1" name="chk"></div>
