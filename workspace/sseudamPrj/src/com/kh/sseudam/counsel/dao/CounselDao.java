@@ -404,7 +404,6 @@ public class CounselDao {
 		if(counselTypeArr != null && counselTypeArr.length >= 1 && counselTypeArr.length <= 3) {
 			counselTypeQuery = String.join("','", counselTypeArr);
 			counselTypeQuery = "'" + counselTypeQuery + "'";
-			
 		}
 		
 		if(g.equals("M")) {
@@ -423,12 +422,13 @@ public class CounselDao {
 			certificateQuery = "'50000'";
 		}
 		
-		
-		//String sql = "SELECT M.NO, T.CLASS COUNSEL_TYPE,M.ID,M.PWD, M.NAME, M.GENDER,M.PHONE, M.EMAIL,M.EDUCATION,M.PRICE,M.PRO_STATUS,M.IMG,M.JOIN_DATE,M.MODIFY_DATE,M.INTRODUCE FROM PRO_MEMBER M JOIN COUNSEL_TYPE T ON M.COUNSEL_TYPE_NO = T.NO WHERE PRO_STATUS = 'J' AND T.CLASS IN ("+counselTypeQuery+") AND M.GENDER IN ("+genderQuery+") AND M.PRICE IN ("+certificateQuery+")";
-		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT M.NO, T.CLASS COUNSEL_TYPE,M.ID,M.PWD, M.NAME, M.GENDER,M.PHONE, M.EMAIL,M.EDUCATION,M.PRICE,M.PRO_STATUS,M.IMG,M.JOIN_DATE,M.MODIFY_DATE,M.INTRODUCE FROM PRO_MEMBER M JOIN COUNSEL_TYPE T ON M.COUNSEL_TYPE_NO = T.NO WHERE PRO_STATUS = 'J' AND T.CLASS IN ("+counselTypeQuery+") AND M.GENDER IN ("+genderQuery+") AND M.PRICE IN ("+certificateQuery+") ORDER BY M.NO) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT M.NO, T.CLASS COUNSEL_TYPE,M.ID,M.PWD, M.NAME, M.GENDER,M.PHONE, M.EMAIL,M.EDUCATION,M.PRICE,M.PRO_STATUS,M.IMG,M.JOIN_DATE,M.MODIFY_DATE,"
+				+ "M.INTRODUCE FROM PRO_MEMBER M JOIN COUNSEL_TYPE T ON M.COUNSEL_TYPE_NO = T.NO WHERE PRO_STATUS = 'J' AND T.CLASS IN ("+counselTypeQuery+") AND M.GENDER IN ("+genderQuery+") AND M.PRICE IN ("+certificateQuery+") "
+						+ "ORDER BY M.NO) T ) WHERE RNUM BETWEEN ? AND ?";
 		if(proLevel != null && proLevel.length == 1 && proLevel[0].equals("level3")) {
 			System.out.println("마스터 쿼리문 시작!");
-			sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT M.NO, TO_CHAR(AVG(A.STAR),'fm0.0') AVG_STAR,  T.CLASS COUNSEL_TYPE,M.ID,M.PWD, M.NAME, M.GENDER,M.PHONE, M.EMAIL,M.EDUCATION,M.PRICE,M.PRO_STATUS,M.IMG,M.JOIN_DATE,M.MODIFY_DATE,M.INTRODUCE, C.COUNSEL_CNT\r\n"
+			sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT M.NO, TO_CHAR(AVG(A.STAR),'fm0.0') AVG_STAR,  T.CLASS COUNSEL_TYPE,M.ID,M.PWD, M.NAME, M.GENDER,M.PHONE, M.EMAIL,"
+					+ "M.EDUCATION,M.PRICE,M.PRO_STATUS,M.IMG,M.JOIN_DATE,M.MODIFY_DATE,M.INTRODUCE, C.COUNSEL_CNT\r\n"
 					+ "FROM PRO_MEMBER M \r\n"
 					+ "JOIN COUNSEL_TYPE T ON M.COUNSEL_TYPE_NO = T.NO\r\n"
 					+ "LEFT JOIN PRO_APPOINT A ON M.NO = A.PRO_NO\r\n"
@@ -446,7 +446,8 @@ public class CounselDao {
 			sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( \r\n"
 					+ "SELECT *\r\n"
 					+ "FROM NOT_MASTER\r\n"
-					+ "WHERE ((PRICE = 50000) OR ((COUNSEL_CNT >= 10) AND (AVG_STAR >= 4.5))) AND COUNSEL_TYPE IN ("+counselTypeQuery+") AND GENDER IN ("+genderQuery+") AND PRICE IN ("+certificateQuery+") ORDER BY NO) T ) WHERE RNUM BETWEEN ? AND ?";
+					+ "WHERE ((PRICE = 50000) OR ((COUNSEL_CNT >= 10) AND (AVG_STAR >= 4.5))) AND COUNSEL_TYPE IN ("+counselTypeQuery+") AND GENDER IN ("+genderQuery+") AND PRICE IN ("+certificateQuery+") ORDER BY NO) T ) "
+							+ "WHERE RNUM BETWEEN ? AND ?";
 		}
 		if(proLevel != null && proLevel.length == 1 && proLevel[0].equals("level1")) {
 			System.out.println("일반 쿼리문 시작!");
@@ -455,12 +456,9 @@ public class CounselDao {
 					+ "WHERE COUNSEL_TYPE IN ("+counselTypeQuery+") AND GENDER IN ("+genderQuery+") AND PRICE IN ("+certificateQuery+") ORDER BY NO) T ) WHERE RNUM BETWEEN ? AND ?";
 		}
 		if(proLevel != null && proLevel.length == 2 && Arrays.asList(proLevel).contains("level3") && Arrays.asList(proLevel).contains("level2")) {
-			System.out.println("마스터+전문 쿼리문 시작!");
-//			sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT *\r\n"
-//					+ "FROM LEVEL2AND3\r\n"
-//					+ "WHERE COUNSEL_TYPE IN ("+counselTypeQuery+") AND GENDER IN ("+genderQuery+") AND PRICE IN ("+certificateQuery+") ORDER BY NO) T ) WHERE RNUM BETWEEN ? AND ?";
-//			
-			sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT * FROM LEVEL2AND3 WHERE COUNSEL_TYPE IN ("+counselTypeQuery+") AND GENDER IN ("+genderQuery+") AND PRICE IN ("+certificateQuery+") ORDER BY NO ) T ) WHERE RNUM BETWEEN ? AND ?";
+			System.out.println("마스터+전문 쿼리문 시작!");	
+			sql = "SELECT * FROM ( SELECT ROWNUM AS RNUM, T.* FROM ( SELECT * FROM LEVEL2AND3 WHERE COUNSEL_TYPE IN ("+counselTypeQuery+") AND GENDER IN ("+genderQuery+") AND PRICE IN ("+certificateQuery+") ORDER BY NO ) T ) "
+					+ "WHERE RNUM BETWEEN ? AND ?";
 		}
 		if(proLevel != null && proLevel.length == 2 && Arrays.asList(proLevel).contains("level3") && Arrays.asList(proLevel).contains("level1")) {
 			System.out.println("마스터+일반 쿼리문 시작!");
