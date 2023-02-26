@@ -19,7 +19,7 @@
 ### 🔧개발 환경
 - 개발 언어 : Java(11.0.15) , HTML5, CSS3 , Javascript
 - 데이터베이스 : ORACLE(21.3.0.0.0)
-- 개발도구 : SQL Developer
+- 개발도구 : SQL Developer, Eclipse
 - 서버 : Apache Tomcat 9 
 - 협업 : Erd , GitHub, SourceTree, Notion , Figma, Discord
 
